@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ProfileEditScreenForm from "./ProfileEditScreenForm";
-import { AsyncStorage, BackHandler } from "react-native";
-import {
-  postUserInfo,
-  handleBackButton,
-  clearUserLocal
-} from "../../../actions/userActions";
+import { BackHandler } from "react-native";
+import { postUserInfo, handleBackButton } from "../../../actions/userActions";
 import { LoadingHOC, ShowToast } from "@components/AllComponents";
 import debounce from "lodash/debounce";
 import {
@@ -89,19 +85,12 @@ export default function ProfileEditScreen(props) {
       setIsLoading(false);
     }
   };
-  // full signout user
-  const signOutUser = async () => {
-    AsyncStorage.clear().catch(e => console.log(e));
-    clearUserLocal({ dispatch });
-    props.navigation.navigate("IntroScreen");
-  };
 
   return (
     <ProfileEditScreenWithLoading
       isLoading={isLoading}
       goProfileScreen={goProfileScreen}
       post={post}
-      signOutUser={signOutUser}
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
       formErrors={formErrors}

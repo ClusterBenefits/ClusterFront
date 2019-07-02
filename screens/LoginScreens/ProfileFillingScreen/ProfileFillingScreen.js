@@ -29,7 +29,7 @@ export default function ProfileFillingScreen(props) {
 
   useEffect(() => {
     registerForPushNotificationsAsync(state.token);
-  });
+  }, []);
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
     debounceSingleFieldValidation({ name, value });
@@ -63,7 +63,7 @@ export default function ProfileFillingScreen(props) {
       };
       let response = await postUserInfo({ token: state.token, data, dispatch });
       if (response) {
-        props.navigation.navigate("ProfileBottomTabNavigatior");
+        props.navigation.navigate("AddCreditInfoScreen");
       } else {
         setIsLoading(false);
       }

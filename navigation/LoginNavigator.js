@@ -20,6 +20,7 @@ import NewPasswordScreen from "../screens/LoginScreens/NewPasswordScreen";
 
 import WelcomeScreen from "../screens/LoginScreens/WelcomeScreen";
 import ProfileFillingScreen from "../screens/LoginScreens/ProfileFillingScreen";
+import AddCreditInfoScreen from "../screens/LoginScreens/AddCreditInfoScreen";
 
 // listing screens next
 
@@ -152,10 +153,11 @@ const ResetPassword = createStackNavigator(
 
 const WelcomeBundle = createSwitchNavigator({
   IntroScreen,
-  ProfileFillingScreen,
-  WelcomeScreen,
   SignUpScreen,
-  ResetPassword
+  ResetPassword,
+  WelcomeScreen,
+  ProfileFillingScreen,
+  AddCreditInfoScreen
 });
 
 const AppSwitchNavigator = createSwitchNavigator({

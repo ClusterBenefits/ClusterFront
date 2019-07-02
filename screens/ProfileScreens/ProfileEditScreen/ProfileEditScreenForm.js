@@ -10,14 +10,12 @@ profileEdit.propTypes = {
   onChangeValue: T.func,
   post: T.func,
   goProfileScreen: T.func,
-  signOutUser: T.func,
   state: T.object
 };
 
 export default function profileEdit({
   post,
   goProfileScreen,
-  signOutUser,
   onChangeValue,
   formCredentials,
   formErrors
@@ -69,13 +67,6 @@ export default function profileEdit({
               <Text style={{ color: "white", fontSize: 18 }}>Edit</Text>
             </Button>
           </View>
-          <Button
-            full
-            style={(styles.button2, { marginTop: 10 })}
-            onPress={signOutUser}
-          >
-            <Text style={{ color: "white", fontSize: 18 }}>logout</Text>
-          </Button>
         </Form>
       </Container>
     </MyLinearGradient>

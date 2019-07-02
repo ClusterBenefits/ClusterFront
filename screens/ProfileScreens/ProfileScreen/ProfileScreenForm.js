@@ -10,6 +10,7 @@ profile.propTypes = {
   goChangeEmailScreen: T.func,
   goChangePasswordScreen: T.func,
   goAddCommentScreen: T.func,
+  signOutUser: T.func,
   userInfo: T.object
 };
 
@@ -19,6 +20,7 @@ export default function profile({
   goChangePasswordScreen,
   goAddCommentScreen,
   goBillingInformation,
+  signOutUser,
   userInfo
 }) {
   const {
@@ -95,12 +97,23 @@ export default function profile({
                 <H3>Billing information</H3>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.row} onPress={goAddCommentScreen}>
+            <TouchableOpacity
+              style={[styles.row, styles.main]}
+              onPress={goAddCommentScreen}
+            >
               <View style={styles.icon}>
-                <Ionicons name="ios-send" color="white" size={30} />
+                <Icon name="paper-plane-1" color="white" size={30} />
               </View>
               <View style={styles.menu}>
                 <H3>Contact administrator</H3>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.row} onPress={signOutUser}>
+              <View style={styles.icon}>
+                <Icon name="logout" color="white" size={30} />
+              </View>
+              <View style={styles.menu}>
+                <H3>Logout</H3>
               </View>
             </TouchableOpacity>
           </View>

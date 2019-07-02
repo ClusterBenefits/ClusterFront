@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "./../../../reducers/context";
-import { handleBackButton } from "../../../actions/userActions";
+import { handleBackButton, clearUserLocal } from "../../../actions/userActions";
 import { BackHandler } from "react-native";
 import ProfileScreenForm from "./ProfileScreenForm";
 import T from "prop-types";
@@ -10,7 +10,6 @@ export default function ProfileScreen(props) {
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-
     return () => {
       BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     };
@@ -33,6 +32,10 @@ export default function ProfileScreen(props) {
       userInfo: state.userInfo
     });
   };
+  const signOutUser = async () => {
+    await clearUserLocal({ dispatch, props });
+  };
+
   return (
     <ProfileScreenForm
       goProfileEditScreen={goProfileEditScreen}
@@ -40,6 +43,7 @@ export default function ProfileScreen(props) {
       goChangePasswordScreen={goChangePasswordScreen}
       goBillingInformation={goBillingInformation}
       goAddCommentScreen={goAddCommentScreen}
+      signOutUser={signOutUser}
       userInfo={state.userInfo}
     />
   );

@@ -59,7 +59,7 @@ export default function commentsForm({
               alignItems: "center"
             }}
           >
-            {comments.length > 0 && comments.data.length > 0 ? (
+            {Object.keys(comments).length > 1 && comments.data.length > 0 ? (
               <FlatList
                 data={comments.data}
                 keyExtractor={item => Math.random().toString()}

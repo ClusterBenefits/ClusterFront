@@ -36,7 +36,7 @@ export default function barcode({
   item
 }) {
   const height = Dimensions.get("window").height;
-
+  console.log("item", item);
   return (
     <MyLinearGradient>
       <Container style={styles.container}>

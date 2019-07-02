@@ -1,31 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
-import BillingInformationScreenForm from "./BillingInformationScreenForm";
-import { AsyncStorage, BackHandler } from "react-native";
-import { handleBackButton } from "../../../actions/userActions";
+import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
 import { LoadingHOC, ShowToast } from "@components/AllComponents";
 import { allFieldsValidation } from "../../../utils/validation";
 import { UserContext } from "../../../reducers/context";
 
-const BillingInformationScreenWithLoading = LoadingHOC(
-  BillingInformationScreenForm
-);
+const AddCreditInfoScreenWithLoading = LoadingHOC(AddCreditInfoScreenForm);
 
-export default function ProfileEditScreen(props) {
+export default function AddCreditInfoScreen(props) {
   const [formCredentials, setFormCredentials] = useState({
     creditCardNumber: "",
     expiration: "",
-    cvv2: ""
+    cvv2: "",
+    checkBox: false
   });
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
   const onChangeValue = (value, name) => {
-    setFormCredentials({ ...formCredentials, [name]: value });
-  };
-
-  const goProfileScreen = () => {
-    props.navigation.navigate("ProfileScreen");
+    if (name === "checkBox") {
+      setFormCredentials({
+        ...formCredentials,
+        [name]: !formCredentials.checkBox
+      });
+    } else {
+      setFormCredentials({ ...formCredentials, [name]: value });
+    }
   };
 
   // post user info
@@ -43,13 +43,13 @@ export default function ProfileEditScreen(props) {
       // await postCreditInfo();
       setIsLoading(false);
       setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
+      props.navigation.navigate("ProfileBottomTabNavigatior");
     }
   };
 
   return (
-    <BillingInformationScreenWithLoading
+    <AddCreditInfoScreenWithLoading
       isLoading={isLoading}
-      goProfileScreen={goProfileScreen}
       post={post}
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}

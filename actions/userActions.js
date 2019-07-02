@@ -252,10 +252,32 @@ export const handleClickIcon = ({ item, dispatch }) => {
 
 // other
 
-export const clearUserLocal = ({ dispatch }) => {
-  dispatch({
-    type: CLEAR_USER
-  });
+export const clearUserLocal = ({ dispatch, props }) => {
+  Alert.alert(
+    "Logout user",
+    "Are you sure that you want to logout?",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          console.log("loging out )");
+          AsyncStorage.clear().catch(e => console.log(e));
+          dispatch({
+            type: CLEAR_USER
+          });
+          props.navigation.navigate("IntroScreen");
+        }
+      }
+    ],
+    {
+      cancelable: false
+    }
+  );
 };
 
 // handle back button

@@ -20,10 +20,16 @@ const rules = {
   email5: "required",
   myComment: "required|min:5",
   subject: "required",
-  creditCardNumber: "required",
+  creditCardNumber: [
+    "required",
+    "regex:/^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12}))$/"
+  ],
   expiration: ["required", "regex:/^(0[1-9]|1[0-2])/?([0-9]{4}|[0-9]{2})$/"],
   cvv2: "required"
 };
+
+// /^(?:4[0-9]{12}(?:[0-9]{3})?)$/ visa regex,
+//  /^(?:5[1-5][0-9]{14})$/   mastercard regex
 
 Validator.setMessages("en", en);
 

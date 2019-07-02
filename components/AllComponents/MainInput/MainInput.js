@@ -7,7 +7,6 @@ const MainInput = ({
   name,
   value,
   error,
-  errorText,
   style,
   width,
   ...props

@@ -68,7 +68,7 @@ const initialState = {
   userInfo: null,
   items: [],
   favoriteItems: [],
-  comments: []
+  comments: {}
 };
 
 const UserContext = React.createContext(initialState);
