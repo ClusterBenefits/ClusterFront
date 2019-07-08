@@ -50,10 +50,7 @@ export default function AddCommentsScreen(props) {
         token: state.token,
         id: item.id
       });
-      // dispatch({
-      //   type: ADD_COMMENTS,
-      //   payload: [response, ...state.comments.data]
-      // });
+
       getComments({ id: item.id, token: state.token, dispatch });
       setIsLoading(false);
       setFormCredentials({});
@@ -63,7 +60,6 @@ export default function AddCommentsScreen(props) {
   // getting item that needs to be rendered from navigation
 
   const item = props.navigation.getParam("item", "NO-ID");
-  const fromWho = props.navigation.getParam("fromWho", "NO-ID");
 
   return (
     <AddCommentsScreenWithLoading
@@ -71,7 +67,6 @@ export default function AddCommentsScreen(props) {
       goBack={goBack}
       onChangeValue={onChangeValue}
       sendMessage={sendMessage}
-      fromWho={fromWho}
       formCredentials={formCredentials}
       formErrors={formErrors}
     />
@@ -79,6 +74,5 @@ export default function AddCommentsScreen(props) {
 }
 
 AddCommentsScreen.propTypes = {
-  fromWho: T.string,
   userInfo: T.object
 };

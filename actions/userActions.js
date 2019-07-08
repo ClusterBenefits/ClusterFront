@@ -179,22 +179,21 @@ export const fetchFavoriteItems = async ({ token, dispatch }) => {
   return response;
 };
 
-// Send Message
+//  Message and Comments
 
 export const getComments = async ({ id, token, dispatch, page, comments }) => {
   let response = await getItemComments({ id, token, page });
-  console.log(response);
   if (response) {
     if (!page) {
       dispatch({
         type: ADD_COMMENTS,
         payload: response
       });
-    } else {
+    } // adding new comments from page 2/3/4/5......
+    else {
       let newPayload = { ...comments };
       newPayload.data = [...newPayload.data, ...response.data];
       newPayload.meta = response.meta;
-      console.log(newPayload);
       dispatch({
         type: ADD_COMMENTS,
         payload: newPayload
@@ -217,7 +216,7 @@ export const sendMessageToAdmin = async ({ ...props }) => {
   return response;
 };
 
-//  Send Message
+//  Message and Comments
 
 // change star color if item is in favorite list (doing it only once at start)
 export const changeInitialFeatured = ({ items, favoriteItems, dispatch }) => {
@@ -243,6 +242,7 @@ export const changeFavoriteCompanies = ({ token, item }) => {
 };
 
 // change item.featured , favoriteItems , favoriteItemsKeys(All logic in reducer)
+
 export const handleClickIcon = ({ item, dispatch }) => {
   dispatch({
     type: FEATURED,

@@ -4,7 +4,6 @@ import {
   handleClickIcon,
   changeFavoriteCompanies
 } from "../../../actions/userActions";
-import T from "prop-types";
 import { UserContext } from "./../../../reducers/context";
 import { LoadingHOC } from "@components/AllComponents";
 
@@ -30,10 +29,3 @@ export default function FavoritesScreen(props) {
     />
   );
 }
-
-FavoritesScreen.propTypes = {
-  token: T.string,
-  favoriteItemsKeys: T.array,
-  favoriteItems: T.array,
-  lastItem: T.string
-};

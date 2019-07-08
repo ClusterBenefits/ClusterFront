@@ -19,8 +19,9 @@ import T from "prop-types";
 commentsForm.propTypes = {
   goBack: T.func,
   onChangeValue: T.func,
-  userInfo: T.object,
-  fromWho: T.string
+  sendMessage: T.func,
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function commentsForm({
@@ -90,9 +91,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderColor: "transparent",
-    // color: "black",
     padding: 10
-    // marginBottom: 10
   },
   button2: {
     borderRadius: 3,

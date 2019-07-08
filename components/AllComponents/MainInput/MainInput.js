@@ -1,16 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Input, Item, Icon, Text } from "native-base";
+import { Input, Item, Text } from "native-base";
 
-const MainInput = ({
-  onChangeText,
-  name,
-  value,
-  error,
-  style,
-  width,
-  ...props
-}) => {
+const MainInput = ({ onChangeText, error, style, name, width, ...props }) => {
   const styles = StyleSheet.create({
     container: {
       borderColor: "transparent",
@@ -27,23 +19,21 @@ const MainInput = ({
       color: "white",
       backgroundColor: "rgba(255, 255, 255, 0.2)"
     },
-    style,
+
     error: {
       color: "white",
       fontSize: 14,
       marginTop: -10,
       marginLeft: 5
-    }
+    },
+    style
   });
 
   return (
-    <View style={{ transition: 0.5 }}>
+    <View>
       <Item style={styles.container}>
         <Input
-          value={value}
-          name={name}
           placeholderTextColor={"white"}
-          selectionColor={"white"}
           onChangeText={value => onChangeText(name, value)}
           style={[styles.input, style]}
           {...props}

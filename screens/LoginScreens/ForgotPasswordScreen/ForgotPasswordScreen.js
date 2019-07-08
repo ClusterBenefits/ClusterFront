@@ -5,7 +5,6 @@ import {
   handleBackButton,
   resetUserPassword
 } from "../../../actions/userActions";
-import T from "prop-types";
 import debounce from "lodash/debounce";
 import {
   singleFieldValidation,

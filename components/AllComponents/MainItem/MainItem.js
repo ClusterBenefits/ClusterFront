@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
-import { H3, Text, ListItem } from "native-base";
+import { Text, ListItem } from "native-base";
+import { colors } from "../../../constants/Colors";
 import { Icon } from "@components/AllComponents";
 import T from "prop-types";
 import { url } from "../../../actions/userActions";
@@ -12,7 +13,6 @@ list.propTypes = {
 };
 
 export default function list({ item, goBarcodeScreen, handleFavoriteChange }) {
-  const starName = item.featured ? "star" : "star-empty";
   return (
     <ListItem style={styles.listItem}>
       <TouchableOpacity
@@ -33,18 +33,20 @@ export default function list({ item, goBarcodeScreen, handleFavoriteChange }) {
           </Text>
 
           <TouchableOpacity onPress={() => handleFavoriteChange(item)}>
-            <Icon name={starName} color="#ffcd02" size={35} />
+            <Icon
+              name={item.featured ? "star" : "star-empty"}
+              color={colors.orange}
+              size={35}
+            />
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
     </ListItem>
   );
 }
-// 007AFF
-// ffcd02
+
 const styles = StyleSheet.create({
   Item: {
-    // height: 50,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",

@@ -53,14 +53,10 @@ export default function changeEmail({
                 color="white"
                 size={25}
               />
-              <Text uppercase={false} style={{ fontSize: 18, color: "white" }}>
-                Profile
-              </Text>
+              <Text style={{ fontSize: 18, color: "white" }}>Profile</Text>
             </Button>
             <Button style={styles.button2} onPress={changeEmail}>
-              <Text uppercase={false} style={{ color: "white", fontSize: 18 }}>
-                Save
-              </Text>
+              <Text style={{ color: "white", fontSize: 18 }}>Save</Text>
             </Button>
           </View>
         </Form>

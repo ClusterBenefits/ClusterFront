@@ -17,6 +17,7 @@ import {
   Body,
   Right
 } from "native-base";
+import { colors } from "../../../constants/Colors";
 import Barcode from "react-native-barcode-builder";
 import { url } from "../../../actions/userActions";
 import { MyLinearGradient, Icon } from "@components/AllComponents";
@@ -36,7 +37,6 @@ export default function barcode({
   item
 }) {
   const height = Dimensions.get("window").height;
-  console.log("item", item);
   return (
     <MyLinearGradient>
       <Container style={styles.container}>
@@ -49,16 +49,14 @@ export default function barcode({
               </Text>
             </Button>
           </Left>
-          {/* <Body>
-            <Title>Header</Title>
-          </Body> */}
+
           <Right>
             <TouchableOpacity onPress={() => handleFavoriteChange(item)}>
-              {item.featured ? (
-                <Icon name="star" color="#ffcd02" size={30} />
-              ) : (
-                <Icon name="star-empty" color="#ffcd02" size={30} />
-              )}
+              <Icon
+                name={item.featured ? "star" : "star-empty"}
+                color={colors.orange}
+                size={30}
+              />
             </TouchableOpacity>
           </Right>
         </Header>
@@ -79,6 +77,7 @@ export default function barcode({
               height={height > 535 ? 200 : 140}
             />
             <Text style={styles.big}>{item.fields.discount} %</Text>
+            {/* <Text>Buy first to get acces for discounts !!</Text> */}
           </View>
 
           <TouchableOpacity onPress={() => goCommentsScreen(item)}>

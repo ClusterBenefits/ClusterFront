@@ -44,7 +44,6 @@ export default function CommentsScreen(props) {
 
   const goAddCommentsScreen = () => {
     props.navigation.navigate("AddCommentsScreen", {
-      userInfo: state.userInfo,
       item: item
     });
   };

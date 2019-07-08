@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
-import { Container, H3, Text } from "native-base";
+import { Container, H3 } from "native-base";
 import { MainItem, MyLinearGradient } from "@components/AllComponents";
 import T from "prop-types";
 

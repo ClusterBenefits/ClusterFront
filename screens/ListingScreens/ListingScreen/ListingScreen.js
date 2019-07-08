@@ -9,7 +9,6 @@ import {
   handleClickIcon,
   changeFavoriteCompanies
 } from "../../../actions/userActions";
-import T from "prop-types";
 import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "./../../../reducers/context";
 
@@ -21,8 +20,8 @@ export default function ListingScreen(props) {
 
   useEffect(() => {
     asyncLoading();
+
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    return () => {};
   }, []);
 
   async function asyncLoading() {
@@ -59,9 +58,3 @@ export default function ListingScreen(props) {
     />
   );
 }
-
-ListingScreen.propTypes = {
-  token: T.string,
-  items: T.array,
-  favoriteItems: T.array
-};

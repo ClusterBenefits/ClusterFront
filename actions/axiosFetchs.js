@@ -71,6 +71,7 @@ export const login = ({ email, password }) => {
       return response.data.token;
     })
     .catch(({ response }) => {
+      console.log(response);
       ShowToast(`error: ${response.data.error}`);
     });
 

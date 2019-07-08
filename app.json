@@ -20,6 +20,9 @@
     "ios": {
       "supportsTablet": true
     },
+    "android": {
+      "package": "com.mycompany.meelor"
+    },
     "description": "testing"
   }
 }

@@ -36,19 +36,14 @@ export default function IntroScreen(props) {
 
   // Autologin , try to get password and email from asyncstorage, if yes => try to login
   const getUserData = async () => {
-    let email = "";
-    let password = "";
-    try {
-      email = (await AsyncStorage.getItem("email")) || "none";
-      password = (await AsyncStorage.getItem("password")) || "none";
-    } catch (error) {
-      console.log(error.message);
-    }
+    let email = (await AsyncStorage.getItem("email")) || "none";
+    let password = (await AsyncStorage.getItem("password")) || "none";
+
     console.log(email, password);
 
-    if (!(email === "none") && !(password === "none")) {
-      // tryng to auto login
+    // tryng to auto login
 
+    if (!(email === "none") && !(password === "none")) {
       let response = await loginUser({
         email,
         password,

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { H3, Text, ListItem } from "native-base";
+import { Text, ListItem } from "native-base";
 
 import T from "prop-types";
 

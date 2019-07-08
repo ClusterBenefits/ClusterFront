@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Container, Form, View, H1, H3 } from "native-base";
+import { Container, Form, H1, H3 } from "native-base";
 import {
   BlueButton,
   LogoImage,
@@ -12,7 +11,8 @@ import T from "prop-types";
 password.propTypes = {
   onChangeValue: T.func,
   resetPassword: T.func,
-  state: T.object
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function password({
@@ -41,5 +41,3 @@ export default function password({
     </MyLinearGradient>
   );
 }
-
-const styles = StyleSheet.create({});

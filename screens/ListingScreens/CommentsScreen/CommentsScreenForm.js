@@ -9,7 +9,6 @@ import {
 import {
   Container,
   Button,
-  H2,
   H3,
   Header,
   Left,
