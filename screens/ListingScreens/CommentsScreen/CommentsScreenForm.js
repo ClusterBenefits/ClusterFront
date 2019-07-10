@@ -6,23 +6,20 @@ import {
   FlatList,
   ActivityIndicator
 } from "react-native";
+import { Container, H3, Header, Left, Body, Title } from "native-base";
 import {
-  Container,
-  Button,
-  H3,
-  Header,
-  Left,
-  Text,
-  Body,
-  Title
-} from "native-base";
-import { MyLinearGradient, Icon, MainComment } from "@components/AllComponents";
+  MyLinearGradient,
+  MainComment,
+  IconButton
+} from "@components/AllComponents";
 import T from "prop-types";
 
 commentsForm.propTypes = {
   goBarcodeScreen: T.func,
   goAddCommentsScreen: T.func,
-  userInfo: T.object
+  handleLoadMore: T.func,
+  comments: T.object,
+  refreshing: T.bool
 };
 
 export default function commentsForm({
@@ -37,12 +34,14 @@ export default function commentsForm({
       <Container style={styles.container}>
         <Header noShadow style={styles.header}>
           <Left>
-            <Button onPress={goBarcodeScreen} bordered style={styles.button}>
-              <Icon name="left" color="white" size={20} />
-              <Text uppercase={false} style={{ color: "white" }}>
-                Back
-              </Text>
-            </Button>
+            <IconButton
+              fontSize={16}
+              onPress={goBarcodeScreen}
+              name="left"
+              text={"Back"}
+              size={20}
+              marginLeft={0.1}
+            />
           </Left>
           <Body>
             <Title />
@@ -107,9 +106,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#c9c9c9",
     height: 40
-  },
-  button: {
-    borderColor: "transparent",
-    padding: 10
   }
 });

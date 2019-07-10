@@ -7,7 +7,8 @@ import {
   fetchFavoriteItems,
   changeInitialFeatured,
   handleClickIcon,
-  changeFavoriteCompanies
+  changeFavoriteCompanies,
+  checkCreditCardSubscription
 } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "./../../../reducers/context";
@@ -25,6 +26,7 @@ export default function ListingScreen(props) {
   }, []);
 
   async function asyncLoading() {
+    checkCreditCardSubscription({ token: state.token, dispatch });
     let response1 = await fetchItems({ dispatch }); // fetch all product items
     let response2 = await fetchFavoriteItems({ token: state.token, dispatch }); //fetch all favorites items
     changeInitialFeatured({

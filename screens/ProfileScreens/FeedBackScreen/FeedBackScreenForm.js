@@ -1,15 +1,20 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { colors } from "../../../constants/Colors";
-import Icon from "react-native-vector-icons/Ionicons";
-import { Container, Button, H3, Form } from "native-base";
-import { MyLinearGradient, MainInput } from "@components/AllComponents";
+import { StyleSheet, View } from "react-native";
+import { Container, H3, Form } from "native-base";
+import {
+  MyLinearGradient,
+  MainInput,
+  SmallBlueButton,
+  IconButton
+} from "@components/AllComponents";
 import T from "prop-types";
 
 commentsForm.propTypes = {
   goBack: T.func,
   onChangeValue: T.func,
-  userInfo: T.object
+  sendMessage: T.func,
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function commentsForm({
@@ -31,7 +36,6 @@ export default function commentsForm({
             value={formCredentials.subject}
             error={formErrors["subject"]}
           />
-
           <MainInput
             placeholder={"Message"}
             onChangeText={onChangeValue}
@@ -42,24 +46,9 @@ export default function commentsForm({
             multiline={true}
           />
         </Form>
-
         <View style={styles.bottom}>
-          <Button onPress={goBack} bordered style={styles.button}>
-            <Icon
-              style={{ marginRight: 10 }}
-              name="md-arrow-back"
-              color="white"
-              size={25}
-            />
-            <Text style={{ fontSize: 18, color: "white" }}>Profile</Text>
-          </Button>
-          <Button
-            style={styles.button2}
-            onPress={sendMessage}
-            textTransform="none"
-          >
-            <Text style={{ color: "white", fontSize: 18 }}>Send</Text>
-          </Button>
+          <IconButton onPress={goBack} text={"Profile"} />
+          <SmallBlueButton onPress={sendMessage} text={"Save"} />
         </View>
       </Container>
     </MyLinearGradient>
@@ -67,17 +56,6 @@ export default function commentsForm({
 }
 
 const styles = StyleSheet.create({
-  button: {
-    borderColor: "transparent",
-    padding: 10
-  },
-  button2: {
-    borderRadius: 3,
-    backgroundColor: `${colors.blue}`,
-    padding: 10,
-    paddingLeft: 30,
-    paddingRight: 30
-  },
   bottom: {
     flexDirection: "row",
     justifyContent: "space-between",

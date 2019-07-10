@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { AsyncStorage, BackHandler } from "react-native";
 import ChangeEmailScreenForm from "./ChangeEmailScreenForm";
 import { handleBackButton, changeEmail } from "../../../actions/userActions";
-import T from "prop-types";
 import debounce from "lodash/debounce";
 import {
   singleFieldValidation,
@@ -97,7 +96,3 @@ export default function IntroScreen(props) {
     />
   );
 }
-
-IntroScreen.propTypes = {
-  token: T.string
-};

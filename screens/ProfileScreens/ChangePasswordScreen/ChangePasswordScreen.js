@@ -8,7 +8,6 @@ import {
   singleFieldValidation,
   allFieldsValidation
 } from "./../../../utils/validation";
-import T from "prop-types";
 import { UserContext } from "./../../../reducers/context";
 
 const ChangePasswordScreenWithLoading = LoadingHOC(ChangePasswordScreenForm);
@@ -92,7 +91,3 @@ export default function ChangePasswordScreen(props) {
     />
   );
 }
-
-ChangePasswordScreen.propTypes = {
-  token: T.string
-};

@@ -1,31 +1,34 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   Container,
   Form,
-  Button,
   Input,
   Item,
   CheckBox,
   ListItem,
-  Body
+  Body,
+  Text
 } from "native-base";
-import { MyLinearGradient } from "@components/AllComponents";
-import { colors } from "../../../constants/Colors";
+import { MyLinearGradient, SmallBlueButton } from "@components/AllComponents";
 import T from "prop-types";
 
 AddCreditInfoScreen.propTypes = {
   onChangeValue: T.func,
   post: T.func,
   formCredentials: T.object,
-  formErrors: T.object
+  formErrors: T.object,
+  skip: T.func,
+  fromWho: T.string
 };
 
 export default function AddCreditInfoScreen({
   post,
   onChangeValue,
   formCredentials,
-  formErrors
+  formErrors,
+  skip,
+  fromWho
 }) {
   return (
     <MyLinearGradient>
@@ -72,7 +75,7 @@ export default function AddCreditInfoScreen({
             </View>
           </View>
           {formErrors && (
-            <Text style={{ color: "white", marginTop: 10 }}>
+            <Text style={{ marginTop: 10 }}>
               {formErrors[Object.keys(formErrors)[0]]}
             </Text>
           )}
@@ -96,44 +99,24 @@ export default function AddCreditInfoScreen({
             </Text>
           </Body>
         </ListItem>
-        {formCredentials.checkBox ? (
-          <Button
-            full
-            style={styles.button2}
-            onPress={post}
-            textTransform="none"
-          >
-            <Text style={{ color: "white", fontSize: 18 }}>Pay</Text>
-          </Button>
-        ) : (
-          <Button
-            full
-            disabled
-            style={styles.button1}
-            onPress={post}
-            textTransform="none"
-          >
-            <Text style={{ color: "white", fontSize: 18 }}>Pay</Text>
-          </Button>
-        )}
+        <View style={styles.bottom}>
+          <SmallBlueButton onPress={skip} text={fromWho} />
+
+          {formCredentials.checkBox ? (
+            <SmallBlueButton onPress={post} text={"Pay"} />
+          ) : (
+            <SmallBlueButton disabled={true} onPress={post} text={"Pay"} />
+          )}
+        </View>
       </Container>
     </MyLinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    borderColor: "transparent",
-    padding: 10
-  },
-  button1: {
-    borderRadius: 3,
-    marginTop: 50
-  },
-  button2: {
-    borderRadius: 3,
-    backgroundColor: `${colors.blue}`,
-    marginTop: 50
+  bottom: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   container: {
     marginBottom: 5,
@@ -145,8 +128,5 @@ const styles = StyleSheet.create({
     marginBottom: -10,
     height: 40,
     borderColor: "red"
-  },
-  text: {
-    color: "white"
   }
 });

@@ -42,6 +42,7 @@ export default function BarcodeScreen(props) {
       handleFavoriteChange={handleFavoriteChange}
       goCommentsScreen={goCommentsScreen}
       item={item}
+      subscription={state.subscription}
     />
   );
 }

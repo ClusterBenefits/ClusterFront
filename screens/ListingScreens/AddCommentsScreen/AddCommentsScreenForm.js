@@ -1,19 +1,12 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { colors } from "../../../constants/Colors";
+import { StyleSheet, View } from "react-native";
+import { Container, H3, Header, Left, Body, Title, Form } from "native-base";
 import {
-  Container,
-  Button,
-  H3,
-  Header,
-  Left,
-  Body,
-  Title,
-  Form,
-  Text
-} from "native-base";
-
-import { MyLinearGradient, Icon, MainInput } from "@components/AllComponents";
+  MyLinearGradient,
+  MainInput,
+  SmallBlueButton,
+  IconButton
+} from "@components/AllComponents";
 import T from "prop-types";
 
 commentsForm.propTypes = {
@@ -27,8 +20,8 @@ commentsForm.propTypes = {
 export default function commentsForm({
   goBack,
   onChangeValue,
-  formCredentials,
   sendMessage,
+  formCredentials,
   formErrors
 }) {
   return (
@@ -36,12 +29,14 @@ export default function commentsForm({
       <Container style={styles.container}>
         <Header noShadow style={styles.header}>
           <Left>
-            <Button onPress={goBack} bordered style={styles.button}>
-              <Icon name="left" color="white" size={20} />
-              <Text uppercase={false} style={{ color: "white" }}>
-                Back
-              </Text>
-            </Button>
+            <IconButton
+              fontSize={16}
+              onPress={goBack}
+              name="left"
+              text={"Back"}
+              size={20}
+              marginLeft={0.1}
+            />
           </Left>
           <Body>
             <Title />
@@ -56,21 +51,17 @@ export default function commentsForm({
               name="myComment"
               value={formCredentials.myComment}
               error={formErrors["myComment"]}
-              style={{ textAlignVertical: "top", paddingTop: 5, height: 100 }}
+              style={{
+                textAlignVertical: "top",
+                paddingTop: 5,
+                height: 100
+              }}
               multiline={true}
             />
           </Form>
-          <Button style={styles.button2} onPress={sendMessage}>
-            <Text
-              uppercase={false}
-              style={{
-                color: "white",
-                fontSize: 18
-              }}
-            >
-              Send
-            </Text>
-          </Button>
+          <View style={{ alignSelf: "flex-end" }}>
+            <SmallBlueButton onPress={sendMessage} text={"Send"} />
+          </View>
         </Container>
       </Container>
     </MyLinearGradient>
@@ -88,18 +79,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#c9c9c9",
     height: 40
-  },
-  button: {
-    borderColor: "transparent",
-    padding: 10
-  },
-  button2: {
-    borderRadius: 3,
-    backgroundColor: `${colors.blue}`,
-    padding: 10,
-    marginTop: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
-    alignSelf: "flex-end"
   }
 });

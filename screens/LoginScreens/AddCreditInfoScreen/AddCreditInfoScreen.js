@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
-import { LoadingHOC, ShowToast } from "@components/AllComponents";
+import { LoadingHOC } from "@components/AllComponents";
 import { allFieldsValidation } from "../../../utils/validation";
 import { UserContext } from "../../../reducers/context";
+import { addCreditCardSubscription } from "../../../actions/userActions";
 
 const AddCreditInfoScreenWithLoading = LoadingHOC(AddCreditInfoScreenForm);
 
@@ -28,8 +29,16 @@ export default function AddCreditInfoScreen(props) {
     }
   };
 
-  // post user info
+  // check where the user has come from(registration or billinginformation)
+  const fromWho = props.navigation.getParam("name", "Registration");
 
+  const skip = () => {
+    if (fromWho === "Registration") {
+      props.navigation.navigate("ProfileBottomTabNavigatior");
+    } else {
+      props.navigation.navigate("BillingInformationScreen");
+    }
+  };
   const post = async () => {
     const { isValid, errors } = allFieldsValidation({
       ...formCredentials,
@@ -40,10 +49,27 @@ export default function AddCreditInfoScreen(props) {
       setFormErrors(errors);
     } else {
       setIsLoading(true);
-      // await postCreditInfo();
-      setIsLoading(false);
-      setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
-      props.navigation.navigate("ProfileBottomTabNavigatior");
+      let response = await addCreditCardSubscription({
+        token: state.token,
+        dispatch,
+        data: {
+          creditCardNumber: formCredentials.creditCardNumber,
+          expiration: formCredentials.expiration,
+          cvv2: formCredentials.cvv2
+        }
+      });
+      if (response && fromWho === "Registration") {
+        // after registration user has made a subscription
+        setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
+        props.navigation.navigate("ProfileBottomTabNavigatior");
+      } else if (response && fromWho !== "Registration") {
+        // after billinginformation has user made a subscription
+        setFormCredentials({ bcreditCardNumber: "", expiration: "", cvv2: "" });
+        props.navigation.navigate("BillingInformationScreen");
+      } else {
+        // somthing was wrong with creditCard
+        setIsLoading(false);
+      }
     }
   };
 
@@ -54,6 +80,8 @@ export default function AddCreditInfoScreen(props) {
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
       formErrors={formErrors}
+      skip={skip}
+      fromWho={fromWho}
     />
   );
 }

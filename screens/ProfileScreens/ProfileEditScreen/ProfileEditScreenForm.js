@@ -1,16 +1,20 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Container, Form, Button, H3 } from "native-base";
-import Icon from "react-native-vector-icons/Ionicons";
-import { MyLinearGradient, MainInput } from "@components/AllComponents";
-import { colors } from "../../../constants/Colors";
+import { StyleSheet, View } from "react-native";
+import { Container, Form, H3 } from "native-base";
 import T from "prop-types";
+import {
+  MyLinearGradient,
+  MainInput,
+  SmallBlueButton,
+  IconButton
+} from "@components/AllComponents";
 
 profileEdit.propTypes = {
   onChangeValue: T.func,
   post: T.func,
   goProfileScreen: T.func,
-  state: T.object
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function profileEdit({
@@ -54,18 +58,8 @@ export default function profileEdit({
             error={formErrors["position"]}
           />
           <View style={styles.bottom}>
-            <Button onPress={goProfileScreen} bordered style={styles.button}>
-              <Icon
-                style={{ marginRight: 10 }}
-                name="md-arrow-back"
-                color="white"
-                size={25}
-              />
-              <Text style={{ fontSize: 18, color: "white" }}>Profile</Text>
-            </Button>
-            <Button style={styles.button2} onPress={post}>
-              <Text style={{ color: "white", fontSize: 18 }}>Edit</Text>
-            </Button>
+            <IconButton onPress={goProfileScreen} text={"Profile"} />
+            <SmallBlueButton onPress={post} text={"Edit"} />
           </View>
         </Form>
       </Container>
@@ -74,17 +68,6 @@ export default function profileEdit({
 }
 
 const styles = StyleSheet.create({
-  button: {
-    borderColor: "transparent",
-    padding: 10
-  },
-  button2: {
-    borderRadius: 3,
-    backgroundColor: `${colors.blue}`,
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
   bottom: {
     flexDirection: "row",
     justifyContent: "space-between",

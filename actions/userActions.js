@@ -16,7 +16,10 @@ import {
   listOfCompanies,
   getItemComments,
   sendMessageToAdmins,
-  sendComments
+  sendComments,
+  checkBillingSubscription,
+  addBillingSubscription,
+  deleteBillingSubscription
 } from "./axiosFetchs";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
@@ -29,9 +32,10 @@ export const FEATURED = "FEATURED";
 export const FAVORITE_ITEMS_KEYS = "FAVORITE_ITEMS_KEYS";
 export const ADD_FAVORITE_ITEMS = "ADD_FAVORITE_ITEMS";
 export const ADD_COMMENTS = "ADD_COMMENTS";
+export const SUBSCRIPTION = "SUBSCRIPTION";
 
 export const url = "https://api.cluster.ukietech.org";
-// export const url = "https://274b5575.ngrok.io";
+// export const url = "https://e66bd48a.ngrok.io";
 
 ///////// AUTH
 export const registerForPushNotificationsAsync = async userToken => {
@@ -217,6 +221,37 @@ export const sendMessageToAdmin = async ({ ...props }) => {
 };
 
 //  Message and Comments
+
+// CreditCardApi
+
+export const checkCreditCardSubscription = async ({ token, dispatch }) => {
+  let response = await checkBillingSubscription(token);
+  dispatch({
+    type: SUBSCRIPTION,
+    payload: response ? response : false
+  });
+  return response;
+};
+
+export const addCreditCardSubscription = async ({ ...props }) => {
+  let response = await addBillingSubscription(props);
+  props.dispatch({
+    type: SUBSCRIPTION,
+    payload: response ? response : false
+  });
+  return response;
+};
+
+export const deleteCreditCardSubscription = async ({ ...props }) => {
+  let response = await deleteBillingSubscription(props);
+  props.dispatch({
+    type: SUBSCRIPTION,
+    payload: response ? response : false
+  });
+  return response;
+};
+
+// CreditCardApi
 
 // change star color if item is in favorite list (doing it only once at start)
 export const changeInitialFeatured = ({ items, favoriteItems, dispatch }) => {

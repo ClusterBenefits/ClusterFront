@@ -46,7 +46,8 @@ const ProfileStack = createStackNavigator(
     ChangePasswordScreen,
     ChangeEmailScreen,
     BillingInformationScreen,
-    FeedBackScreen
+    FeedBackScreen,
+    AddCreditInfoScreen
   },
   {
     headerMode: "none",

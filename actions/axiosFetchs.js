@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ShowToast } from "@components/AllComponents";
 const url = "https://api.cluster.ukietech.org";
-// const url = "https://274b5575.ngrok.io";
+// const url = "https://e66bd48a.ngrok.io";
 
 export const postTokenToServer = async ({ expoToken, token }) => {
   let response = axios
@@ -367,4 +367,63 @@ export const sendComments = ({ message, token, id }) => {
   return response;
 };
 
-//
+// Send Messages
+
+// CreditCard Api
+
+export const checkBillingSubscription = token => {
+  let response = axios
+    .get(`${url}/api/user/payment/subscribe`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token
+      }
+    })
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch(({ response }) => {
+      console.log("check bill err ", response.data);
+    });
+  return response;
+};
+
+export const addBillingSubscription = ({ ...props }) => {
+  let response = axios
+    .post(`${url}/api/user/payment/subscribe`, props.data, {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + props.token
+      }
+    })
+    .then(response => {
+      return response.data;
+    })
+    .catch(({ response }) => {
+      ShowToast("There was an error");
+      console.log("addbillingsub error", response.data);
+    });
+  return response;
+};
+
+export const deleteBillingSubscription = ({ token, id }) => {
+  let response = axios
+    .post(`${url}/api/user/payment/subscribe/${id}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token
+      }
+    })
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch(({ response }) => {
+      console.log(response);
+      ShowToast(`error: ${response.data.error}`);
+    });
+  return response;
+};
+
+// CreditCard Api

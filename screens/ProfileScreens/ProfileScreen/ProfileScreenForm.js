@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { Container, Form, Button, H3, H2, Text } from "native-base";
-import { MyLinearGradient, Icon } from "@components/AllComponents";
-import { Ionicons } from "@expo/vector-icons";
+import { Container, H3, Text } from "native-base";
+import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
 import T from "prop-types";
 
 profile.propTypes = {
@@ -10,6 +9,7 @@ profile.propTypes = {
   goChangeEmailScreen: T.func,
   goChangePasswordScreen: T.func,
   goAddCommentScreen: T.func,
+  goBillingInformation: T.func,
   signOutUser: T.func,
   userInfo: T.object
 };
@@ -37,14 +37,14 @@ export default function profile({
           <View>
             <View style={styles.row}>
               <H3 style={{ marginLeft: 0 }}>Profile</H3>
-              <Button
+              <IconButton
                 onPress={goProfileEditScreen}
-                bordered
-                style={styles.button}
-              >
-                <Icon name="pencil" color="white" size={24} />
-                <H3 style={{ marginLeft: 10 }}>Edit</H3>
-              </Button>
+                text={"Edit"}
+                size={24}
+                fontSize={20}
+                name={"pencil"}
+                marginLeft={-5}
+              />
             </View>
 
             <View style={{ flexDirection: "row", margin: 15 }}>
@@ -130,11 +130,6 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 0,
     paddingBottom: 20
-  },
-  button: {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    padding: 10
   },
   row: {
     flexDirection: "row",

@@ -1,16 +1,20 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Container, Form, Button, H1, H3 } from "native-base";
-import { MyLinearGradient, MainInput } from "@components/AllComponents";
-import Icon from "react-native-vector-icons/Ionicons";
-import { colors } from "../../../constants/Colors";
+import { StyleSheet, View } from "react-native";
+import { Container, Form, H3 } from "native-base";
+import {
+  MyLinearGradient,
+  MainInput,
+  SmallBlueButton,
+  IconButton
+} from "@components/AllComponents";
 import T from "prop-types";
 
 changeEmail.propTypes = {
   onChangeValue: T.func,
   goProfileScreen: T.func,
   changeEmail: T.func,
-  state: T.object
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function changeEmail({
@@ -41,23 +45,8 @@ export default function changeEmail({
             error={formErrors["password_email"]}
           />
           <View style={styles.bottom}>
-            <Button
-              onPress={goProfileScreen}
-              white
-              bordered
-              style={styles.button}
-            >
-              <Icon
-                style={{ marginRight: 10 }}
-                name="md-arrow-back"
-                color="white"
-                size={25}
-              />
-              <Text style={{ fontSize: 18, color: "white" }}>Profile</Text>
-            </Button>
-            <Button style={styles.button2} onPress={changeEmail}>
-              <Text style={{ color: "white", fontSize: 18 }}>Save</Text>
-            </Button>
+            <IconButton onPress={goProfileScreen} text={"Profile"} />
+            <SmallBlueButton onPress={changeEmail} text={"Save"} />
           </View>
         </Form>
       </Container>
@@ -68,17 +57,6 @@ export default function changeEmail({
 const styles = StyleSheet.create({
   center: {
     justifyContent: "center"
-  },
-  button: {
-    borderColor: "transparent",
-    padding: 10
-  },
-  button2: {
-    borderRadius: 3,
-    backgroundColor: `${colors.blue}`,
-    padding: 10,
-    paddingLeft: 30,
-    paddingRight: 30
   },
   bottom: {
     flexDirection: "row",

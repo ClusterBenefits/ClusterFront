@@ -6,7 +6,8 @@ import {
   ADD_ITEMS,
   FEATURED,
   ADD_FAVORITE_ITEMS,
-  ADD_COMMENTS
+  ADD_COMMENTS,
+  SUBSCRIPTION
 } from "../actions/userActions";
 
 let reducer = (state, action) => {
@@ -58,6 +59,11 @@ let reducer = (state, action) => {
         ...state,
         comments: action.payload
       };
+    case SUBSCRIPTION:
+      return {
+        ...state,
+        subscription: action.payload
+      };
 
     default:
       return state;
@@ -68,7 +74,8 @@ const initialState = {
   userInfo: null,
   items: [],
   favoriteItems: [],
-  comments: {}
+  comments: {},
+  subscription: false
 };
 
 const UserContext = React.createContext(initialState);

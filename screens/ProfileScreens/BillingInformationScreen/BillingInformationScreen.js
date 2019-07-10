@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import BillingInformationScreenForm from "./BillingInformationScreenForm";
-import { AsyncStorage, BackHandler } from "react-native";
-import { handleBackButton } from "../../../actions/userActions";
-import { LoadingHOC, ShowToast } from "@components/AllComponents";
-import { allFieldsValidation } from "../../../utils/validation";
+import {
+  deleteCreditCardSubscription,
+  checkCreditCardSubscription
+} from "../../../actions/userActions";
+import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "../../../reducers/context";
 
 const BillingInformationScreenWithLoading = LoadingHOC(
@@ -11,49 +12,40 @@ const BillingInformationScreenWithLoading = LoadingHOC(
 );
 
 export default function ProfileEditScreen(props) {
-  const [formCredentials, setFormCredentials] = useState({
-    creditCardNumber: "",
-    expiration: "",
-    cvv2: ""
-  });
-  const [formErrors, setFormErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch } = useContext(UserContext);
 
-  const onChangeValue = (value, name) => {
-    setFormCredentials({ ...formCredentials, [name]: value });
-  };
+  useEffect(() => {
+    async function bob() {
+      await checkCreditCardSubscription({ token: state.token, dispatch });
+      setIsLoading(false);
+    }
+    bob();
+  }, []);
 
   const goProfileScreen = () => {
     props.navigation.navigate("ProfileScreen");
   };
 
-  // post user info
+  const goEditBillingInfoScreen = () => {
+    props.navigation.navigate("AddCreditInfoScreen", { name: "Back" });
+  };
 
-  const post = async () => {
-    const { isValid, errors } = allFieldsValidation({
-      ...formCredentials,
-      creditCardNumber: formCredentials.creditCardNumber.replace(/\D/g, "")
+  const cancelSubscription = () => {
+    deleteCreditCardSubscription({
+      dispatch: dispatch,
+      token: state.token,
+      id: state.subscription.id
     });
-
-    if (!isValid) {
-      setFormErrors(errors);
-    } else {
-      setIsLoading(true);
-      // await postCreditInfo();
-      setIsLoading(false);
-      setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
-    }
   };
 
   return (
     <BillingInformationScreenWithLoading
       isLoading={isLoading}
       goProfileScreen={goProfileScreen}
-      post={post}
-      onChangeValue={onChangeValue}
-      formCredentials={formCredentials}
-      formErrors={formErrors}
+      goEditBillingInfoScreen={goEditBillingInfoScreen}
+      cancelSubscription={cancelSubscription}
+      subscription={state.subscription}
     />
   );
 }

@@ -1,10 +1,10 @@
 {
-  "packagerPort": 19015,
-  "packagerPid": 11020,
-  "expoServerNgrokUrl": "https://za-kki.meelor.cluster.exp.direct",
-  "packagerNgrokUrl": "https://packager.za-kki.meelor.cluster.exp.direct",
-  "ngrokPid": 11103,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19011,
-  "expoServerPort": 19012,
+  "expoServerPort": null,
   "webpackServerPort": null
 }

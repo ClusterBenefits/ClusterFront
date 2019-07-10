@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import {
   Container,
-  Button,
   H2,
   H3,
   Header,
@@ -20,7 +19,7 @@ import {
 import { colors } from "../../../constants/Colors";
 import Barcode from "react-native-barcode-builder";
 import { url } from "../../../actions/userActions";
-import { MyLinearGradient, Icon } from "@components/AllComponents";
+import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
 import T from "prop-types";
 
 barcode.propTypes = {
@@ -34,7 +33,8 @@ export default function barcode({
   goListingScreen,
   handleFavoriteChange,
   goCommentsScreen,
-  item
+  item,
+  subscription
 }) {
   const height = Dimensions.get("window").height;
   return (
@@ -42,14 +42,15 @@ export default function barcode({
       <Container style={styles.container}>
         <Header noShadow style={styles.header}>
           <Left>
-            <Button onPress={goListingScreen} bordered style={styles.button}>
-              <Icon name="left" color="white" size={20} />
-              <Text uppercase={false} style={{ color: "white" }}>
-                Back
-              </Text>
-            </Button>
+            <IconButton
+              fontSize={16}
+              onPress={goListingScreen}
+              name="left"
+              text={"Back"}
+              size={20}
+              marginLeft={0.1}
+            />
           </Left>
-
           <Right>
             <TouchableOpacity onPress={() => handleFavoriteChange(item)}>
               <Icon
@@ -69,17 +70,19 @@ export default function barcode({
             <H2 style={styles.h2}> {item.fields.name}</H2>
           </View>
 
-          <View>
-            <Barcode
-              value={`${item.fields.discount}`}
-              format="CODE128"
-              width={3}
-              height={height > 535 ? 200 : 140}
-            />
-            <Text style={styles.big}>{item.fields.discount} %</Text>
-            {/* <Text>Buy first to get acces for discounts !!</Text> */}
-          </View>
-
+          {subscription ? (
+            <View>
+              <Barcode
+                value={`${item.fields.discount}`}
+                format="CODE128"
+                width={3}
+                height={height > 535 ? 200 : 140}
+              />
+              <Text style={styles.big}>{item.fields.discount} %</Text>
+            </View>
+          ) : (
+            <Text>Buy subscription</Text>
+          )}
           <TouchableOpacity onPress={() => goCommentsScreen(item)}>
             <H3>Comments</H3>
           </TouchableOpacity>
@@ -108,10 +111,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 40,
     color: "white"
-  },
-  button: {
-    borderColor: "transparent",
-    padding: 10
   },
   image: {
     height: 100,

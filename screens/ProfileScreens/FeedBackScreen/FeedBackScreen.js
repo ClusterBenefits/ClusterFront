@@ -1,11 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import FeedBackScreenForm from "./FeedBackScreenForm";
 import T from "prop-types";
-import {
-  sendMessageToAdmin,
-  sendComment,
-  getComments
-} from "../../../actions/userActions";
+import { sendMessageToAdmin } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
 import {
   allFieldsValidation,

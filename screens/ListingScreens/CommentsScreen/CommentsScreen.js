@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import CommentsScreenForm from "./CommentsScreenForm";
 import { getComments } from "../../../actions/userActions";
-import T from "prop-types";
 import { UserContext } from "./../../../reducers/context";
 import { LoadingHOC } from "@components/AllComponents";
 
@@ -63,8 +62,3 @@ export default function CommentsScreen(props) {
     />
   );
 }
-
-CommentsScreen.propTypes = {
-  token: T.string,
-  favoriteItems: T.array
-};
