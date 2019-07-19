@@ -1,18 +1,19 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Container, H3, Header, Left, Body, Title, Form } from "native-base";
+import T from "prop-types";
+
 import {
   MyLinearGradient,
   MainInput,
   SmallBlueButton,
   IconButton
 } from "@components/AllComponents";
-import T from "prop-types";
 
 commentsForm.propTypes = {
   goBack: T.func,
   onChangeValue: T.func,
-  sendMessage: T.func,
+  addComment: T.func,
   formCredentials: T.object,
   formErrors: T.object
 };
@@ -20,7 +21,7 @@ commentsForm.propTypes = {
 export default function commentsForm({
   goBack,
   onChangeValue,
-  sendMessage,
+  addComment,
   formCredentials,
   formErrors
 }) {
@@ -60,7 +61,7 @@ export default function commentsForm({
             />
           </Form>
           <View style={{ alignSelf: "flex-end" }}>
-            <SmallBlueButton onPress={sendMessage} text={"Send"} />
+            <SmallBlueButton onPress={addComment} text={"Send"} />
           </View>
         </Container>
       </Container>

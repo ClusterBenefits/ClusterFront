@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import SignUpScreenForm from "./SignUpScreenForm";
 import { AsyncStorage, BackHandler } from "react-native";
+import debounce from "lodash/debounce";
+
+import SignUpScreenForm from "./SignUpScreenForm";
 import { handleBackButton, registerUser } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
-import debounce from "lodash/debounce";
 import {
   singleFieldValidation,
   allFieldsValidation
@@ -89,7 +90,7 @@ export default function SignUpScreen(props) {
       setIsLoading(false);
     }
   };
-  const goSignIn = () => {
+  const goLoginScreen = () => {
     props.navigation.navigate("LoginScreen");
   };
 
@@ -99,7 +100,7 @@ export default function SignUpScreen(props) {
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
       formErrors={formErrors}
-      goSignIn={goSignIn}
+      goLoginScreen={goLoginScreen}
       signUpUser={signUpUser}
     />
   );

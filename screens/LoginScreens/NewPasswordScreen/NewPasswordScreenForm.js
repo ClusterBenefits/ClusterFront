@@ -1,18 +1,19 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Container, Form, H1 } from "native-base";
+import T from "prop-types";
+
 import {
   BlueButton,
   LogoImage,
   MainInput,
   MyLinearGradient
 } from "@components/AllComponents";
-import T from "prop-types";
 
 newPassword.propTypes = {
   goLogin: T.func,
   onChangeValue: T.func,
-  state: T.object
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function newPassword({
@@ -49,5 +50,3 @@ export default function newPassword({
     </MyLinearGradient>
   );
 }
-
-const styles = StyleSheet.create({});

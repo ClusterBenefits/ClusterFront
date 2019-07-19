@@ -1,12 +1,12 @@
 import React, { useEffect, useContext } from "react";
+import { BackHandler } from "react-native";
+
 import BarcodeScreenForm from "./BarcodeScreenForm";
 import {
   handleClickIcon,
   changeFavoriteCompanies,
   handleBackButton
 } from "../../../actions/userActions";
-import T from "prop-types";
-import { BackHandler } from "react-native";
 import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "./../../../reducers/context";
 
@@ -42,12 +42,6 @@ export default function BarcodeScreen(props) {
       handleFavoriteChange={handleFavoriteChange}
       goCommentsScreen={goCommentsScreen}
       item={item}
-      subscription={state.subscription}
     />
   );
 }
-
-BarcodeScreen.propTypes = {
-  token: T.string,
-  favoriteItems: T.array
-};

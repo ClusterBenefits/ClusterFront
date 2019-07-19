@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Container, Form, Text, H1, H3 } from "native-base";
+import { Container, Form, Text, H1 } from "native-base";
+import T from "prop-types";
+
 import {
   BlueButton,
   LogoImage,
   MyLinearGradient
 } from "@components/AllComponents";
-import T from "prop-types";
 
 welcome.propTypes = {
   goProfileFillingScreen: T.func

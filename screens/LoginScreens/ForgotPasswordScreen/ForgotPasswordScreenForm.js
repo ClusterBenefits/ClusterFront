@@ -1,12 +1,13 @@
 import React from "react";
 import { Container, Form, H1, H3 } from "native-base";
+import T from "prop-types";
+
 import {
   BlueButton,
   LogoImage,
   MainInput,
   MyLinearGradient
 } from "@components/AllComponents";
-import T from "prop-types";
 
 password.propTypes = {
   onChangeValue: T.func,

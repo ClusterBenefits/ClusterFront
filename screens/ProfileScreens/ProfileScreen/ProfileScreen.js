@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
+import { BackHandler } from "react-native";
+
 import { UserContext } from "./../../../reducers/context";
 import { handleBackButton, clearUserLocal } from "../../../actions/userActions";
-import { BackHandler } from "react-native";
 import ProfileScreenForm from "./ProfileScreenForm";
-import T from "prop-types";
 
 export default function ProfileScreen(props) {
   const { state, dispatch } = useContext(UserContext);
@@ -48,7 +48,3 @@ export default function ProfileScreen(props) {
     />
   );
 }
-
-ProfileScreen.propTypes = {
-  userInfo: T.object
-};

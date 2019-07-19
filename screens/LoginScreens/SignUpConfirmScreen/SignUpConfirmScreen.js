@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
+
 import SignUpConfirmScreenForm from "./SignUpConfirmScreenForm";
 import { confirmUserCodeFromEmail } from "../../../actions/userActions";
-
-import { Root } from "native-base";
-import {
-  singleFieldValidation,
-  allFieldsValidation
-} from "./../../../utils/validation";
+import { allFieldsValidation } from "./../../../utils/validation";
 import { LoadingHOC } from "@components/AllComponents";
 
 const SignUpConfrimScreenWithLoading = LoadingHOC(SignUpConfirmScreenForm);

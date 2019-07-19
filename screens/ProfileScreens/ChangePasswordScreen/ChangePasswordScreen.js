@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AsyncStorage, BackHandler } from "react-native";
+import debounce from "lodash/debounce";
+
 import ChangePasswordScreenForm from "./ChangePasswordScreenForm";
 import { handleBackButton, changePassword } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
-import debounce from "lodash/debounce";
 import {
   singleFieldValidation,
   allFieldsValidation
@@ -31,6 +32,7 @@ export default function ChangePasswordScreen(props) {
     };
   }, []);
 
+  // get inital password for validation
   const getPassword = async () => {
     let password = (await AsyncStorage.getItem("password")) || "none";
     setFormCredentials({ ...formCredentials, realPassword: password });
@@ -68,6 +70,7 @@ export default function ChangePasswordScreen(props) {
       setFormErrors(errors);
     } else {
       setIsLoading(true);
+
       // trying to change password
       await changePassword({
         token: state.token,

@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Container, H3, Text } from "native-base";
-import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
 import T from "prop-types";
+
+import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
 
 profile.propTypes = {
   goProfileEditScreen: T.func,

@@ -2,6 +2,7 @@ import BlueButton from "./BlueButton/BlueButton";
 import SmallBlueButton from "./SmallBlueButton/SmallBlueButton";
 import LogoImage from "./LogoImage/LogoImage";
 import MainInput from "./MainInput/MainInput";
+import SimpleInput from "./SimpleInput/SimpleInput";
 import MainItem from "./MainItem/MainItem";
 import NewToast from "./NewToast/NewToast";
 import MainComment from "./MainComment/MainComment";
@@ -16,6 +17,7 @@ export {
   SmallBlueButton,
   LogoImage,
   MainInput,
+  SimpleInput,
   MainItem,
   MainComment,
   MyLinearGradient,

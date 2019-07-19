@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Container, Form, H3 } from "native-base";
+import T from "prop-types";
+
 import {
   MyLinearGradient,
   MainInput,
   SmallBlueButton,
   IconButton
 } from "@components/AllComponents";
-import T from "prop-types";
 
 changeEmail.propTypes = {
   onChangeValue: T.func,

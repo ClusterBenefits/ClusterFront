@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
+import { BackHandler } from "react-native";
+
 import BillingInformationScreenForm from "./BillingInformationScreenForm";
 import {
   deleteCreditCardSubscription,
-  checkCreditCardSubscription
+  checkCreditCardSubscription,
+  handleBackButton
 } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "../../../reducers/context";
@@ -16,11 +19,17 @@ export default function ProfileEditScreen(props) {
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
-    async function bob() {
+    async function checkCreditInfo() {
       await checkCreditCardSubscription({ token: state.token, dispatch });
       setIsLoading(false);
     }
-    bob();
+    checkCreditInfo();
+
+    BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+
+    return () => {
+      BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    };
   }, []);
 
   const goProfileScreen = () => {
@@ -31,12 +40,15 @@ export default function ProfileEditScreen(props) {
     props.navigation.navigate("AddCreditInfoScreen", { name: "Back" });
   };
 
-  const cancelSubscription = () => {
-    deleteCreditCardSubscription({
+  // remove payment subscription
+  const cancelSubscription = async () => {
+    setIsLoading(true);
+    let response = await deleteCreditCardSubscription({
       dispatch: dispatch,
-      token: state.token,
-      id: state.subscription.id
+      token: state.token
     });
+
+    setIsLoading(false);
   };
 
   return (

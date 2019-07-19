@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Container, Form, H3, Item, Text } from "native-base";
+import T from "prop-types";
+
 import {
   MyLinearGradient,
   SmallBlueButton,
   IconButton
 } from "@components/AllComponents";
-import T from "prop-types";
 
 BillingInformationScreen.propTypes = {
   goProfileScreen: T.func,

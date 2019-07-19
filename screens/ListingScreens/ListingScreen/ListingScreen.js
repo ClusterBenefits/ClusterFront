@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import ListingScreenForm from "./ListingScreenForm";
 import { BackHandler } from "react-native";
+
 import {
   fetchItems,
   handleBackButton,
   fetchFavoriteItems,
   changeInitialFeatured,
   handleClickIcon,
-  changeFavoriteCompanies,
-  checkCreditCardSubscription
+  changeFavoriteCompanies
 } from "../../../actions/userActions";
+import ListingScreenForm from "./ListingScreenForm";
 import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "./../../../reducers/context";
 
@@ -23,20 +23,29 @@ export default function ListingScreen(props) {
     asyncLoading();
 
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-  }, []);
+  }, [state.subscription]);
 
   async function asyncLoading() {
-    checkCreditCardSubscription({ token: state.token, dispatch });
-    let response1 = await fetchItems({ dispatch }); // fetch all product items
-    let response2 = await fetchFavoriteItems({ token: state.token, dispatch }); //fetch all favorites items
-    changeInitialFeatured({
+    if (!state.subscription) {
+      // fetch all product items
+      let response1 = await fetchItems({
+        dispatch,
+        token: state.token
+      });
+      //fetch all favorites items
+      let response2 = await fetchFavoriteItems({
+        token: state.token,
+        dispatch
+      });
       // change star color if item is in favorite list
-      items: response1,
-      favoriteItems: response2,
-      dispatch
-    });
+      changeInitialFeatured({
+        items: response1,
+        favoriteItems: response2,
+        dispatch
+      });
+    }
+
     setIsLoading(false);
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
   }
 
   const goBarcodeScreen = item => {
@@ -57,6 +66,7 @@ export default function ListingScreen(props) {
       items={state.items}
       goBarcodeScreen={goBarcodeScreen}
       handleFavoriteChange={handleFavoriteChange}
+      subscription={!state.subscription}
     />
   );
 }

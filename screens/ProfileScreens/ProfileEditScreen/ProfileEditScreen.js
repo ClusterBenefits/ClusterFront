@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import ProfileEditScreenForm from "./ProfileEditScreenForm";
+import debounce from "lodash/debounce";
 import { BackHandler } from "react-native";
+
+import ProfileEditScreenForm from "./ProfileEditScreenForm";
 import { postUserInfo, handleBackButton } from "../../../actions/userActions";
 import { LoadingHOC, ShowToast } from "@components/AllComponents";
-import debounce from "lodash/debounce";
 import {
   singleFieldValidation,
   allFieldsValidation
@@ -50,9 +51,9 @@ export default function ProfileEditScreen(props) {
     props.navigation.navigate("ProfileScreen");
   };
 
-  // post user info
+  // edit profiel user info
 
-  const post = async () => {
+  const editUserProfile = async () => {
     const { isValid, errors } = allFieldsValidation(formCredentials);
     if (!isValid) {
       setFormErrors(errors);
@@ -90,7 +91,7 @@ export default function ProfileEditScreen(props) {
     <ProfileEditScreenWithLoading
       isLoading={isLoading}
       goProfileScreen={goProfileScreen}
-      post={post}
+      editUserProfile={editUserProfile}
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
       formErrors={formErrors}

@@ -1,13 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
+import { BackHandler } from "react-native";
+import debounce from "lodash/debounce";
+
 import FeedBackScreenForm from "./FeedBackScreenForm";
-import T from "prop-types";
-import { sendMessageToAdmin } from "../../../actions/userActions";
+import {
+  sendMessageToAdmin,
+  handleBackButton
+} from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
 import {
   allFieldsValidation,
   singleFieldValidation
 } from "../../../utils/validation";
-import debounce from "lodash/debounce";
 import { UserContext } from "../../../reducers/context";
 
 const FeedBackScreenWithLoading = LoadingHOC(FeedBackScreenForm);
@@ -20,6 +24,13 @@ export default function AddCommentsScreen(props) {
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
+
+  useEffect(() => {
+    BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
@@ -39,6 +50,7 @@ export default function AddCommentsScreen(props) {
     props.navigation.pop();
   };
 
+  // feedback to admin
   const sendMessage = async () => {
     const { isValid, errors } = allFieldsValidation(formCredentials);
     if (!isValid) {
@@ -59,8 +71,6 @@ export default function AddCommentsScreen(props) {
     }
   };
 
-  // getting item that needs to be rendered from navigation
-
   return (
     <FeedBackScreenWithLoading
       isLoading={isLoading}
@@ -72,8 +82,3 @@ export default function AddCommentsScreen(props) {
     />
   );
 }
-
-AddCommentsScreen.propTypes = {
-  fromWho: T.string,
-  userInfo: T.object
-};

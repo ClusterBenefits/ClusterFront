@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { UserContext } from "./../../../reducers/context";
 import { BackHandler } from "react-native";
+
+import { UserContext } from "./../../../reducers/context";
 import WelcomeScreenForm from "./WelcomeScreenForm";
 import {
   fetchUserInfo,
   handleBackButton,
-  registerForPushNotificationsAsync
+  registerForPushNotificationsAsync,
+  checkCreditCardSubscription
 } from "../../../actions/userActions";
-import T from "prop-types";
 import { LoadingHOC } from "@components/AllComponents";
 
 const WelcomeScreenWithLoading = LoadingHOC(WelcomeScreenForm);
@@ -18,17 +19,22 @@ export default function WelcomeScreen(props) {
 
   useEffect(() => {
     // trying to get user info
-    async function fetchUserData({ token, dispatch }) {
-      let response = await fetchUserInfo({ token, dispatch });
+    async function fetchUserData() {
+      let response = await fetchUserInfo({ token: state.token, dispatch });
+
       // trying to autoloign if userinfo is there , otherwise stay here and fill info
 
       if (response.first_name) {
+        await checkCreditCardSubscription({
+          token: state.token,
+          dispatch
+        });
         props.navigation.navigate("ProfileBottomTabNavigatior");
       } else {
         setIsLoading(false);
       }
     }
-    fetchUserData({ token: state.token, dispatch });
+    fetchUserData();
     registerForPushNotificationsAsync(state.token);
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     return () => {
@@ -49,8 +55,3 @@ export default function WelcomeScreen(props) {
     />
   );
 }
-
-WelcomeScreen.propTypes = {
-  token: T.string,
-  userInfo: T.object
-};

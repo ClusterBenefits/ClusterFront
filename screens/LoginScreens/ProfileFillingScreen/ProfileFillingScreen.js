@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
+import debounce from "lodash/debounce";
+
 import { UserContext } from "./../../../reducers/context";
 import ProfileFillingScreenForm from "./ProfileFillingScreenForm";
 import {
   postUserInfo,
   registerForPushNotificationsAsync
 } from "../../../actions/userActions";
-import T from "prop-types";
-import debounce from "lodash/debounce";
 import {
   singleFieldValidation,
   allFieldsValidation
@@ -80,8 +80,3 @@ export default function ProfileFillingScreen(props) {
     />
   );
 }
-
-ProfileFillingScreen.propTypes = {
-  token: T.string,
-  userInfo: T.object
-};

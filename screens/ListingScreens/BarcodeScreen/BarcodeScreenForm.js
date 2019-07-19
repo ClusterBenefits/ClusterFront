@@ -16,11 +16,12 @@ import {
   Body,
   Right
 } from "native-base";
-import { colors } from "../../../constants/Colors";
+import T from "prop-types";
 import Barcode from "react-native-barcode-builder";
+
+import { colors } from "../../../constants/Colors";
 import { url } from "../../../actions/userActions";
 import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
-import T from "prop-types";
 
 barcode.propTypes = {
   goListingScreen: T.func,
@@ -33,8 +34,7 @@ export default function barcode({
   goListingScreen,
   handleFavoriteChange,
   goCommentsScreen,
-  item,
-  subscription
+  item
 }) {
   const height = Dimensions.get("window").height;
   return (
@@ -70,19 +70,16 @@ export default function barcode({
             <H2 style={styles.h2}> {item.fields.name}</H2>
           </View>
 
-          {subscription ? (
-            <View>
-              <Barcode
-                value={`${item.fields.discount}`}
-                format="CODE128"
-                width={3}
-                height={height > 535 ? 200 : 140}
-              />
-              <Text style={styles.big}>{item.fields.discount} %</Text>
-            </View>
-          ) : (
-            <Text>Buy subscription</Text>
-          )}
+          <View>
+            <Barcode
+              value={`${item.fields.discount}`}
+              format="CODE128"
+              width={3}
+              height={height > 535 ? 200 : 140}
+            />
+            <Text style={styles.big}>{item.fields.discount} %</Text>
+          </View>
+
           <TouchableOpacity onPress={() => goCommentsScreen(item)}>
             <H3>Comments</H3>
           </TouchableOpacity>

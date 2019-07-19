@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import ForgotPasswordScreenForm from "./ForgotPasswordScreenForm";
 import { BackHandler } from "react-native";
+import debounce from "lodash/debounce";
+
 import {
   handleBackButton,
   resetUserPassword
 } from "../../../actions/userActions";
-import debounce from "lodash/debounce";
+import ForgotPasswordScreenForm from "./ForgotPasswordScreenForm";
 import {
   singleFieldValidation,
   allFieldsValidation

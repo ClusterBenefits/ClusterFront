@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AsyncStorage, BackHandler } from "react-native";
-import { Root } from "native-base";
+import debounce from "lodash/debounce";
+
+import { UserContext } from "./../../../reducers/context";
 import LoginScreenForm from "./LoginScreenForm";
 import { LoadingHOC } from "@components/AllComponents";
 import { handleBackButton, loginUser } from "../../../actions/userActions";
-
-import debounce from "lodash/debounce";
 import {
   singleFieldValidation,
   allFieldsValidation
 } from "./../../../utils/validation";
-import T from "prop-types";
-
-import { UserContext } from "./../../../reducers/context";
 
 const LoginScreenWithLoading = LoadingHOC(LoginScreenForm);
 

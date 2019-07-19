@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Container, Form, H3 } from "native-base";
 import T from "prop-types";
+
 import {
   MyLinearGradient,
   MainInput,
@@ -11,14 +12,14 @@ import {
 
 profileEdit.propTypes = {
   onChangeValue: T.func,
-  post: T.func,
+  editUserProfile: T.func,
   goProfileScreen: T.func,
   formCredentials: T.object,
   formErrors: T.object
 };
 
 export default function profileEdit({
-  post,
+  editUserProfile,
   goProfileScreen,
   onChangeValue,
   formCredentials,
@@ -59,7 +60,7 @@ export default function profileEdit({
           />
           <View style={styles.bottom}>
             <IconButton onPress={goProfileScreen} text={"Profile"} />
-            <SmallBlueButton onPress={post} text={"Edit"} />
+            <SmallBlueButton onPress={editUserProfile} text={"Edit"} />
           </View>
         </Form>
       </Container>

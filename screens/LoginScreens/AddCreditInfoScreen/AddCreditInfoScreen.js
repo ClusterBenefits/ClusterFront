@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+
 import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
 import { LoadingHOC } from "@components/AllComponents";
 import { allFieldsValidation } from "../../../utils/validation";
@@ -9,16 +10,19 @@ const AddCreditInfoScreenWithLoading = LoadingHOC(AddCreditInfoScreenForm);
 
 export default function AddCreditInfoScreen(props) {
   const [formCredentials, setFormCredentials] = useState({
-    creditCardNumber: "",
+    credit_card_number: "",
     expiration: "",
     cvv2: "",
+    city: "",
+    address: "",
+    postal_code: "",
     checkBox: false
   });
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
-  const onChangeValue = (value, name) => {
+  const onChangeValue = (name, value) => {
     if (name === "checkBox") {
       setFormCredentials({
         ...formCredentials,
@@ -42,7 +46,7 @@ export default function AddCreditInfoScreen(props) {
   const post = async () => {
     const { isValid, errors } = allFieldsValidation({
       ...formCredentials,
-      creditCardNumber: formCredentials.creditCardNumber.replace(/\D/g, "")
+      credit_card_number: formCredentials.credit_card_number.replace(/\D/g, "")
     });
 
     if (!isValid) {
@@ -53,9 +57,12 @@ export default function AddCreditInfoScreen(props) {
         token: state.token,
         dispatch,
         data: {
-          creditCardNumber: formCredentials.creditCardNumber,
+          credit_card_number: formCredentials.credit_card_number,
           expiration: formCredentials.expiration,
-          cvv2: formCredentials.cvv2
+          cvv2: formCredentials.cvv2,
+          city: formCredentials.city,
+          address: formCredentials.address,
+          postal_code: formCredentials.postal_code
         }
       });
       if (response && fromWho === "Registration") {

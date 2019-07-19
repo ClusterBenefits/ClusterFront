@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ShowToast } from "@components/AllComponents";
 const url = "https://api.cluster.ukietech.org";
-// const url = "https://e66bd48a.ngrok.io";
+// const url = "https://9a81fe9a.ngrok.io";
 
 export const postTokenToServer = async ({ expoToken, token }) => {
   let response = axios
@@ -26,36 +26,36 @@ export const postTokenToServer = async ({ expoToken, token }) => {
   return response;
 };
 
-export const pushNotification = async () => {
-  let response = axios
-    .post(
-      "https://exp.host/--/api/v2/push/send",
-      [
-        {
-          to: "ExponentPushToken[xMo4G5DbkdyE--CE8Yo1nK]",
-          sound: "default",
-          body: "myyy nigggaa!"
-        },
-        {
-          to: "ExponentPushToken[OBaTB3JjiFEITrOYskPVV8]",
-          sound: "default",
-          body: "myyy nigggaa!"
-        }
-      ],
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        }
-      }
-    )
-    .then(response => {
-      console.log(response.data);
-      return response;
-    })
-    .catch(err => console.log(err));
-  return response;
-};
+// export const pushNotification = async () => {
+//   let response = axios
+//     .post(
+//       "https://exp.host/--/api/v2/push/send",
+//       [
+//         {
+//           to: "ExponentPushToken[xMo4G5DbkdyE--CE8Yo1nK]",
+//           sound: "default",
+//           body: "myyy nigggaa!"
+//         },
+//         {
+//           to: "ExponentPushToken[OBaTB3JjiFEITrOYskPVV8]",
+//           sound: "default",
+//           body: "myyy nigggaa!"
+//         }
+//       ],
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Accept: "application/json"
+//         }
+//       }
+//     )
+//     .then(response => {
+//       console.log(response.data);
+//       return response;
+//     })
+//     .catch(err => console.log(err));
+//   return response;
+// };
 
 ///////// AUTH
 export const login = ({ email, password }) => {
@@ -71,7 +71,7 @@ export const login = ({ email, password }) => {
       return response.data.token;
     })
     .catch(({ response }) => {
-      console.log(response);
+      console.log(response.data);
       ShowToast(`error: ${response.data.error}`);
     });
 
@@ -277,13 +277,18 @@ export const removeFromFavorites = ({ token, id }) => {
 
 ////////////Companies
 
-export const listOfCompanies = () => {
+export const listOfCompanies = token => {
   let response = axios
-    .get(`${url}/api/companies`)
+    .get(`${url}/api/companies`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token
+      }
+    })
     .then(response => {
       return response.data;
     })
-    .catch(err => console.log("failed to load items", err));
+    .catch(({ response }) => console.log("failed to load items", response));
 
   return response;
 };
@@ -398,6 +403,7 @@ export const addBillingSubscription = ({ ...props }) => {
       }
     })
     .then(response => {
+      ShowToast(response.data.message);
       return response.data;
     })
     .catch(({ response }) => {
@@ -407,16 +413,16 @@ export const addBillingSubscription = ({ ...props }) => {
   return response;
 };
 
-export const deleteBillingSubscription = ({ token, id }) => {
+export const deleteBillingSubscription = ({ token }) => {
   let response = axios
-    .post(`${url}/api/user/payment/subscribe/${id}`, {
+    .delete(`${url}/api/user/payment/subscribe`, {
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + token
       }
     })
     .then(response => {
-      console.log(response.data);
+      ShowToast(`${response.data.message}`);
       return response.data;
     })
     .catch(({ response }) => {

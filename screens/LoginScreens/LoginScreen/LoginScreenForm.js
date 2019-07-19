@@ -1,20 +1,22 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { Container, Form, View, H1 } from "native-base";
+import T from "prop-types";
+
 import {
   BlueButton,
   LogoImage,
   MainInput,
   MyLinearGradient
 } from "@components/AllComponents";
-import T from "prop-types";
 
 Login.propTypes = {
   logInUser: T.func,
   goSignUp: T.func,
   goForgotPassword: T.func,
   onChangeValue: T.func,
-  state: T.object
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function Login({

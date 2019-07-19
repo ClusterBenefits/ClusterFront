@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
+import debounce from "lodash/debounce";
+
 import AddCommentsScreenForm from "./AddCommentsScreenForm";
-import T from "prop-types";
 import { sendComment, getComments } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
 import {
   allFieldsValidation,
   singleFieldValidation
 } from "./../../../utils/validation";
-import debounce from "lodash/debounce";
 import { UserContext } from "./../../../reducers/context";
 
 const AddCommentsScreenWithLoading = LoadingHOC(AddCommentsScreenForm);
@@ -38,7 +38,9 @@ export default function AddCommentsScreen(props) {
     props.navigation.pop();
   };
 
-  const sendMessage = async () => {
+  // send comment from user
+
+  const addComment = async () => {
     const { isValid, errors } = allFieldsValidation(formCredentials);
     if (!isValid) {
       setFormErrors(errors);
@@ -51,13 +53,15 @@ export default function AddCommentsScreen(props) {
         id: item.id
       });
 
+      // getting list of new comments back
+
       getComments({ id: item.id, token: state.token, dispatch });
       setIsLoading(false);
       setFormCredentials({});
     }
   };
 
-  // getting item that needs to be rendered from navigation
+  // getting item for comments from navigation
 
   const item = props.navigation.getParam("item", "NO-ID");
 
@@ -66,13 +70,9 @@ export default function AddCommentsScreen(props) {
       isLoading={isLoading}
       goBack={goBack}
       onChangeValue={onChangeValue}
-      sendMessage={sendMessage}
+      addComment={addComment}
       formCredentials={formCredentials}
       formErrors={formErrors}
     />
   );
 }
-
-AddCommentsScreen.propTypes = {
-  userInfo: T.object
-};

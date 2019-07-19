@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AsyncStorage, BackHandler } from "react-native";
+import debounce from "lodash/debounce";
+
 import ChangeEmailScreenForm from "./ChangeEmailScreenForm";
 import { handleBackButton, changeEmail } from "../../../actions/userActions";
-import debounce from "lodash/debounce";
 import {
   singleFieldValidation,
   allFieldsValidation
@@ -23,12 +24,13 @@ export default function IntroScreen(props) {
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
     getPassword();
     return () => {
-      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+      BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     };
   }, []);
+  // get inital password for validation
   const getPassword = async () => {
     let response = (await AsyncStorage.getItem("password")) || "none";
     setFormCredentials({
@@ -42,7 +44,7 @@ export default function IntroScreen(props) {
     debounceSingleFieldValidation({ name, value });
   };
 
-  // check if input field is correct after typing
+  // check if input fields are correct after typing
 
   const debounceSingleFieldValidation = debounce(({ name, value }) => {
     const { isValid, errors } = singleFieldValidation({ key: name, value });
@@ -67,8 +69,8 @@ export default function IntroScreen(props) {
       setFormErrors(errors);
     } else {
       setIsLoading(true);
-      //trying to change email
 
+      //trying to change email
       let response = await changeEmail({
         token: state.token,
         email: formCredentials.email,

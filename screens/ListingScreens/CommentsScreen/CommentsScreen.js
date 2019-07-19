@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+
 import CommentsScreenForm from "./CommentsScreenForm";
 import { getComments } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
@@ -12,14 +13,14 @@ export default function CommentsScreen(props) {
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
+    const getAllComments = async () => {
+      await getComments({ id: item.id, token: state.token, dispatch });
+      setIsLoading(false);
+    };
     getAllComments();
   }, []);
 
-  const getAllComments = async () => {
-    await getComments({ id: item.id, token: state.token, dispatch });
-    setIsLoading(false);
-  };
-
+  // adding on scrollview
   const handleLoadMore = async () => {
     if (
       state.comments.meta.pagination.current_page <

@@ -1,17 +1,19 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
-import { Container, Form, View, H1 } from "native-base";
+import { StyleSheet } from "react-native";
+import { Container, Form, H1 } from "native-base";
+import T from "prop-types";
+
 import {
   BlueButton,
   MainInput,
   MyLinearGradient
 } from "@components/AllComponents";
-import T from "prop-types";
 
 profile.propTypes = {
   onChangeValue: T.func,
   post: T.func,
-  state: T.object
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function profile({

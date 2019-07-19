@@ -35,7 +35,7 @@ export const ADD_COMMENTS = "ADD_COMMENTS";
 export const SUBSCRIPTION = "SUBSCRIPTION";
 
 export const url = "https://api.cluster.ukietech.org";
-// export const url = "https://e66bd48a.ngrok.io";
+// export const url = "https://9a81fe9a.ngrok.io";
 
 ///////// AUTH
 export const registerForPushNotificationsAsync = async userToken => {
@@ -157,8 +157,8 @@ export const postUserInfo = async ({ token, data, dispatch }) => {
 
 /////// User
 
-export const fetchItems = async ({ dispatch }) => {
-  let response = await listOfCompanies();
+export const fetchItems = async ({ dispatch, token }) => {
+  let response = await listOfCompanies(token);
   if (response) {
     await dispatch({
       type: ADD_ITEMS,
@@ -243,11 +243,31 @@ export const addCreditCardSubscription = async ({ ...props }) => {
 };
 
 export const deleteCreditCardSubscription = async ({ ...props }) => {
-  let response = await deleteBillingSubscription(props);
-  props.dispatch({
-    type: SUBSCRIPTION,
-    payload: response ? response : false
-  });
+  let response = Alert.alert(
+    "Cancel Subscription?",
+    "Are you sure that you want to cancel subscription?",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      {
+        text: "OK",
+        onPress: async () => {
+          let response = await deleteBillingSubscription(props);
+          props.dispatch({
+            type: SUBSCRIPTION,
+            payload: response ? response : false
+          });
+          return response;
+        }
+      }
+    ],
+    {
+      cancelable: false
+    }
+  );
   return response;
 };
 

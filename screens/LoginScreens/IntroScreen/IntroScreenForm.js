@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Container, Form, H1, H3 } from "native-base";
+import T from "prop-types";
+
 import {
   BlueButton,
   LogoImage,
   MyLinearGradient
 } from "@components/AllComponents";
-
-import T from "prop-types";
 
 IntroScreen.propTypes = {
   goSignIn: T.func,

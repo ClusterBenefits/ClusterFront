@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import debounce from "lodash/debounce";
+
 import NewPasswordScreenForm from "./NewPasswordScreenForm";
 import { setNewUserPassword } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
-import debounce from "lodash/debounce";
 import {
   singleFieldValidation,
   allFieldsValidation

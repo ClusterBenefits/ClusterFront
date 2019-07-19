@@ -1,23 +1,25 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { Container, Form, View, H1 } from "native-base";
+import T from "prop-types";
+
 import {
   BlueButton,
   LogoImage,
   MainInput,
   MyLinearGradient
 } from "@components/AllComponents";
-import T from "prop-types";
 
 singUp.propTypes = {
-  goSignIn: T.func,
+  goLoginScreen: T.func,
   signUpUser: T.func,
   onChangeValue: T.func,
-  state: T.object
+  formCredentials: T.object,
+  formErrors: T.object
 };
 
 export default function singUp({
-  goSignIn,
+  goLoginScreen,
   signUpUser,
   onChangeValue,
   formCredentials,
@@ -54,7 +56,7 @@ export default function singUp({
           />
           <BlueButton text="Log In" onPress={signUpUser} />
           <View style={styles.bottom_menu}>
-            <Text onPress={goSignIn} style={styles.bottom_menu_text}>
+            <Text onPress={goLoginScreen} style={styles.bottom_menu_text}>
               Sign in
             </Text>
           </View>

@@ -1,18 +1,19 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { Container, Form, H1, H3 } from "native-base";
+import T from "prop-types";
+
 import {
   LogoImage,
   BlueButton,
   MyLinearGradient,
   MainInput
 } from "@components/AllComponents";
-import T from "prop-types";
 
 singUp.propTypes = {
   goNewPassword: T.func,
   onChangeValue: T.func,
-  state: T.object
+  formCredentials: T.object
 };
 
 export default function singUp({

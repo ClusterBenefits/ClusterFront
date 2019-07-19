@@ -1,17 +1,13 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import {
-  Container,
-  Form,
-  Input,
-  Item,
-  CheckBox,
-  ListItem,
-  Body,
-  Text
-} from "native-base";
-import { MyLinearGradient, SmallBlueButton } from "@components/AllComponents";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { Container, Form, CheckBox, ListItem, Body, Text } from "native-base";
 import T from "prop-types";
+
+import {
+  MyLinearGradient,
+  SmallBlueButton,
+  SimpleInput
+} from "@components/AllComponents";
 
 AddCreditInfoScreen.propTypes = {
   onChangeValue: T.func,
@@ -33,81 +29,132 @@ export default function AddCreditInfoScreen({
   return (
     <MyLinearGradient>
       <Container style={{ justifyContent: "center" }}>
-        <Form>
-          <Text style={styles.text}>Card Number</Text>
-          <Item style={styles.container}>
-            <Input
-              placeholderTextColor={"white"}
-              placeholder={"XXXX-XXXX-XXXX-XXXX"}
-              value={formCredentials.creditCardNumber}
-              onChangeText={value => onChangeValue(value, "creditCardNumber")}
-              style={styles.input}
-              maxLength={19}
-            />
-          </Item>
-          <View style={{ flexDirection: "row", marginTop: 10 }}>
-            <View style={{ marginRight: 40 }}>
-              <Text style={styles.text}>Expiration</Text>
+        <ScrollView
+          contentContainerStyle={{
+            justifyContent: "space-between"
+          }}
+          // style={{ flex: 1 }}
+        >
+          <Form style={{ flex: 1 }}>
+            <Text style={styles.text}>Card Number</Text>
 
-              <Item style={[styles.container, { width: 80 }]}>
-                <Input
-                  placeholderTextColor={"white"}
+            <SimpleInput
+              placeholder={"XXXX-XXXX-XXXX-XXXX"}
+              onChangeText={onChangeValue}
+              maxLength={19}
+              name="credit_card_number"
+              value={formCredentials.credit_card_number}
+              error={formErrors["credit_card_number"]}
+            />
+
+            <View style={{ flexDirection: "row", marginTop: 10 }}>
+              <View style={{ marginRight: 40 }}>
+                <Text style={styles.text}>Expiration</Text>
+
+                <SimpleInput
                   placeholder={"MM/YY"}
-                  value={formCredentials.expiration}
-                  onChangeText={value => onChangeValue(value, "expiration")}
-                  style={styles.input}
+                  onChangeText={onChangeValue}
                   maxLength={5}
+                  width={80}
+                  name="expiration"
+                  value={formCredentials.expiration}
+                  error={formErrors["expiration"]}
                 />
-              </Item>
+              </View>
+              <View>
+                <Text style={styles.text}>CVV2</Text>
+
+                <SimpleInput
+                  placeholder={"XXX"}
+                  onChangeText={onChangeValue}
+                  maxLength={4}
+                  width={50}
+                  name="cvv2"
+                  value={formCredentials.cvv2}
+                  error={formErrors["cvv2"]}
+                />
+              </View>
             </View>
             <View>
-              <Text style={styles.text}>CVV2</Text>
-              <Item style={[styles.container, { width: 50 }]}>
-                <Input
-                  placeholderTextColor={"white"}
-                  placeholder={"XXX"}
-                  value={formCredentials.cvv2}
-                  onChangeText={value => onChangeValue(value, "cvv2")}
-                  style={styles.input}
-                  maxLength={4}
+              <View>
+                <Text style={styles.text}>City</Text>
+
+                <SimpleInput
+                  placeholder={"City"}
+                  onChangeText={onChangeValue}
+                  maxLength={20}
+                  name="city"
+                  value={formCredentials.city}
+                  error={formErrors["city"]}
                 />
-              </Item>
+              </View>
+              <View>
+                <Text style={styles.text}>Address</Text>
+                <SimpleInput
+                  placeholder={"Address"}
+                  onChangeText={onChangeValue}
+                  maxLength={25}
+                  name="address"
+                  value={formCredentials.address}
+                  error={formErrors["address"]}
+                />
+              </View>
+              <View>
+                <Text style={styles.text}>CVpostal Code</Text>
+
+                <SimpleInput
+                  placeholder={"Postal Code"}
+                  onChangeText={onChangeValue}
+                  maxLength={10}
+                  name="postal_code"
+                  value={formCredentials.postal_code}
+                  error={formErrors["postal_code"]}
+                />
+              </View>
             </View>
-          </View>
-          {formErrors && (
-            <Text style={{ marginTop: 10 }}>
-              {formErrors[Object.keys(formErrors)[0]]}
-            </Text>
-          )}
-        </Form>
-        <ListItem
-          style={{ borderColor: "white", borderBottomWidth: 0, marginLeft: 0 }}
-        >
-          <View style={{ alignSelf: "flex-start", marginTop: 5 }}>
-            <CheckBox
-              style={{ borderColor: "white", backgroundColor: "transparent" }}
-              checked={formCredentials.checkBox}
-              onPress={value => onChangeValue(value, "checkBox")}
+            {formErrors && (
+              <Text style={{ marginTop: 10 }}>
+                {formErrors[Object.keys(formErrors)[0]]}
+              </Text>
+            )}
+          </Form>
+          <ListItem
+            style={{
+              borderColor: "white",
+              borderBottomWidth: 0,
+              marginLeft: 0
+            }}
+          >
+            <View style={{ alignSelf: "flex-start", marginTop: 5 }}>
+              <CheckBox
+                style={{ borderColor: "white", backgroundColor: "transparent" }}
+                checked={formCredentials.checkBox}
+                onPress={value => onChangeValue("checkBox", value)}
+              />
+            </View>
+
+            <Body style={{ marginLeft: 15 }}>
+              <Text style={{ color: "white" }}>
+                Eu velit occaecat eu minim minim nostrud et sunt nostrud
+                adipisicing ut aliqua sint. Exercitation qui Lorem ea qui fugiat
+                eiusmod id velit. Nisi
+              </Text>
+            </Body>
+          </ListItem>
+
+          <View style={styles.bottom}>
+            <SmallBlueButton
+              onPress={skip}
+              text={fromWho === "Registration" ? "Skip" : fromWho}
             />
+
+            {formCredentials.checkBox ? (
+              <SmallBlueButton onPress={post} text={"Pay"} />
+            ) : (
+              <SmallBlueButton disabled={true} onPress={post} text={"Pay"} />
+            )}
           </View>
-
-          <Body style={{ marginLeft: 15 }}>
-            <Text style={{ color: "white" }}>
-              Eu velit occaecat eu minim minim nostrud et sunt nostrud
-              adipisicing ut aliqua sint. Exercitation qui Lorem ea qui fugiat
-              eiusmod id velit. Nisi
-            </Text>
-          </Body>
-        </ListItem>
-        <View style={styles.bottom}>
-          <SmallBlueButton onPress={skip} text={fromWho} />
-
-          {formCredentials.checkBox ? (
-            <SmallBlueButton onPress={post} text={"Pay"} />
-          ) : (
-            <SmallBlueButton disabled={true} onPress={post} text={"Pay"} />
-          )}
-        </View>
+        </ScrollView>
       </Container>
     </MyLinearGradient>
   );
@@ -126,7 +173,6 @@ const styles = StyleSheet.create({
   input: {
     paddingBottom: 0,
     marginBottom: -10,
-    height: 40,
-    borderColor: "red"
+    height: 40
   }
 });

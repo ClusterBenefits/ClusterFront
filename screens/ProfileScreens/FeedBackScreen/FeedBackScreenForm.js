@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Container, H3, Form } from "native-base";
+import T from "prop-types";
+
 import {
   MyLinearGradient,
   MainInput,
   SmallBlueButton,
   IconButton
 } from "@components/AllComponents";
-import T from "prop-types";
 
 commentsForm.propTypes = {
   goBack: T.func,

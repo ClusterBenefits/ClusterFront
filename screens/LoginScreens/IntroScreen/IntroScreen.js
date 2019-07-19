@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import IntroScreenForm from "./IntroScreenForm";
 import { AsyncStorage, BackHandler } from "react-native";
-import { handleBackButton, loginUser } from "../../../actions/userActions";
 import * as Font from "expo-font";
-import { LoadingHOC } from "@components/AllComponents";
 import T from "prop-types";
+
+import IntroScreenForm from "./IntroScreenForm";
+import { LoadingHOC } from "@components/AllComponents";
+import { handleBackButton, loginUser } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
 
 const IntroScreenWithLoading = LoadingHOC(IntroScreenForm);

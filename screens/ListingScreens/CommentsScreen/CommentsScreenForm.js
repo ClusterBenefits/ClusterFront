@@ -7,12 +7,13 @@ import {
   ActivityIndicator
 } from "react-native";
 import { Container, H3, Header, Left, Body, Title } from "native-base";
+import T from "prop-types";
+
 import {
   MyLinearGradient,
   MainComment,
   IconButton
 } from "@components/AllComponents";
-import T from "prop-types";
 
 commentsForm.propTypes = {
   goBarcodeScreen: T.func,
