@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AsyncStorage, BackHandler } from "react-native";
 import * as Font from "expo-font";
-import T from "prop-types";
 
 import IntroScreenForm from "./IntroScreenForm";
 import { LoadingHOC } from "@components/AllComponents";
@@ -16,6 +15,7 @@ export default function IntroScreen(props) {
 
   useEffect(() => {
     loadAll();
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     return () => {
       BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
     };
@@ -24,7 +24,6 @@ export default function IntroScreen(props) {
   async function loadAll() {
     await loadFontsAsync();
     await getUserData();
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
   }
   // loading all extra fonts and fonticons i need
 
@@ -79,9 +78,3 @@ export default function IntroScreen(props) {
     />
   );
 }
-
-IntroScreen.propTypes = {
-  loginUser: T.func,
-  addUserLocal: T.func,
-  fetchUserInfo: T.func
-};

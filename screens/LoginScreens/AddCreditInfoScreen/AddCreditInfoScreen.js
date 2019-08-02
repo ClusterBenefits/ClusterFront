@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Alert, Linking } from "react-native";
 
 import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
 import { LoadingHOC } from "@components/AllComponents";
@@ -33,7 +34,7 @@ export default function AddCreditInfoScreen(props) {
     }
   };
 
-  // check where the user has come from(registration or billinginformation)
+  // check where the user has come from(first time registration or billinginformation)
   const fromWho = props.navigation.getParam("name", "Registration");
 
   const skip = () => {
@@ -65,6 +66,22 @@ export default function AddCreditInfoScreen(props) {
           postal_code: formCredentials.postal_code
         }
       });
+      if (!response) {
+        setIsLoading(false);
+        return;
+      }
+      if (response.code === "wait_3ds") {
+        let response1 = await AsyncAlert(response);
+        if (response1 === "No") {
+          console.log("nothing will happen");
+        } else {
+          console.log("doing");
+        }
+      }
+      if (response.code === "phone_verify") {
+        console.log("phone_verify");
+        return;
+      }
       if (response && fromWho === "Registration") {
         // after registration user has made a subscription
         setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
@@ -79,6 +96,39 @@ export default function AddCreditInfoScreen(props) {
       }
     }
   };
+  const AsyncAlert = async response =>
+    new Promise(resolve => {
+      Alert.alert(
+        "Verify",
+        "To verify payment , press OK and you will be redirected to browser ",
+        [
+          {
+            text: "Cancel",
+            onPress: () => {
+              console.log("Cancel Pressed");
+              resolve("No");
+            },
+            style: "cancel"
+          },
+          {
+            text: "OK",
+            onPress: () => {
+              Linking.canOpenURL(response.verify_link).then(supported => {
+                if (supported) {
+                  Linking.openURL(response.verify_link);
+                } else {
+                  console.log(
+                    "Don't know how to open URI: " + response.verify_link
+                  );
+                }
+              });
+              resolve("Yes");
+            }
+          }
+        ],
+        { cancelable: false }
+      );
+    });
 
   return (
     <AddCreditInfoScreenWithLoading

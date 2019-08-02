@@ -1,42 +1,41 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-import { Button, H3 } from "native-base";
+import { Button } from "native-base";
 import { colors } from "../../../constants/Colors";
+import T from "prop-types";
 
-const BlueButton = ({
+const SmallBlueButton = ({
   text,
-  textColor,
+  textColor = "white",
   buttonColor,
   onPress,
-  opacity,
-  bordered,
   ...props
 }) => {
-  const _textColor = textColor || "white";
-  const _text = text || "write Text!!";
-  let _buttonColor;
-  if (props.disabled) {
-    _buttonColor = "#b5b5b5";
-  } else {
-    _buttonColor = buttonColor || `${colors.blue}`;
-  }
-
   const styles = StyleSheet.create({
     button: {
       borderRadius: 3,
-      backgroundColor: _buttonColor,
+      backgroundColor: props.disabled
+        ? "#b5b5b5"
+        : buttonColor || `${colors.blue}`,
       padding: 10,
       paddingLeft: 30,
       paddingRight: 30
     },
-    button_text: { color: _textColor, fontSize: 18 }
+    button_text: { color: textColor, fontSize: 18 }
   });
 
   return (
     <Button style={styles.button} disabled={props.disabled} onPress={onPress}>
-      <Text style={styles.button_text}>{_text}</Text>
+      <Text style={styles.button_text}>{text}</Text>
     </Button>
   );
 };
 
-export default BlueButton;
+SmallBlueButton.propTypes = {
+  text: T.string.isRequired,
+  onPress: T.func.isRequired,
+  textColor: T.string,
+  buttonColor: T.string
+};
+
+export default SmallBlueButton;

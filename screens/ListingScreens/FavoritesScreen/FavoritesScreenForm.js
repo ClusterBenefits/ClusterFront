@@ -5,13 +5,7 @@ import T from "prop-types";
 
 import { MainItem, MyLinearGradient } from "@components/AllComponents";
 
-favorit.propTypes = {
-  favoriteItems: T.array,
-  handleFeaturedChange: T.func,
-  goBarcodeScreen: T.func
-};
-
-export default function favorit({
+export default function FavoriteForm({
   favoriteItems,
   handleFavoriteChange,
   goBarcodeScreen
@@ -39,6 +33,12 @@ export default function favorit({
     </MyLinearGradient>
   );
 }
+
+FavoriteForm.propTypes = {
+  favoriteItems: T.array.isRequired,
+  handleFavoriteChange: T.func.isRequired,
+  goBarcodeScreen: T.func.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -10,16 +10,7 @@ import {
   MyLinearGradient
 } from "@components/AllComponents";
 
-Login.propTypes = {
-  logInUser: T.func,
-  goSignUp: T.func,
-  goForgotPassword: T.func,
-  onChangeValue: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
-export default function Login({
+export default function LoginForm({
   logInUser,
   goSignUp,
   goForgotPassword,
@@ -48,7 +39,7 @@ export default function Login({
             value={formCredentials.password}
             error={formErrors["password"]}
           />
-          <BlueButton text="Log In" onPress={logInUser} />
+          <BlueButton text="Log In" onPress={logInUser} testID="button" />
           <View style={styles.bottom_menu}>
             <Text onPress={goForgotPassword} style={styles.bottom_menu_text}>
               Forgot password
@@ -62,6 +53,15 @@ export default function Login({
     </MyLinearGradient>
   );
 }
+
+LoginForm.propTypes = {
+  logInUser: T.func.isRequired,
+  goSignUp: T.func.isRequired,
+  goForgotPassword: T.func.isRequired,
+  onChangeValue: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   bottom_menu: {

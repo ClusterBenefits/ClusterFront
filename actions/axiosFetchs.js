@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ShowToast } from "@components/AllComponents";
-const url = "https://api.cluster.ukietech.org";
-// const url = "https://9a81fe9a.ngrok.io";
+// const url = "https://api.cluster.ukietech.org";
+const url = "https://258910eb.ngrok.io";
 
 export const postTokenToServer = async ({ expoToken, token }) => {
   let response = axios
@@ -389,7 +389,8 @@ export const checkBillingSubscription = token => {
       return response.data;
     })
     .catch(({ response }) => {
-      console.log("check bill err ", response.data);
+      console.log("check bill err ");
+      console.log(response);
     });
   return response;
 };
@@ -403,12 +404,13 @@ export const addBillingSubscription = ({ ...props }) => {
       }
     })
     .then(response => {
+      console.log("response addsubscription", response.data);
       ShowToast(response.data.message);
       return response.data;
     })
     .catch(({ response }) => {
-      ShowToast("There was an error");
-      console.log("addbillingsub error", response.data);
+      ShowToast(response.data.message);
+      console.log("addbillingsub error");
     });
   return response;
 };
@@ -422,6 +424,7 @@ export const deleteBillingSubscription = ({ token }) => {
       }
     })
     .then(response => {
+      console.log(response.data);
       ShowToast(`${response.data.message}`);
       return response.data;
     })

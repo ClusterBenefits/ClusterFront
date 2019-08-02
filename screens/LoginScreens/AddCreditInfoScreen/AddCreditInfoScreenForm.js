@@ -9,15 +9,6 @@ import {
   SimpleInput
 } from "@components/AllComponents";
 
-AddCreditInfoScreen.propTypes = {
-  onChangeValue: T.func,
-  post: T.func,
-  formCredentials: T.object,
-  formErrors: T.object,
-  skip: T.func,
-  fromWho: T.string
-};
-
 export default function AddCreditInfoScreen({
   post,
   onChangeValue,
@@ -159,6 +150,15 @@ export default function AddCreditInfoScreen({
     </MyLinearGradient>
   );
 }
+
+AddCreditInfoScreen.propTypes = {
+  onChangeValue: T.func.isRequired,
+  post: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired,
+  skip: T.func.isRequired,
+  fromWho: T.string.isRequired
+};
 
 const styles = StyleSheet.create({
   bottom: {

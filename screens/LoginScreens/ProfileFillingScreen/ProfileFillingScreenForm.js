@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Container, Form, H1 } from "native-base";
 import T from "prop-types";
 
@@ -9,16 +8,9 @@ import {
   MyLinearGradient
 } from "@components/AllComponents";
 
-profile.propTypes = {
-  onChangeValue: T.func,
-  post: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
-export default function profile({
+export default function ProfileFillingForm({
   onChangeValue,
-  post,
+  onSubmit,
   formCredentials,
   formErrors
 }) {
@@ -54,11 +46,16 @@ export default function profile({
           value={formCredentials.position}
           error={formErrors["position"]}
         />
-        <BlueButton text="Next" onPress={post} />
+        <BlueButton text="Next" onPress={onSubmit} />
         <Form />
       </Container>
     </MyLinearGradient>
   );
 }
 
-const styles = StyleSheet.create({});
+ProfileFillingForm.propTypes = {
+  onChangeValue: T.func.isRequired,
+  onSubmit: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};

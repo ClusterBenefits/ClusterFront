@@ -10,15 +10,7 @@ import {
   IconButton
 } from "@components/AllComponents";
 
-changePassword.propTypes = {
-  onChangeValue: T.func,
-  goProfileScreen: T.func,
-  changePassword: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
-export default function changePassword({
+export default function ChangePasswordForm({
   onChangeValue,
   goProfileScreen,
   changePassword,
@@ -63,6 +55,13 @@ export default function changePassword({
     </MyLinearGradient>
   );
 }
+ChangePasswordForm.propTypes = {
+  onChangeValue: T.func.isRequired,
+  goProfileScreen: T.func.isRequired,
+  changePassword: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   center: {

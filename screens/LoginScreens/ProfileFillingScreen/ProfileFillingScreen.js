@@ -48,7 +48,7 @@ export default function ProfileFillingScreen(props) {
 
   // filling profile information ( name last_name etc )
 
-  const post = async () => {
+  const onSubmit = async () => {
     const { isValid, errors } = allFieldsValidation(formCredentials);
 
     if (!isValid) {
@@ -74,7 +74,7 @@ export default function ProfileFillingScreen(props) {
     <ProfileFillingScreenWithLoading
       isLoading={isLoading}
       onChangeValue={onChangeValue}
-      post={post}
+      onSubmit={onSubmit}
       formCredentials={formCredentials}
       formErrors={formErrors}
     />

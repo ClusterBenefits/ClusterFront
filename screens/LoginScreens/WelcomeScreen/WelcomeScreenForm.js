@@ -9,11 +9,7 @@ import {
   MyLinearGradient
 } from "@components/AllComponents";
 
-welcome.propTypes = {
-  goProfileFillingScreen: T.func
-};
-
-export default function welcome({ goProfileFillingScreen }) {
+export default function WelcomeForm({ goProfileFillingScreen }) {
   return (
     <MyLinearGradient>
       <Container>
@@ -33,6 +29,10 @@ export default function welcome({ goProfileFillingScreen }) {
     </MyLinearGradient>
   );
 }
+
+WelcomeForm.propTypes = {
+  goProfileFillingScreen: T.func.isRequired
+};
 
 const styles = StyleSheet.create({
   text3: {

@@ -24,7 +24,7 @@ export default function WelcomeScreen(props) {
 
       // trying to autoloign if userinfo is there , otherwise stay here and fill info
 
-      if (response.first_name) {
+      if (response.first_name && response.last_name) {
         await checkCreditCardSubscription({
           token: state.token,
           dispatch

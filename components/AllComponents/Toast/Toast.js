@@ -1,9 +1,4 @@
 import { Toast } from "native-base";
-import T from "prop-types";
-
-ShowToast.propTypes = {
-  text: T.string
-};
 
 export default function ShowToast(text) {
   Toast.show({

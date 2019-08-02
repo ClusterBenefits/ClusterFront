@@ -10,15 +10,7 @@ import {
   MyLinearGradient
 } from "@components/AllComponents";
 
-singUp.propTypes = {
-  goLoginScreen: T.func,
-  signUpUser: T.func,
-  onChangeValue: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
-export default function singUp({
+export default function SignUpScreenForm({
   goLoginScreen,
   signUpUser,
   onChangeValue,
@@ -65,6 +57,14 @@ export default function singUp({
     </MyLinearGradient>
   );
 }
+
+SignUpScreenForm.propTypes = {
+  goLoginScreen: T.func.isRequired,
+  signUpUser: T.func.isRequired,
+  onChangeValue: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   bottom_menu: {

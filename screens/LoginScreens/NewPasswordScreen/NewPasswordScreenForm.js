@@ -9,14 +9,7 @@ import {
   MyLinearGradient
 } from "@components/AllComponents";
 
-newPassword.propTypes = {
-  goLogin: T.func,
-  onChangeValue: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
-export default function newPassword({
+export default function NewPasswordForm({
   goLogin,
   onChangeValue,
   formCredentials,
@@ -50,3 +43,10 @@ export default function newPassword({
     </MyLinearGradient>
   );
 }
+
+NewPasswordForm.propTypes = {
+  goLogin: T.func.isRequired,
+  onChangeValue: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};

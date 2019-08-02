@@ -9,17 +9,11 @@ import {
   IconButton
 } from "@components/AllComponents";
 
-BillingInformationScreen.propTypes = {
-  goProfileScreen: T.func,
-  goEditBillingInfoScreen: T.func,
-  cancelSubscription: T.func,
-  signOutUser: T.func
-};
-
 export default function BillingInformationScreen({
   goProfileScreen,
   goEditBillingInfoScreen,
   cancelSubscription,
+  checkCreditInfo,
   subscription
 }) {
   return (
@@ -29,35 +23,53 @@ export default function BillingInformationScreen({
           <H3 style={{ marginLeft: 0, marginBottom: 20 }}>
             Billing information
           </H3>
-          {subscription ? (
-            <>
-              <Text style={styles.text}>Card Number</Text>
-              <Item style={styles.container}>
-                <H3>XXXX-XXXX-XXXX-1234</H3>
-              </Item>
-            </>
-          ) : (
-            <Text> You have no subscription</Text>
-          )}
+          {(subscription &&
+            subscription.expired_at &&
+            new Date(subscription.expired_at).getTime() >
+              new Date().getTime() && (
+              <>
+                <Text style={styles.text}>
+                  Expiration Date: {subscription.expired_at}
+                </Text>
+                <Text style={styles.text}>Card Number</Text>
+                <Item style={styles.container}>
+                  <H3>{subscription.credit_card_number}</H3>
+                </Item>
+              </>
+            )) ||
+            (subscription && (
+              <Text> Checking subscription , it may take few minutes</Text>
+            )) || <Text> You have no subscription</Text>}
           <View style={styles.bottom}>
             <IconButton onPress={goProfileScreen} text={"Profile"} />
-            {subscription ? (
-              <SmallBlueButton
-                onPress={cancelSubscription}
-                text={"Cancel Subscription"}
-              />
-            ) : (
-              <SmallBlueButton
-                onPress={goEditBillingInfoScreen}
-                text={"Subscribe"}
-              />
-            )}
+            {(subscription &&
+              subscription.expired_at &&
+              new Date(subscription.expired_at).getTime() >
+                new Date().getTime() && (
+                <SmallBlueButton
+                  onPress={cancelSubscription}
+                  text={"Cancel Subscription"}
+                />
+              )) ||
+              (subscription && subscription.expired_at && (
+                <SmallBlueButton onPress={checkCreditInfo} text={"Update"} />
+              )) || (
+                <SmallBlueButton
+                  onPress={goEditBillingInfoScreen}
+                  text={"Subscribe"}
+                />
+              )}
           </View>
         </Form>
       </Container>
     </MyLinearGradient>
   );
 }
+BillingInformationScreen.propTypes = {
+  goProfileScreen: T.func.isRequired,
+  goEditBillingInfoScreen: T.func.isRequired,
+  cancelSubscription: T.func.isRequired
+};
 
 const styles = StyleSheet.create({
   bottom: {

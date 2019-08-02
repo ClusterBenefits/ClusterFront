@@ -10,15 +10,7 @@ import {
   IconButton
 } from "@components/AllComponents";
 
-profileEdit.propTypes = {
-  onChangeValue: T.func,
-  editUserProfile: T.func,
-  goProfileScreen: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
-export default function profileEdit({
+export default function ProfileEditForm({
   editUserProfile,
   goProfileScreen,
   onChangeValue,
@@ -67,6 +59,14 @@ export default function profileEdit({
     </MyLinearGradient>
   );
 }
+
+ProfileEditForm.propTypes = {
+  onChangeValue: T.func.isRequired,
+  editUserProfile: T.func.isRequired,
+  goProfileScreen: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   bottom: {

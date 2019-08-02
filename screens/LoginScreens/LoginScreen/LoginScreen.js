@@ -73,7 +73,7 @@ export default function LoginScreen(props) {
         // if login is successful we will have a token
 
         saveDataToLocalStorage(formCredentials.email, formCredentials.password);
-        props.navigation.navigate("WelcomeScreen", {});
+        props.navigation.navigate("WelcomeScreen");
       } else {
         console.log("wrong token");
         setIsLoading(false);

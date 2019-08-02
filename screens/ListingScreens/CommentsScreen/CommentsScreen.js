@@ -57,7 +57,6 @@ export default function CommentsScreen(props) {
       goBarcodeScreen={goBarcodeScreen}
       goAddCommentsScreen={goAddCommentsScreen}
       comments={state.comments}
-      userInfo={state.userInfo}
       handleLoadMore={handleLoadMore}
       refreshing={refreshing}
     />

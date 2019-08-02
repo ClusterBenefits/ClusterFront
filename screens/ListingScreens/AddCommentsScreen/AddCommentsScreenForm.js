@@ -10,14 +10,6 @@ import {
   IconButton
 } from "@components/AllComponents";
 
-commentsForm.propTypes = {
-  goBack: T.func,
-  onChangeValue: T.func,
-  addComment: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
 export default function commentsForm({
   goBack,
   onChangeValue,
@@ -68,6 +60,13 @@ export default function commentsForm({
     </MyLinearGradient>
   );
 }
+commentsForm.propTypes = {
+  goBack: T.func.isRequired,
+  onChangeValue: T.func.isRequired,
+  addComment: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {

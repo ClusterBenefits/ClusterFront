@@ -15,23 +15,21 @@ const BillingInformationScreenWithLoading = LoadingHOC(
 );
 
 export default function ProfileEditScreen(props) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
-    async function checkCreditInfo() {
-      await checkCreditCardSubscription({ token: state.token, dispatch });
-      setIsLoading(false);
-    }
     checkCreditInfo();
-
     BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
-
     return () => {
       BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     };
   }, []);
-
+  const checkCreditInfo = async () => {
+    setIsLoading(true);
+    await checkCreditCardSubscription({ token: state.token, dispatch });
+    setIsLoading(false);
+  };
   const goProfileScreen = () => {
     props.navigation.navigate("ProfileScreen");
   };
@@ -42,20 +40,18 @@ export default function ProfileEditScreen(props) {
 
   // remove payment subscription
   const cancelSubscription = async () => {
-    setIsLoading(true);
-    let response = await deleteCreditCardSubscription({
+    deleteCreditCardSubscription({
       dispatch: dispatch,
-      token: state.token
+      token: state.token,
+      setIsLoading: setIsLoading
     });
-
-    setIsLoading(false);
   };
-
   return (
     <BillingInformationScreenWithLoading
       isLoading={isLoading}
       goProfileScreen={goProfileScreen}
       goEditBillingInfoScreen={goEditBillingInfoScreen}
+      checkCreditInfo={checkCreditInfo}
       cancelSubscription={cancelSubscription}
       subscription={state.subscription}
     />

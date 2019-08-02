@@ -10,8 +10,8 @@ import {
 } from "@components/AllComponents";
 
 IntroScreen.propTypes = {
-  goSignIn: T.func,
-  goLogIn: T.func
+  goSignIn: T.func.isRequired,
+  goLogIn: T.func.isRequired
 };
 
 export default function IntroScreen({ goSignIn, goLogIn }) {

@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Input, Item, Text } from "native-base";
+import T from "prop-types";
 
 const SimpleInput = ({ onChangeText, error, style, name, ...props }) => {
   const styles = StyleSheet.create({
@@ -39,6 +40,10 @@ const SimpleInput = ({ onChangeText, error, style, name, ...props }) => {
       {error && <Text style={styles.error}>{error[0]}</Text>}
     </View>
   );
+};
+SimpleInput.propTypes = {
+  onChangeText: T.func.isRequired,
+  name: T.string.isRequired
 };
 
 export default SimpleInput;

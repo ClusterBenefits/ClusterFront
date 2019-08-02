@@ -10,15 +10,7 @@ import {
   IconButton
 } from "@components/AllComponents";
 
-changeEmail.propTypes = {
-  onChangeValue: T.func,
-  goProfileScreen: T.func,
-  changeEmail: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
-export default function changeEmail({
+export default function ChangeEmailForm({
   onChangeValue,
   goProfileScreen,
   changeEmail,
@@ -54,6 +46,13 @@ export default function changeEmail({
     </MyLinearGradient>
   );
 }
+ChangeEmailForm.propTypes = {
+  onChangeValue: T.func.isRequired,
+  goProfileScreen: T.func.isRequired,
+  changeEmail: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   center: {

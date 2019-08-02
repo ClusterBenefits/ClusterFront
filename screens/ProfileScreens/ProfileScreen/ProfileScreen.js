@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { BackHandler } from "react-native";
 
 import { UserContext } from "./../../../reducers/context";
@@ -33,7 +33,10 @@ export default function ProfileScreen(props) {
     });
   };
   const signOutUser = async () => {
-    await clearUserLocal({ dispatch, props });
+    let response = await clearUserLocal({ dispatch });
+    if (response === "Yes") {
+      props.navigation.navigate("IntroScreen");
+    }
   };
 
   return (

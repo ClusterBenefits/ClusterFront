@@ -9,14 +9,7 @@ import {
   MyLinearGradient
 } from "@components/AllComponents";
 
-password.propTypes = {
-  onChangeValue: T.func,
-  resetPassword: T.func,
-  formCredentials: T.object,
-  formErrors: T.object
-};
-
-export default function password({
+export default function PasswordForm({
   onChangeValue,
   resetPassword,
   formCredentials,
@@ -42,3 +35,10 @@ export default function password({
     </MyLinearGradient>
   );
 }
+
+PasswordForm.propTypes = {
+  onChangeValue: T.func.isRequired,
+  resetPassword: T.func.isRequired,
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
+};

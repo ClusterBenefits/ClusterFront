@@ -5,22 +5,20 @@ import T from "prop-types";
 
 import { MainItem, MyLinearGradient } from "@components/AllComponents";
 
-list.propTypes = {
-  items: T.array,
-  goBarcodeScreen: T.func,
-  handleFavoriteChange: T.func
-};
-export default function list({
+export default function ListScreenForm({
   goBarcodeScreen,
   items,
   handleFavoriteChange,
-  subscription
+  subscription,
+  userInfo
 }) {
   return (
     <MyLinearGradient>
       <Container style={styles.container}>
         <H3 style={{ marginLeft: 10 }}>Organizations</H3>
-        {subscription ? (
+        {subscription &&
+        subscription.status &&
+        new Date(userInfo.expired_at).getTime() > new Date().getTime() ? (
           <FlatList
             data={items}
             keyExtractor={item => item.id.toString()}
@@ -39,6 +37,12 @@ export default function list({
     </MyLinearGradient>
   );
 }
+
+ListScreenForm.propTypes = {
+  items: T.array.isRequired,
+  goBarcodeScreen: T.func.isRequired,
+  handleFavoriteChange: T.func.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {

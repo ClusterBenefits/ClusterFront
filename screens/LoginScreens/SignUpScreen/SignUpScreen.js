@@ -78,16 +78,14 @@ export default function SignUpScreen(props) {
         dispatch
       });
       if (response) {
-        // if signup is successful , we will have a token
+        // signup is successful , save password & email
         console.log("login time");
         saveDataToLocalStorage(formCredentials.email, formCredentials.password);
         props.navigation.navigate("WelcomeScreen", {});
-        return;
       } else {
         console.log("wrong token");
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     }
   };
   const goLoginScreen = () => {

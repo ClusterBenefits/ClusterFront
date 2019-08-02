@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Text } from "native-base";
 import { Icon } from "@components/AllComponents";
+import T from "prop-types";
 
 const IconButton = ({ text, onPress, ...props }) => {
   const styles = StyleSheet.create({
@@ -29,6 +30,10 @@ const IconButton = ({ text, onPress, ...props }) => {
       </Text>
     </Button>
   );
+};
+IconButton.propTypes = {
+  text: T.string.isRequired,
+  onPress: T.func.isRequired
 };
 
 export default IconButton;

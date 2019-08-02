@@ -1,40 +1,50 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, H3 } from "native-base";
+import T from "prop-types";
 import { colors } from "../../../constants/Colors";
 
 const BlueButton = ({
   text,
-  textColor,
-  buttonColor,
+  textColor = "white",
+  buttonColor = `${colors.blue}`,
   onPress,
-  opacity,
-  bordered
+  bordered,
+  ...props
 }) => {
-  const _textColor = textColor || "white";
-  const _text = text || "write Text!!";
-  const _buttonColor = buttonColor || `${colors.blue}`;
-
   const styles = StyleSheet.create({
     button: {
       borderRadius: 3,
-      backgroundColor: _buttonColor,
+      backgroundColor: buttonColor,
       marginTop: 10,
       marginBottom: 10,
-      opacity: opacity,
       borderColor: colors.white
     },
     button_text: {
-      color: _textColor,
+      color: textColor,
       fontFamily: "Helvetica"
     }
   });
 
   return (
-    <Button full onPress={onPress} bordered={bordered} style={styles.button}>
-      <H3 style={styles.button_text}>{_text}</H3>
+    <Button
+      full
+      onPress={onPress}
+      bordered={bordered}
+      style={styles.button}
+      {...props}
+    >
+      <H3 style={styles.button_text}>{text}</H3>
     </Button>
   );
+};
+
+BlueButton.propTypes = {
+  text: T.string.isRequired,
+  onPress: T.func.isRequired,
+  textColor: T.string,
+  buttonColor: T.string,
+  bordered: T.bool
 };
 
 export default BlueButton;

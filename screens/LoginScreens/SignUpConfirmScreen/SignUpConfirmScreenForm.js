@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { Container, Form, H1, H3 } from "native-base";
 import T from "prop-types";
 
@@ -10,13 +10,7 @@ import {
   MainInput
 } from "@components/AllComponents";
 
-singUp.propTypes = {
-  goNewPassword: T.func,
-  onChangeValue: T.func,
-  formCredentials: T.object
-};
-
-export default function singUp({
+export default function SignUpForm({
   goNewPassword,
   onChangeValue,
   formCredentials,
@@ -90,6 +84,12 @@ export default function singUp({
     </MyLinearGradient>
   );
 }
+
+SignUpForm.propTypes = {
+  goNewPassword: T.func.isRequired,
+  onChangeValue: T.func.isRequired,
+  formCredentials: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   form: {

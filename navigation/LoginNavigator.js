@@ -153,12 +153,12 @@ const ResetPassword = createStackNavigator(
 );
 
 const WelcomeBundle = createSwitchNavigator({
-  AddCreditInfoScreen,
   IntroScreen,
   SignUpScreen,
   ResetPassword,
   WelcomeScreen,
-  ProfileFillingScreen
+  ProfileFillingScreen,
+  AddCreditInfoScreen
 });
 
 const AppSwitchNavigator = createSwitchNavigator({

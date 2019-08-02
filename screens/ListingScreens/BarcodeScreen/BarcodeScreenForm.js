@@ -23,14 +23,7 @@ import { colors } from "../../../constants/Colors";
 import { url } from "../../../actions/userActions";
 import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
 
-barcode.propTypes = {
-  goListingScreen: T.func,
-  handleFavoriteChange: T.func,
-  goCommentsScreen: T.func,
-  item: T.object
-};
-
-export default function barcode({
+export default function BardCodeForm({
   goListingScreen,
   handleFavoriteChange,
   goCommentsScreen,
@@ -88,6 +81,13 @@ export default function barcode({
     </MyLinearGradient>
   );
 }
+
+BardCodeForm.propTypes = {
+  goListingScreen: T.func.isRequired,
+  handleFavoriteChange: T.func.isRequired,
+  goCommentsScreen: T.func.isRequired,
+  item: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {

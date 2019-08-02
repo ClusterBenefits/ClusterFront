@@ -76,13 +76,14 @@ export default function ProfileEditScreen(props) {
       });
       if (response) {
         ShowToast("Your information has been updated successfully!");
+
+        setFormCredentials({
+          firstName: "",
+          lastName: "",
+          organization: "",
+          position: ""
+        });
       }
-      setFormCredentials({
-        firstName: "",
-        lastName: "",
-        organization: "",
-        position: ""
-      });
       setIsLoading(false);
     }
   };

@@ -1,12 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, ListItem } from "native-base";
-
 import T from "prop-types";
-
-comment.propTypes = {
-  item: T.object
-};
 
 export default function comment({ item }) {
   return (
@@ -22,6 +17,10 @@ export default function comment({ item }) {
     </ListItem>
   );
 }
+
+comment.propTypes = {
+  item: T.object.isRequired
+};
 
 const styles = StyleSheet.create({
   listItem: {

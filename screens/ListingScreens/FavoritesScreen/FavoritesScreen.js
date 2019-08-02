@@ -17,6 +17,7 @@ export default function FavoritesScreen(props) {
       item: item
     });
   };
+  // remove item from favorite list
   const handleFavoriteChange = item => {
     handleClickIcon({ item, dispatch });
     changeFavoriteCompanies({ token: state.token, item });

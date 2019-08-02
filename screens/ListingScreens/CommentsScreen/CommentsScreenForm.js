@@ -15,14 +15,6 @@ import {
   IconButton
 } from "@components/AllComponents";
 
-commentsForm.propTypes = {
-  goBarcodeScreen: T.func,
-  goAddCommentsScreen: T.func,
-  handleLoadMore: T.func,
-  comments: T.object,
-  refreshing: T.bool
-};
-
 export default function commentsForm({
   goBarcodeScreen,
   goAddCommentsScreen,
@@ -95,6 +87,14 @@ export default function commentsForm({
     </MyLinearGradient>
   );
 }
+
+commentsForm.propTypes = {
+  goBarcodeScreen: T.func.isRequired,
+  goAddCommentsScreen: T.func.isRequired,
+  handleLoadMore: T.func.isRequired,
+  comments: T.object.isRequired,
+  refreshing: T.bool.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {

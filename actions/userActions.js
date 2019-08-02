@@ -34,8 +34,8 @@ export const ADD_FAVORITE_ITEMS = "ADD_FAVORITE_ITEMS";
 export const ADD_COMMENTS = "ADD_COMMENTS";
 export const SUBSCRIPTION = "SUBSCRIPTION";
 
-export const url = "https://api.cluster.ukietech.org";
-// export const url = "https://9a81fe9a.ngrok.io";
+// export const url = "https://api.cluster.ukietech.org";
+export const url = "https://258910eb.ngrok.io";
 
 ///////// AUTH
 export const registerForPushNotificationsAsync = async userToken => {
@@ -228,7 +228,7 @@ export const checkCreditCardSubscription = async ({ token, dispatch }) => {
   let response = await checkBillingSubscription(token);
   dispatch({
     type: SUBSCRIPTION,
-    payload: response ? response : false
+    payload: response
   });
   return response;
 };
@@ -243,7 +243,7 @@ export const addCreditCardSubscription = async ({ ...props }) => {
 };
 
 export const deleteCreditCardSubscription = async ({ ...props }) => {
-  let response = Alert.alert(
+  Alert.alert(
     "Cancel Subscription?",
     "Are you sure that you want to cancel subscription?",
     [
@@ -255,12 +255,15 @@ export const deleteCreditCardSubscription = async ({ ...props }) => {
       {
         text: "OK",
         onPress: async () => {
+          props.setIsLoading(true);
           let response = await deleteBillingSubscription(props);
-          props.dispatch({
-            type: SUBSCRIPTION,
-            payload: response ? response : false
-          });
-          return response;
+          if (response) {
+            props.dispatch({
+              type: SUBSCRIPTION,
+              payload: response.status === "unsubscribe" ? false : null
+            });
+          }
+          props.setIsLoading(false);
         }
       }
     ],
@@ -268,7 +271,6 @@ export const deleteCreditCardSubscription = async ({ ...props }) => {
       cancelable: false
     }
   );
-  return response;
 };
 
 // CreditCardApi
@@ -307,33 +309,37 @@ export const handleClickIcon = ({ item, dispatch }) => {
 
 // other
 
-export const clearUserLocal = ({ dispatch, props }) => {
-  Alert.alert(
-    "Logout user",
-    "Are you sure that you want to logout?",
-    [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      {
-        text: "OK",
-        onPress: () => {
-          console.log("loging out )");
-          AsyncStorage.clear().catch(e => console.log(e));
-          dispatch({
-            type: CLEAR_USER
-          });
-          props.navigation.navigate("IntroScreen");
+export const clearUserLocal = async ({ dispatch }) =>
+  new Promise((resolve, reject) => {
+    Alert.alert(
+      "Logout user",
+      "Are you sure that you want to logout?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {
+            console.log("Cancel Pressed");
+            resolve("No");
+          },
+          style: "cancel"
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("loging out )");
+            AsyncStorage.clear().catch(e => console.log(e));
+            dispatch({
+              type: CLEAR_USER
+            });
+            resolve("Yes");
+          }
         }
+      ],
+      {
+        cancelable: false
       }
-    ],
-    {
-      cancelable: false
-    }
-  );
-};
+    );
+  });
 
 // handle back button
 export const handleBackButton = () => {
