@@ -67,7 +67,7 @@ export default function AddCreditInfoScreen({
               </View>
             </View>
             <View>
-              <View>
+              <View style={{ marginTop: 10 }}>
                 <Text style={styles.text}>City</Text>
 
                 <SimpleInput
@@ -79,7 +79,7 @@ export default function AddCreditInfoScreen({
                   error={formErrors["city"]}
                 />
               </View>
-              <View>
+              <View style={{ marginTop: 10 }}>
                 <Text style={styles.text}>Address</Text>
                 <SimpleInput
                   placeholder={"Address"}
@@ -90,8 +90,8 @@ export default function AddCreditInfoScreen({
                   error={formErrors["address"]}
                 />
               </View>
-              <View>
-                <Text style={styles.text}>CVpostal Code</Text>
+              <View style={{ marginTop: 10 }}>
+                <Text style={styles.text}>Postal Code</Text>
 
                 <SimpleInput
                   placeholder={"Postal Code"}

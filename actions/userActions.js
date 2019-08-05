@@ -34,8 +34,8 @@ export const ADD_FAVORITE_ITEMS = "ADD_FAVORITE_ITEMS";
 export const ADD_COMMENTS = "ADD_COMMENTS";
 export const SUBSCRIPTION = "SUBSCRIPTION";
 
-// export const url = "https://api.cluster.ukietech.org";
-export const url = "https://258910eb.ngrok.io";
+export const url = "https://api.cluster.ukietech.org";
+// export const url = "https://258910eb.ngrok.io";
 
 ///////// AUTH
 export const registerForPushNotificationsAsync = async userToken => {
