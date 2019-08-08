@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Container, Form, H1, H3 } from "native-base";
+import { StyleSheet, ScrollView } from "react-native";
+import { Form, H1, H3 } from "native-base";
 import T from "prop-types";
 
 import {
@@ -18,7 +18,13 @@ export default function SignUpForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+      >
         <LogoImage />
         <H1>Password reset confirm</H1>
         <H3>A confirmation code was sent to you'r email</H3>
@@ -80,7 +86,7 @@ export default function SignUpForm({
         </Form>
         {/* {formErrors && <Text>Please enter all required numbers</Text>} */}
         <BlueButton text="Confirm" onPress={goNewPassword} />
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }

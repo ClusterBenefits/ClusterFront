@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Container, Form, H3 } from "native-base";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { Form, H3 } from "native-base";
 import T from "prop-types";
 
 import {
@@ -19,7 +19,13 @@ export default function ChangePasswordForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container style={styles.center}>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+      >
         <Form>
           <H3 style={{ marginLeft: 0 }}>Change password</H3>
           <MainInput
@@ -51,7 +57,7 @@ export default function ChangePasswordForm({
             <SmallBlueButton onPress={changePassword} text={"Save"} />
           </View>
         </Form>
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }
@@ -64,12 +70,10 @@ ChangePasswordForm.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  center: {
-    justifyContent: "center"
-  },
   bottom: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 5
   }
 });

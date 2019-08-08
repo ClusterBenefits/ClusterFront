@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { Container, Form, H3 } from "native-base";
 import T from "prop-types";
 
@@ -19,7 +19,15 @@ export default function ProfileEditForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container style={{ justifyContent: "center" }}>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+        indicatorStyle={"white"}
+        scrollbarThumbVertical="@android:color/white"
+      >
         <Form>
           <H3 style={{ marginLeft: 0 }}>Profile edit</H3>
           <MainInput
@@ -55,7 +63,7 @@ export default function ProfileEditForm({
             <SmallBlueButton onPress={editUserProfile} text={"Edit"} />
           </View>
         </Form>
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }
@@ -72,6 +80,7 @@ const styles = StyleSheet.create({
   bottom: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 5
   }
 });

@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
-import { Container, Form, View, H1 } from "native-base";
+import { StyleSheet, Text, ScrollView } from "react-native";
+import { Form, View, H1 } from "native-base";
 import T from "prop-types";
 
 import {
@@ -19,7 +19,13 @@ export default function SignUpScreenForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+      >
         <LogoImage />
         <H1>Sign Up</H1>
         <Form>
@@ -53,7 +59,7 @@ export default function SignUpScreenForm({
             </Text>
           </View>
         </Form>
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
 import { Container, H3, Text } from "native-base";
 import T from "prop-types";
 
@@ -23,7 +23,14 @@ export default function ProfileForm({
 
   return (
     <MyLinearGradient>
-      <Container style={styles.container}>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "space-between",
+          flex: 1
+        }}
+        style={styles.container}
+        indicatorStyle={"white"}
+      >
         <View style={{ justifyContent: "space-between", flex: 1 }}>
           <View>
             <View style={styles.row}>
@@ -99,7 +106,7 @@ export default function ProfileForm({
             </TouchableOpacity>
           </View>
         </View>
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }
@@ -118,7 +125,9 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 0,
     paddingRight: 0,
-    paddingBottom: 20
+    paddingBottom: 20,
+    marginTop: 30,
+    flex: 1
   },
   row: {
     flexDirection: "row",

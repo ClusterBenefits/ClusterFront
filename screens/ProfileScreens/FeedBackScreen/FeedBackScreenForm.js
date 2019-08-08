@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Container, H3, Form } from "native-base";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { H3, Form } from "native-base";
 import T from "prop-types";
 
 import {
@@ -19,7 +19,13 @@ export default function commentsForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container style={{ justifyContent: "center" }}>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+      >
         <H3 style={{ marginBottom: 10 }}>Contact administrator</H3>
         <Form>
           <MainInput
@@ -43,7 +49,7 @@ export default function commentsForm({
           <IconButton onPress={goBack} text={"Profile"} />
           <SmallBlueButton onPress={sendMessage} text={"Save"} />
         </View>
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }
@@ -60,6 +66,7 @@ const styles = StyleSheet.create({
   bottom: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 5
   }
 });

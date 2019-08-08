@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Form, H1 } from "native-base";
+import { Form, H1 } from "native-base";
+import { ScrollView } from "react-native";
 import T from "prop-types";
 
 import {
@@ -17,7 +18,13 @@ export default function NewPasswordForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+      >
         <LogoImage />
         <H1>Please create a new passowrd</H1>
         <Form>
@@ -39,7 +46,7 @@ export default function NewPasswordForm({
           />
           <BlueButton text="Confirm" onPress={goLogin} />
         </Form>
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }

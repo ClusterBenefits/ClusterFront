@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Container, Form, H3 } from "native-base";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { Form, H3 } from "native-base";
 import T from "prop-types";
 
 import {
@@ -19,7 +19,13 @@ export default function ChangeEmailForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container style={styles.center}>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+      >
         <Form>
           <H3 style={{ marginLeft: 0 }}>Change email</H3>
           <MainInput
@@ -42,7 +48,7 @@ export default function ChangeEmailForm({
             <SmallBlueButton onPress={changeEmail} text={"Save"} />
           </View>
         </Form>
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }
@@ -55,9 +61,6 @@ ChangeEmailForm.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  center: {
-    justifyContent: "center"
-  },
   bottom: {
     flexDirection: "row",
     justifyContent: "space-between",

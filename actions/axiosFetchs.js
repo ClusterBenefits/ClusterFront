@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ShowToast } from "@components/AllComponents";
 const url = "https://api.cluster.ukietech.org";
-// const url = "https://258910eb.ngrok.io";
+// const url = "https://48d03f7f.ngrok.io";
 
 export const postTokenToServer = async ({ expoToken, token }) => {
   let response = axios

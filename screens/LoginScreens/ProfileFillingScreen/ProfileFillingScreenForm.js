@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Form, H1 } from "native-base";
+import { Form, H1 } from "native-base";
+import { ScrollView } from "react-native";
 import T from "prop-types";
 
 import {
@@ -16,7 +17,13 @@ export default function ProfileFillingForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+      >
         <H1>Welcome</H1>
         <MainInput
           onChangeText={onChangeValue}
@@ -48,7 +55,7 @@ export default function ProfileFillingForm({
         />
         <BlueButton text="Next" onPress={onSubmit} />
         <Form />
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }

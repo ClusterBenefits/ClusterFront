@@ -35,7 +35,7 @@ export const ADD_COMMENTS = "ADD_COMMENTS";
 export const SUBSCRIPTION = "SUBSCRIPTION";
 
 export const url = "https://api.cluster.ukietech.org";
-// export const url = "https://258910eb.ngrok.io";
+// export const url = "https://48d03f7f.ngrok.io";
 
 ///////// AUTH
 export const registerForPushNotificationsAsync = async userToken => {

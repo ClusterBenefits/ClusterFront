@@ -1,4 +1,5 @@
 import React from "react";
+import { ScrollView } from "react-native";
 import { Container, Form, H1, H3 } from "native-base";
 import T from "prop-types";
 
@@ -17,7 +18,13 @@ export default function PasswordForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "center",
+          flexGrow: 1
+        }}
+        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+      >
         <LogoImage />
         <H1>Forgot Password</H1>
         <H3>UpEnim consectetur reprehenderit minim anim fugiat</H3>
@@ -31,7 +38,7 @@ export default function PasswordForm({
           />
           <BlueButton text="Reset" onPress={resetPassword} />
         </Form>
-      </Container>
+      </ScrollView>
     </MyLinearGradient>
   );
 }
