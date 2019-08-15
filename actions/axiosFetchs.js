@@ -116,6 +116,7 @@ export const forgotPassword = ({ email }) => {
       }
     )
     .then(response => {
+      console.log(response);
       return response.data;
     })
     .catch(({ response }) => {

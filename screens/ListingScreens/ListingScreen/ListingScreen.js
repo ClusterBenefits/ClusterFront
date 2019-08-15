@@ -26,28 +26,28 @@ export default function ListingScreen(props) {
   }, [state.subscription]);
 
   async function asyncLoading() {
-    if (
-      state.subscription &&
-      state.subscription.status &&
-      new Date(state.userInfo.expired_at).getTime() > new Date().getTime()
-    ) {
-      // fetch all product items
-      let response1 = await fetchItems({
-        dispatch,
-        token: state.token
-      });
-      //fetch all favorites items
-      let response2 = await fetchFavoriteItems({
-        token: state.token,
-        dispatch
-      });
-      // change star color if item is in favorite list
-      changeInitialFeatured({
-        items: response1,
-        favoriteItems: response2,
-        dispatch
-      });
-    }
+    // if (
+    //   state.subscription &&
+    //   state.subscription.status &&
+    //   new Date(state.userInfo.expired_at).getTime() > new Date().getTime()
+    // ) {
+    // fetch all product items
+    let response1 = await fetchItems({
+      dispatch,
+      token: state.token
+    });
+    //fetch all favorites items
+    let response2 = await fetchFavoriteItems({
+      token: state.token,
+      dispatch
+    });
+    // change star color if item is in favorite list
+    changeInitialFeatured({
+      items: response1,
+      favoriteItems: response2,
+      dispatch
+    });
+    // }
 
     setIsLoading(false);
   }

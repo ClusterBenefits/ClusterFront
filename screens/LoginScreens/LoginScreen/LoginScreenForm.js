@@ -22,10 +22,13 @@ export default function LoginForm({
     <MyLinearGradient>
       <ScrollView
         contentContainerStyle={{
-          justifyContent: "center",
           flexGrow: 1
         }}
-        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+        style={{
+          paddingHorizontal: 20,
+          marginTop: 30,
+          marginBottom: 20
+        }}
       >
         <LogoImage />
         <H1>Sign In </H1>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import SignUpConfirmScreenForm from "./SignUpConfirmScreenForm";
 import { confirmUserCodeFromEmail } from "../../../actions/userActions";
@@ -16,10 +16,22 @@ export default function SignUpConfirmScreen(props) {
     email5: ""
   });
   const [formErrors, setFormErrors] = useState({});
+  const [isEditing, setEditing] = useState(true);
+
   const [isLoading, setIsLoading] = useState(false);
+
+  const inputRef = useRef();
+  useEffect(() => {
+    // if (isEditing) {
+    //   inputRef.focus();
+    // }
+  }, [isEditing]);
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
+    if (name === "email1") {
+      inputRef.current.focus();
+    }
   };
 
   const goNewPassword = async () => {
@@ -57,6 +69,7 @@ export default function SignUpConfirmScreen(props) {
       goNewPassword={goNewPassword}
       formCredentials={formCredentials}
       formErrors={formErrors}
+      inputRef={inputRef}
     />
   );
 }

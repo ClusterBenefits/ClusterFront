@@ -14,16 +14,20 @@ export default function SignUpForm({
   goNewPassword,
   onChangeValue,
   formCredentials,
-  formErrors
+  formErrors,
+  inputRef
 }) {
   return (
     <MyLinearGradient>
       <ScrollView
         contentContainerStyle={{
-          justifyContent: "center",
           flexGrow: 1
         }}
-        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+        style={{
+          paddingHorizontal: 20,
+          marginTop: 30,
+          marginBottom: 20
+        }}
       >
         <LogoImage />
         <H1>Password reset confirm</H1>
@@ -38,6 +42,7 @@ export default function SignUpForm({
             name="email1"
             value={formCredentials.email1}
             maxLength={1}
+            autoFocus={true}
           />
 
           <MainInput
@@ -49,6 +54,7 @@ export default function SignUpForm({
             name="email2"
             value={formCredentials.email2}
             maxLength={1}
+            ref={inputRef}
           />
 
           <MainInput
