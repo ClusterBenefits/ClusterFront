@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Text, ListItem } from "native-base";
 import { colors } from "../../../constants/Colors";
-import { Icon } from "@components/AllComponents";
+import Icon from "../Icon";
 import T from "prop-types";
 import { url } from "../../../actions/userActions";
 

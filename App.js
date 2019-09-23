@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import AppContainer from "./navigation/LoginNavigator";
+import AppContainer from "./src/navigation/LoginNavigator";
 import { StyleProvider, Root } from "native-base";
-import getTheme from "./native-base-theme/components";
-import platform from "./native-base-theme/variables/platform";
-import { MyProvider } from "./reducers/context";
+import getTheme from "./src/native-base-theme/components";
+import platform from "./src/native-base-theme/variables/platform";
+import { MyProvider } from "./src/reducers/context";
 
 const StyleProviderTheme = ({ children }) => (
   <StyleProvider style={getTheme(platform)}>{children}</StyleProvider>

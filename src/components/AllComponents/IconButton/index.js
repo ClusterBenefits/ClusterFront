@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Text } from "native-base";
-import { Icon } from "@components/AllComponents";
+import Icon from "../Icon";
 import T from "prop-types";
 
 const IconButton = ({ text, onPress, ...props }) => {
