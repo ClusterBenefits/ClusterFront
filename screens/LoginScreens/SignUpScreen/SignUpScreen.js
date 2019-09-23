@@ -89,7 +89,7 @@ export default function SignUpScreen(props) {
     }
   };
   const goLoginScreen = () => {
-    props.navigation.navigate("LoginScreen");
+    props.navigation.navigate("SignUpConfirmScreen");
   };
 
   return (
