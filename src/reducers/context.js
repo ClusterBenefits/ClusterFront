@@ -1,38 +1,29 @@
 import React, { useReducer } from "react";
-import {
-  ADD_TOKEN,
-  CLEAR_USER,
-  ADD_USERINFO,
-  ADD_ITEMS,
-  FEATURED,
-  ADD_FAVORITE_ITEMS,
-  ADD_COMMENTS,
-  SUBSCRIPTION
-} from "../actions/userActions";
+import { dispatchTypes } from "../actions/userActions";
 
 let reducer = (state, action) => {
   switch (action.type) {
-    case ADD_TOKEN:
+    case dispatchTypes.ADD_TOKEN:
       return {
         ...state,
         token: action.payload
       };
-    case CLEAR_USER:
+    case dispatchTypes.CLEAR_USER:
       return {
         ...state,
         token: ""
       };
-    case ADD_USERINFO:
+    case dispatchTypes.ADD_USERINFO:
       return {
         ...state,
         userInfo: action.payload
       };
-    case ADD_ITEMS:
+    case dispatchTypes.ADD_ITEMS:
       return {
         ...state,
         items: action.payload
       };
-    case FEATURED:
+    case dispatchTypes.FEATURED:
       const Item = state.items.find(item => item.id === action.payload.id);
       if (Item.featured) {
         Item.featured = false;
@@ -49,17 +40,17 @@ let reducer = (state, action) => {
           favoriteItems: [Item, ...state.favoriteItems]
         };
       }
-    case ADD_FAVORITE_ITEMS:
+    case dispatchTypes.ADD_FAVORITE_ITEMS:
       return {
         ...state,
         favoriteItems: action.payload
       };
-    case ADD_COMMENTS:
+    case dispatchTypes.ADD_COMMENTS:
       return {
         ...state,
         comments: action.payload
       };
-    case SUBSCRIPTION:
+    case dispatchTypes.SUBSCRIPTION:
       return {
         ...state,
         subscription: action.payload

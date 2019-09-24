@@ -24,18 +24,17 @@ import {
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 
-export const ADD_TOKEN = "ADD_TOKEN";
-export const CLEAR_USER = "CLEAR_USER";
-export const ADD_USERINFO = "ADD_USERINFO";
-export const ADD_ITEMS = "ADD_ITEMS";
-export const FEATURED = "FEATURED";
-export const FAVORITE_ITEMS_KEYS = "FAVORITE_ITEMS_KEYS";
-export const ADD_FAVORITE_ITEMS = "ADD_FAVORITE_ITEMS";
-export const ADD_COMMENTS = "ADD_COMMENTS";
-export const SUBSCRIPTION = "SUBSCRIPTION";
-
-export const url = "https://api.cluster.ukietech.org";
-// export const url = "https://48d03f7f.ngrok.io";
+export const dispatchTypes = {
+  ADD_TOKEN: "ADD_TOKEN",
+  CLEAR_USER: "CLEAR_USER",
+  ADD_USERINFO: "ADD_USERINFO",
+  ADD_ITEMS: "ADD_ITEMS",
+  FEATURED: "FEATURED",
+  FAVORITE_ITEMS_KEYS: "FAVORITE_ITEMS_KEYS",
+  ADD_FAVORITE_ITEMS: "ADD_FAVORITE_ITEMS",
+  ADD_COMMENTS: "ADD_COMMENTS",
+  SUBSCRIPTION: "SUBSCRIPTION"
+};
 
 ///////// AUTH
 export const registerForPushNotificationsAsync = async userToken => {
@@ -66,7 +65,7 @@ export const loginUser = async ({ ...props }) => {
   let response = await login(props);
   if (response) {
     props.dispatch({
-      type: ADD_TOKEN,
+      type: dispatchTypes.ADD_TOKEN,
       payload: response
     });
   }
@@ -77,7 +76,7 @@ export const registerUser = async ({ ...props }) => {
   let response = await register(props);
   if (response) {
     props.dispatch({
-      type: ADD_TOKEN,
+      type: dispatchTypes.ADD_TOKEN,
       payload: response
     });
   }
@@ -113,7 +112,7 @@ export const changeEmail = async ({ token, email, dispatch }) => {
     console.log("email changed to", email);
     AsyncStorage.setItem("email", email);
     dispatch({
-      type: ADD_USERINFO,
+      type: dispatchTypes.ADD_USERINFO,
       payload: response
     });
   }
@@ -137,7 +136,7 @@ export const fetchUserInfo = async ({ token, dispatch }) => {
   const response = await showUserInformation(token);
   if (response) {
     dispatch({
-      type: ADD_USERINFO,
+      type: dispatchTypes.ADD_USERINFO,
       payload: response
     });
   }
@@ -148,7 +147,7 @@ export const postUserInfo = async ({ token, data, dispatch }) => {
   const response = await updateUserInformation({ token, data });
   if (response) {
     dispatch({
-      type: ADD_USERINFO,
+      type: dispatchTypes.ADD_USERINFO,
       payload: response
     });
   }
@@ -161,7 +160,7 @@ export const fetchItems = async ({ dispatch, token }) => {
   let response = await listOfCompanies(token);
   if (response) {
     await dispatch({
-      type: ADD_ITEMS,
+      type: dispatchTypes.ADD_ITEMS,
       payload: response
     });
   }
@@ -176,7 +175,7 @@ export const fetchFavoriteItems = async ({ token, dispatch }) => {
   if (response) {
     response.forEach(item => (item.featured = true));
     await dispatch({
-      type: ADD_FAVORITE_ITEMS,
+      type: dispatchTypes.ADD_FAVORITE_ITEMS,
       payload: response
     });
   }
@@ -190,7 +189,7 @@ export const getComments = async ({ id, token, dispatch, page, comments }) => {
   if (response) {
     if (!page) {
       dispatch({
-        type: ADD_COMMENTS,
+        type: dispatchTypes.ADD_COMMENTS,
         payload: response
       });
     } // adding new comments from page 2/3/4/5......
@@ -199,7 +198,7 @@ export const getComments = async ({ id, token, dispatch, page, comments }) => {
       newPayload.data = [...newPayload.data, ...response.data];
       newPayload.meta = response.meta;
       dispatch({
-        type: ADD_COMMENTS,
+        type: dispatchTypes.ADD_COMMENTS,
         payload: newPayload
       });
     }
@@ -227,7 +226,7 @@ export const sendMessageToAdmin = async ({ ...props }) => {
 export const checkCreditCardSubscription = async ({ token, dispatch }) => {
   let response = await checkBillingSubscription(token);
   dispatch({
-    type: SUBSCRIPTION,
+    type: dispatchTypes.SUBSCRIPTION,
     payload: response
   });
   return response;
@@ -236,7 +235,7 @@ export const checkCreditCardSubscription = async ({ token, dispatch }) => {
 export const addCreditCardSubscription = async ({ ...props }) => {
   let response = await addBillingSubscription(props);
   props.dispatch({
-    type: SUBSCRIPTION,
+    type: dispatchTypes.SUBSCRIPTION,
     payload: response ? response : false
   });
   return response;
@@ -259,7 +258,7 @@ export const deleteCreditCardSubscription = async ({ ...props }) => {
           let response = await deleteBillingSubscription(props);
           if (response) {
             props.dispatch({
-              type: SUBSCRIPTION,
+              type: dispatchTypes.SUBSCRIPTION,
               payload: response.status === "unsubscribe" ? false : null
             });
           }
@@ -285,7 +284,7 @@ export const changeInitialFeatured = ({ items, favoriteItems, dispatch }) => {
     });
   });
   dispatch({
-    type: ADD_ITEMS,
+    type: dispatchTypes.ADD_ITEMS,
     payload: items
   });
 };
@@ -302,7 +301,7 @@ export const changeFavoriteCompanies = ({ token, item }) => {
 
 export const handleClickIcon = ({ item, dispatch }) => {
   dispatch({
-    type: FEATURED,
+    type: dispatchTypes.FEATURED,
     payload: item
   });
 };
@@ -329,7 +328,7 @@ export const clearUserLocal = async ({ dispatch }) =>
             console.log("loging out )");
             AsyncStorage.clear().catch(e => console.log(e));
             dispatch({
-              type: CLEAR_USER
+              type: dispatchTypes.CLEAR_USER
             });
             resolve("Yes");
           }

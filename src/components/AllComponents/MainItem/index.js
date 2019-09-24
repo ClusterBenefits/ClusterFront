@@ -4,7 +4,7 @@ import { Text, ListItem } from "native-base";
 import { colors } from "../../../constants/Colors";
 import Icon from "../Icon";
 import T from "prop-types";
-import { url } from "../../../actions/userActions";
+import { url } from "../../../constants";
 
 export default function list({ item, goBarcodeScreen, handleFavoriteChange }) {
   return (
