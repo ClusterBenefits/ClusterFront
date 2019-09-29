@@ -10,10 +10,11 @@ import {
   checkCreditCardSubscription
 } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
+import { screens } from "../../../constants";
 
 const WelcomeScreenWithLoading = LoadingHOC(WelcomeScreenForm);
 
-export default function WelcomeScreen(props) {
+export default function WelcomeScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch } = useContext(UserContext);
 
@@ -29,7 +30,7 @@ export default function WelcomeScreen(props) {
           token: state.token,
           dispatch
         });
-        props.navigation.navigate("ProfileBottomTabNavigatior");
+        navigation.navigate(screens.ProfileBottomTabNavigatior);
       } else {
         setIsLoading(false);
       }
@@ -45,7 +46,7 @@ export default function WelcomeScreen(props) {
   // attantion please
 
   const goProfileFillingScreen = () => {
-    props.navigation.navigate("ProfileFillingScreen");
+    navigation.push(screens.ProfileFillingScreen);
   };
 
   return (

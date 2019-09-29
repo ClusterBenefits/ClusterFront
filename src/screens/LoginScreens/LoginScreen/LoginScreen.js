@@ -6,8 +6,7 @@ import { UserContext } from "./../../../reducers/context";
 import LoginScreenForm from "./LoginScreenForm";
 import { LoadingHOC } from "@components/AllComponents";
 import { handleBackButton, loginUser } from "../../../actions/userActions";
-import { allFieldsValidation } from "./../../../utils/validation";
-import { saveDataToLocalStorage } from "../../../utils";
+import { saveDataToLocalStorage, allFieldsValidation } from "../../../utils";
 import { screens } from "../../../constants";
 
 const LoginScreenWithLoading = LoadingHOC(LoginScreenForm);

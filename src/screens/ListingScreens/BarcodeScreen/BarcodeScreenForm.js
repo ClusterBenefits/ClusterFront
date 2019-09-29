@@ -23,6 +23,35 @@ import { colors } from "../../../constants/Colors";
 import { url } from "../../../actions/userActions";
 import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
 
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 0,
+    paddingRight: 0
+  },
+  header: {
+    alignItems: "center",
+    backgroundColor: "transparent",
+    borderBottomWidth: 1,
+    borderBottomColor: "#c9c9c9",
+    height: 40
+  },
+  top: {
+    alignItems: "center"
+  },
+  big: {
+    textAlign: "center",
+    fontSize: 40,
+    color: "white"
+  },
+  image: {
+    height: 100,
+    width: 100
+  },
+  h2: {
+    marginTop: 5
+  }
+});
+
 export default function BardCodeForm({
   goListingScreen,
   handleFavoriteChange,
@@ -88,32 +117,3 @@ BardCodeForm.propTypes = {
   goCommentsScreen: T.func.isRequired,
   item: T.object.isRequired
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingLeft: 0,
-    paddingRight: 0
-  },
-  header: {
-    alignItems: "center",
-    backgroundColor: "transparent",
-    borderBottomWidth: 1,
-    borderBottomColor: "#c9c9c9",
-    height: 40
-  },
-  top: {
-    alignItems: "center"
-  },
-  big: {
-    textAlign: "center",
-    fontSize: 40,
-    color: "white"
-  },
-  image: {
-    height: 100,
-    width: 100
-  },
-  h2: {
-    marginTop: 5
-  }
-});

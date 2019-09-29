@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Button, H3 } from "native-base";
+import { Button, Text } from "native-base";
 import T from "prop-types";
 import { colors } from "../../../constants/Colors";
 
@@ -37,7 +37,7 @@ const BlueButton = ({
       disabled={disabled}
       {...props}
     >
-      <H3 style={s.button_text}>{text}</H3>
+      <Text style={s.button_text}>{text}</Text>
     </Button>
   );
 };

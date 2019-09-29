@@ -27,11 +27,23 @@ const ResetPasswordNavigation = createStackNavigator(
   }
 );
 
+const FirstLogin = createStackNavigator(
+  {
+    [screens.WelcomeScreen]: WelcomeScreen,
+    [screens.ProfileFillingScreen]: ProfileFillingScreen
+  },
+  {
+    headerMode: "none",
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+);
+
 export default createSwitchNavigator({
   [screens.IntroScreen]: IntroScreen,
   [screens.SignUpScreen]: SignUpScreen,
-  [screens.WelcomeScreen]: WelcomeScreen,
-  [screens.ProfileFillingScreen]: ProfileFillingScreen,
   [screens.AddCreditInfoScreen]: AddCreditInfoScreen,
-  ResetPasswordNavigation
+  ResetPasswordNavigation,
+  FirstLogin
 });

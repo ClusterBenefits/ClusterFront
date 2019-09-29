@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { Input, Item, Text, Label, Icon } from "native-base";
 import T from "prop-types";
 import { colors } from "../../../constants";
@@ -22,6 +22,9 @@ const MainInput = ({
       width: width || "100%",
       borderBottomWidth: 2
     },
+    input: {
+      paddingLeft: 0
+    },
     error: {
       color: colors.mainRed,
       fontSize: 12,
@@ -41,7 +44,7 @@ const MainInput = ({
   const [focused, setState] = useState(false);
 
   return (
-    <View>
+    <>
       <Item style={[s.container, focused && s.borderBlue]} floatingLabel>
         <Label style={[s.placeholder, focused && s.colorBlue]}>
           {placeholder}
@@ -54,11 +57,12 @@ const MainInput = ({
           onBlur={() => setState(!focused)}
           placeholder={"placeholder"}
           clearButtonMode={"while-editing"}
+          style={s.input}
           {...props}
         />
       </Item>
       {error && <Text style={s.error}>{error[0]}</Text>}
-    </View>
+    </>
   );
 };
 

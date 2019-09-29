@@ -3,6 +3,6 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "ew-94u",
+  "urlRandomness": null,
   "https": false
 }

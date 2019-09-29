@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Container, Form, Text, H1 } from "native-base";
+import { Container, Text, H1 } from "native-base";
 import T from "prop-types";
 
 import {
@@ -9,22 +9,28 @@ import {
   MyLinearGradient
 } from "@components/AllComponents";
 
+const s = StyleSheet.create({
+  H1: {
+    marginBottom: 20
+  },
+  text3: {
+    marginBottom: 10,
+    flex: 1
+  }
+});
+
 export default function WelcomeForm({ goProfileFillingScreen }) {
   return (
     <MyLinearGradient>
       <Container>
-        <LogoImage />
-        <H1>Welcome</H1>
-        <Text style={styles.text3}>
+        <LogoImage noBg />
+        <H1 style={s.H1}>Welcome</H1>
+        <Text style={s.text3}>
           Eu velit occaecat eu minim minim nostrud et sunt nostrud adipisicing
           ut aliqua sint. Exercitation qui Lorem ea qui fugiat eiusmod id velit.
           Nisi
         </Text>
-        <BlueButton
-          text="Complete registration"
-          onPress={goProfileFillingScreen}
-        />
-        <Form />
+        <BlueButton text="Гаразд" onPress={goProfileFillingScreen} />
       </Container>
     </MyLinearGradient>
   );
@@ -33,10 +39,3 @@ export default function WelcomeForm({ goProfileFillingScreen }) {
 WelcomeForm.propTypes = {
   goProfileFillingScreen: T.func.isRequired
 };
-
-const styles = StyleSheet.create({
-  text3: {
-    marginBottom: 10,
-    marginLeft: 5
-  }
-});

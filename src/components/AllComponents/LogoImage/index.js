@@ -1,13 +1,15 @@
 import React from "react";
 import { StyleSheet, Image, View } from "react-native";
 
-const LogoImage = ({ withText = false }) => {
+const LogoImage = ({ withText = false, noBg = false }) => {
   const s = StyleSheet.create({
     container: {
-      flex: 1,
+      // flex: 1,
+      height: 225,
+      width: "100%",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#f6f7fb"
+      backgroundColor: noBg ? "#fff" : "#f6f7fb"
     },
     image: {
       // justifyContent: "center",

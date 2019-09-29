@@ -10,6 +10,7 @@ import Icon from "./Icon";
 import ShowToast from "./Toast";
 import LoadingHOC from "./LoadingHOC";
 import IconButton from "./IconButton";
+import Header from "./Header";
 
 export {
   BlueButton,
@@ -23,5 +24,6 @@ export {
   Icon,
   ShowToast,
   LoadingHOC,
-  IconButton
+  IconButton,
+  Header
 };

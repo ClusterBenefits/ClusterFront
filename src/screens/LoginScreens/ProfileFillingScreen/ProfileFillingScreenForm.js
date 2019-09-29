@@ -1,19 +1,33 @@
 import React from "react";
-import { Form, H1 } from "native-base";
-import { ScrollView } from "react-native";
+import { H1, View } from "native-base";
+import { ScrollView, StyleSheet } from "react-native";
 import T from "prop-types";
 
 import {
   BlueButton,
   MainInput,
-  MyLinearGradient
+  MyLinearGradient,
+  Header
 } from "@components/AllComponents";
+
+const s = StyleSheet.create({
+  container: {
+    marginBottom: 30,
+    marginHorizontal: 20
+  },
+  header: {
+    alignItems: "center",
+    backgroundColor: "transparent",
+    height: 40
+  }
+});
 
 export default function ProfileFillingForm({
   onChangeValue,
   onSubmit,
   formCredentials,
-  formErrors
+  goWelcomeScreen,
+  isValid
 }) {
   return (
     <MyLinearGradient>
@@ -21,39 +35,40 @@ export default function ProfileFillingForm({
         contentContainerStyle={{
           flexGrow: 1
         }}
-        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
+        style={s.container}
+        showsVerticalScrollIndicator={false}
       >
+        <Header titleText="Додаткова Інформація" onPress={goWelcomeScreen} />
         <H1>Welcome</H1>
         <MainInput
-          onChangeText={onChangeValue}
-          placeholder="First name*"
+          placeholder="Ім'я"
           name="firstName"
+          focusedText="Введіть ваш пароль"
           value={formCredentials.firstName}
-          error={formErrors["firstName"]}
+          onChangeText={onChangeValue}
         />
         <MainInput
-          onChangeText={onChangeValue}
-          placeholder="Last name*"
+          placeholder="Прізвище"
           name="lastName"
+          focusedText="Введіть ваш пароль"
           value={formCredentials.lastName}
-          error={formErrors["lastName"]}
+          onChangeText={onChangeValue}
         />
         <MainInput
-          onChangeText={onChangeValue}
-          placeholder="Organization*"
+          placeholder="Компанія"
           name="organization"
+          focusedText="Введіть ваш пароль"
           value={formCredentials.organization}
-          error={formErrors["organization"]}
+          onChangeText={onChangeValue}
         />
         <MainInput
-          onChangeText={onChangeValue}
-          placeholder="Position*"
+          placeholder="Позиція (не обов'язково)"
           name="position"
           value={formCredentials.position}
-          error={formErrors["position"]}
+          onChangeText={onChangeValue}
         />
-        <BlueButton text="Next" onPress={onSubmit} />
-        <Form />
+        <View style={{ flex: 1 }} />
+        <BlueButton text="Next" onPress={onSubmit} disabled={!isValid} />
       </ScrollView>
     </MyLinearGradient>
   );
@@ -63,5 +78,5 @@ ProfileFillingForm.propTypes = {
   onChangeValue: T.func.isRequired,
   onSubmit: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  formErrors: T.object.isRequired
+  isValid: T.bool.isRequired
 };

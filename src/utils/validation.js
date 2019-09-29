@@ -10,7 +10,7 @@ const rules = {
   firstName: "required|max:30",
   lastName: "required|max:30",
   organization: "required|max:30",
-  position: "required|max:30",
+  // position: "max:30",
   realPassword: "required|min:8",
   oldPassword: "required|same:realPassword",
   email1: "required",

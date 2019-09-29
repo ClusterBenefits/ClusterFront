@@ -179,9 +179,9 @@ export const updateUserInformation = ({ token, data }) => {
       // ShowToast("Your information has been changed successfully!");
       return response.data;
     })
-    .catch(err => {
-      console.log(err);
-      ShowToast(err);
+    .catch(({ response }) => {
+      console.log({ response });
+      ShowToast(`error: ${response.data.error}`);
     });
   return response;
 };
