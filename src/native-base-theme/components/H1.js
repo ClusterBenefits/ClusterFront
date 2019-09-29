@@ -6,6 +6,7 @@ export default (variables /*: * */ = variable) => {
   const h1Theme = {
     color: variables.textColor,
     fontSize: variables.fontSizeH1,
+    fontWeight: "700",
     lineHeight: variables.lineHeightH1,
     marginTop: 10,
     marginBottom: 5

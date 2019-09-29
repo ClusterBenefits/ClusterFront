@@ -2,6 +2,14 @@ import React from "react";
 import { StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
 import { Container, H3, Text } from "native-base";
 import T from "prop-types";
+import {
+  Email,
+  Password,
+  PaymentDetails,
+  BackArrow,
+  CustomUserIcon,
+  MainLogo
+} from "../../../assets/svg";
 
 import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
 
@@ -34,7 +42,12 @@ export default function ProfileForm({
         <View style={{ justifyContent: "space-between", flex: 1 }}>
           <View>
             <View style={styles.row}>
+              <MainLogo />
+
               <H3 style={{ marginLeft: 0, flex: 1 }}>Profile</H3>
+              <H3 style={{ marginLeft: 0, flex: 1, fontWeight: "800" }}>
+                Profile
+              </H3>
               <IconButton
                 onPress={goProfileEditScreen}
                 text={"Edit"}

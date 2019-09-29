@@ -11,7 +11,7 @@ export default (variables /*: * */ = variable) => {
         height: 50,
         top: 8,
         paddingTop: 3,
-        paddingBottom: 7,
+        paddingBottom: 8,
         ".multiline": {
           minHeight: variables.inputHeightBase,
           paddingTop: Platform.OS === "ios" ? 10 : 3,
@@ -19,7 +19,7 @@ export default (variables /*: * */ = variable) => {
         }
       },
       "NativeBase.Label": {
-        paddingTop: 5
+        paddingTop: 0
       },
       "NativeBase.Icon": {
         top: 6,
@@ -66,7 +66,7 @@ export default (variables /*: * */ = variable) => {
         fontSize: variables.inputFontSize,
         lineHeight: variables.inputLineHeight - 6,
         ".secureTextEntry": {
-          fontSize: variables.inputFontSize - 4
+          fontSize: variables.inputFontSize
         },
         ".multiline": {
           paddingTop: Platform.OS === "ios" ? 9 : undefined,

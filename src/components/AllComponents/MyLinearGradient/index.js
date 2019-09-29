@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const MyLinearGradient = ({ children }) => {
   return (
-    <LinearGradient style={{ flex: 1 }} colors={["#eb3a85", "#fa9630"]}>
+    <LinearGradient style={{ flex: 1 }} colors={["#fbfcfd", "#f6f7fb"]}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
         {children}
       </KeyboardAvoidingView>
@@ -13,3 +13,4 @@ const MyLinearGradient = ({ children }) => {
 };
 
 export default MyLinearGradient;
+// background-image: linear-gradient(180deg, #fbfcfd 0%, #f6f7fb 100%);

@@ -47,17 +47,6 @@ export const singleFieldValidation = ({ key, value }) => {
   }
   return validationResponse;
 };
-// export const debounceSingleFieldValidation = debounce(
-//   ({ name, value, formErrors }) => {
-//     const { isValid, errors } = singleFieldValidation({ key: name, value });
-//     if (!isValid) {
-//       this.setState({ formErrors: { ...formErrors, [name]: errors[name] } });
-//     } else {
-//       this.setState({ formErrors: { ...formErrors, [name]: null } });
-//     }
-//   },
-//   800
-// );
 
 export const allFieldsValidation = data => {
   // making new rules for each request

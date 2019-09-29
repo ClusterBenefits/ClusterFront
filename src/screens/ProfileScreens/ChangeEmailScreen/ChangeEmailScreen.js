@@ -41,7 +41,7 @@ export default function IntroScreen(props) {
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
-    debounceSingleFieldValidation({ name, value });
+    // debounceSingleFieldValidation({ name, value });
   };
 
   // check if input fields are correct after typing

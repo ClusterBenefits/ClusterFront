@@ -3,6 +3,7 @@
 import color from "color";
 
 import { Platform, Dimensions, PixelRatio } from "react-native";
+import { colors } from "../../constants";
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -126,11 +127,11 @@ export default {
 
   // Font
 
-  DefaultFontSize: 15,
+  DefaultFontSize: 14,
   fontFamily: platform === "ios" ? "System" : "Roboto",
   fontSizeBase: 15,
   get fontSizeH1() {
-    return this.fontSizeBase * 2.0;
+    return this.fontSizeBase * 1.9;
   },
   get fontSizeH2() {
     return this.fontSizeBase * 1.6;
@@ -180,8 +181,8 @@ export default {
   iconHeaderSize: platform === "ios" ? 33 : 24,
 
   // InputGroup
-  inputFontSize: 17,
-  inputBorderColor: "#D9D5DC",
+  inputFontSize: 14,
+  inputBorderColor: colors.mainGrey,
   inputSuccessBorderColor: "#2b8339",
   inputErrorBorderColor: "#ed2f2f",
   inputHeightBase: 50,
@@ -245,7 +246,7 @@ export default {
   tabFontSize: 15,
 
   // Text
-  textColor: "#fff",
+  textColor: "#141820",
   inverseTextColor: "#000",
   noteFontSize: 14,
   get defaultTextColor() {

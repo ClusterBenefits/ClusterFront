@@ -1,0 +1,1 @@
+export { saveDataToLocalStorage } from "./localStorage";
