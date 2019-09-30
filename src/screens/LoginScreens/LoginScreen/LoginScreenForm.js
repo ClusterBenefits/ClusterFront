@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
-import { Container, Form, View, H1, Text } from "native-base";
+import { StyleSheet } from "react-native";
+import { Form, View, H1, Text } from "native-base";
 import T from "prop-types";
 
 import {
@@ -11,7 +11,6 @@ import {
 } from "@components/AllComponents";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../../constants";
-import { MainLogo } from "../../../assets/svg";
 import { keyboard } from "../../../hooks";
 
 const s = StyleSheet.create({
@@ -52,46 +51,44 @@ export default function LoginForm({
   const [visible] = keyboard();
 
   return (
-    <MyLinearGradient>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        {!visible && <LogoImage withText />}
-        <View style={s.container}>
-          <H1>Вітаємо!</H1>
-          <Form>
-            <MainInput
-              placeholder="Емейл"
-              focusedText="Введіть ваш емейл"
-              name="email"
-              onChangeText={onChangeValue}
-              value={formCredentials.email}
-            />
-            <MainInput
-              placeholder="Пароль"
-              focusedText="Введіть ваш пароль"
-              name="password"
-              onChangeText={onChangeValue}
-              value={formCredentials.password}
-              secureTextEntry={true}
-            />
-            <View style={s.forgotPasswordContainer}>
-              <TouchableOpacity onPress={goForgotPassword}>
-                <Text style={s.forgotPasswordText}>Забули пароль?</Text>
-              </TouchableOpacity>
-              <View />
-            </View>
+    <MyLinearGradient withScroll>
+      {!visible && <LogoImage withText />}
+      <View style={s.container}>
+        <H1>Вітаємо!</H1>
+        <Form>
+          <MainInput
+            placeholder="Емейл"
+            focusedText="Введіть ваш емейл"
+            name="email"
+            onChangeText={onChangeValue}
+            value={formCredentials.email}
+          />
+          <MainInput
+            placeholder="Пароль"
+            focusedText="Введіть ваш пароль"
+            name="password"
+            onChangeText={onChangeValue}
+            value={formCredentials.password}
+            secureTextEntry={true}
+          />
+          <View style={s.forgotPasswordContainer}>
+            <TouchableOpacity onPress={goForgotPassword}>
+              <Text style={s.forgotPasswordText}>Забули пароль?</Text>
+            </TouchableOpacity>
+            <View />
+          </View>
 
-            <BlueButton text="Log In" onPress={logInUser} disabled={!isValid} />
+          <BlueButton text="Log In" onPress={logInUser} disabled={!isValid} />
 
-            <View style={s.bottom_menu}>
-              <Text style={s.bottom_menu_text}>Ще не зареєстровані?</Text>
+          <View style={s.bottom_menu}>
+            <Text style={s.bottom_menu_text}>Ще не зареєстровані?</Text>
 
-              <TouchableOpacity onPress={goSignUp}>
-                <Text style={s.signUpText}>Зареєструйтесь</Text>
-              </TouchableOpacity>
-            </View>
-          </Form>
-        </View>
-      </ScrollView>
+            <TouchableOpacity onPress={goSignUp}>
+              <Text style={s.signUpText}>Зареєструйтесь</Text>
+            </TouchableOpacity>
+          </View>
+        </Form>
+      </View>
     </MyLinearGradient>
   );
 }

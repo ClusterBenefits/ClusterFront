@@ -1,11 +1,10 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
-import { Container, H3, Text, ListItem } from "native-base";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { H3, Text, ListItem } from "native-base";
 import T from "prop-types";
 import {
   EmailIcon,
   PasswordIcon,
-  PaymentDetailsIcon,
   BackArrow,
   CustomUserIcon,
   BillingInformationIcon,
@@ -14,12 +13,7 @@ import {
   InfoIcon,
   EditPenIcon
 } from "../../../assets/svg";
-import {
-  MyLinearGradient,
-  Icon,
-  IconButton,
-  Header
-} from "@components/AllComponents";
+import { MyLinearGradient, Header } from "@components/AllComponents";
 
 const styles = StyleSheet.create({
   container: {
@@ -65,121 +59,87 @@ export default function ProfileForm({
   } = userInfo;
 
   return (
-    <MyLinearGradient>
-      <ScrollView
-        contentContainerStyle={{
+    <MyLinearGradient withScroll style={styles.container}>
+      <View
+        style={{
+          flexDirection: "row",
           justifyContent: "space-between",
-          flex: 1
+          alignItems: "center",
+          height: 40,
+          marginHorizontal: 15
         }}
-        style={styles.container}
-        indicatorStyle={"white"}
       >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: 40,
-            marginHorizontal: 15
-          }}
-        >
+        <TouchableOpacity onPress={() => {}}>
           <InfoIcon />
-          <Text>Профіль</Text>
+        </TouchableOpacity>
+        <Text>Профіль</Text>
+        <TouchableOpacity onPress={goProfileEditScreen}>
           <EditPenIcon />
+        </TouchableOpacity>
+      </View>
+      <View style={{ justifyContent: "space-between", flex: 1 }}>
+        <View>
+          <TouchableOpacity>
+            <Text>Open Camere or image picker )</Text>
+          </TouchableOpacity>
         </View>
-        <View style={{ justifyContent: "space-between", flex: 1 }}>
-          <View>
-            <View style={styles.row}>
-              <H3 style={{ marginLeft: 0, flex: 1 }}>Profile</H3>
-              <H3 style={{ marginLeft: 0, flex: 1, fontWeight: "800" }}>
-                Profile
-              </H3>
-              <IconButton
-                onPress={goProfileEditScreen}
-                text={"Edit"}
-                size={24}
-                fontSize={20}
-                name={"pencil"}
-                marginLeft={-5}
-              />
-            </View>
 
-            <View style={{ flexDirection: "row", margin: 15 }}>
-              <View style={styles.test}>
-                <Text style={styles.left}>FIRST NAME:</Text>
-                <Text style={styles.left}>LAST NAME:</Text>
-                <Text style={styles.left}>COMPANY:</Text>
-                <Text style={styles.left}>POSITION:</Text>
+        <View>
+          <ListItem style={styles.catagoryContainer}>
+            <TouchableOpacity
+              style={[styles.row, styles.main]}
+              onPress={goChangeEmailScreen}
+            >
+              <View style={styles.icon}>
+                <EmailIcon />
               </View>
-              <View style={styles.test}>
-                <Text style={styles.left}>{first_name}</Text>
-                <Text style={styles.left}>{last_name}</Text>
-                <Text style={styles.left}>{company}</Text>
-                <Text style={styles.left}>{position}</Text>
+              <H3>Change email</H3>
+            </TouchableOpacity>
+          </ListItem>
+
+          <ListItem style={styles.catagoryContainer}>
+            <TouchableOpacity
+              style={[styles.row, styles.main]}
+              onPress={goChangePasswordScreen}
+            >
+              <View style={styles.icon}>
+                <PasswordIcon />
               </View>
-            </View>
-          </View>
+              <H3>Change password</H3>
+            </TouchableOpacity>
+          </ListItem>
 
-          <View>
-            <ListItem style={styles.catagoryContainer}>
-              <TouchableOpacity
-                style={[styles.row, styles.main]}
-                onPress={goChangeEmailScreen}
-              >
-                <View style={styles.icon}>
-                  <EmailIcon />
-                </View>
-                <H3>Change email</H3>
-              </TouchableOpacity>
-            </ListItem>
+          <ListItem style={styles.catagoryContainer}>
+            <TouchableOpacity
+              style={[styles.row, styles.main]}
+              onPress={goBillingInformation}
+            >
+              <View style={styles.icon}>
+                <BillingInformationIcon />
+              </View>
+              <H3>Billing information</H3>
+            </TouchableOpacity>
+          </ListItem>
 
-            <ListItem style={styles.catagoryContainer}>
-              <TouchableOpacity
-                style={[styles.row, styles.main]}
-                onPress={goChangePasswordScreen}
-              >
-                <View style={styles.icon}>
-                  <PasswordIcon />
-                </View>
-                <H3>Change password</H3>
-              </TouchableOpacity>
-            </ListItem>
+          <ListItem style={styles.catagoryContainer}>
+            <TouchableOpacity style={[styles.row]} onPress={goAddCommentScreen}>
+              <View style={styles.icon}>
+                <SupportIcon />
+              </View>
+              <H3>Contact administrator</H3>
+            </TouchableOpacity>
+          </ListItem>
 
-            <ListItem style={styles.catagoryContainer}>
-              <TouchableOpacity
-                style={[styles.row, styles.main]}
-                onPress={goBillingInformation}
-              >
-                <View style={styles.icon}>
-                  <BillingInformationIcon />
-                </View>
-                <H3>Billing information</H3>
-              </TouchableOpacity>
-            </ListItem>
-
-            <ListItem style={styles.catagoryContainer}>
-              <TouchableOpacity
-                style={[styles.row]}
-                onPress={goAddCommentScreen}
-              >
-                <View style={styles.icon}>
-                  <SupportIcon />
-                </View>
-                <H3>Contact administrator</H3>
-              </TouchableOpacity>
-            </ListItem>
-
-            <ListItem style={[styles.catagoryContainer, styles.lastItemMargin]}>
-              <TouchableOpacity style={styles.row} onPress={signOutUser}>
-                <View style={styles.icon}>
-                  <LogOutIcon />
-                </View>
-                <H3>Logout</H3>
-              </TouchableOpacity>
-            </ListItem>
-          </View>
+          <ListItem style={[styles.catagoryContainer, styles.lastItemMargin]}>
+            <TouchableOpacity style={styles.row} onPress={signOutUser}>
+              <View style={styles.icon}>
+                <LogOutIcon />
+              </View>
+              <H3>Logout</H3>
+            </TouchableOpacity>
+          </ListItem>
         </View>
-      </ScrollView>
+      </View>
     </MyLinearGradient>
   );
 }

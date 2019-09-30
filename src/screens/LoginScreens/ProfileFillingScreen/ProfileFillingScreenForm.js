@@ -30,46 +30,38 @@ export default function ProfileFillingForm({
   isValid
 }) {
   return (
-    <MyLinearGradient>
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1
-        }}
-        style={s.container}
-        showsVerticalScrollIndicator={false}
-      >
-        <Header titleText="Додаткова Інформація" onPress={goWelcomeScreen} />
-        <H1>Welcome</H1>
-        <MainInput
-          placeholder="Ім'я"
-          name="firstName"
-          focusedText="Введіть ваш пароль"
-          value={formCredentials.firstName}
-          onChangeText={onChangeValue}
-        />
-        <MainInput
-          placeholder="Прізвище"
-          name="lastName"
-          focusedText="Введіть ваш пароль"
-          value={formCredentials.lastName}
-          onChangeText={onChangeValue}
-        />
-        <MainInput
-          placeholder="Компанія"
-          name="organization"
-          focusedText="Введіть ваш пароль"
-          value={formCredentials.organization}
-          onChangeText={onChangeValue}
-        />
-        <MainInput
-          placeholder="Позиція (не обов'язково)"
-          name="position"
-          value={formCredentials.position}
-          onChangeText={onChangeValue}
-        />
-        <View style={{ flex: 1 }} />
-        <BlueButton text="Next" onPress={onSubmit} disabled={!isValid} />
-      </ScrollView>
+    <MyLinearGradient withScroll style={s.container}>
+      <Header titleText="Додаткова Інформація" onPress={goWelcomeScreen} />
+      <H1>Welcome</H1>
+      <MainInput
+        placeholder="Ім'я"
+        name="firstName"
+        focusedText="Введіть ваш пароль"
+        value={formCredentials.firstName}
+        onChangeText={onChangeValue}
+      />
+      <MainInput
+        placeholder="Прізвище"
+        name="lastName"
+        focusedText="Введіть ваш пароль"
+        value={formCredentials.lastName}
+        onChangeText={onChangeValue}
+      />
+      <MainInput
+        placeholder="Компанія"
+        name="organization"
+        focusedText="Введіть ваш пароль"
+        value={formCredentials.organization}
+        onChangeText={onChangeValue}
+      />
+      <MainInput
+        placeholder="Позиція (не обов'язково)"
+        name="position"
+        value={formCredentials.position}
+        onChangeText={onChangeValue}
+      />
+      <View style={{ flex: 1 }} />
+      <BlueButton text="Next" onPress={onSubmit} disabled={!isValid} />
     </MyLinearGradient>
   );
 }

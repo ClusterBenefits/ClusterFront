@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, ScrollView } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { Form, View, H1 } from "native-base";
 import T from "prop-types";
 
@@ -38,48 +38,42 @@ export default function SignUpScreenForm({
   const [visible] = keyboard();
 
   return (
-    <MyLinearGradient>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        {!visible && <LogoImage withText />}
-        <View style={s.container}>
-          <H1>Реєстрація</H1>
-          <Form>
-            <MainInput
-              placeholder="Емейл"
-              focusedText="Введіть ваш емейл"
-              onChangeText={onChangeValue}
-              name="email"
-              value={formCredentials.email}
-            />
-            <MainInput
-              placeholder="Пароль"
-              focusedText="Введіть ваш пароль"
-              secureTextEntry={true}
-              onChangeText={onChangeValue}
-              name="password"
-              value={formCredentials.password}
-            />
-            <MainInput
-              placeholder="Повторіть пароль"
-              focusedText="Повторіть ваш пароль"
-              secureTextEntry={true}
-              onChangeText={onChangeValue}
-              name="password_confirmation"
-              value={formCredentials.password_confirmation}
-            />
-            <BlueButton
-              text="Log In"
-              onPress={signUpUser}
-              disabled={!isValid}
-            />
-            <View style={s.bottom_menu}>
-              <Text onPress={goLoginScreen} style={s.bottom_menu_text}>
-                Продовжити
-              </Text>
-            </View>
-          </Form>
-        </View>
-      </ScrollView>
+    <MyLinearGradient withScroll>
+      {!visible && <LogoImage withText />}
+      <View style={s.container}>
+        <H1>Реєстрація</H1>
+        <Form>
+          <MainInput
+            placeholder="Емейл"
+            focusedText="Введіть ваш емейл"
+            onChangeText={onChangeValue}
+            name="email"
+            value={formCredentials.email}
+          />
+          <MainInput
+            placeholder="Пароль"
+            focusedText="Введіть ваш пароль"
+            secureTextEntry={true}
+            onChangeText={onChangeValue}
+            name="password"
+            value={formCredentials.password}
+          />
+          <MainInput
+            placeholder="Повторіть пароль"
+            focusedText="Повторіть ваш пароль"
+            secureTextEntry={true}
+            onChangeText={onChangeValue}
+            name="password_confirmation"
+            value={formCredentials.password_confirmation}
+          />
+          <BlueButton text="Log In" onPress={signUpUser} disabled={!isValid} />
+          <View style={s.bottom_menu}>
+            <Text onPress={goLoginScreen} style={s.bottom_menu_text}>
+              Продовжити
+            </Text>
+          </View>
+        </Form>
+      </View>
     </MyLinearGradient>
   );
 }
