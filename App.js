@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import AppContainer from "./src/navigation/LoginNavigator";
+import React from "react";
+import AppNavigation from "./src/navigation/AppNavigation";
 import { StyleProvider, Root } from "native-base";
 import { StatusBar, View, Platform } from "react-native";
 import getTheme from "./src/native-base-theme/components";
@@ -26,7 +26,7 @@ export default function App() {
       <MyProvider>
         <Root>
           <Test />
-          <AppContainer />
+          <AppNavigation />
         </Root>
       </MyProvider>
     </StyleProviderTheme>

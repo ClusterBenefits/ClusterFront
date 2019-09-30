@@ -290,7 +290,8 @@ export const changeInitialFeatured = ({ items, favoriteItems, dispatch }) => {
 };
 
 export const changeFavoriteCompanies = ({ token, item }) => {
-  if (!item.featured) {
+  console.log(item.featured);
+  if (item.featured) {
     removeFromFavorites({ token, id: item.id });
   } else {
     attachToFavorites({ token, id: item.id });

@@ -2,27 +2,28 @@ import React from "react";
 import { createBottomTabNavigator } from "react-navigation";
 import ProfileNavigation from "../ProfileNavigator";
 import ListingNavigation from "../ListingNavigator";
-import { Icon } from "@components/AllComponents";
 import { FavoritesScreen } from "../../screens";
+import { colors } from "../../constants";
+import { ProfileIcon, FavoritesIcon, MyCardsIcon } from "../../assets/svg";
 
 export default createBottomTabNavigator(
   {
     ListingScreen: {
       screen: ListingNavigation,
       navigationOptions: {
-        tabBarLabel: "Listing"
+        tabBarLabel: "Мої картки"
       }
     },
     FavoritesScreen: {
       screen: FavoritesScreen,
       navigationOptions: {
-        tabBarLabel: "Favorites"
+        tabBarLabel: "Улюблені"
       }
     },
     ProfileScreen: {
       screen: ProfileNavigation,
       navigationOptions: {
-        tabBarLabel: "Profile"
+        tabBarLabel: "Профіль"
       }
     }
   },
@@ -31,32 +32,21 @@ export default createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor, focused }) => {
         let { routeName } = navigation.state;
-        let iconName;
         if (routeName === "ProfileScreen") {
-          iconName = "user";
+          return <ProfileIcon fill={`${tintColor}`} />;
         }
         if (routeName === "ListingScreen") {
-          iconName = "list";
+          return <MyCardsIcon fill={`${tintColor}`} />;
         }
         if (routeName === "FavoritesScreen") {
-          iconName = "star-empty";
+          return <FavoritesIcon fill={`${tintColor}`} />;
         }
-        return (
-          <Icon
-            color={`${tintColor}`}
-            name={`${iconName}`}
-            size={30}
-            style={{ padding: 4 }}
-          />
-        );
       }
     }),
     tabBarOptions: {
       style: {
         height: 50,
-        borderTopWidth: 1,
-        borderTopColor: "#c9c9c9",
-        backgroundColor: "#eb3a85"
+        backgroundColor: "#fff"
       },
       labelStyle: {
         fontSize: 9,
@@ -64,8 +54,8 @@ export default createBottomTabNavigator(
       },
       // activeBackgroundColor: "lightblue",
       // inactiveBackgroundColor: "white",
-      activeTintColor: "#ffcd02",
-      inactiveTintColor: "white"
+      activeTintColor: colors.mainBlue,
+      inactiveTintColor: colors.mainGrey
     }
   }
 );

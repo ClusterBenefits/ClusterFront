@@ -37,9 +37,7 @@ export default function ProfileFillingScreen({ navigation }) {
       position: formCredentials.position
     };
     let response = await postUserInfo({ token: state.token, data, dispatch });
-    response
-      ? navigation.navigate(screens.AddCreditInfoScreen)
-      : setIsLoading(false);
+    response ? navigation.navigate(screens.ListingScreen) : setIsLoading(false);
   };
   const goWelcomeScreen = () => navigation.pop();
 

@@ -30,13 +30,15 @@ export default function WelcomeScreen({ navigation }) {
           token: state.token,
           dispatch
         });
-        navigation.navigate(screens.ProfileBottomTabNavigatior);
+        navigation.navigate(screens.ListingScreen);
       } else {
         setIsLoading(false);
       }
     }
     fetchUserData();
-    registerForPushNotificationsAsync(state.token);
+
+    // updaiting expoPushNotificationKey
+    // registerForPushNotificationsAsync(state.token);
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     return () => {
       BackHandler.removeEventListener("hardwareBackPress", handleBackButton);

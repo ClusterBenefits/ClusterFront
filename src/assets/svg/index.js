@@ -218,7 +218,7 @@ export const PasswordIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const PaymentDetailsIcon = ({ fill = "#afb4c4", ...props }) => (
+export const BillingInformationIcon = ({ fill = "#afb4c4", ...props }) => (
   <Svg width="20" height="20" viewBox="0 0 20 20" {...props}>
     <Path
       fill={fill}
@@ -232,6 +232,15 @@ export const SupportIcon = ({ fill = "#afb4c4", ...props }) => (
     <Path
       fill={fill}
       d="M14 11H4l-4 4V1c0-.55.45-1 1-1h13c.55 0 1 .45 1 1v9c0 .55-.45 1-1 1zm6-6v15l-4-4H5c-.55 0-1-.45-1-1v-2h13V4h2c.55 0 1 .45 1 1z"
+    />
+  </Svg>
+);
+
+export const LogOutIcon = ({ fill = "#afb4c4", ...props }) => (
+  <Svg width="24" height="24" viewBox="0 0 24 24" {...props}>
+    <Path
+      fill="#afb4c4"
+      d="M21 5v14c0 1.1-.9 2-2 2H5a2 2 0 0 1-2-2v-4h2v4h14V5H5v4H3V5a2 2 0 0 1 2-2h14c1.1 0 2 .9 2 2zm-8.33 8H3v-2h9.67l-2.58-2.59L11.5 7l5 5-5 5-1.41-1.41z"
     />
   </Svg>
 );
@@ -256,7 +265,7 @@ export const EditPenIcon = ({ fill = "#4285f4", ...props }) => (
 
 //BottomNavigation
 export const MyCardsIcon = ({ fill = "#afb4c4", ...props }) => (
-  <Svg width="20" height="16" viewBox="0 0 20 16" {...props}>
+  <Svg width="21" height="17" viewBox="0 0 20 16" {...props}>
     <Path
       fill={fill}
       d="M0 6V4h.008L.007 6zm18-6H2C.89 0 .01.89.01 2L.008 4H20V2c0-1.11-.89-2-2-2zM0 14c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6H.007z"
@@ -265,7 +274,7 @@ export const MyCardsIcon = ({ fill = "#afb4c4", ...props }) => (
 );
 
 export const FavoritesIcon = ({ fill = "#afb4c4", ...props }) => (
-  <Svg width="20" height="19" viewBox="0 0 20 19" {...props}>
+  <Svg width="22" height="21" viewBox="0 0 20 19" {...props}>
     <Path
       fill={fill}
       d="M10 18.35l-1.45-1.32C3.4 12.36 0 9.28 0 5.5 0 2.42 2.42 0 5.5 0 7.24 0 8.91.81 10 2.09 11.09.81 12.76 0 14.5 0 17.58 0 20 2.42 20 5.5c0 3.78-3.4 6.86-8.55 11.54z"
@@ -273,8 +282,18 @@ export const FavoritesIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
+export const FavoritesIconOutLine = ({ fill = "#afb4c4", ...props }) => (
+  <Svg width="22" height="21" viewBox="0 0 20 19">
+    <Path
+      fill="none"
+      stroke="#e2e3e7"
+      d="M10 18.35v0l-1.45-1.32C3.4 12.36 0 9.28 0 5.5 0 2.42 2.42 0 5.5 0 7.24 0 8.91.81 10 2.09 11.09.81 12.76 0 14.5 0 17.58 0 20 2.42 20 5.5c0 3.78-3.4 6.86-8.55 11.54z"
+    />
+  </Svg>
+);
+
 export const ProfileIcon = ({ fill = "#afb4c4", ...props }) => (
-  <Svg width="20" height="20" viewBox="0 0 20 20" {...props}>
+  <Svg width="21" height="21" viewBox="0 0 20 20" {...props}>
     <Path
       fill={fill}
       d="M10 17.2a7.2 7.2 0 0 1-6-3.22c.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08a7.2 7.2 0 0 1-6 3.22zM10 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0-3C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0z"

@@ -7,6 +7,6 @@ const AppSwitchNavigator = createSwitchNavigator({
   ProfileBottomTabNavigatior
 });
 
-const AppContainer = createAppContainer(AppSwitchNavigator);
+const AppNavigation = createAppContainer(AppSwitchNavigator);
 
-export default AppContainer;
+export default AppNavigation;

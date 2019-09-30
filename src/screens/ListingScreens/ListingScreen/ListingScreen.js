@@ -60,8 +60,8 @@ export default function ListingScreen(props) {
 
   // change item.featured and favoritelist
   const handleFavoriteChange = async item => {
-    handleClickIcon({ item, dispatch });
     changeFavoriteCompanies({ token: state.token, item });
+    handleClickIcon({ item, dispatch });
   };
 
   return (

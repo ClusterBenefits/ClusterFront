@@ -1,17 +1,52 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
-import { Container, H3, Text } from "native-base";
+import { Container, H3, Text, ListItem } from "native-base";
 import T from "prop-types";
 import {
-  Email,
-  Password,
-  PaymentDetails,
+  EmailIcon,
+  PasswordIcon,
+  PaymentDetailsIcon,
   BackArrow,
   CustomUserIcon,
-  MainLogo
+  BillingInformationIcon,
+  SupportIcon,
+  LogOutIcon,
+  InfoIcon,
+  EditPenIcon
 } from "../../../assets/svg";
+import {
+  MyLinearGradient,
+  Icon,
+  IconButton,
+  Header
+} from "@components/AllComponents";
 
-import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
+const styles = StyleSheet.create({
+  container: {
+    paddingBottom: 20
+  },
+  catagoryContainer: {
+    height: 56,
+    marginLeft: 0
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 20,
+    paddingRight: 20
+  },
+  icon: {
+    alignItems: "center",
+    width: 50,
+    marginRight: 20
+  },
+  left: {
+    margin: 5
+  },
+  lastItemMargin: {
+    marginTop: 20
+  }
+});
 
 export default function ProfileForm({
   goProfileEditScreen,
@@ -39,11 +74,22 @@ export default function ProfileForm({
         style={styles.container}
         indicatorStyle={"white"}
       >
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: 40,
+            marginHorizontal: 15
+          }}
+        >
+          <InfoIcon />
+          <Text>Профіль</Text>
+          <EditPenIcon />
+        </View>
         <View style={{ justifyContent: "space-between", flex: 1 }}>
           <View>
             <View style={styles.row}>
-              <MainLogo />
-
               <H3 style={{ marginLeft: 0, flex: 1 }}>Profile</H3>
               <H3 style={{ marginLeft: 0, flex: 1, fontWeight: "800" }}>
                 Profile
@@ -75,48 +121,62 @@ export default function ProfileForm({
           </View>
 
           <View>
-            <TouchableOpacity
-              style={[styles.row, styles.main]}
-              onPress={goChangeEmailScreen}
-            >
-              <View style={styles.icon}>
-                <Icon name="mail-alt" color="white" size={30} />
-              </View>
-              <H3>Change email</H3>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.row, styles.main]}
-              onPress={goChangePasswordScreen}
-            >
-              <View style={styles.icon}>
-                <Icon color="white" name="key" size={30} />
-              </View>
-              <H3>Change password</H3>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.row, styles.main]}
-              onPress={goBillingInformation}
-            >
-              <View style={styles.icon}>
-                <Icon color="white" name="credit-card" size={30} />
-              </View>
-              <H3>Billing information</H3>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.row, styles.main]}
-              onPress={goAddCommentScreen}
-            >
-              <View style={styles.icon}>
-                <Icon name="paper-plane-1" color="white" size={30} />
-              </View>
-              <H3>Contact administrator</H3>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.row} onPress={signOutUser}>
-              <View style={styles.icon}>
-                <Icon name="logout" color="white" size={30} />
-              </View>
-              <H3>Logout</H3>
-            </TouchableOpacity>
+            <ListItem style={styles.catagoryContainer}>
+              <TouchableOpacity
+                style={[styles.row, styles.main]}
+                onPress={goChangeEmailScreen}
+              >
+                <View style={styles.icon}>
+                  <EmailIcon />
+                </View>
+                <H3>Change email</H3>
+              </TouchableOpacity>
+            </ListItem>
+
+            <ListItem style={styles.catagoryContainer}>
+              <TouchableOpacity
+                style={[styles.row, styles.main]}
+                onPress={goChangePasswordScreen}
+              >
+                <View style={styles.icon}>
+                  <PasswordIcon />
+                </View>
+                <H3>Change password</H3>
+              </TouchableOpacity>
+            </ListItem>
+
+            <ListItem style={styles.catagoryContainer}>
+              <TouchableOpacity
+                style={[styles.row, styles.main]}
+                onPress={goBillingInformation}
+              >
+                <View style={styles.icon}>
+                  <BillingInformationIcon />
+                </View>
+                <H3>Billing information</H3>
+              </TouchableOpacity>
+            </ListItem>
+
+            <ListItem style={styles.catagoryContainer}>
+              <TouchableOpacity
+                style={[styles.row]}
+                onPress={goAddCommentScreen}
+              >
+                <View style={styles.icon}>
+                  <SupportIcon />
+                </View>
+                <H3>Contact administrator</H3>
+              </TouchableOpacity>
+            </ListItem>
+
+            <ListItem style={[styles.catagoryContainer, styles.lastItemMargin]}>
+              <TouchableOpacity style={styles.row} onPress={signOutUser}>
+                <View style={styles.icon}>
+                  <LogOutIcon />
+                </View>
+                <H3>Logout</H3>
+              </TouchableOpacity>
+            </ListItem>
           </View>
         </View>
       </ScrollView>
@@ -133,31 +193,3 @@ ProfileForm.propTypes = {
   signOutUser: T.func.isRequired,
   userInfo: T.object.isRequired
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingBottom: 20,
-    marginTop: 30,
-    flex: 1
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-  icon: {
-    alignItems: "center",
-    width: 50,
-    marginRight: 20
-  },
-  left: {
-    margin: 5
-  },
-  main: {
-    borderColor: "#c9c9c9",
-    borderBottomWidth: 2
-  }
-});

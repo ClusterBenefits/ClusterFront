@@ -1,6 +1,7 @@
 // @flow
 
 import variable from "./../variables/platform";
+import { colors } from "../../constants";
 
 export default (variables /*: * */ = variable) => {
   const platform = variables.platform;
@@ -15,7 +16,7 @@ export default (variables /*: * */ = variable) => {
     ".success": {
       backgroundColor: variables.brandSuccess
     },
-    backgroundColor: "rgba(0,0,0,0.8)",
+    backgroundColor: colors.mainBlack,
     borderRadius: platform === "ios" ? 5 : 0,
     flexDirection: "row",
     justifyContent: "space-between",

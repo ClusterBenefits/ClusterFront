@@ -7,20 +7,21 @@ import {
 } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
 import { LoadingHOC } from "@components/AllComponents";
+import { screens } from "../../../constants";
 
 const FavoritesScreenWithLoading = LoadingHOC(FavoritesScreenForm);
 
 export default function FavoritesScreen(props) {
   const { state, dispatch } = useContext(UserContext);
   const goBarcodeScreen = item => {
-    props.navigation.navigate("BarcodeScreen", {
+    props.navigation.navigate(screens.BarcodeScreen, {
       item: item
     });
   };
   // remove item from favorite list
   const handleFavoriteChange = item => {
-    handleClickIcon({ item, dispatch });
     changeFavoriteCompanies({ token: state.token, item });
+    handleClickIcon({ item, dispatch });
   };
 
   return (

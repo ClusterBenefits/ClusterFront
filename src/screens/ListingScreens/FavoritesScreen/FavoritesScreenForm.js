@@ -1,9 +1,10 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
-import { Container, H3 } from "native-base";
+import { Container, H1, H3 } from "native-base";
 import T from "prop-types";
 
 import { MainItem, MyLinearGradient } from "@components/AllComponents";
+import { colors } from "../../../constants";
 
 export default function FavoriteForm({
   favoriteItems,
@@ -12,24 +13,22 @@ export default function FavoriteForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container style={styles.container}>
-        <H3 style={{ marginLeft: 10 }}>Organizations</H3>
-        {favoriteItems.length > 0 ? (
-          <FlatList
-            data={favoriteItems}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({ item }) => (
-              <MainItem
-                item={item}
-                goBarcodeScreen={goBarcodeScreen}
-                handleFavoriteChange={handleFavoriteChange}
-              />
-            )}
-          />
-        ) : (
-          <H3 style={{ marginLeft: 10 }}>No items in favorite list</H3>
-        )}
-      </Container>
+      <H1 style={s.mainText}>Улюблені</H1>
+      {favoriteItems.length > 0 ? (
+        <FlatList
+          data={favoriteItems}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <MainItem
+              item={item}
+              goBarcodeScreen={goBarcodeScreen}
+              handleFavoriteChange={handleFavoriteChange}
+            />
+          )}
+        />
+      ) : (
+        <H3 style={{ marginLeft: 10 }}>No items in favorite list</H3>
+      )}
     </MyLinearGradient>
   );
 }
@@ -40,7 +39,14 @@ FavoriteForm.propTypes = {
   goBarcodeScreen: T.func.isRequired
 };
 
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
+  mainText: {
+    marginTop: 50,
+    paddingLeft: 15,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.mainGrey
+  },
   container: {
     paddingLeft: 0,
     paddingRight: 0,
