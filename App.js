@@ -5,6 +5,7 @@ import { StatusBar, View, Platform } from "react-native";
 import getTheme from "./src/native-base-theme/components";
 import platform from "./src/native-base-theme/variables/platform";
 import { MyProvider } from "./src/reducers/context";
+import { MainModalComponent } from "./src/services/mainModal";
 
 const StyleProviderTheme = ({ children }) => (
   <StyleProvider style={getTheme(platform)}>{children}</StyleProvider>
@@ -20,13 +21,14 @@ const Test = () => (
   </View>
 );
 
-export default function App() {
+export default function App({ navigation }) {
   return (
     <StyleProviderTheme>
       <MyProvider>
         <Root>
           <Test />
           <AppNavigation />
+          <MainModalComponent navigation={navigation} />
         </Root>
       </MyProvider>
     </StyleProviderTheme>

@@ -6,7 +6,8 @@ import {
   ChangeEmailScreen,
   BillingInformationScreen,
   FeedBackScreen,
-  AddCreditInfoScreen
+  AddCreditInfoScreen,
+  CameraScreen
 } from "../../screens";
 import { screens } from "../../constants";
 
@@ -18,7 +19,8 @@ export default createStackNavigator(
     [screens.ChangeEmailScreen]: ChangeEmailScreen,
     [screens.BillingInformationScreen]: BillingInformationScreen,
     [screens.FeedBackScreen]: FeedBackScreen,
-    [screens.AddCreditInfoScreen]: AddCreditInfoScreen
+    [screens.AddCreditInfoScreen]: AddCreditInfoScreen,
+    [screens.CameraScreen]: CameraScreen
   },
   {
     headerMode: "none",

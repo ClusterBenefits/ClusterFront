@@ -1,5 +1,12 @@
-import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TouchableHighlight,
+  Image,
+  Button
+} from "react-native";
 import { H3, Text, ListItem } from "native-base";
 import T from "prop-types";
 import {
@@ -14,6 +21,10 @@ import {
   EditPenIcon
 } from "../../../assets/svg";
 import { MyLinearGradient, Header } from "@components/AllComponents";
+import * as ImagePicker from "expo-image-picker";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
+import { ButtonModal } from "../../../services/mainModal";
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +60,8 @@ export default function ProfileForm({
   goAddCommentScreen,
   goBillingInformation,
   signOutUser,
-  userInfo
+  userInfo,
+  navigation
 }) {
   const {
     first_name = "first_name",
@@ -57,6 +69,18 @@ export default function ProfileForm({
     position = "Position",
     company = "Organization"
   } = userInfo;
+
+  useEffect(() => {
+    const getPermissionAsync = async () => {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    };
+    getPermissionAsync();
+  });
 
   return (
     <MyLinearGradient withScroll style={styles.container}>
@@ -79,7 +103,7 @@ export default function ProfileForm({
       </View>
       <View style={{ justifyContent: "space-between", flex: 1 }}>
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => ButtonModal.showModal(navigation)}>
             <Text>Open Camere or image picker )</Text>
           </TouchableOpacity>
         </View>

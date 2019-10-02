@@ -7,5 +7,7 @@ export const colors = {
   mainGrey: "#afb4c4",
   mainBlack: "#141820",
   mainRed: "#ea4335",
-  bottomNavigationBg: "#ffffff"
+  mainWhite: "#ffffff",
+  bottomNavigationBg: "#ffffff",
+  modalBg: "rgba(0, 0, 0, 0.4)"
 };

@@ -390,7 +390,6 @@ export const checkBillingSubscription = token => {
     })
     .catch(({ response }) => {
       console.log("check bill err ");
-      console.log(response);
     });
   return response;
 };

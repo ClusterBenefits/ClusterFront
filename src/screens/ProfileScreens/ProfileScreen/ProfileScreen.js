@@ -48,6 +48,7 @@ export default function ProfileScreen(props) {
       goAddCommentScreen={goAddCommentScreen}
       signOutUser={signOutUser}
       userInfo={state.userInfo}
+      navigation={props.navigation}
     />
   );
 }

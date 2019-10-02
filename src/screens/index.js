@@ -22,3 +22,4 @@ export { default as ChangePasswordScreen} from "./ProfileScreens/ChangePasswordS
 export { default as ChangeEmailScreen} from "./ProfileScreens/ChangeEmailScreen";
 export { default as BillingInformationScreen} from "./ProfileScreens/BillingInformationScreen";
 export { default as FeedBackScreen} from "./ProfileScreens/FeedBackScreen";
+export { default as CameraScreen} from "./ProfileScreens/CameraScreen";
