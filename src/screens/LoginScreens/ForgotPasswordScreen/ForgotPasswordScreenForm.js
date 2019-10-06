@@ -1,43 +1,55 @@
 import React from "react";
-import { ScrollView } from "react-native";
-import { Container, Form, H1, H3 } from "native-base";
+import { View, StyleSheet } from "react-native";
+import { Form, H1, Text } from "native-base";
 import T from "prop-types";
 
 import {
   BlueButton,
-  LogoImage,
   MainInput,
-  MyLinearGradient
+  MyLinearGradient,
+  Header
 } from "@components/AllComponents";
+
+const s = StyleSheet.create({
+  container: {
+    marginHorizontal: 16,
+    marginBottom: 20
+  },
+  maxFlex: {
+    flex: 1
+  },
+  enterEmailText: {
+    textAlign: "center",
+    marginTop: 10
+  }
+});
 
 export default function PasswordForm({
   onChangeValue,
   resetPassword,
   formCredentials,
-  formErrors
+  navigation,
+  isValid
 }) {
   return (
-    <MyLinearGradient>
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1
-        }}
-        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
-      >
-        <LogoImage />
-        <H1>Forgot Password</H1>
-        <H3>UpEnim consectetur reprehenderit minim anim fugiat</H3>
-        <Form>
-          <MainInput
-            placeholder="Email"
-            onChangeText={onChangeValue}
-            name={"email"}
-            value={formCredentials.email}
-            error={formErrors["email"]}
-          />
-          <BlueButton text="Reset" onPress={resetPassword} />
-        </Form>
-      </ScrollView>
+    <MyLinearGradient style={s.container}>
+      <Header navigation={navigation} />
+      <H1>Скидання паролю</H1>
+      <Form>
+        <MainInput
+          placeholder="Email"
+          onChangeText={onChangeValue}
+          name={"email"}
+          value={formCredentials.email}
+        />
+      </Form>
+      <Text style={s.enterEmailText}>Введіть емайл для відновлення паролю</Text>
+      <View style={s.maxFlex} />
+      <BlueButton
+        text="Скинути пароль"
+        onPress={resetPassword}
+        disabled={!isValid}
+      />
     </MyLinearGradient>
   );
 }
@@ -46,5 +58,6 @@ PasswordForm.propTypes = {
   onChangeValue: T.func.isRequired,
   resetPassword: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  formErrors: T.object.isRequired
+  navigation: T.object.isRequired,
+  isValid: T.bool.isRequired
 };

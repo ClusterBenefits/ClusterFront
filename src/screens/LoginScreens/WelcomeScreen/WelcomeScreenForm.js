@@ -24,7 +24,7 @@ export default function WelcomeForm({ goProfileFillingScreen }) {
     <MyLinearGradient>
       <Container>
         <LogoImage noBg />
-        <H1 style={s.H1}>Welcome</H1>
+        <H1 style={s.H1}>Welcome!</H1>
         <Text style={s.text3}>
           Eu velit occaecat eu minim minim nostrud et sunt nostrud adipisicing
           ut aliqua sint. Exercitation qui Lorem ea qui fugiat eiusmod id velit.

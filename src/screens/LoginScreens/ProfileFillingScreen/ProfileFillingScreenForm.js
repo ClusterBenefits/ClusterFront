@@ -1,6 +1,6 @@
 import React from "react";
 import { H1, View } from "native-base";
-import { ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import T from "prop-types";
 
 import {
@@ -12,13 +12,8 @@ import {
 
 const s = StyleSheet.create({
   container: {
-    marginBottom: 30,
+    marginBottom: 20,
     marginHorizontal: 20
-  },
-  header: {
-    alignItems: "center",
-    backgroundColor: "transparent",
-    height: 40
   }
 });
 
@@ -32,7 +27,7 @@ export default function ProfileFillingForm({
   return (
     <MyLinearGradient withScroll style={s.container}>
       <Header titleText="Додаткова Інформація" onPress={goWelcomeScreen} />
-      <H1>Welcome</H1>
+      <H1>Реєстрація</H1>
       <MainInput
         placeholder="Ім'я"
         name="firstName"

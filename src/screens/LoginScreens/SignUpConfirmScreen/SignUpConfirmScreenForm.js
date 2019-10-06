@@ -1,65 +1,85 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Form, H1, H3 } from "native-base";
+import { H1, Text } from "native-base";
 import T from "prop-types";
 import CodeInput from "react-native-confirmation-code-field";
 
 import {
-  LogoImage,
   BlueButton,
-  MyLinearGradient
+  MyLinearGradient,
+  Header
 } from "@components/AllComponents";
+import { colors } from "../../../constants";
 
 const s = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
-    marginTop: 65,
-    marginBottom: 30
+    marginHorizontal: 16,
+    marginBottom: 20
+  },
+  inputContainer: {
+    justifyContent: "space-between",
+    marginTop: 80,
+    marginHorizontal: 25
+  },
+  inputCell: {
+    borderColor: colors.mainBlack,
+    height: 50,
+    width: 45
+  },
+  maxFlex: {
+    flex: 1
+  },
+  enterText: {
+    textAlign: "center",
+    marginBottom: 5
   }
 });
 
 export default function SignUpForm({
   goNewPassword,
-  verificationCode,
-  setVerificationCode
+  code,
+  setVerificationCode,
+  resendVarificationCode,
+  navigation
 }) {
+  const isValid = code.length === 4;
+
   return (
-    <MyLinearGradient>
-      <LogoImage />
-      <View style={s.container}>
-        <H1>Password reset confirm</H1>
-        <H3>A confirmation code was sent to you'r email</H3>
+    <MyLinearGradient style={s.container}>
+      <Header
+        navigation={navigation}
+        onTitleRightPress={resendVarificationCode}
+        titleRightText="Надіслати код знову"
+      />
+      <H1>Підтвердження</H1>
 
-        <CodeInput
-          onFulfill={setVerificationCode}
-          autoFocus
-          codeLength={4}
-          cellProps={{
-            // placeholderTextColor: 'black',
-            style: { borderBottomColor: "black" }
-          }}
-          activeColor={"white"}
-          inactiveColor={"white"}
-          cellBorderWidth={1}
-          containerProps={{
-            style: {
-              justifyContent: "space-between"
-            }
-          }}
-          inputProps={{
-            onChangeText: setVerificationCode
-          }}
-        />
+      <CodeInput
+        onFulfill={setVerificationCode}
+        codeLength={4}
+        cellProps={{ style: s.inputCell }}
+        activeColor={colors.mainBlack}
+        cellBorderWidth={1}
+        containerProps={{ style: s.inputContainer }}
+        inputProps={{ onChangeText: setVerificationCode }}
+      />
+      <View style={s.maxFlex} />
+      <Text style={s.enterText}>
+        Введіть отриманий на емейл 4-ти значний код
+      </Text>
 
-        {verificationCode.length === 4 && (
-          <BlueButton text="Confirm" onPress={goNewPassword} />
-        )}
-      </View>
+      <BlueButton
+        text="Підтвердити скидання паролю"
+        onPress={goNewPassword}
+        isValid={isValid}
+      />
     </MyLinearGradient>
   );
 }
 
 SignUpForm.propTypes = {
   goNewPassword: T.func.isRequired,
-  verificationCode: T.string.isRequired
+  code: T.string.isRequired,
+  setVerificationCode: T.func.isRequired,
+  resendVarificationCode: T.func.isRequired,
+  navigation: T.object.isRequired
 };

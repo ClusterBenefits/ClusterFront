@@ -25,6 +25,7 @@ import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { ButtonModal } from "../../../services/mainModal";
+import { url } from "../../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -50,6 +51,10 @@ const styles = StyleSheet.create({
   },
   lastItemMargin: {
     marginTop: 20
+  },
+  image: {
+    height: 100,
+    width: 100
   }
 });
 
@@ -67,7 +72,8 @@ export default function ProfileForm({
     first_name = "first_name",
     last_name = "LastName",
     position = "Position",
-    company = "Organization"
+    company = "Organization",
+    image: { tiny = {} }
   } = userInfo;
 
   useEffect(() => {
@@ -107,7 +113,7 @@ export default function ProfileForm({
             <Text>Open Camere or image picker )</Text>
           </TouchableOpacity>
         </View>
-
+        <Image source={{ uri: `${url}${tiny.url}` }} style={styles.image} />
         <View>
           <ListItem style={styles.catagoryContainer}>
             <TouchableOpacity

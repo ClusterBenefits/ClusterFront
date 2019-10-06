@@ -17,9 +17,8 @@ export default function ProfileFillingScreen({ navigation }) {
     position: ""
   });
   const [isLoading, setIsLoading] = useState(false);
-  const { isValid, errors } = allFieldsValidation(formCredentials);
+  const { isValid } = allFieldsValidation(formCredentials);
   const { state, dispatch } = useContext(UserContext);
-  // trying to get user token for pushnotification
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
@@ -28,7 +27,6 @@ export default function ProfileFillingScreen({ navigation }) {
   // filling profile information ( name last_name etc )
 
   const onSubmit = async () => {
-    console.log(errors, isValid);
     setIsLoading(true);
     let data = {
       first_name: formCredentials.firstName,
@@ -39,7 +37,7 @@ export default function ProfileFillingScreen({ navigation }) {
     let response = await postUserInfo({ token: state.token, data, dispatch });
     response ? navigation.navigate(screens.ListingScreen) : setIsLoading(false);
   };
-  const goWelcomeScreen = () => navigation.pop();
+  const goWelcomeScreen = () => navigation.navigate(screens.WelcomeScreen);
 
   return (
     <ProfileFillingScreenWithLoading

@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BackHandler } from "react-native";
-import debounce from "lodash/debounce";
 
 import { UserContext } from "./../../../reducers/context";
 import LoginScreenForm from "./LoginScreenForm";
 import { LoadingHOC } from "@components/AllComponents";
 import { handleBackButton, loginUser } from "../../../actions/userActions";
-import { saveDataToLocalStorage, allFieldsValidation } from "../../../utils";
+import {
+  saveDataToLocalStorage,
+  getDataFromLocalStorage,
+  allFieldsValidation
+} from "../../../utils";
 import { screens } from "../../../constants";
 
 const LoginScreenWithLoading = LoadingHOC(LoginScreenForm);
@@ -16,15 +19,42 @@ export default function LoginScreen({ navigation }) {
     email: "",
     password: ""
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-  //   return () => {
-  //     BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
-  //   };
-  // }, []);
+  useEffect(() => {
+    const getUserData = async () => {
+      let { email, password } = await getDataFromLocalStorage();
+
+      console.log(email, password);
+
+      // tryng to auto login
+
+      if (!(email === "none") && !(password === "none")) {
+        let response = await loginUser({
+          email,
+          password,
+          dispatch
+        });
+
+        if (response) {
+          navigation.navigate(screens.WelcomeScreen);
+        } else {
+          console.log("wrong token");
+          setIsLoading(false);
+        }
+      } else {
+        console.log("no data at async storage");
+        setIsLoading(false);
+      }
+    };
+    getUserData();
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+    };
+  }, []);
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });

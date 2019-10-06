@@ -1,39 +1,47 @@
 import React, { useState } from "react";
 
 import SignUpConfirmScreenForm from "./SignUpConfirmScreenForm";
-import { confirmUserCodeFromEmail } from "../../../actions/userActions";
+import {
+  confirmUserCodeFromEmail,
+  resetUserPassword
+} from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
+import { screens } from "../../../constants";
 
 const SignUpConfrimScreenWithLoading = LoadingHOC(SignUpConfirmScreenForm);
 
-export default function SignUpConfirmScreen(props) {
-  const [verificationCode, setVerificationCode] = useState("");
+export default function SignUpConfirmScreen({ navigation }) {
+  const [code, setVerificationCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const email = props.navigation.getParam("email", "Peter");
+  const email = navigation.getParam("email", "");
 
-  const goNewPassword = async value => {
-    console.log(verificationCode);
-    // setIsLoading(true);
+  // Resend varificationCode with resend && ShowToast('text')
+  const resendVarificationCode = () =>
+    resetUserPassword({ email, resend: true });
 
-    // let response = await confirmUserCodeFromEmail({ email, value });
-    // console.log(value);
-    // // if code fron email is right , finish reseting password
-    // if (response) {
-    //   props.navigation.navigate("NewPasswordScreen", {
-    //     token: response,
-    //     email: email
-    //   });
-    // } else {
-    //   setIsLoading(false);
-    // }
+  const goNewPassword = async () => {
+    setIsLoading(true);
+
+    let response = await confirmUserCodeFromEmail({ email, code });
+    // Check if code is right
+    if (response) {
+      navigation.navigate(screens.NewPasswordScreen, {
+        token: response,
+        email: email
+      });
+    } else {
+      setIsLoading(false);
+    }
   };
 
   return (
     <SignUpConfrimScreenWithLoading
       isLoading={isLoading}
       goNewPassword={goNewPassword}
-      verificationCode={verificationCode}
+      code={code}
       setVerificationCode={setVerificationCode}
+      navigation={navigation}
+      resendVarificationCode={resendVarificationCode}
     />
   );
 }

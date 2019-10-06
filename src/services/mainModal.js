@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import {
   Modal,
   StyleSheet,
@@ -13,6 +13,8 @@ import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { colors, screens } from "../constants";
+import { postUserAvatar } from "../actions/userActions";
+import { UserContext } from "../reducers/context";
 
 const s = StyleSheet.create({
   modalContainer: {
@@ -55,6 +57,7 @@ const s = StyleSheet.create({
 let mainModal;
 
 export function MainModalComponent() {
+  const { state, dispatch } = useContext(UserContext);
   const [{ isVisible, navigation }, setState] = useState({ isVisible: false });
 
   const showModal = navigation => setState({ isVisible: true, navigation });
@@ -64,6 +67,8 @@ export function MainModalComponent() {
     showModal,
     hideModal
   };
+
+  const token = state.token;
 
   const [image, setImage] = useState(null);
 
@@ -79,16 +84,53 @@ export function MainModalComponent() {
   const _pickImage = async () => {
     getPermissionAsync();
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [3, 3]
+      mediaTypes: "Images"
+      // allowsEditing: true,
+      // aspect: [3, 3]
     });
 
-    console.log(result);
+    console.log(result, "result here");
 
-    if (!result.cancelled) {
-      setImage({ image: result.uri });
+    if (result.cancelled) {
+      // setImage({ image: result.uri });
+      // console.log(result);
+      return;
     }
+
+    // const url = "https://api.cluster.ukietech.org";
+    // let localUri = result.uri;
+    // let filename = localUri.split("/").pop();
+
+    // // Infer the type of the image
+    // let match = /\.(\w+)$/.exec(filename);
+    // let type = match ? `image/${match[1]}` : `image`;
+    // let formData = new FormData();
+    // formData.append("photo", { uri: localUri, name: filename, type });
+
+    // await postUserAvatar({
+    //   dispatch,
+    //   token: state.token,
+    //   data: formData
+    // });
+    // let response = await fetch(`${url}/api/common/files?type=user`, {
+
+    const uriParts = result.uri.split(".");
+    const fileType = uriParts[uriParts.length - 1];
+    const payloadKey = "file"; // Define PayloadKey here Ex. 'file'
+    const formData = new FormData();
+
+    formData.append(payloadKey, {
+      uri: result.uri,
+      name: result.uri.split("/").pop(),
+      type: `image/${fileType}`
+    });
+    console.log("hererere", formData);
+    await postUserAvatar({
+      dispatch,
+      token: state.token,
+      data: formData
+    });
+
     hideModal();
   };
 

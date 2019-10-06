@@ -74,16 +74,6 @@ export function ImagePickerFunction() {
   };
 
   _pickImage();
-  // return (
-  //   <MyLinearGradient withScroll style={styles.container}>
-  //     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-  //       <Button title="Pick an image from camera roll" onPress={_pickImage} />
-  //       {image && (
-  //         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-  //       )}
-  //     </View>
 
-  //   </MyLinearGradient>
-  // );
   return image;
 }

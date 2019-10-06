@@ -20,8 +20,7 @@ const BlueButton = ({
       borderColor: colors.mainBlue
     },
     button_text: {
-      color: textColor,
-      fontFamily: "Helvetica"
+      color: textColor
     },
     backgroundColor: {
       backgroundColor: colors.mainBlue

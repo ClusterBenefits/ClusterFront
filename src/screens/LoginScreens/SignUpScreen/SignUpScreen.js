@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AsyncStorage, BackHandler } from "react-native";
+import { BackHandler } from "react-native";
 
 import SignUpScreenForm from "./SignUpScreenForm";
 import { handleBackButton, registerUser } from "../../../actions/userActions";
@@ -56,18 +56,15 @@ export default function SignUpScreen({ navigation }) {
       setIsLoading(false);
     }
   };
-  const goLoginScreen = () => {
-    navigation.navigate(screens.SignUpConfirmScreen);
-  };
 
   return (
     <SignUpScreenWithLoading
       isLoading={isLoading}
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
-      goLoginScreen={goLoginScreen}
       signUpUser={signUpUser}
       isValid={isValid}
+      navigation={navigation}
     />
   );
 }

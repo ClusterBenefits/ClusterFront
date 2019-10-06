@@ -9,3 +9,9 @@ export const saveDataToLocalStorage = async ({ email, password }) => {
     console.log(error.message);
   }
 };
+
+export const getDataFromLocalStorage = async () => {
+  let email = (await AsyncStorage.getItem("email")) || "none";
+  let password = (await AsyncStorage.getItem("password")) || "none";
+  return { email, password };
+};

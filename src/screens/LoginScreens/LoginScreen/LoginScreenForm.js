@@ -16,13 +16,13 @@ import { keyboard } from "../../../hooks";
 const s = StyleSheet.create({
   container: {
     marginHorizontal: 20,
-    marginTop: 65,
-    marginBottom: 30
+    marginTop: 65
   },
   bottom_menu: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 10
+    marginTop: 20,
+    marginBottom: 20
   },
   bottom_menu_text: {
     marginRight: 10
@@ -33,7 +33,7 @@ const s = StyleSheet.create({
   forgotPasswordContainer: {
     flexDirection: "row",
     marginTop: 15,
-    marginBottom: 30
+    marginBottom: 20
   },
   forgotPasswordText: {
     fontWeight: "500"

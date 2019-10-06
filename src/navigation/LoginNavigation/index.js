@@ -1,6 +1,5 @@
 import { createSwitchNavigator, createStackNavigator } from "react-navigation";
 import {
-  IntroScreen,
   SignUpScreen,
   WelcomeScreen,
   ProfileFillingScreen,
@@ -15,11 +14,13 @@ import { screens } from "../../constants";
 const ResetPasswordNavigation = createStackNavigator(
   {
     [screens.LoginScreen]: LoginScreen,
+    [screens.SignUpScreen]: SignUpScreen,
     [screens.ForgotPasswordScreen]: ForgotPasswordScreen,
     [screens.NewPasswordScreen]: NewPasswordScreen,
     [screens.SignUpConfirmScreen]: SignUpConfirmScreen
   },
   {
+    initialRouteName: screens.LoginScreen,
     headerMode: "none",
     navigationOptions: {
       headerVisible: false
@@ -41,9 +42,7 @@ const FirstLogin = createStackNavigator(
 );
 
 export default createSwitchNavigator({
-  [screens.IntroScreen]: IntroScreen,
-  [screens.SignUpScreen]: SignUpScreen,
-  [screens.AddCreditInfoScreen]: AddCreditInfoScreen,
   ResetPasswordNavigation,
+  [screens.AddCreditInfoScreen]: AddCreditInfoScreen,
   FirstLogin
 });

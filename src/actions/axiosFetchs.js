@@ -62,9 +62,7 @@ export const login = ({ email, password }) => {
     .post(
       `${url}/api/login`,
       { email, password },
-      {
-        headers: { "Content-Type": "application/json" }
-      }
+      { headers: { "Content-Type": "application/json" } }
     )
     .then(response => {
       return response.data.token;
@@ -85,9 +83,7 @@ export const register = ({ email, password, password_confirmation }) => {
   };
   let response = axios
     .post(`${url}/api/register`, data, {
-      headers: {
-        Accept: "application/json"
-      }
+      headers: { Accept: "application/json" }
     })
     .then(response => {
       return response.data.token;
@@ -103,19 +99,15 @@ export const register = ({ email, password, password_confirmation }) => {
 
 ///////// Password/Email Reset
 
-export const forgotPassword = ({ email }) => {
+export const forgotPassword = ({ email, resend }) => {
   let response = axios
     .post(
       `${url}/api/password/forgot`,
       { email },
-      {
-        headers: {
-          Accept: "application/json"
-        }
-      }
+      { headers: { Accept: "application/json" } }
     )
     .then(response => {
-      console.log(response);
+      resend && ShowToast("Код успішно відправлений");
       return response.data;
     })
     .catch(({ response }) => {
@@ -178,6 +170,27 @@ export const updateUserInformation = ({ token, data }) => {
     .then(response => {
       // ShowToast("Your information has been changed successfully!");
       return response.data;
+    })
+    .catch(({ response }) => {
+      console.log({ response });
+      ShowToast(`error: ${response.data.error}`);
+    });
+  return response;
+};
+
+export const updateUserAvatar = ({ token, data }) => {
+  console.log("here");
+  let response = axios
+    .post(`${url}/api/common/files?type=user`, data, {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then(response => {
+      // return response.data
+      console.log(response);
     })
     .catch(({ response }) => {
       console.log({ response });

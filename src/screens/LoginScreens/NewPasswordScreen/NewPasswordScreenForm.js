@@ -1,51 +1,57 @@
 import React from "react";
 import { Form, H1 } from "native-base";
-import { ScrollView } from "react-native";
+import { StyleSheet, View } from "react-native";
 import T from "prop-types";
 
 import {
   BlueButton,
-  LogoImage,
   MainInput,
-  MyLinearGradient
+  MyLinearGradient,
+  Header
 } from "@components/AllComponents";
+
+const s = StyleSheet.create({
+  container: {
+    marginHorizontal: 16,
+    marginBottom: 20
+  },
+  maxFlex: {
+    flex: 1
+  }
+});
 
 export default function NewPasswordForm({
   goLogin,
   onChangeValue,
-  formCredentials,
-  formErrors
+  formCredentials
 }) {
+  const isValid =
+    formCredentials.password.length >= 6 &&
+    formCredentials.password.length ===
+      formCredentials.password_confirmation.length;
+
   return (
-    <MyLinearGradient>
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1
-        }}
-        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
-      >
-        <LogoImage />
-        <H1>Please create a new passowrd</H1>
-        <Form>
-          <MainInput
-            placeholder="New password"
-            onChangeText={onChangeValue}
-            secureTextEntry={true}
-            name={"password"}
-            value={formCredentials.password}
-            error={formErrors["password"]}
-          />
-          <MainInput
-            placeholder="Password Confirm"
-            onChangeText={onChangeValue}
-            secureTextEntry={true}
-            name={"password_confirmation"}
-            value={formCredentials.password_confirmation}
-            error={formErrors["password_confirmation"]}
-          />
-          <BlueButton text="Confirm" onPress={goLogin} />
-        </Form>
-      </ScrollView>
+    <MyLinearGradient style={s.container}>
+      <Header />
+      <H1>Новий пароль</H1>
+      <Form>
+        <MainInput
+          placeholder="Пароль"
+          onChangeText={onChangeValue}
+          secureTextEntry={true}
+          name={"password"}
+          value={formCredentials.password}
+        />
+        <MainInput
+          placeholder="Повторіть пароль"
+          onChangeText={onChangeValue}
+          secureTextEntry={true}
+          name={"password_confirmation"}
+          value={formCredentials.password_confirmation}
+        />
+      </Form>
+      <View style={s.maxFlex} />
+      <BlueButton text="Зберегти" onPress={goLogin} disabled={!isValid} />
     </MyLinearGradient>
   );
 }
@@ -53,6 +59,5 @@ export default function NewPasswordForm({
 NewPasswordForm.propTypes = {
   goLogin: T.func.isRequired,
   onChangeValue: T.func.isRequired,
-  formCredentials: T.object.isRequired,
-  formErrors: T.object.isRequired
+  formCredentials: T.object.isRequired
 };

@@ -19,7 +19,8 @@ import {
   sendComments,
   checkBillingSubscription,
   addBillingSubscription,
-  deleteBillingSubscription
+  deleteBillingSubscription,
+  updateUserAvatar
 } from "./axiosFetchs";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
@@ -87,8 +88,9 @@ export const registerUser = async ({ ...props }) => {
 
 ///////// Forgot password
 
-export const resetUserPassword = async ({ email }) => {
-  const response = await forgotPassword({ email });
+export const resetUserPassword = async ({ email, resend }) => {
+  const response = await forgotPassword({ email, resend });
+  console.log(response);
   return response;
 };
 
@@ -145,6 +147,17 @@ export const fetchUserInfo = async ({ token, dispatch }) => {
 
 export const postUserInfo = async ({ token, data, dispatch }) => {
   const response = await updateUserInformation({ token, data });
+  if (response) {
+    dispatch({
+      type: dispatchTypes.ADD_USERINFO,
+      payload: response
+    });
+  }
+  return response;
+};
+
+export const postUserAvatar = async ({ dispatch, token, data }) => {
+  const response = await updateUserAvatar({ token, data });
   if (response) {
     dispatch({
       type: dispatchTypes.ADD_USERINFO,

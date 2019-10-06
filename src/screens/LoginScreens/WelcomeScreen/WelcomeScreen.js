@@ -38,7 +38,8 @@ export default function WelcomeScreen({ navigation }) {
     fetchUserData();
 
     // updaiting expoPushNotificationKey
-    // registerForPushNotificationsAsync(state.token);
+    registerForPushNotificationsAsync(state.token);
+
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     return () => {
       BackHandler.removeEventListener("hardwareBackPress", handleBackButton);

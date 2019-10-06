@@ -4,6 +4,7 @@ import { BackHandler } from "react-native";
 import { UserContext } from "./../../../reducers/context";
 import { handleBackButton, clearUserLocal } from "../../../actions/userActions";
 import ProfileScreenForm from "./ProfileScreenForm";
+import { screens } from "../../../constants";
 
 export default function ProfileScreen(props) {
   const { state, dispatch } = useContext(UserContext);
@@ -35,7 +36,7 @@ export default function ProfileScreen(props) {
   const signOutUser = async () => {
     let response = await clearUserLocal({ dispatch });
     if (response === "Yes") {
-      props.navigation.navigate("IntroScreen");
+      props.navigation.navigate(screens.LoginScreen);
     }
   };
 
