@@ -19,14 +19,7 @@ const Header = ({
       backgroundColor: "transparent",
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 10
-    },
-    button: {
-      borderRadius: 3,
-      marginTop: 10,
-      marginBottom: 10,
-      borderColor: colors.mainBlue
+      justifyContent: "space-between"
     },
     titleText: {
       fontSize: 15,

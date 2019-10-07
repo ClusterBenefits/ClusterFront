@@ -1,69 +1,102 @@
 import React from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
-import { Container, Form, H3 } from "native-base";
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import { Text } from "native-base";
 import T from "prop-types";
 
 import {
   MyLinearGradient,
   MainInput,
-  SmallBlueButton,
-  IconButton
+  BlueButton,
+  Header
 } from "@components/AllComponents";
+import { ButtonModal } from "../../../services/mainModal";
+import { url, colors } from "../../../constants";
+
+const s = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20
+  },
+  imageStyle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginBottom: 15,
+    marginTop: 30
+  },
+  maxFlex: {
+    flex: 1
+  },
+  extraMarginBottom: {
+    marginBottom: 30
+  },
+  uploadText: {
+    color: colors.mainBlue
+  }
+});
 
 export default function ProfileEditForm({
   editUserProfile,
   goProfileScreen,
   onChangeValue,
   formCredentials,
-  formErrors
+  navigation,
+  isValid,
+  userInfo
 }) {
+  const { image } = userInfo;
+  const imageUrl = image && image.tiny;
+
   return (
-    <MyLinearGradient>
-      <ScrollView
-        contentContainerStyle={{
-          justifyContent: "center",
-          flexGrow: 1
-        }}
-        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
-        indicatorStyle={"white"}
-        scrollbarThumbVertical="@android:color/white"
-      >
-        <Form>
-          <H3 style={{ marginLeft: 0 }}>Profile edit</H3>
-          <MainInput
-            onChangeText={onChangeValue}
-            placeholder={"First name*"}
-            name={"firstName"}
-            value={formCredentials.firstName}
-            error={formErrors["firstName"]}
-          />
-          <MainInput
-            onChangeText={onChangeValue}
-            placeholder="Last name*"
-            name="lastName"
-            value={formCredentials.lastName}
-            error={formErrors["lastName"]}
-          />
-          <MainInput
-            onChangeText={onChangeValue}
-            placeholder="Organization*"
-            name="organization"
-            value={formCredentials.organization}
-            error={formErrors["organization"]}
-          />
-          <MainInput
-            name="position"
-            onChangeText={onChangeValue}
-            placeholder="Position*"
-            value={formCredentials.position}
-            error={formErrors["position"]}
-          />
-          <View style={styles.bottom}>
-            <IconButton onPress={goProfileScreen} text={"Profile"} />
-            <SmallBlueButton onPress={editUserProfile} text={"Edit"} />
-          </View>
-        </Form>
-      </ScrollView>
+    <MyLinearGradient withScroll style={s.container}>
+      <Header navigation={navigation} titleText="Редагування" />
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <Image
+          source={
+            imageUrl
+              ? { uri: `${url}${imageUrl.url}` }
+              : require("../../../assets/images/DefaultAvatar.png")
+          }
+          style={s.imageStyle}
+        />
+        <TouchableOpacity
+          onPress={() => ButtonModal.showModal(navigation, true)}
+        >
+          <Text style={s.uploadText}>Завантажити фото</Text>
+        </TouchableOpacity>
+      </View>
+      <MainInput
+        onChangeText={onChangeValue}
+        placeholder="Ім'я"
+        name={"firstName"}
+        value={formCredentials.firstName}
+      />
+      <MainInput
+        onChangeText={onChangeValue}
+        placeholder="Прізвище"
+        name="lastName"
+        value={formCredentials.lastName}
+      />
+      <MainInput
+        onChangeText={onChangeValue}
+        placeholder="Компанія"
+        name="organization"
+        value={formCredentials.organization}
+      />
+      <MainInput
+        name="position"
+        onChangeText={onChangeValue}
+        placeholder="Позиція(не обов'язково)"
+        value={formCredentials.position}
+      />
+
+      <View style={s.maxFlex} />
+
+      <BlueButton
+        onPress={editUserProfile}
+        text="Зберегти зміни"
+        disabled={!isValid}
+        style={s.extraMarginBottom}
+      />
     </MyLinearGradient>
   );
 }
@@ -73,14 +106,6 @@ ProfileEditForm.propTypes = {
   editUserProfile: T.func.isRequired,
   goProfileScreen: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  formErrors: T.object.isRequired
+  navigation: T.object.isRequired,
+  isValid: T.bool.isRequired
 };
-
-const styles = StyleSheet.create({
-  bottom: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 10,
-    marginBottom: 5
-  }
-});

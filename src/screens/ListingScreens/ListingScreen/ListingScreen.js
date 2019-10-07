@@ -52,12 +52,6 @@ export default function ListingScreen(props) {
     setIsLoading(false);
   }
 
-  const goBarcodeScreen = item => {
-    props.navigation.navigate("BarcodeScreen", {
-      item: item
-    });
-  };
-
   // change item.featured and favoritelist
   const handleFavoriteChange = async item => {
     changeFavoriteCompanies({ token: state.token, item });
@@ -68,7 +62,6 @@ export default function ListingScreen(props) {
     <ListingScreenWithLoading
       isLoading={isLoading}
       items={state.items}
-      goBarcodeScreen={goBarcodeScreen}
       handleFavoriteChange={handleFavoriteChange}
       subscription={state.subscription}
       userInfo={state.userInfo}

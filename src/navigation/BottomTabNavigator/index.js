@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "react-navigation";
 import ProfileNavigation from "../ProfileNavigator";
 import ListingNavigation from "../ListingNavigator";
 import { FavoritesScreen } from "../../screens";
-import { colors } from "../../constants";
+import { colors, screens } from "../../constants";
 import { ProfileIcon, FavoritesIcon, MyCardsIcon } from "../../assets/svg";
 
 export default createBottomTabNavigator(
@@ -28,17 +28,17 @@ export default createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "ListingScreen",
+    initialRouteName: screens.ListingScreen,
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor, focused }) => {
         let { routeName } = navigation.state;
-        if (routeName === "ProfileScreen") {
+        if (routeName === screens.ProfileScreen) {
           return <ProfileIcon fill={`${tintColor}`} />;
         }
-        if (routeName === "ListingScreen") {
+        if (routeName === screens.ListingScreen) {
           return <MyCardsIcon fill={`${tintColor}`} />;
         }
-        if (routeName === "FavoritesScreen") {
+        if (routeName === screens.FavoritesScreen) {
           return <FavoritesIcon fill={`${tintColor}`} />;
         }
       }

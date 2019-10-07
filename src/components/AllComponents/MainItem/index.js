@@ -46,12 +46,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function list({ item, goBarcodeScreen, handleFavoriteChange }) {
+export default function list({ item, onPress, handleFavoriteChange }) {
   return (
     <ListItem style={styles.container}>
       <TouchableOpacity
         style={styles.container_item}
-        // onPress={() => goBarcodeScreen(item)}
+        onPress={() => onPress({ item })}
       >
         <View style={styles.imageContainer}>
           <Image
@@ -81,6 +81,6 @@ export default function list({ item, goBarcodeScreen, handleFavoriteChange }) {
 
 list.propTypes = {
   item: T.object.isRequired,
-  goBarcodeScreen: T.func.isRequired,
+  onPress: T.func.isRequired,
   handleFavoriteChange: T.func.isRequired
 };

@@ -152,7 +152,7 @@ export const resetPassword = ({
 //////// User
 
 export const showUserInformation = token => {
-  console.log("fetching data");
+  console.log("fetching userInfo data");
   let response = axios
     .get(`${url}/api/user`, { headers: { Authorization: "Bearer " + token } })
     .then(response => {
@@ -168,18 +168,16 @@ export const updateUserInformation = ({ token, data }) => {
       headers: { Accept: "application/json", Authorization: "Bearer " + token }
     })
     .then(response => {
-      // ShowToast("Your information has been changed successfully!");
       return response.data;
     })
     .catch(({ response }) => {
-      console.log({ response });
+      console.log("error", { response });
       ShowToast(`error: ${response.data.error}`);
     });
   return response;
 };
 
 export const updateUserAvatar = ({ token, data }) => {
-  console.log("here");
   let response = axios
     .post(`${url}/api/common/files?type=user`, data, {
       headers: {
@@ -209,7 +207,7 @@ export const changeUserEmail = ({ token, email }) => {
       }
     )
     .then(response => {
-      ShowToast("Your email has been changed successfully!");
+      ShowToast("Ваш емейл успішно оновлено!");
       return response.data;
     })
     .catch(({ response }) => {

@@ -5,9 +5,9 @@ import T from "prop-types";
 
 import { MainItem, MyLinearGradient } from "@components/AllComponents";
 import { colors } from "../../../constants";
+import { ButtonModal } from "../../../services/mainModal";
 
 export default function ListScreenForm({
-  goBarcodeScreen,
   items,
   handleFavoriteChange,
   subscription,
@@ -25,7 +25,7 @@ export default function ListScreenForm({
         renderItem={({ item }) => (
           <MainItem
             item={item}
-            goBarcodeScreen={goBarcodeScreen}
+            onPress={ButtonModal.showModal}
             handleFavoriteChange={handleFavoriteChange}
           />
         )}
@@ -39,7 +39,6 @@ export default function ListScreenForm({
 
 ListScreenForm.propTypes = {
   items: T.array.isRequired,
-  goBarcodeScreen: T.func.isRequired,
   handleFavoriteChange: T.func.isRequired
 };
 

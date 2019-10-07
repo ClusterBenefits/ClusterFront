@@ -10,6 +10,7 @@ const BlueButton = ({
   onPress,
   bordered,
   disabled = false,
+  style,
   ...props
 }) => {
   const s = StyleSheet.create({
@@ -32,7 +33,7 @@ const BlueButton = ({
       full
       onPress={onPress}
       bordered={bordered}
-      style={[s.button, !disabled && s.backgroundColor]}
+      style={[s.button, !disabled && s.backgroundColor, style]}
       disabled={disabled}
       {...props}
     >

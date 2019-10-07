@@ -6,7 +6,7 @@ import { handleBackButton, clearUserLocal } from "../../../actions/userActions";
 import ProfileScreenForm from "./ProfileScreenForm";
 import { screens } from "../../../constants";
 
-export default function ProfileScreen(props) {
+export default function ProfileScreen({ navigation }) {
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
@@ -17,26 +17,26 @@ export default function ProfileScreen(props) {
   }, []);
 
   const goProfileEditScreen = () => {
-    props.navigation.navigate("ProfileEditScreen");
+    navigation.navigate(screens.ProfileEditScreen);
   };
   const goChangeEmailScreen = () => {
-    props.navigation.navigate("ChangeEmailScreen");
+    navigation.navigate(screens.ChangeEmailScreen);
   };
   const goChangePasswordScreen = () => {
-    props.navigation.navigate("ChangePasswordScreen");
+    navigation.navigate(screens.ChangePasswordScreen);
   };
   const goBillingInformation = () => {
-    props.navigation.navigate("BillingInformationScreen");
+    navigation.navigate(screens.BillingInformationScreen);
   };
   const goAddCommentScreen = () => {
-    props.navigation.navigate("FeedBackScreen", {
+    navigation.navigate(screens.FeedBackScreen, {
       userInfo: state.userInfo
     });
   };
   const signOutUser = async () => {
     let response = await clearUserLocal({ dispatch });
     if (response === "Yes") {
-      props.navigation.navigate(screens.LoginScreen);
+      navigation.navigate(screens.LoginScreen);
     }
   };
 
@@ -49,7 +49,6 @@ export default function ProfileScreen(props) {
       goAddCommentScreen={goAddCommentScreen}
       signOutUser={signOutUser}
       userInfo={state.userInfo}
-      navigation={props.navigation}
     />
   );
 }

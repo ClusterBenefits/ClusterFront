@@ -6,49 +6,55 @@ import T from "prop-types";
 import {
   MyLinearGradient,
   MainInput,
-  SmallBlueButton,
-  IconButton
+  BlueButton,
+  Header
 } from "@components/AllComponents";
+
+const s = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20
+  },
+  maxFlex: {
+    flex: 1
+  },
+  extraMarginBottom: {
+    marginBottom: 30
+  }
+});
 
 export default function ChangeEmailForm({
   onChangeValue,
-  goProfileScreen,
   changeEmail,
   formCredentials,
-  formErrors
+  isValid,
+  errorText,
+  navigation
 }) {
   return (
-    <MyLinearGradient>
-      <ScrollView
-        contentContainerStyle={{
-          justifyContent: "center",
-          flexGrow: 1
-        }}
-        style={{ paddingHorizontal: 20, marginTop: 30, marginBottom: 20 }}
-      >
-        <Form>
-          <H3 style={{ marginLeft: 0 }}>Change email</H3>
-          <MainInput
-            onChangeText={onChangeValue}
-            placeholder={"New email*"}
-            name={"email"}
-            value={formCredentials.email}
-            error={formErrors["email"]}
-          />
-          <MainInput
-            onChangeText={onChangeValue}
-            placeholder="Password*"
-            name={"password_email"}
-            secureTextEntry={true}
-            value={formCredentials.password_email}
-            error={formErrors["password_email"]}
-          />
-          <View style={styles.bottom}>
-            <IconButton onPress={goProfileScreen} text={"Profile"} />
-            <SmallBlueButton onPress={changeEmail} text={"Save"} />
-          </View>
-        </Form>
-      </ScrollView>
+    <MyLinearGradient style={s.container}>
+      <Header titleText="Змінити емейл" navigation={navigation} />
+      <H3>Change email</H3>
+      <MainInput
+        onChangeText={onChangeValue}
+        placeholder={"New email*"}
+        name={"email"}
+        value={formCredentials.email}
+      />
+      <MainInput
+        onChangeText={onChangeValue}
+        placeholder="Password*"
+        name={"password_email"}
+        secureTextEntry={true}
+        value={formCredentials.password_email}
+        error={errorText}
+      />
+      <View style={s.maxFlex} />
+      <BlueButton
+        onPress={changeEmail}
+        text="Зберегти зміни"
+        disabled={!isValid}
+        style={s.extraMarginBottom}
+      />
     </MyLinearGradient>
   );
 }
@@ -57,13 +63,5 @@ ChangeEmailForm.propTypes = {
   goProfileScreen: T.func.isRequired,
   changeEmail: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  formErrors: T.object.isRequired
+  errorText: T.string.isRequired
 };
-
-const styles = StyleSheet.create({
-  bottom: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 10
-  }
-});

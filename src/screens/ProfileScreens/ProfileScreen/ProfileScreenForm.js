@@ -1,41 +1,53 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  TouchableHighlight,
-  Image,
-  Button
-} from "react-native";
-import { H3, Text, ListItem } from "native-base";
+import React, { useEffect } from "react";
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import { Text, ListItem } from "native-base";
 import T from "prop-types";
 import {
   EmailIcon,
   PasswordIcon,
-  BackArrow,
-  CustomUserIcon,
   BillingInformationIcon,
   SupportIcon,
   LogOutIcon,
   InfoIcon,
   EditPenIcon
 } from "../../../assets/svg";
-import { MyLinearGradient, Header } from "@components/AllComponents";
-import * as ImagePicker from "expo-image-picker";
+import { MyLinearGradient } from "@components/AllComponents";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
-import { ButtonModal } from "../../../services/mainModal";
-import { url } from "../../../constants";
+import { url, colors } from "../../../constants";
 
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 20
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: 40,
+    marginHorizontal: 15
+  },
+  bodyContainer: {
+    justifyContent: "space-between",
+    flex: 1
+  },
+  userInfoContainer: {
+    alignItems: "center",
+    marginTop: 35
+  },
+  companyContainer: {
+    width: 280,
+    height: 80,
+    marginTop: 15,
+    backgroundColor: colors.mainWhite,
+    alignItems: "center",
+    justifyContent: "center"
+  },
   catagoryContainer: {
     height: 56,
     marginLeft: 0
   },
-  row: {
+  touchableContainer: {
     flexDirection: "row",
     alignItems: "center",
     paddingLeft: 20,
@@ -46,15 +58,26 @@ const styles = StyleSheet.create({
     width: 50,
     marginRight: 20
   },
-  left: {
-    margin: 5
-  },
   lastItemMargin: {
     marginTop: 20
   },
+  nameText: {
+    fontSize: 16,
+    fontWeight: "700"
+  },
+  companyText: {
+    fontSize: 15,
+    fontWeight: "500",
+    marginBottom: 8
+  },
   image: {
-    height: 100,
-    width: 100
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginBottom: 15
+  },
+  extraMarginRight: {
+    marginRight: 5
   }
 });
 
@@ -65,16 +88,16 @@ export default function ProfileForm({
   goAddCommentScreen,
   goBillingInformation,
   signOutUser,
-  userInfo,
-  navigation
+  userInfo
 }) {
   const {
     first_name = "first_name",
     last_name = "LastName",
     position = "Position",
     company = "Organization",
-    image: { tiny = {} }
+    image
   } = userInfo;
+  const imageUrl = image && image.tiny;
 
   useEffect(() => {
     const getPermissionAsync = async () => {
@@ -90,82 +113,94 @@ export default function ProfileForm({
 
   return (
     <MyLinearGradient withScroll style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: 40,
-          marginHorizontal: 15
-        }}
-      >
+      <View style={styles.header}>
         <TouchableOpacity onPress={() => {}}>
           <InfoIcon />
         </TouchableOpacity>
-        <Text>Профіль</Text>
+        <Text style={styles.extraMarginRight}>Профіль</Text>
         <TouchableOpacity onPress={goProfileEditScreen}>
           <EditPenIcon />
         </TouchableOpacity>
       </View>
-      <View style={{ justifyContent: "space-between", flex: 1 }}>
-        <View>
-          <TouchableOpacity onPress={() => ButtonModal.showModal(navigation)}>
-            <Text>Open Camere or image picker )</Text>
-          </TouchableOpacity>
+
+      <View style={styles.bodyContainer}>
+        <View style={styles.userInfoContainer}>
+          <Image
+            source={
+              imageUrl
+                ? { uri: `${url}${imageUrl.url}` }
+                : require("../../../assets/images/DefaultAvatar.png")
+            }
+            style={styles.image}
+          />
+          <Text style={styles.nameText}>{`${first_name} ${last_name}`}</Text>
+
+          <View style={styles.companyContainer}>
+            <Text style={styles.companyText}>{company}</Text>
+            {position ? (
+              <Text style={{ color: colors.mainGrey }}>{position}</Text>
+            ) : null}
+          </View>
         </View>
-        <Image source={{ uri: `${url}${tiny.url}` }} style={styles.image} />
+
         <View>
           <ListItem style={styles.catagoryContainer}>
             <TouchableOpacity
-              style={[styles.row, styles.main]}
+              style={styles.touchableContainer}
               onPress={goChangeEmailScreen}
             >
               <View style={styles.icon}>
                 <EmailIcon />
               </View>
-              <H3>Change email</H3>
+              <Text>Змінити емайл</Text>
             </TouchableOpacity>
           </ListItem>
 
           <ListItem style={styles.catagoryContainer}>
             <TouchableOpacity
-              style={[styles.row, styles.main]}
+              style={styles.touchableContainer}
               onPress={goChangePasswordScreen}
             >
               <View style={styles.icon}>
                 <PasswordIcon />
               </View>
-              <H3>Change password</H3>
+              <Text>Змінити пароль</Text>
             </TouchableOpacity>
           </ListItem>
 
           <ListItem style={styles.catagoryContainer}>
             <TouchableOpacity
-              style={[styles.row, styles.main]}
+              style={styles.touchableContainer}
               onPress={goBillingInformation}
             >
               <View style={styles.icon}>
                 <BillingInformationIcon />
               </View>
-              <H3>Billing information</H3>
+              <Text>Інформація про оплату</Text>
             </TouchableOpacity>
           </ListItem>
 
           <ListItem style={styles.catagoryContainer}>
-            <TouchableOpacity style={[styles.row]} onPress={goAddCommentScreen}>
+            <TouchableOpacity
+              style={styles.touchableContainer}
+              onPress={goAddCommentScreen}
+            >
               <View style={styles.icon}>
                 <SupportIcon />
               </View>
-              <H3>Contact administrator</H3>
+              <Text>Підтримка</Text>
             </TouchableOpacity>
           </ListItem>
 
           <ListItem style={[styles.catagoryContainer, styles.lastItemMargin]}>
-            <TouchableOpacity style={styles.row} onPress={signOutUser}>
+            <TouchableOpacity
+              style={styles.touchableContainer}
+              onPress={signOutUser}
+            >
               <View style={styles.icon}>
                 <LogOutIcon />
               </View>
-              <H3>Logout</H3>
+              <Text>Вийти</Text>
             </TouchableOpacity>
           </ListItem>
         </View>

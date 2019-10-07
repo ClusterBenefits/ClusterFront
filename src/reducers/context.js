@@ -16,7 +16,7 @@ let reducer = (state, action) => {
     case dispatchTypes.ADD_USERINFO:
       return {
         ...state,
-        userInfo: action.payload
+        userInfo: { ...state.userInfo, ...action.payload }
       };
     case dispatchTypes.ADD_ITEMS:
       return {

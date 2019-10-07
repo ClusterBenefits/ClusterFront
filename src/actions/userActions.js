@@ -323,7 +323,7 @@ export const handleClickIcon = ({ item, dispatch }) => {
 // other
 
 export const clearUserLocal = async ({ dispatch }) =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     Alert.alert(
       "Logout user",
       "Are you sure that you want to logout?",

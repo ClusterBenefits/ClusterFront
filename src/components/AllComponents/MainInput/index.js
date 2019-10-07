@@ -55,13 +55,12 @@ const MainInput = ({
           placeholderTextColor={colors.mainGrey}
           onFocus={() => setState(!focused)}
           onBlur={() => setState(!focused)}
-          placeholder={"placeholder"}
           clearButtonMode={"while-editing"}
           style={s.input}
           {...props}
         />
       </Item>
-      {error && <Text style={s.error}>{error[0]}</Text>}
+      {!!error && <Text style={s.error}>{error}</Text>}
     </>
   );
 };
