@@ -16,23 +16,23 @@ export default function ProfileScreen({ navigation }) {
     };
   }, []);
 
-  const goProfileEditScreen = () => {
-    navigation.navigate(screens.ProfileEditScreen);
+  const redirectToScreen = (screenName, props) => {
+    navigation.navigate(screenName, { props });
   };
-  const goChangeEmailScreen = () => {
-    navigation.navigate(screens.ChangeEmailScreen);
-  };
-  const goChangePasswordScreen = () => {
-    navigation.navigate(screens.ChangePasswordScreen);
-  };
-  const goBillingInformation = () => {
-    navigation.navigate(screens.BillingInformationScreen);
-  };
-  const goAddCommentScreen = () => {
-    navigation.navigate(screens.FeedBackScreen, {
-      userInfo: state.userInfo
-    });
-  };
+  // const goChangeEmailScreen = () => {
+  //   navigation.navigate(screens.ChangeEmailScreen);
+  // };
+  // const goChangePasswordScreen = () => {
+  //   navigation.navigate(screens.ChangePasswordScreen);
+  // };
+  // const goBillingInformation = () => {
+  //   navigation.navigate(screens.BillingInformationScreen);
+  // };
+  // const goAddCommentScreen = () => {
+  //   navigation.navigate(screens.FeedBackScreen, {
+  //     userInfo: state.userInfo
+  //   });
+  // };
   const signOutUser = async () => {
     let response = await clearUserLocal({ dispatch });
     if (response === "Yes") {
@@ -42,11 +42,7 @@ export default function ProfileScreen({ navigation }) {
 
   return (
     <ProfileScreenForm
-      goProfileEditScreen={goProfileEditScreen}
-      goChangeEmailScreen={goChangeEmailScreen}
-      goChangePasswordScreen={goChangePasswordScreen}
-      goBillingInformation={goBillingInformation}
-      goAddCommentScreen={goAddCommentScreen}
+      redirectToScreen={redirectToScreen}
       signOutUser={signOutUser}
       userInfo={state.userInfo}
     />

@@ -36,7 +36,6 @@ const s = StyleSheet.create({
 
 export default function ProfileEditForm({
   editUserProfile,
-  goProfileScreen,
   onChangeValue,
   formCredentials,
   navigation,

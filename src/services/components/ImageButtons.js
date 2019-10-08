@@ -77,7 +77,6 @@ export default function ImageButtons({ hideModal, navigation = {} }) {
     getPermissionAsync();
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: "Images",
-      cropperCircleOverlay: true,
       allowsEditing: true,
       aspect: [3, 3]
     });
@@ -90,31 +89,16 @@ export default function ImageButtons({ hideModal, navigation = {} }) {
       return;
     }
 
-    // const url = "https://api.cluster.ukietech.org";
-    // let localUri = result.uri;
-    // let filename = localUri.split("/").pop();
-
-    // // Infer the type of the image
-    // let match = /\.(\w+)$/.exec(filename);
-    // let type = match ? `image/${match[1]}` : `image`;
-    // let formData = new FormData();
-    // formData.append("photo", { uri: localUri, name: filename, type });
-
-    // await postUserAvatar({
-    //   dispatch,
-    //   token: state.token,
-    //   data: formData
-    // });
-    // let response = await fetch(`${url}/api/common/files?type=user`, {
-
     const uriParts = result.uri.split(".");
     const fileType = uriParts[uriParts.length - 1];
     const payloadKey = "file"; // Define PayloadKey here Ex. 'file'
     const formData = new FormData();
 
     formData.append(payloadKey, {
+      id: "avatar",
+      name: "avatar",
       uri: result.uri,
-      name: result.uri.split("/").pop(),
+      // name: result.uri.split("/").pop(),
       type: `image/${fileType}`
     });
 

@@ -14,7 +14,7 @@ import {
 import { MyLinearGradient } from "@components/AllComponents";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
-import { url, colors } from "../../../constants";
+import { url, colors, screens } from "../../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -82,11 +82,7 @@ const styles = StyleSheet.create({
 });
 
 export default function ProfileForm({
-  goProfileEditScreen,
-  goChangeEmailScreen,
-  goChangePasswordScreen,
-  goAddCommentScreen,
-  goBillingInformation,
+  redirectToScreen,
   signOutUser,
   userInfo
 }) {
@@ -118,7 +114,9 @@ export default function ProfileForm({
           <InfoIcon />
         </TouchableOpacity>
         <Text style={styles.extraMarginRight}>Профіль</Text>
-        <TouchableOpacity onPress={goProfileEditScreen}>
+        <TouchableOpacity
+          onPress={() => redirectToScreen(screens.ProfileEditScreen)}
+        >
           <EditPenIcon />
         </TouchableOpacity>
       </View>
@@ -147,7 +145,7 @@ export default function ProfileForm({
           <ListItem style={styles.catagoryContainer}>
             <TouchableOpacity
               style={styles.touchableContainer}
-              onPress={goChangeEmailScreen}
+              onPress={() => redirectToScreen(screens.ChangeEmailScreen)}
             >
               <View style={styles.icon}>
                 <EmailIcon />
@@ -159,7 +157,7 @@ export default function ProfileForm({
           <ListItem style={styles.catagoryContainer}>
             <TouchableOpacity
               style={styles.touchableContainer}
-              onPress={goChangePasswordScreen}
+              onPress={() => redirectToScreen(screens.ChangePasswordScreen)}
             >
               <View style={styles.icon}>
                 <PasswordIcon />
@@ -171,7 +169,7 @@ export default function ProfileForm({
           <ListItem style={styles.catagoryContainer}>
             <TouchableOpacity
               style={styles.touchableContainer}
-              onPress={goBillingInformation}
+              onPress={() => redirectToScreen(screens.BillingInformationScreen)}
             >
               <View style={styles.icon}>
                 <BillingInformationIcon />
@@ -183,7 +181,7 @@ export default function ProfileForm({
           <ListItem style={styles.catagoryContainer}>
             <TouchableOpacity
               style={styles.touchableContainer}
-              onPress={goAddCommentScreen}
+              onPress={() => redirectToScreen(screens.FeedBackScreen)}
             >
               <View style={styles.icon}>
                 <SupportIcon />
@@ -210,11 +208,7 @@ export default function ProfileForm({
 }
 
 ProfileForm.propTypes = {
-  goProfileEditScreen: T.func.isRequired,
-  goChangeEmailScreen: T.func.isRequired,
-  goChangePasswordScreen: T.func.isRequired,
-  goAddCommentScreen: T.func.isRequired,
-  goBillingInformation: T.func.isRequired,
+  redirectToScreen: T.func.isRequired,
   signOutUser: T.func.isRequired,
   userInfo: T.object.isRequired
 };
