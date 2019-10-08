@@ -12,8 +12,7 @@ export function MainModalComponent() {
     item: null
   });
 
-  const showModal = ({ navigation, item }) =>
-    setState({ isVisible: true, navigation, item });
+  const showModal = ({ navigation, item }) => setState({ isVisible: true, navigation, item });
   const hideModal = () => setState({ isVisible: false, item: null });
 
   mainModal = {
@@ -22,13 +21,7 @@ export function MainModalComponent() {
   };
 
   return (
-    <Modal
-      animationType="slide"
-      useNativeDriver
-      transparent={true}
-      position={"bottom"}
-      visible={isVisible}
-    >
+    <Modal animationType="slide" useNativeDriver transparent={true} position={"bottom"} visible={isVisible}>
       <>
         {item ? (
           <BarcodeItem item={item} hideModal={hideModal} />
@@ -41,7 +34,6 @@ export function MainModalComponent() {
 }
 
 export const ButtonModal = {
-  showModal: ({ navigation, item }) =>
-    mainModal.showModal({ navigation, item }),
+  showModal: ({ navigation, item }) => mainModal.showModal({ navigation, item }),
   hideModal: () => mainModal.hideModal()
 };

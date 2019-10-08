@@ -3,12 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Text } from "native-base";
 import T from "prop-types";
 
-import {
-  MyLinearGradient,
-  MainInput,
-  BlueButton,
-  Header
-} from "@components/AllComponents";
+import { MyLinearGradient, MainInput, BlueButton, Header } from "@components/AllComponents";
 import { ButtonModal } from "../../../services/mainModal";
 import { url, colors } from "../../../constants";
 
@@ -50,31 +45,15 @@ export default function ProfileEditForm({
       <Header navigation={navigation} titleText="Редагування" />
       <View style={{ alignItems: "center", justifyContent: "center" }}>
         <Image
-          source={
-            imageUrl
-              ? { uri: `${url}${imageUrl.url}` }
-              : require("../../../assets/images/DefaultAvatar.png")
-          }
+          source={imageUrl ? { uri: `${url}${imageUrl.url}` } : require("../../../assets/images/DefaultAvatar.png")}
           style={s.imageStyle}
         />
-        <TouchableOpacity
-          onPress={() => ButtonModal.showModal(navigation, true)}
-        >
+        <TouchableOpacity onPress={() => ButtonModal.showModal(navigation, true)}>
           <Text style={s.uploadText}>Завантажити фото</Text>
         </TouchableOpacity>
       </View>
-      <MainInput
-        onChangeText={onChangeValue}
-        placeholder="Ім'я"
-        name={"firstName"}
-        value={formCredentials.firstName}
-      />
-      <MainInput
-        onChangeText={onChangeValue}
-        placeholder="Прізвище"
-        name="lastName"
-        value={formCredentials.lastName}
-      />
+      <MainInput onChangeText={onChangeValue} placeholder="Ім'я" name="firstName" value={formCredentials.firstName} />
+      <MainInput onChangeText={onChangeValue} placeholder="Прізвище" name="lastName" value={formCredentials.lastName} />
       <MainInput
         onChangeText={onChangeValue}
         placeholder="Компанія"
@@ -90,12 +69,7 @@ export default function ProfileEditForm({
 
       <View style={s.maxFlex} />
 
-      <BlueButton
-        onPress={editUserProfile}
-        text="Зберегти зміни"
-        disabled={!isValid}
-        style={s.extraMarginBottom}
-      />
+      <BlueButton onPress={editUserProfile} text="Зберегти зміни" disabled={!isValid} style={s.extraMarginBottom} />
     </MyLinearGradient>
   );
 }
@@ -105,6 +79,6 @@ ProfileEditForm.propTypes = {
   editUserProfile: T.func.isRequired,
   goProfileScreen: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  navigation: T.object.isRequired,
+  navigation: T.object,
   isValid: T.bool.isRequired
 };

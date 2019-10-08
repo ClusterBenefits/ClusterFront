@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Text, ListItem } from "native-base";
 import T from "prop-types";
+import { MyLinearGradient } from "@components/AllComponents";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
 import {
   EmailIcon,
   PasswordIcon,
@@ -11,9 +14,6 @@ import {
   InfoIcon,
   EditPenIcon
 } from "../../../assets/svg";
-import { MyLinearGradient } from "@components/AllComponents";
-import Constants from "expo-constants";
-import * as Permissions from "expo-permissions";
 import { url, colors, screens } from "../../../constants";
 
 const styles = StyleSheet.create({
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  catagoryContainer: {
+  categoryContainer: {
     height: 56,
     marginLeft: 0
   },
@@ -81,14 +81,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function ProfileForm({
-  redirectToScreen,
-  signOutUser,
-  userInfo
-}) {
+export default function ProfileForm({ redirectToScreen, signOutUser, userInfo }) {
   const {
-    first_name = "first_name",
-    last_name = "LastName",
+    firstName = "first_name",
+    lastName = "LastName",
     position = "Position",
     company = "Organization",
     image
@@ -99,9 +95,7 @@ export default function ProfileForm({
     const getPermissionAsync = async () => {
       if (Constants.platform.ios) {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
+        if (status !== "granted") alert("Sorry, we need camera roll permissions to make this work!");
       }
     };
     getPermissionAsync();
@@ -114,9 +108,7 @@ export default function ProfileForm({
           <InfoIcon />
         </TouchableOpacity>
         <Text style={styles.extraMarginRight}>Профіль</Text>
-        <TouchableOpacity
-          onPress={() => redirectToScreen(screens.ProfileEditScreen)}
-        >
+        <TouchableOpacity onPress={() => redirectToScreen(screens.ProfileEditScreen)}>
           <EditPenIcon />
         </TouchableOpacity>
       </View>
@@ -124,25 +116,19 @@ export default function ProfileForm({
       <View style={styles.bodyContainer}>
         <View style={styles.userInfoContainer}>
           <Image
-            source={
-              imageUrl
-                ? { uri: `${url}${imageUrl.url}` }
-                : require("../../../assets/images/DefaultAvatar.png")
-            }
+            source={imageUrl ? { uri: `${url}${imageUrl.url}` } : require("../../../assets/images/DefaultAvatar.png")}
             style={styles.image}
           />
-          <Text style={styles.nameText}>{`${first_name} ${last_name}`}</Text>
+          <Text style={styles.nameText}>{`${firstName}${lastName}`}</Text>
 
           <View style={styles.companyContainer}>
             <Text style={styles.companyText}>{company}</Text>
-            {position ? (
-              <Text style={{ color: colors.mainGrey }}>{position}</Text>
-            ) : null}
+            {position ? <Text style={{ color: colors.mainGrey }}>{position}</Text> : null}
           </View>
         </View>
 
         <View>
-          <ListItem style={styles.catagoryContainer}>
+          <ListItem style={styles.categoryContainer}>
             <TouchableOpacity
               style={styles.touchableContainer}
               onPress={() => redirectToScreen(screens.ChangeEmailScreen)}
@@ -154,7 +140,7 @@ export default function ProfileForm({
             </TouchableOpacity>
           </ListItem>
 
-          <ListItem style={styles.catagoryContainer}>
+          <ListItem style={styles.categoryContainer}>
             <TouchableOpacity
               style={styles.touchableContainer}
               onPress={() => redirectToScreen(screens.ChangePasswordScreen)}
@@ -166,7 +152,7 @@ export default function ProfileForm({
             </TouchableOpacity>
           </ListItem>
 
-          <ListItem style={styles.catagoryContainer}>
+          <ListItem style={styles.categoryContainer}>
             <TouchableOpacity
               style={styles.touchableContainer}
               onPress={() => redirectToScreen(screens.BillingInformationScreen)}
@@ -178,7 +164,7 @@ export default function ProfileForm({
             </TouchableOpacity>
           </ListItem>
 
-          <ListItem style={styles.catagoryContainer}>
+          <ListItem style={styles.categoryContainer}>
             <TouchableOpacity
               style={styles.touchableContainer}
               onPress={() => redirectToScreen(screens.FeedBackScreen)}
@@ -190,11 +176,8 @@ export default function ProfileForm({
             </TouchableOpacity>
           </ListItem>
 
-          <ListItem style={[styles.catagoryContainer, styles.lastItemMargin]}>
-            <TouchableOpacity
-              style={styles.touchableContainer}
-              onPress={signOutUser}
-            >
+          <ListItem style={[styles.categoryContainer, styles.lastItemMargin]}>
+            <TouchableOpacity style={styles.touchableContainer} onPress={signOutUser}>
               <View style={styles.icon}>
                 <LogOutIcon />
               </View>

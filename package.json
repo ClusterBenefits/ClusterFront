@@ -45,6 +45,7 @@
     "eslint": "^5.8.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-config-react-app": "^3.0.7",
+    "eslint-plugin-react-native": "^3.7.0",
     "eslint-plugin-flowtype": "^3.4.2",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
