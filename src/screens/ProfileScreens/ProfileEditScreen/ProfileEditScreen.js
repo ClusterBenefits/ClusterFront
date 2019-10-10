@@ -48,8 +48,7 @@ export default function ProfileEditScreen({ navigation }) {
       company: formCredentials.organization
     };
     // cant send an empty string as value for position //
-    formCredentials.position.length > 0 &&
-      (data.position = formCredentials.position);
+    formCredentials.position.length > 0 && (data.position = formCredentials.position);
 
     // trying to change user info
 
@@ -60,7 +59,7 @@ export default function ProfileEditScreen({ navigation }) {
     });
 
     if (response) {
-      ShowToast("Вашу профайл оновлено успішно!");
+      ShowToast("Ваш профайл оновлено успішно!");
 
       setFormCredentials({
         firstName: "",

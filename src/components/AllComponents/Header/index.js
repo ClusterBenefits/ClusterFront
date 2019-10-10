@@ -5,13 +5,7 @@ import T from "prop-types";
 import { colors } from "../../../constants/Colors";
 import { BackArrowIcon } from "../../../assets/svg";
 
-const Header = ({
-  titleText,
-  navigation,
-  onPress,
-  titleRightText,
-  onTitleRightPress
-}) => {
+const Header = ({ titleText, navigation, onPress, titleRightText, onTitleRightPress }) => {
   const s = StyleSheet.create({
     containerHeader: {
       width: "100%",

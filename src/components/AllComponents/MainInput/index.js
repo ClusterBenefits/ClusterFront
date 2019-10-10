@@ -4,16 +4,7 @@ import { Input, Item, Text, Label, Icon } from "native-base";
 import T from "prop-types";
 import { colors } from "../../../constants";
 
-const MainInput = ({
-  onChangeText,
-  error,
-  name,
-  width,
-  placeholder,
-  focusedText,
-  value,
-  ...props
-}) => {
+const MainInput = ({ onChangeText, error, name, width, placeholder, focusedText, value, ...props }) => {
   const s = StyleSheet.create({
     container: {
       marginTop: 10,
@@ -21,9 +12,6 @@ const MainInput = ({
       marginLeft: 0,
       width: width || "100%",
       borderBottomWidth: 2
-    },
-    input: {
-      paddingLeft: 0
     },
     error: {
       color: colors.mainRed,
@@ -46,9 +34,7 @@ const MainInput = ({
   return (
     <>
       <Item style={[s.container, focused && s.borderBlue]} floatingLabel>
-        <Label style={[s.placeholder, focused && s.colorBlue]}>
-          {placeholder}
-        </Label>
+        <Label style={[s.placeholder, focused && s.colorBlue]}>{placeholder}</Label>
         <Input
           value={value}
           onChangeText={value => onChangeText(name, value)}
@@ -56,7 +42,6 @@ const MainInput = ({
           onFocus={() => setState(!focused)}
           onBlur={() => setState(!focused)}
           clearButtonMode={"while-editing"}
-          style={s.input}
           {...props}
         />
       </Item>

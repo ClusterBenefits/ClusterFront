@@ -11,7 +11,7 @@ import {
 } from "../../screens";
 import { screens } from "../../constants";
 
-export default createStackNavigator(
+const ProfileNavigator = createStackNavigator(
   {
     [screens.ProfileScreen]: ProfileScreen,
     [screens.ProfileEditScreen]: ProfileEditScreen,
@@ -23,9 +23,19 @@ export default createStackNavigator(
     [screens.CameraScreen]: CameraScreen
   },
   {
-    headerMode: "none",
-    navigationOptions: {
-      headerVisible: false
-    }
+    headerMode: "none"
   }
 );
+
+ProfileNavigator.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible
+  };
+};
+
+export default ProfileNavigator;

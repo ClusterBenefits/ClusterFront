@@ -37,7 +37,7 @@ export default function WelcomeScreen({ navigation }) {
     }
     fetchUserData();
 
-    // updaiting expoPushNotificationKey
+    // update expoPushNotificationKey
     registerForPushNotificationsAsync(state.token);
 
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
@@ -46,16 +46,9 @@ export default function WelcomeScreen({ navigation }) {
     };
   }, []);
 
-  // attantion please
-
   const goProfileFillingScreen = () => {
     navigation.push(screens.ProfileFillingScreen);
   };
 
-  return (
-    <WelcomeScreenWithLoading
-      isLoading={isLoading}
-      goProfileFillingScreen={goProfileFillingScreen}
-    />
-  );
+  return <WelcomeScreenWithLoading isLoading={isLoading} goProfileFillingScreen={goProfileFillingScreen} />;
 }

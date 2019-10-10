@@ -1,29 +1,20 @@
 import React, { useState, useContext, useEffect } from "react";
 import { BackHandler } from "react-native";
-import debounce from "lodash/debounce";
 
 import FeedBackScreenForm from "./FeedBackScreenForm";
-import {
-  sendMessageToAdmin,
-  handleBackButton
-} from "../../../actions/userActions";
+import { sendMessageToAdmin, handleBackButton } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
-import {
-  allFieldsValidation,
-  singleFieldValidation
-} from "../../../utils/validation";
 import { UserContext } from "../../../reducers/context";
 
 const FeedBackScreenWithLoading = LoadingHOC(FeedBackScreenForm);
 
-export default function AddCommentsScreen(props) {
-  const [formCredentials, setFormCredentials] = useState({
-    myComment: "",
-    subject: ""
-  });
-  const [formErrors, setFormErrors] = useState({});
+const initialState = { comment: "", subject: "" };
+
+export default function AddCommentsScreen({ navigation }) {
+  const [formCredentials, setFormCredentials] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
-  const { state, dispatch } = useContext(UserContext);
+  const { state } = useContext(UserContext);
+  const isValid = formCredentials.comment.length > 6 && formCredentials.subject.length > 3;
 
   useEffect(() => {
     BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
@@ -34,51 +25,31 @@ export default function AddCommentsScreen(props) {
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
-    debounceSingleFieldValidation({ name, value });
-  };
-
-  const debounceSingleFieldValidation = debounce(({ name, value }) => {
-    const { isValid, errors } = singleFieldValidation({ key: name, value });
-    if (!isValid) {
-      setFormErrors({ ...formErrors, [name]: errors[name] });
-    } else {
-      setFormErrors({ ...formErrors, [name]: null });
-    }
-  }, 600);
-
-  const goBack = async () => {
-    props.navigation.pop();
   };
 
   // feedback to admin
   const sendMessage = async () => {
-    const { isValid, errors } = allFieldsValidation(formCredentials);
-    if (!isValid) {
-      setFormErrors(errors);
-    } else {
-      setIsLoading(true);
+    setIsLoading(true);
 
-      await sendMessageToAdmin({
-        subject: formCredentials.subject,
-        comment: formCredentials.myComment,
-        name: state.userInfo.first_name,
-        email: state.userInfo.email,
-        token: state.token
-      });
-
-      setIsLoading(false);
-      setFormCredentials({});
-    }
+    let response = await sendMessageToAdmin({
+      subject: formCredentials.subject,
+      comment: formCredentials.comment,
+      name: state.userInfo.first_name,
+      email: state.userInfo.email,
+      token: state.token
+    });
+    response && setFormCredentials(initialState);
+    setIsLoading(false);
   };
 
   return (
     <FeedBackScreenWithLoading
       isLoading={isLoading}
-      goBack={goBack}
       onChangeValue={onChangeValue}
       sendMessage={sendMessage}
       formCredentials={formCredentials}
-      formErrors={formErrors}
+      isValid={isValid}
+      navigation={navigation}
     />
   );
 }

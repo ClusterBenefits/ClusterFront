@@ -19,30 +19,11 @@ export default function ProfileScreen({ navigation }) {
   const redirectToScreen = (screenName, props) => {
     navigation.navigate(screenName, { props });
   };
-  // const goChangeEmailScreen = () => {
-  //   navigation.navigate(screens.ChangeEmailScreen);
-  // };
-  // const goChangePasswordScreen = () => {
-  //   navigation.navigate(screens.ChangePasswordScreen);
-  // };
-  // const goBillingInformation = () => {
-  //   navigation.navigate(screens.BillingInformationScreen);
-  // };
-  // const goAddCommentScreen = () => {
-  //   navigation.navigate(screens.FeedBackScreen, {
-  //     userInfo: state.userInfo
-  //   });
-  // };
+
   const signOutUser = async () => {
     const response = await clearUserLocal({ dispatch });
     if (response === "Yes") navigation.navigate(screens.LoginScreen);
   };
 
-  return (
-    <ProfileScreenForm
-      redirectToScreen={redirectToScreen}
-      signOutUser={signOutUser}
-      userInfo={state.userInfo}
-    />
-  );
+  return <ProfileScreenForm redirectToScreen={redirectToScreen} signOutUser={signOutUser} userInfo={state.userInfo} />;
 }

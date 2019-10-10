@@ -47,6 +47,9 @@ const s = StyleSheet.create({
     lineHeight: 25,
     fontWeight: "600",
     color: colors.mainBlue
+  },
+  flexMax: {
+    flex: 1
   }
 });
 
@@ -113,7 +116,7 @@ export default function ImageButtons({ hideModal, navigation = {} }) {
 
   return (
     <View style={s.modalContainer}>
-      <View style={{ flex: 1 }} />
+      <View style={s.flexMax} />
 
       <View style={s.buttonContainer}>
         <Button full onPress={() => _pickImage()} style={[s.buttonStyle, s.imageButtonStyle]}>

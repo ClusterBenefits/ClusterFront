@@ -10,6 +10,7 @@ const BlueButton = ({
   onPress,
   bordered,
   disabled = false,
+  withMarginBottom = false,
   style,
   ...props
 }) => {
@@ -17,7 +18,7 @@ const BlueButton = ({
     button: {
       borderRadius: 3,
       marginTop: 10,
-      marginBottom: 10,
+      marginBottom: withMarginBottom ? 30 : 10,
       borderColor: colors.mainBlue
     },
     button_text: {

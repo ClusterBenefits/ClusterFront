@@ -26,6 +26,10 @@ const s = StyleSheet.create({
   },
   uploadText: {
     color: colors.mainBlue
+  },
+  imageContainer: {
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 
@@ -43,17 +47,29 @@ export default function ProfileEditForm({
   return (
     <MyLinearGradient withScroll style={s.container}>
       <Header navigation={navigation} titleText="Редагування" />
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
+      <View style={s.imageContainer}>
         <Image
-          source={imageUrl ? { uri: `${url}${imageUrl.url}` } : require("../../../assets/images/DefaultAvatar.png")}
+          source={
+            imageUrl ? { uri: `${url}${imageUrl.url}` } : require("../../../assets/images/DefaultAvatar.png")
+          }
           style={s.imageStyle}
         />
         <TouchableOpacity onPress={() => ButtonModal.showModal(navigation, true)}>
           <Text style={s.uploadText}>Завантажити фото</Text>
         </TouchableOpacity>
       </View>
-      <MainInput onChangeText={onChangeValue} placeholder="Ім'я" name="firstName" value={formCredentials.firstName} />
-      <MainInput onChangeText={onChangeValue} placeholder="Прізвище" name="lastName" value={formCredentials.lastName} />
+      <MainInput
+        onChangeText={onChangeValue}
+        placeholder="Ім'я"
+        name="firstName"
+        value={formCredentials.firstName}
+      />
+      <MainInput
+        onChangeText={onChangeValue}
+        placeholder="Прізвище"
+        name="lastName"
+        value={formCredentials.lastName}
+      />
       <MainInput
         onChangeText={onChangeValue}
         placeholder="Компанія"
@@ -69,7 +85,12 @@ export default function ProfileEditForm({
 
       <View style={s.maxFlex} />
 
-      <BlueButton onPress={editUserProfile} text="Зберегти зміни" disabled={!isValid} style={s.extraMarginBottom} />
+      <BlueButton
+        onPress={editUserProfile}
+        text="Зберегти зміни"
+        disabled={!isValid}
+        style={s.extraMarginBottom}
+      />
     </MyLinearGradient>
   );
 }

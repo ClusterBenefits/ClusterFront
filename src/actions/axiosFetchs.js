@@ -2,6 +2,15 @@ import axios from "axios";
 import { ShowToast } from "@components/AllComponents";
 import { url } from "../constants";
 
+const errorHandler = ({ response }) => {
+  // check if response error has nested lvls or no
+  const textError =
+    typeof response.data.error === "string"
+      ? response.data.error //error right here
+      : response.data.error[Object.keys(response.data.error)[0]];
+  ShowToast(textError);
+};
+
 export const postTokenToServer = async ({ expoToken, token }) => {
   let response = axios
     .post(
@@ -25,52 +34,14 @@ export const postTokenToServer = async ({ expoToken, token }) => {
   return response;
 };
 
-// export const pushNotification = async () => {
-//   let response = axios
-//     .post(
-//       "https://exp.host/--/api/v2/push/send",
-//       [
-//         {
-//           to: "ExponentPushToken[xMo4G5DbkdyE--CE8Yo1nK]",
-//           sound: "default",
-//           body: "myyy nigggaa!"
-//         },
-//         {
-//           to: "ExponentPushToken[OBaTB3JjiFEITrOYskPVV8]",
-//           sound: "default",
-//           body: "myyy nigggaa!"
-//         }
-//       ],
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Accept: "application/json"
-//         }
-//       }
-//     )
-//     .then(response => {
-//       console.log(response.data);
-//       return response;
-//     })
-//     .catch(err => console.log(err));
-//   return response;
-// };
-
 ///////// AUTH
 export const login = ({ email, password }) => {
   let response = axios
-    .post(
-      `${url}/api/login`,
-      { email, password },
-      { headers: { "Content-Type": "application/json" } }
-    )
+    .post(`${url}/api/login`, { email, password }, { headers: { "Content-Type": "application/json" } })
     .then(response => {
       return response.data.token;
     })
-    .catch(({ response }) => {
-      console.log(response.data);
-      ShowToast(`error: ${response.data.error}`);
-    });
+    .catch(errorHandler);
 
   return response;
 };
@@ -88,10 +59,7 @@ export const register = ({ email, password, password_confirmation }) => {
     .then(response => {
       return response.data.token;
     })
-    .catch(({ response }) => {
-      console.log(response);
-      ShowToast(`error: ${response.data.error.email}`);
-    });
+    .catch(errorHandler);
   return response;
 };
 
@@ -101,18 +69,12 @@ export const register = ({ email, password, password_confirmation }) => {
 
 export const forgotPassword = ({ email, resend }) => {
   let response = axios
-    .post(
-      `${url}/api/password/forgot`,
-      { email },
-      { headers: { Accept: "application/json" } }
-    )
+    .post(`${url}/api/password/forgot`, { email }, { headers: { Accept: "application/json" } })
     .then(response => {
       resend && ShowToast("Код успішно відправлений");
       return response.data;
     })
-    .catch(({ response }) => {
-      ShowToast(`error: ${response.data.error.email}`);
-    });
+    .catch(errorHandler);
   return response;
 };
 
@@ -122,28 +84,18 @@ export const confirmCodeFromEmail = ({ email, code }) => {
     .then(response => {
       return response.data.token;
     })
-    .catch(({ response }) => {
-      console.log(response);
-      ShowToast(`error: ${response.data.error.code}`);
-    });
+    .catch(errorHandler);
   return response;
 };
 
-export const resetPassword = ({
-  email,
-  token,
-  password,
-  password_confirmation
-}) => {
+export const resetPassword = ({ email, token, password, password_confirmation }) => {
   let data = { email, token, password, password_confirmation };
   let response = axios
     .post(`${url}/api/password/reset`, data)
     .then(response => {
       return response.data;
     })
-    .catch(({ response }) => {
-      ShowToast(`error: ${response.data.error}`);
-    });
+    .catch(errorHandler);
   return response;
 };
 
@@ -170,10 +122,7 @@ export const updateUserInformation = ({ token, data }) => {
     .then(response => {
       return response.data;
     })
-    .catch(({ response }) => {
-      console.log("error", { response });
-      ShowToast(`error: ${response.data.error}`);
-    });
+    .catch(errorHandler);
   return response;
 };
 
@@ -190,10 +139,7 @@ export const updateUserAvatar = ({ token, data }) => {
       // return response.data
       console.log(response);
     })
-    .catch(({ response }) => {
-      console.log({ response });
-      ShowToast(`error: ${response.data.error}`);
-    });
+    .catch(errorHandler);
   return response;
 };
 
@@ -210,9 +156,7 @@ export const changeUserEmail = ({ token, email }) => {
       ShowToast("Ваш емейл успішно оновлено!");
       return response.data;
     })
-    .catch(({ response }) => {
-      ShowToast(`error: ${response.data.error.email}`);
-    });
+    .catch(errorHandler);
   return response;
 };
 
@@ -231,9 +175,7 @@ export const changeUserPassword = async ({
       ShowToast("Your password has been changed successfully!");
       return response.data;
     })
-    .catch(({ response }) => {
-      ShowToast(`error: ${response.data.error.new_password}`);
-    });
+    .catch(errorHandler);
   return response;
 };
 
@@ -331,13 +273,7 @@ export const getItemComments = ({ id, token, page }) => {
   return response;
 };
 
-export const sendMessageToAdmins = ({
-  name,
-  email,
-  subject,
-  comment,
-  token
-}) => {
+export const sendMessageToAdmins = ({ name, email, subject, comment, token }) => {
   let response = axios
     .post(
       `${url}/api/feedback`,
@@ -353,10 +289,7 @@ export const sendMessageToAdmins = ({
       ShowToast("Message has been sent successfully");
       return response.data;
     })
-    .catch(({ response }) => {
-      console.log("error", response);
-      ShowToast(`error: ${response.data.error}`);
-    });
+    .catch(errorHandler);
 
   return response;
 };

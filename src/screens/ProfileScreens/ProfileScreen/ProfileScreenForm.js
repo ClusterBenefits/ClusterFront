@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     marginLeft: 0
   },
   touchableContainer: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     paddingLeft: 20,
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
 
 export default function ProfileForm({ redirectToScreen, signOutUser, userInfo }) {
   const {
-    firstName = "first_name",
+    firstName = "Name",
     lastName = "LastName",
     position = "Position",
     company = "Organization",
@@ -99,7 +100,7 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
       }
     };
     getPermissionAsync();
-  });
+  }, []);
 
   return (
     <MyLinearGradient withScroll style={styles.container}>
@@ -116,7 +117,11 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
       <View style={styles.bodyContainer}>
         <View style={styles.userInfoContainer}>
           <Image
-            source={imageUrl ? { uri: `${url}${imageUrl.url}` } : require("../../../assets/images/DefaultAvatar.png")}
+            source={
+              imageUrl
+                ? { uri: `${url}${imageUrl.url}` }
+                : require("../../../assets/images/DefaultAvatar.png")
+            }
             style={styles.image}
           />
           <Text style={styles.nameText}>{`${firstName}${lastName}`}</Text>

@@ -39,9 +39,7 @@ export const dispatchTypes = {
 
 ///////// AUTH
 export const registerForPushNotificationsAsync = async userToken => {
-  const { status: existingStatus } = await Permissions.getAsync(
-    Permissions.NOTIFICATIONS
-  );
+  const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
 
   let finalStatus = existingStatus;
   if (existingStatus !== "granted") {
