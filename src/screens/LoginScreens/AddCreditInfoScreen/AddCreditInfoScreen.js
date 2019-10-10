@@ -9,7 +9,7 @@ import { addCreditCardSubscription } from "../../../actions/userActions";
 
 const AddCreditInfoScreenWithLoading = LoadingHOC(AddCreditInfoScreenForm);
 
-export default function AddCreditInfoScreen(props) {
+export default function AddCreditInfoScreen({ navigation }) {
   const [formCredentials, setFormCredentials] = useState({
     credit_card_number: "",
     expiration: "",
@@ -35,13 +35,13 @@ export default function AddCreditInfoScreen(props) {
   };
 
   // check where the user has come from(first time registration or billinginformation)
-  const fromWho = props.navigation.getParam("name", "Registration");
+  const fromWho = navigation.getParam("name", "Registration");
 
   const skip = () => {
     if (fromWho === "Registration") {
-      props.navigation.navigate("ProfileBottomTabNavigatior");
+      navigation.navigate("ProfileBottomTabNavigatior");
     } else {
-      props.navigation.navigate("BillingInformationScreen");
+      navigation.navigate("BillingInformationScreen");
     }
   };
   const post = async () => {
@@ -85,11 +85,11 @@ export default function AddCreditInfoScreen(props) {
       if (response && fromWho === "Registration") {
         // after registration user has made a subscription
         setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
-        props.navigation.navigate("ProfileBottomTabNavigatior");
+        navigation.navigate("ProfileBottomTabNavigatior");
       } else if (response && fromWho !== "Registration") {
         // after billinginformation has user made a subscription
         setFormCredentials({ bcreditCardNumber: "", expiration: "", cvv2: "" });
-        props.navigation.navigate("BillingInformationScreen");
+        navigation.navigate("BillingInformationScreen");
       } else {
         // somthing was wrong with creditCard
         setIsLoading(false);
@@ -117,9 +117,7 @@ export default function AddCreditInfoScreen(props) {
                 if (supported) {
                   Linking.openURL(response.verify_link);
                 } else {
-                  console.log(
-                    "Don't know how to open URI: " + response.verify_link
-                  );
+                  console.log("Don't know how to open URI: " + response.verify_link);
                 }
               });
               resolve("Yes");
@@ -136,9 +134,8 @@ export default function AddCreditInfoScreen(props) {
       post={post}
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
-      formErrors={formErrors}
-      skip={skip}
-      fromWho={fromWho}
+      navigation={navigation}
+      isValid={true}
     />
   );
 }

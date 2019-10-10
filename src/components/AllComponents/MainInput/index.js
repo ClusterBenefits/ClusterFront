@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Input, Item, Text, Label, Icon } from "native-base";
+import { Input, Item, Text, Label } from "native-base";
 import T from "prop-types";
 import { colors } from "../../../constants";
 
-const MainInput = ({ onChangeText, error, name, width, placeholder, focusedText, value, ...props }) => {
+const MainInput = ({
+  onChangeText,
+  error,
+  name,
+  width,
+  containerStyle,
+  placeholder,
+  focusedText,
+  value,
+  ...props
+}) => {
   const s = StyleSheet.create({
     container: {
       marginTop: 10,
@@ -33,7 +43,7 @@ const MainInput = ({ onChangeText, error, name, width, placeholder, focusedText,
 
   return (
     <>
-      <Item style={[s.container, focused && s.borderBlue]} floatingLabel>
+      <Item style={[s.container, focused && s.borderBlue, containerStyle]} floatingLabel>
         <Label style={[s.placeholder, focused && s.colorBlue]}>{placeholder}</Label>
         <Input
           value={value}

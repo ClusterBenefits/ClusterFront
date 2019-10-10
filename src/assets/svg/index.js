@@ -56,19 +56,13 @@ export const MainLogoWithText = props => (
             <G>
               <G />
               <G ClipPath="url(#7ipec)">
-                <Path
-                  fill="#34a853"
-                  d="M41.422 39.18l32.651-25.091 8.598 1.09L93.664-1.183V51.18H41.422z"
-                />
+                <Path fill="#34a853" d="M41.422 39.18l32.651-25.091 8.598 1.09L93.664-1.183V51.18H41.422z" />
               </G>
             </G>
             <G>
               <G />
               <G ClipPath="url(#7iped)">
-                <Path
-                  fill="#4285f4"
-                  d="M93.663 51.18l-33.74-26.182-4.353-3.273 38.093-10.909z"
-                />
+                <Path fill="#4285f4" d="M93.663 51.18l-33.74-26.182-4.353-3.273 38.093-10.909z" />
               </G>
             </G>
           </G>
@@ -105,28 +99,19 @@ export const MainLogo = props => (
         <G>
           <G />
           <G clipPath="url(#ksykb)">
-            <Path
-              fill="#ea4335"
-              d="M-1.63 17.36l30.837 23.636 12.698-11.09 43.535-7.091V-2.64H-1.63z"
-            />
+            <Path fill="#ea4335" d="M-1.63 17.36l30.837 23.636 12.698-11.09 43.535-7.091V-2.64H-1.63z" />
           </G>
         </G>
         <G>
           <G />
           <G clipPath="url(#ksykc)">
-            <Path
-              fill="#34a853"
-              d="M-1.63 64.633l54.419-41.818 14.33 1.818L85.439-2.64v87.273H-1.63z"
-            />
+            <Path fill="#34a853" d="M-1.63 64.633l54.419-41.818 14.33 1.818L85.439-2.64v87.273H-1.63z" />
           </G>
         </G>
         <G>
           <G />
           <G clipPath="url(#ksykd)">
-            <Path
-              fill="#4285f4"
-              d="M85.438 84.633L29.206 40.996l-7.256-5.454L85.438 17.36z"
-            />
+            <Path fill="#4285f4" d="M85.438 84.633L29.206 40.996l-7.256-5.454L85.438 17.36z" />
           </G>
         </G>
       </G>
@@ -300,6 +285,8 @@ export const ProfileIcon = ({ fill = "#afb4c4", ...props }) => (
     />
   </Svg>
 );
+
+//BottomNavigation
 
 export const BackArrowIcon = ({ fill = "#4285f4", ...props }) => (
   <Svg width="10" height="18" viewBox="0 0 10 18" {...props}>

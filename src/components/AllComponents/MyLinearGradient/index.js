@@ -22,10 +22,7 @@ const MyLinearGradient = ({ children, withScroll = false, style }) => {
       colors={["#fbfcfd", "#f6f7fb"]}
     >
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-        <ViewComponent
-          {...scrollProps}
-          style={[!withScroll && { flex: 1 }, style]}
-        >
+        <ViewComponent {...scrollProps} style={[!withScroll && { flex: 1 }, style]}>
           {children}
         </ViewComponent>
       </KeyboardAvoidingView>

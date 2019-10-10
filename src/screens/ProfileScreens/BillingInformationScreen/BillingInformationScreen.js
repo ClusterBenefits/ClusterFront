@@ -10,11 +10,9 @@ import {
 import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "../../../reducers/context";
 
-const BillingInformationScreenWithLoading = LoadingHOC(
-  BillingInformationScreenForm
-);
+const BillingInformationScreenWithLoading = LoadingHOC(BillingInformationScreenForm);
 
-export default function ProfileEditScreen(props) {
+export default function ProfileEditScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
@@ -30,13 +28,6 @@ export default function ProfileEditScreen(props) {
     await checkCreditCardSubscription({ token: state.token, dispatch });
     setIsLoading(false);
   };
-  const goProfileScreen = () => {
-    props.navigation.navigate("ProfileScreen");
-  };
-
-  const goEditBillingInfoScreen = () => {
-    props.navigation.navigate("AddCreditInfoScreen", { name: "Back" });
-  };
 
   // remove payment subscription
   const cancelSubscription = async () => {
@@ -49,11 +40,10 @@ export default function ProfileEditScreen(props) {
   return (
     <BillingInformationScreenWithLoading
       isLoading={isLoading}
-      goProfileScreen={goProfileScreen}
-      goEditBillingInfoScreen={goEditBillingInfoScreen}
       checkCreditInfo={checkCreditInfo}
       cancelSubscription={cancelSubscription}
       subscription={state.subscription}
+      navigation={navigation}
     />
   );
 }
