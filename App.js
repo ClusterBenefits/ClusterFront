@@ -6,18 +6,20 @@ import getTheme from "./src/native-base-theme/components";
 import platform from "./src/native-base-theme/variables/platform";
 import { MyProvider } from "./src/reducers/context";
 import { MainModalComponent } from "./src/services/mainModal";
+import { isIphoneX } from "./src/utils";
 
 const StyleProviderTheme = ({ children }) => (
   <StyleProvider style={getTheme(platform)}>{children}</StyleProvider>
 );
+const iosHeight = isIphoneX ? 44 : 20;
 const Test = () => (
   <View
     style={{
-      backgroundColor: "#fff",
-      height: Platform.OS === "ios" ? 20 : StatusBar.currentHeight
+      backgroundColor: "rgba(255, 255, 255, 1)",
+      height: Platform.OS === "ios" ? iosHeight : StatusBar.currentHeight
     }}
   >
-    <StatusBar translucent barStyle="dark-content" backgroundColor="#fffddd" />
+    <StatusBar translucent barStyle="dark-content" backgroundColor="white" />
   </View>
 );
 
@@ -26,7 +28,7 @@ export default function App({ navigation }) {
     <StyleProviderTheme>
       <MyProvider>
         <Root>
-          <Test />
+          {/* <Test /> */}
           <AppNavigation />
           <MainModalComponent navigation={navigation} />
         </Root>

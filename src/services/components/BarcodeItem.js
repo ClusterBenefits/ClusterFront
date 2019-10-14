@@ -54,7 +54,7 @@ const s = StyleSheet.create({
 export default function BarcodeItem({ item: { fields = {}, image = {} }, hideModal }) {
   return (
     <BlurView style={s.flexMax} tint="dark" intensity={100}>
-      <TouchableOpacity style={s.modalContainer} onPress={hideModal} opacity={1}>
+      <TouchableOpacity style={s.modalContainer} onPress={hideModal} activeOpacity={1}>
         <TouchableWithoutFeedback>
           <View style={s.container}>
             <View style={s.topPartContainer}>

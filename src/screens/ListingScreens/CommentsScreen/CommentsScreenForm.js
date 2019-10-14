@@ -1,19 +1,9 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  FlatList,
-  ActivityIndicator
-} from "react-native";
+import { StyleSheet, View, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
 import { Container, H3, Header, Left, Body, Title } from "native-base";
 import T from "prop-types";
 
-import {
-  MyLinearGradient,
-  MainComment,
-  IconButton
-} from "@components/AllComponents";
+import { MyLinearGradient, MainComment, IconButton } from "@components/AllComponents";
 
 export default function commentsForm({
   goBarcodeScreen,
@@ -24,7 +14,7 @@ export default function commentsForm({
 }) {
   return (
     <MyLinearGradient>
-      <Container style={styles.container}>
+      {/* <Container style={styles.container}>
         <Header noShadow style={styles.header}>
           <Left>
             <IconButton
@@ -83,7 +73,7 @@ export default function commentsForm({
             </TouchableOpacity>
           </View>
         </Body>
-      </Container>
+      </Container> */}
     </MyLinearGradient>
   );
 }
