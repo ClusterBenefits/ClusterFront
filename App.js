@@ -17,7 +17,7 @@ const Test = () => (
       height: Platform.OS === "ios" ? 20 : StatusBar.currentHeight
     }}
   >
-    <StatusBar translucent barStyle="dark-content" backgroundColor="#fff" />
+    <StatusBar translucent barStyle="dark-content" backgroundColor="#fffddd" />
   </View>
 );
 

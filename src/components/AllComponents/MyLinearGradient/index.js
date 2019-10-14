@@ -1,9 +1,15 @@
 import React from "react";
-import { KeyboardAvoidingView, ScrollView, View } from "react-native";
+import { KeyboardAvoidingView, ScrollView, View, SafeAreaView, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Platform, Dimensions } from "react-native";
 
 const deviceHeight = Dimensions.get("window").height;
+
+const s = StyleSheet.create({
+  flexMax: {
+    flex: 1
+  }
+});
 
 const MyLinearGradient = ({ children, withScroll = false, style }) => {
   const ViewComponent = withScroll ? ScrollView : View;
@@ -14,17 +20,13 @@ const MyLinearGradient = ({ children, withScroll = false, style }) => {
       }
     : {};
   return (
-    <LinearGradient
-      style={{
-        flex: 1,
-        height: Platform.OS === "ios" ? deviceHeight : deviceHeight - 20
-      }}
-      colors={["#fbfcfd", "#f6f7fb"]}
-    >
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-        <ViewComponent {...scrollProps} style={[!withScroll && { flex: 1 }, style]}>
-          {children}
-        </ViewComponent>
+    <LinearGradient style={s.flexMax} colors={["#fbfcfd", "#f6f7fb"]}>
+      <KeyboardAvoidingView style={s.flexMax} behavior="padding">
+        <SafeAreaView style={s.flexMax}>
+          <ViewComponent {...scrollProps} style={[!withScroll && s.flexMax, style]}>
+            {children}
+          </ViewComponent>
+        </SafeAreaView>
       </KeyboardAvoidingView>
     </LinearGradient>
   );

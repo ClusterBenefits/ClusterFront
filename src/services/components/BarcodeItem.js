@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  View,
-  TouchableWithoutFeedback
-} from "react-native";
+import { StyleSheet, TouchableOpacity, Image, View, TouchableWithoutFeedback } from "react-native";
 import { Text } from "native-base";
 import T from "prop-types";
 import Barcode from "react-native-barcode-builder";
@@ -15,6 +9,11 @@ import { FavoritesIcon, FavoritesIconOutLine } from "../../assets/svg";
 import { BlurView } from "expo-blur";
 
 const s = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
   container: {
     height: 250,
     width: 340,
@@ -22,6 +21,14 @@ const s = StyleSheet.create({
     borderRadius: 16,
     alignItems: "center",
     justifyContent: "center"
+  },
+  topPartContainer: {
+    width: "100%",
+    paddingHorizontal: 25,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15
   },
   discountStyle: {
     color: colors.mainGrey,
@@ -38,50 +45,26 @@ const s = StyleSheet.create({
   image: {
     height: 64,
     width: 64
+  },
+  flexMax: {
+    flex: 1
   }
 });
 
-export default function BarcodeItem({
-  item: { fields = {}, image = {} },
-  hideModal
-}) {
+export default function BarcodeItem({ item: { fields = {}, image = {} }, hideModal }) {
   return (
-    <BlurView style={{ flex: 1 }} tint="dark" intensity={100}>
-      <TouchableOpacity
-        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        onPress={hideModal}
-      >
+    <BlurView style={s.flexMax} tint="dark" intensity={100}>
+      <TouchableOpacity style={s.modalContainer} onPress={hideModal} opacity={1}>
         <TouchableWithoutFeedback>
           <View style={s.container}>
-            <View
-              style={{
-                width: "100%",
-                paddingHorizontal: 25,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 15
-              }}
-            >
+            <View style={s.topPartContainer}>
               <View />
               <View style={s.imageContainer}>
-                <Image
-                  source={{ uri: `${url}${image.tiny.url}` }}
-                  style={s.image}
-                />
+                <Image source={{ uri: `${url}${image.tiny.url}` }} style={s.image} />
               </View>
-              {true ? (
-                <FavoritesIcon fill={colors.mainRed} />
-              ) : (
-                <FavoritesIconOutLine />
-              )}
+              {true ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
             </View>
-            <Barcode
-              value={`${fields.discount}`}
-              format="CODE128"
-              width={2}
-              height={80}
-            />
+            <Barcode value={`${fields.discount}`} format="CODE128" width={2} height={80} />
             <Text>{fields.discount} %</Text>
             <Text style={s.discountStyle}>{`Знижка ${fields.discount} %`}</Text>
           </View>

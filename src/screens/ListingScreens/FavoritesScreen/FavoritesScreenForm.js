@@ -1,16 +1,26 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
-import { Container, H1, H3 } from "native-base";
+import { H1, H3 } from "native-base";
 import T from "prop-types";
 
-import { MainItem, MyLinearGradient } from "@components/AllComponents";
+import { MainItem, MyLinearGradient } from "../../../components/AllComponents";
 import { colors } from "../../../constants";
+import { ButtonModal } from "../../../services/mainModal";
 
-export default function FavoriteForm({
-  favoriteItems,
-  handleFavoriteChange,
-  goBarcodeScreen
-}) {
+const s = StyleSheet.create({
+  mainText: {
+    marginTop: 50,
+    paddingLeft: 15,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.mainGrey
+  },
+  extraMarginLeft: {
+    marginLeft: 10
+  }
+});
+
+export default function FavoriteForm({ favoriteItems, handleFavoriteChange }) {
   return (
     <MyLinearGradient>
       <H1 style={s.mainText}>Улюблені</H1>
@@ -21,13 +31,13 @@ export default function FavoriteForm({
           renderItem={({ item }) => (
             <MainItem
               item={item}
-              goBarcodeScreen={goBarcodeScreen}
+              onPress={ButtonModal.showModal}
               handleFavoriteChange={handleFavoriteChange}
             />
           )}
         />
       ) : (
-        <H3 style={{ marginLeft: 10 }}>No items in favorite list</H3>
+        <H3 style={s.extraMarginLeft}>No items in favorite list</H3>
       )}
     </MyLinearGradient>
   );
@@ -35,21 +45,5 @@ export default function FavoriteForm({
 
 FavoriteForm.propTypes = {
   favoriteItems: T.array.isRequired,
-  handleFavoriteChange: T.func.isRequired,
-  goBarcodeScreen: T.func.isRequired
+  handleFavoriteChange: T.func.isRequired
 };
-
-const s = StyleSheet.create({
-  mainText: {
-    marginTop: 50,
-    paddingLeft: 15,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.mainGrey
-  },
-  container: {
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingBottom: 20
-  }
-});

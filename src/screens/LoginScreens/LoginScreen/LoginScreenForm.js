@@ -1,14 +1,9 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Animated } from "react-native";
 import { Form, View, H1, Text } from "native-base";
 import T from "prop-types";
 
-import {
-  BlueButton,
-  LogoImage,
-  MainInput,
-  MyLinearGradient
-} from "@components/AllComponents";
+import { BlueButton, LogoImage, MainInput, MyLinearGradient } from "../../../components/AllComponents";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../../constants";
 import { keyboard } from "../../../hooks";
@@ -37,6 +32,13 @@ const s = StyleSheet.create({
   },
   forgotPasswordText: {
     fontWeight: "500"
+  },
+  subView: {
+    position: "relative",
+    top: 0,
+    left: 0,
+    right: 0,
+    flex: 1
   }
 });
 
@@ -48,11 +50,24 @@ export default function LoginForm({
   formCredentials,
   isValid
 }) {
-  const [visible] = keyboard();
+  // const [visible] = keyboard();
+  // console.log(visible);
+  // const bounceValue = new Animated.Value(visible ? 0 : -225);
+  // function animation() {
+  //   let toValue = visible ? -225 : 0;
+
+  //   Animated.timing(bounceValue, {
+  //     toValue: toValue,
+  //     duration: 500
+  //   }).start();
+  // }
+  // animation();
 
   return (
     <MyLinearGradient withScroll>
-      {!visible && <LogoImage withText />}
+      {/* <Animated.View style={[s.subView, { transform: [{ translateY: bounceValue }] }]}> */}
+      <LogoImage withText />
+      {/* </Animated.View> */}
       <View style={s.container}>
         <H1>Вітаємо!</H1>
         <Form>

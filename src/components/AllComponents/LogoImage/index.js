@@ -5,8 +5,6 @@ const LogoImage = ({ withText = false, noBg = false }) => {
   const s = StyleSheet.create({
     container: {
       flex: 1,
-      maxHeight: 220,
-      minHeight: 100,
       width: "100%",
       justifyContent: "center",
       alignItems: "center",

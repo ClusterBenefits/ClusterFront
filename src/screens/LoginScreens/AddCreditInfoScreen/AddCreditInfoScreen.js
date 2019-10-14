@@ -6,6 +6,7 @@ import { LoadingHOC } from "@components/AllComponents";
 import { allFieldsValidation } from "../../../utils/validation";
 import { UserContext } from "../../../reducers/context";
 import { addCreditCardSubscription } from "../../../actions/userActions";
+import formatStringByConfig from "../../../utils/formatStringByConfig";
 
 const AddCreditInfoScreenWithLoading = LoadingHOC(AddCreditInfoScreenForm);
 
@@ -14,88 +15,87 @@ export default function AddCreditInfoScreen({ navigation }) {
     credit_card_number: "",
     expiration: "",
     cvv2: "",
-    city: "",
-    address: "",
-    postal_code: "",
+    city: "dfsdf",
+    address: "dfg",
+    postal_code: "123123",
     checkBox: false
   });
+
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
+  const { isValid, errors } = allFieldsValidation({
+    credit_card_number: formCredentials.credit_card_number.replace(/[^0-9]/g, ""),
+    expiration: formCredentials.expiration,
+    cvv2: formCredentials.cvv2
+  });
+  const validForm = isValid && formCredentials.checkBox;
+
+  const formatNumberCard = formatStringByConfig({ 4: "-", 8: "-", 12: "-" });
+  const formatMonthAndYear = formatStringByConfig({ 2: "/" });
+
   const onChangeValue = (name, value) => {
     if (name === "checkBox") {
-      setFormCredentials({
-        ...formCredentials,
-        [name]: !formCredentials.checkBox
-      });
+      setFormCredentials({ ...formCredentials, [name]: !formCredentials.checkBox });
+    } else if (name === "expiration") {
+      const formatedNumberCard = formatMonthAndYear(value);
+      setFormCredentials({ ...formCredentials, [name]: formatedNumberCard });
+    } else if (name === "credit_card_number") {
+      const formatedNumberCard = formatNumberCard(value);
+      setFormCredentials({ ...formCredentials, [name]: formatedNumberCard });
     } else {
       setFormCredentials({ ...formCredentials, [name]: value });
     }
   };
-
-  // check where the user has come from(first time registration or billinginformation)
-  const fromWho = navigation.getParam("name", "Registration");
-
-  const skip = () => {
-    if (fromWho === "Registration") {
-      navigation.navigate("ProfileBottomTabNavigatior");
-    } else {
-      navigation.navigate("BillingInformationScreen");
-    }
-  };
+  console.log(errors, isValid);
   const post = async () => {
-    const { isValid, errors } = allFieldsValidation({
-      ...formCredentials,
-      credit_card_number: formCredentials.credit_card_number.replace(/\D/g, "")
-    });
+    console.log(formCredentials);
 
-    if (!isValid) {
-      setFormErrors(errors);
-    } else {
-      setIsLoading(true);
-      let response = await addCreditCardSubscription({
-        token: state.token,
-        dispatch,
-        data: {
-          credit_card_number: formCredentials.credit_card_number,
-          expiration: formCredentials.expiration,
-          cvv2: formCredentials.cvv2,
-          city: formCredentials.city,
-          address: formCredentials.address,
-          postal_code: formCredentials.postal_code
-        }
-      });
-      if (!response) {
-        setIsLoading(false);
-        return;
+    let response = await addCreditCardSubscription({
+      token: state.token,
+      dispatch,
+      data: {
+        credit_card_number: formCredentials.credit_card_number,
+        expiration: formCredentials.expiration,
+        cvv2: formCredentials.cvv2,
+        city: formCredentials.city,
+        address: formCredentials.address,
+        postal_code: formCredentials.postal_code
       }
-      if (response.code === "wait_3ds") {
-        let response1 = await AsyncAlert(response);
-        if (response1 === "No") {
-          console.log("nothing will happen");
-        } else {
-          console.log("doing");
-        }
-      }
-      if (response.code === "phone_verify") {
-        console.log("phone_verify");
-        return;
-      }
-      if (response && fromWho === "Registration") {
-        // after registration user has made a subscription
-        setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
-        navigation.navigate("ProfileBottomTabNavigatior");
-      } else if (response && fromWho !== "Registration") {
-        // after billinginformation has user made a subscription
-        setFormCredentials({ bcreditCardNumber: "", expiration: "", cvv2: "" });
-        navigation.navigate("BillingInformationScreen");
-      } else {
-        // somthing was wrong with creditCard
-        setIsLoading(false);
-      }
-    }
+    });
+    console.log(response);
+    //   if (!response) {
+    //     setIsLoading(false);
+    //     return;
+    //   }
+    //   if (response.code === "wait_3ds") {
+    //     let response1 = await AsyncAlert(response);
+    //     if (response1 === "No") {
+    //       console.log("nothing will happen");
+    //     } else {
+    //       console.log("doing");
+    //     }
+    //   }
+    //   if (response.code === "phone_verify") {
+    //     console.log("phone_verify");
+    //     return;
+    //   }
+    //   if (response && fromWho === "Registration") {
+    //     // after registration user has made a subscription
+    //     setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
+    //     navigation.navigate("ProfileBottomTabNavigatior");
+    //   } else if (response && fromWho !== "Registration") {
+    //     // after billinginformation has user made a subscription
+    //     setFormCredentials({ bcreditCardNumber: "", expiration: "", cvv2: "" });
+    //     navigation.navigate("BillingInformationScreen");
+    //   } else {
+    //     // somthing was wrong with creditCard
+    //     setIsLoading(false);
+    //   }
+    // }
   };
+
   const AsyncAlert = async response =>
     new Promise(resolve => {
       Alert.alert(
@@ -135,7 +135,7 @@ export default function AddCreditInfoScreen({ navigation }) {
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
       navigation={navigation}
-      isValid={true}
+      isValid={validForm}
     />
   );
 }

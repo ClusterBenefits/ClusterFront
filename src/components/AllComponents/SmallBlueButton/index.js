@@ -4,19 +4,11 @@ import { Button } from "native-base";
 import { colors } from "../../../constants/Colors";
 import T from "prop-types";
 
-const SmallBlueButton = ({
-  text,
-  textColor = "white",
-  buttonColor,
-  onPress,
-  ...props
-}) => {
+const SmallBlueButton = ({ text, textColor = "white", buttonColor, onPress, ...props }) => {
   const styles = StyleSheet.create({
     button: {
       borderRadius: 3,
-      backgroundColor: props.disabled
-        ? "#b5b5b5"
-        : buttonColor || `${colors.blue}`,
+      backgroundColor: props.disabled ? "#b5b5b5" : buttonColor || `${colors.blue}`,
       padding: 10,
       paddingLeft: 30,
       paddingRight: 30

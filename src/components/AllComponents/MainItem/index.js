@@ -49,15 +49,9 @@ const styles = StyleSheet.create({
 export default function list({ item, onPress, handleFavoriteChange }) {
   return (
     <ListItem style={styles.container}>
-      <TouchableOpacity
-        style={styles.container_item}
-        onPress={() => onPress({ item })}
-      >
+      <TouchableOpacity style={styles.container_item} onPress={() => onPress({ item })}>
         <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: `${url}${item.image.tiny.url}` }}
-            style={styles.image}
-          />
+          <Image source={{ uri: `${url}${item.image.tiny.url}` }} style={styles.image} />
         </View>
         <View style={styles.flex}>
           <Text numberOfLines={1} style={styles.mainText}>
@@ -68,11 +62,7 @@ export default function list({ item, onPress, handleFavoriteChange }) {
           </Text>
         </View>
         <TouchableOpacity onPress={() => handleFavoriteChange(item)}>
-          {item.featured ? (
-            <FavoritesIcon fill={colors.mainRed} />
-          ) : (
-            <FavoritesIconOutLine />
-          )}
+          {item.featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
         </TouchableOpacity>
       </TouchableOpacity>
     </ListItem>

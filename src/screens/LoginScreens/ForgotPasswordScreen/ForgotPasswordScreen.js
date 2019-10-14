@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BackHandler } from "react-native";
 
-import {
-  handleBackButton,
-  resetUserPassword
-} from "../../../actions/userActions";
+import { handleBackButton, resetUserPassword } from "../../../actions/userActions";
 import ForgotPasswordScreenForm from "./ForgotPasswordScreenForm";
 import { allFieldsValidation } from "./../../../utils/validation";
 import { LoadingHOC } from "@components/AllComponents";
@@ -26,7 +23,7 @@ export default function ForgotPasswordScreen({ navigation }) {
 
   const resetPassword = async () => {
     setIsLoading(true);
-    // trying to resetpassword, if email is in database go to the next screen
+    // trying to reset password, if email is in database go to the next screen
     let response = await resetUserPassword({
       email: formCredentials.email
     });
@@ -35,7 +32,6 @@ export default function ForgotPasswordScreen({ navigation }) {
       navigation.navigate(screens.SignUpConfirmScreen, {
         email: formCredentials.email
       });
-      return;
     }
     setIsLoading(false);
   };

@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Form, CheckBox, ListItem, Body, Text } from "native-base";
 import T from "prop-types";
 
-import { MyLinearGradient, BlueButton, MainInput, Header } from "@components/AllComponents";
+import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components/AllComponents";
 import { colors } from "../../../constants";
 
 const s = StyleSheet.create({
@@ -12,12 +12,25 @@ const s = StyleSheet.create({
   },
   flexMax: {
     flex: 1
+  },
+  extraMarginTop: {
+    marginTop: 20
+  },
+  extraMarginLeft: {
+    marginLeft: 20
+  },
+  checkBoxContainer: {
+    marginLeft: 10,
+    borderBottomWidth: 0
+  },
+  checkBox: {
+    backgroundColor: "transparent"
   }
 });
 
 export default function AddCreditInfoScreen({ post, onChangeValue, formCredentials, navigation, isValid }) {
   return (
-    <MyLinearGradient style={s.container}>
+    <MyLinearGradient withScroll style={s.container}>
       <Header titleText="Нова карта" navigation={navigation} />
       <MainInput
         placeholder="Номер карти"
@@ -25,7 +38,7 @@ export default function AddCreditInfoScreen({ post, onChangeValue, formCredentia
         maxLength={19}
         name="credit_card_number"
         value={formCredentials.credit_card_number}
-        containerStyle={{ marginTop: 20 }}
+        containerStyle={s.extraMarginTop}
       />
 
       <MainInput
@@ -39,7 +52,7 @@ export default function AddCreditInfoScreen({ post, onChangeValue, formCredentia
       <MainInput
         placeholder={"CVV"}
         onChangeText={onChangeValue}
-        maxLength={4}
+        maxLength={3}
         name="cvv2"
         value={formCredentials.cvv2}
       />
@@ -71,19 +84,19 @@ export default function AddCreditInfoScreen({ post, onChangeValue, formCredentia
         error={formErrors["postal_code"]}
       /> */}
 
-      <ListItem style={{ marginLeft: 10, borderBottomWidth: 0 }}>
+      <ListItem style={s.checkBoxContainer}>
         <CheckBox
-          style={{ backgroundColor: "transparent" }}
+          style={s.checkBox}
           checked={!formCredentials.checkBox}
           onPress={value => onChangeValue("checkBox", value)}
         />
-        <Body style={{ marginLeft: 20 }}>
+        <Body style={s.extraMarginLeft}>
           <Text>Я погоджуюсь з умовами користування сервісом</Text>
         </Body>
       </ListItem>
 
       <View style={s.flexMax} />
-      <BlueButton text="Зберегти" onPress={post} isValid={isValid} />
+      <BlueButton text="Зберегти" onPress={post} disabled={!isValid} withMarginBottom />
     </MyLinearGradient>
   );
 }

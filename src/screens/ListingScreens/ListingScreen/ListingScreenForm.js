@@ -17,13 +17,11 @@ const s = StyleSheet.create({
   }
 });
 
-export default function ListScreenForm({ items, handleFavoriteChange, subscription, userInfo }) {
+export default function ListScreenForm({ items, handleFavoriteChange, isSubscribed, userInfo }) {
   return (
     <MyLinearGradient>
       <H1 style={s.mainText}>Мої картки</H1>
-      {subscription &&
-      subscription.status &&
-      new Date(userInfo.expired_at).getTime() > new Date().getTime() ? (
+      {!isSubscribed ? (
         <FlatList
           data={items}
           keyExtractor={item => item.id.toString()}

@@ -31,7 +31,7 @@ export default function ListingScreen(props) {
     new Date(state.userInfo.expired_at).getTime() > new Date().getTime();
 
   async function asyncLoading() {
-    if (isSubscribed) {
+    if (!isSubscribed) {
       // fetch all product items
       let response1 = await fetchItems({
         dispatch,
@@ -66,6 +66,7 @@ export default function ListingScreen(props) {
       handleFavoriteChange={handleFavoriteChange}
       subscription={state.subscription}
       userInfo={state.userInfo}
+      isSubscribed={isSubscribed}
     />
   );
 }
