@@ -12,6 +12,7 @@ import {
 import ListingScreenForm from "./ListingScreenForm";
 import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "./../../../reducers/context";
+import { isSubscribed } from "../../../utils";
 
 const ListingScreenWithLoading = LoadingHOC(ListingScreenForm);
 
@@ -25,18 +26,17 @@ export default function ListingScreen(props) {
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
   }, [state.subscription]);
 
-  const isSubscribed =
-    state.subscription &&
-    state.subscription.status &&
-    new Date(state.userInfo.expired_at).getTime() > new Date().getTime();
+  const subscribed = isSubscribed(state.subscription);
+  console.log(subscribed, state.subscription);
 
   async function asyncLoading() {
-    if (!isSubscribed) {
+    if (!subscribed) {
       // fetch all product items
       let response1 = await fetchItems({
         dispatch,
         token: state.token
       });
+
       //fetch all favorites items
       let response2 = await fetchFavoriteItems({
         token: state.token,
@@ -64,9 +64,7 @@ export default function ListingScreen(props) {
       isLoading={isLoading}
       items={state.items}
       handleFavoriteChange={handleFavoriteChange}
-      subscription={state.subscription}
-      userInfo={state.userInfo}
-      isSubscribed={isSubscribed}
+      subscribed={subscribed}
     />
   );
 }

@@ -20,21 +20,34 @@ const s = StyleSheet.create({
   }
 });
 
-export default function BillingInformationScreen({ navigation }) {
+export default function BillingInformationScreen({ navigation, subscribed, subscription }) {
   return (
     <MyLinearGradient style={s.container}>
-      <Header navigation={navigation} titleText="інформація про оплату" />
-      <CreditCardBigIcon style={s.imageStyle} />
-      <H1>Платіжну карту не додано</H1>
-      <Text>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      </Text>
-      <View style={s.flexMax} />
-      <BlueButton
-        text="Додати карту"
-        withMarginBottom
-        onPress={() => navigation.navigate(screens.AddCreditInfoScreen)}
-      />
+      <>
+        {/* {subscribed ? (
+          <>
+            <Text style={styles.text}>Expiration Date: 2019.09.10</Text>
+            <Text style={styles.text}>Card Number</Text>
+            <Item style={styles.container}>
+              <H3>{credit_card_number}</H3>
+            </Item>
+            
+          </>
+        ) : null} */}
+        <Header navigation={navigation} titleText="інформація про оплату" />
+        <CreditCardBigIcon style={s.imageStyle} />
+        <H1>Платіжну карту не додано</H1>
+        <Text>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur.
+        </Text>
+        <View style={s.flexMax} />
+        <BlueButton
+          text="Додати карту"
+          withMarginBottom
+          onPress={() => navigation.navigate(screens.AddCreditInfoScreen)}
+        />
+      </>
     </MyLinearGradient>
   );
 }

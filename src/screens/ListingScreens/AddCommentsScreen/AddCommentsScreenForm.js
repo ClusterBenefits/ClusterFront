@@ -8,17 +8,10 @@ import { MyLinearGradient, MainInput, SmallBlueButton, IconButton } from "@compo
 export default function commentsForm({ goBack, onChangeValue, addComment, formCredentials, formErrors }) {
   return (
     <MyLinearGradient>
-      {/* <Container style={styles.container}>
+      <Container style={styles.container}>
         <Header noShadow style={styles.header}>
           <Left>
-            <IconButton
-              fontSize={16}
-              onPress={goBack}
-              name="left"
-              text={"Back"}
-              size={20}
-              marginLeft={0.1}
-            />
+            <IconButton fontSize={16} onPress={goBack} name="left" text={"Back"} size={20} marginLeft={0.1} />
           </Left>
           <Body>
             <Title />
@@ -45,7 +38,7 @@ export default function commentsForm({ goBack, onChangeValue, addComment, formCr
             <SmallBlueButton onPress={addComment} text={"Send"} />
           </View>
         </Container>
-      </Container> */}
+      </Container>
     </MyLinearGradient>
   );
 }

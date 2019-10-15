@@ -9,12 +9,14 @@ import {
 } from "../../../actions/userActions";
 import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "../../../reducers/context";
+import { isSubscribed } from "../../../utils";
 
 const BillingInformationScreenWithLoading = LoadingHOC(BillingInformationScreenForm);
 
 export default function ProfileEditScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
+  const subscribed = isSubscribed(state.subscription);
 
   useEffect(() => {
     checkCreditInfo();
@@ -44,6 +46,7 @@ export default function ProfileEditScreen({ navigation }) {
       cancelSubscription={cancelSubscription}
       subscription={state.subscription}
       navigation={navigation}
+      subscribed={subscribed}
     />
   );
 }

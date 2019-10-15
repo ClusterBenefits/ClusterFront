@@ -10,7 +10,7 @@ import { screens } from "../../../constants";
 
 const ChangeEmailScreenWithLoading = LoadingHOC(ChangeEmailScreenForm);
 
-export default function IntroScreen({ navigation }) {
+export default function ChangeEmailScreen({ navigation }) {
   const [formCredentials, setFormCredentials] = useState({
     email: "",
     password_email: "",

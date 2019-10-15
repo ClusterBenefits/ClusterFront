@@ -3,12 +3,7 @@ import { Form, H1 } from "native-base";
 import { StyleSheet, View } from "react-native";
 import T from "prop-types";
 
-import {
-  BlueButton,
-  MainInput,
-  MyLinearGradient,
-  Header
-} from "@components/AllComponents";
+import { BlueButton, MainInput, MyLinearGradient, Header } from "@components/AllComponents";
 
 const s = StyleSheet.create({
   container: {
@@ -20,15 +15,10 @@ const s = StyleSheet.create({
   }
 });
 
-export default function NewPasswordForm({
-  goLogin,
-  onChangeValue,
-  formCredentials
-}) {
+export default function NewPasswordForm({ goLogin, onChangeValue, formCredentials }) {
   const isValid =
     formCredentials.password.length >= 6 &&
-    formCredentials.password.length ===
-      formCredentials.password_confirmation.length;
+    formCredentials.password.length === formCredentials.password_confirmation.length;
 
   return (
     <MyLinearGradient style={s.container}>

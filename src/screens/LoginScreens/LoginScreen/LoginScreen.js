@@ -19,13 +19,9 @@ export default function LoginScreen({ navigation }) {
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
-    const getUserData = async () => {
+    const autoAuth = async () => {
       let { email, password } = await getDataFromLocalStorage();
-
       console.log(email, password);
-
-      // tryng to auto login
-
       if (!(email === "none") && !(password === "none")) {
         let response = await loginUser({
           email,
@@ -44,7 +40,7 @@ export default function LoginScreen({ navigation }) {
         setIsLoading(false);
       }
     };
-    getUserData();
+    autoAuth();
 
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     return () => {
@@ -87,6 +83,7 @@ export default function LoginScreen({ navigation }) {
   const goSignUp = () => {
     navigation.navigate(screens.SignUpScreen);
   };
+
   return (
     <LoginScreenWithLoading
       isLoading={isLoading}

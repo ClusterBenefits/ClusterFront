@@ -1,5 +1,4 @@
 export const screens = {
-  IntroScreen: "IntroScreen",
   LoginScreen: "LoginScreen",
   SignUpScreen: "SignUpScreen",
   SignUpConfirmScreen: "SignUpConfirmScreen",
