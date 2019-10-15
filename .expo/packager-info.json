@@ -1,10 +1,10 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "packagerPort": null,
-  "packagerPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://xy-nwk.anonymous.cluster.exp.direct",
+  "packagerNgrokUrl": "https://packager.xy-nwk.anonymous.cluster.exp.direct",
+  "ngrokPid": 67509,
+  "packagerPort": 19004,
+  "packagerPid": 67488,
   "webpackServerPort": null,
-  "devToolsPort": 19008
+  "devToolsPort": 19005
 }
