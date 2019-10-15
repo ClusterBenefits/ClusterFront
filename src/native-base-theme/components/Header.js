@@ -50,7 +50,8 @@ export default (variables /*: * */ = variable) => {
       shadowRadius: null,
       shadowOpacity: null,
       paddingTop: platform === "android" ? StatusBar.currentHeight : undefined,
-      height: platform === "android" ? variables.toolbarHeight + StatusBar.currentHeight : variables.toolbarHeight
+      height:
+        platform === "android" ? variables.toolbarHeight + StatusBar.currentHeight : variables.toolbarHeight
     },
     ".noShadow": {
       elevation: 0,
@@ -169,8 +170,7 @@ export default (variables /*: * */ = variable) => {
     },
     ".rounded": {
       "NativeBase.Item": {
-        borderRadius:
-          platform === "ios" && platformStyle !== "material" ? 25 : 3
+        borderRadius: platform === "ios" && platformStyle !== "material" ? 25 : 3
       }
     },
     "NativeBase.Left": {
@@ -200,8 +200,7 @@ export default (variables /*: * */ = variable) => {
           }
         },
         ".transparent": {
-          marginLeft:
-            platform === "ios" && platformStyle !== "material" ? -3 : 0,
+          marginLeft: platform === "ios" && platformStyle !== "material" ? -3 : 0,
           "NativeBase.Icon": {
             color: variables.toolbarBtnColor,
             fontSize:
@@ -228,12 +227,8 @@ export default (variables /*: * */ = variable) => {
             color: variables.toolbarBtnTextColor,
             fontSize: platform === "ios" ? 17 : 0,
             top: platform === "ios" ? 1 : -1.5,
-            paddingLeft:
-              platform === "ios" && platformStyle !== "material" ? 2 : 5,
-            paddingRight:
-              platform === "ios" && platformStyle !== "material"
-                ? undefined
-                : 10
+            paddingLeft: platform === "ios" && platformStyle !== "material" ? 2 : 5,
+            paddingRight: platform === "ios" && platformStyle !== "material" ? undefined : 10
           },
           backgroundColor: "transparent",
           borderColor: null,
@@ -259,10 +254,7 @@ export default (variables /*: * */ = variable) => {
     },
     "NativeBase.Body": {
       flex: 1,
-      alignItems:
-        platform === "ios" && platformStyle !== "material"
-          ? "center"
-          : "flex-start",
+      alignItems: platform === "ios" && platformStyle !== "material" ? "center" : "flex-start",
       alignSelf: "center",
       "NativeBase.Segment": {
         borderWidth: 0,
@@ -336,10 +328,7 @@ export default (variables /*: * */ = variable) => {
             color: variables.toolbarBtnTextColor,
             fontSize: platform === "ios" ? 17 : 14,
             top: platform === "ios" ? 1 : -1.5,
-            paddingRight:
-              platform === "ios" && variables.platformStyle !== "material"
-                ? 0
-                : undefined
+            paddingRight: platform === "ios" && variables.platformStyle !== "material" ? 0 : undefined
           },
           backgroundColor: "transparent",
           borderColor: null,
@@ -367,13 +356,11 @@ export default (variables /*: * */ = variable) => {
     backgroundColor: variables.toolbarDefaultBg,
     flexDirection: "row",
     // paddingHorizontal: 10,
-    paddingLeft:
-      platform === "ios" && variables.platformStyle !== "material" ? 6 : 10,
+    paddingLeft: platform === "ios" && variables.platformStyle !== "material" ? 6 : 10,
     paddingRight: 10,
     justifyContent: "center",
     paddingTop: platform === "ios" ? 18 : 0,
-    borderBottomWidth:
-      platform === "ios" ? 1 / PixelRatio.getPixelSizeForLayoutSize(1) : 0,
+    borderBottomWidth: platform === "ios" ? 1 / PixelRatio.getPixelSizeForLayoutSize(1) : 0,
     borderBottomColor: variables.toolbarDefaultBorder,
     height:
       variables.platform === "ios" && variables.platformStyle === "material"
@@ -381,8 +368,7 @@ export default (variables /*: * */ = variable) => {
         : variables.toolbarHeight,
     elevation: 3,
     shadowColor: platformStyle === "material" ? "#000" : undefined,
-    shadowOffset:
-      platformStyle === "material" ? { width: 0, height: 2 } : undefined,
+    shadowOffset: platformStyle === "material" ? { width: 0, height: 2 } : undefined,
     shadowOpacity: platformStyle === "material" ? 0.2 : undefined,
     shadowRadius: platformStyle === "material" ? 1.2 : undefined,
     top: 0,

@@ -3,23 +3,12 @@ import { StyleSheet, View } from "react-native";
 import { Container, H3, Header, Left, Body, Title, Form } from "native-base";
 import T from "prop-types";
 
-import {
-  MyLinearGradient,
-  MainInput,
-  SmallBlueButton,
-  IconButton
-} from "@components/AllComponents";
+import { MyLinearGradient, MainInput, SmallBlueButton, IconButton } from "@components/AllComponents";
 
-export default function commentsForm({
-  goBack,
-  onChangeValue,
-  addComment,
-  formCredentials,
-  formErrors
-}) {
+export default function commentsForm({ goBack, onChangeValue, addComment, formCredentials, formErrors }) {
   return (
     <MyLinearGradient>
-      <Container style={styles.container}>
+      {/* <Container style={styles.container}>
         <Header noShadow style={styles.header}>
           <Left>
             <IconButton
@@ -56,7 +45,7 @@ export default function commentsForm({
             <SmallBlueButton onPress={addComment} text={"Send"} />
           </View>
         </Container>
-      </Container>
+      </Container> */}
     </MyLinearGradient>
   );
 }

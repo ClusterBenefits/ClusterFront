@@ -42,7 +42,7 @@ import cardItemTheme from "./CardItem";
 import listItemTheme from "./ListItem";
 import formTheme from "./Form";
 import separatorTheme from "./Separator";
-import pickerTheme from "./Picker"
+import pickerTheme from "./Picker";
 import variable from "./../variables/platform";
 
 export default (variables /*: * */ = variable) => {
@@ -217,11 +217,7 @@ export default (variables /*: * */ = variable) => {
 
   const cssifyTheme = (grandparent, parent, parentKey) => {
     _.forEach(parent, (style, styleName) => {
-      if (
-        styleName.indexOf(".") === 0 &&
-        parentKey &&
-        parentKey.indexOf(".") === 0
-      ) {
+      if (styleName.indexOf(".") === 0 && parentKey && parentKey.indexOf(".") === 0) {
         if (grandparent) {
           if (!grandparent[styleName]) {
             grandparent[styleName] = {};
