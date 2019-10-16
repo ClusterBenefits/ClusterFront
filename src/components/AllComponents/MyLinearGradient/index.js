@@ -18,7 +18,7 @@ const MyLinearGradient = ({ children, withScroll = false, style }) => {
     : {};
   return (
     <LinearGradient style={s.flexMax} colors={["#fbfcfd", "#f6f7fb"]}>
-      <KeyboardAvoidingView style={s.flexMax} behavior="padding">
+      <KeyboardAvoidingView style={s.flexMax} behavior="margin">
         <SafeAreaView style={s.flexMax}>
           <ViewComponent {...scrollProps} style={[!withScroll && s.flexMax, style]}>
             {children}

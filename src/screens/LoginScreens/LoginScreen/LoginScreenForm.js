@@ -70,39 +70,38 @@ export default function LoginForm({
       {/* </Animated.View> */}
       <View style={s.container}>
         <H1>Вітаємо!</H1>
-        <Form>
-          <MainInput
-            placeholder="Емейл"
-            focusedText="Введіть ваш емейл"
-            name="email"
-            onChangeText={onChangeValue}
-            value={formCredentials.email}
-          />
-          <MainInput
-            placeholder="Пароль"
-            focusedText="Введіть ваш пароль"
-            name="password"
-            onChangeText={onChangeValue}
-            value={formCredentials.password}
-            secureTextEntry={true}
-          />
-          <View style={s.forgotPasswordContainer}>
-            <TouchableOpacity onPress={goForgotPassword}>
-              <Text style={s.forgotPasswordText}>Забули пароль?</Text>
-            </TouchableOpacity>
-            <View />
-          </View>
 
-          <BlueButton text="Log In" onPress={logInUser} disabled={!isValid} />
+        <MainInput
+          placeholder="Емейл"
+          focusedText="Введіть ваш емейл"
+          name="email"
+          onChangeText={onChangeValue}
+          value={formCredentials.email}
+        />
+        <MainInput
+          placeholder="Пароль"
+          focusedText="Введіть ваш пароль"
+          name="password"
+          onChangeText={onChangeValue}
+          value={formCredentials.password}
+          secureTextEntry={true}
+        />
+        <View style={s.forgotPasswordContainer}>
+          <TouchableOpacity onPress={goForgotPassword}>
+            <Text style={s.forgotPasswordText}>Забули пароль?</Text>
+          </TouchableOpacity>
+          <View />
+        </View>
 
-          <View style={s.bottom_menu}>
-            <Text style={s.bottom_menu_text}>Ще не зареєстровані?</Text>
+        <BlueButton text="Log In" onPress={logInUser} disabled={!isValid} />
 
-            <TouchableOpacity onPress={goSignUp}>
-              <Text style={s.signUpText}>Зареєструйтесь</Text>
-            </TouchableOpacity>
-          </View>
-        </Form>
+        <View style={s.bottom_menu}>
+          <Text style={s.bottom_menu_text}>Ще не зареєстровані?</Text>
+
+          <TouchableOpacity onPress={goSignUp}>
+            <Text style={s.signUpText}>Зареєструйтесь</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </MyLinearGradient>
   );

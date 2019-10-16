@@ -51,7 +51,7 @@ export default function AddCreditInfoScreen({ navigation }) {
   console.log(errors, isValid);
   const post = async () => {
     console.log(formCredentials);
-
+    setIsLoading(true);
     let response = await addCreditCardSubscription({
       token: state.token,
       dispatch,
@@ -64,6 +64,7 @@ export default function AddCreditInfoScreen({ navigation }) {
         postal_code: formCredentials.postal_code
       }
     });
+    setIsLoading(false);
     console.log(response);
     //   if (!response) {
     //     setIsLoading(false);

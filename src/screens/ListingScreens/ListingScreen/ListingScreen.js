@@ -43,11 +43,12 @@ export default function ListingScreen(props) {
         dispatch
       });
       // change star color if item is in favorite list
-      changeInitialFeatured({
-        items: response1,
-        favoriteItems: response2,
-        dispatch
-      });
+      response1 &&
+        changeInitialFeatured({
+          items: response1,
+          favoriteItems: response2,
+          dispatch
+        });
     }
 
     setIsLoading(false);
