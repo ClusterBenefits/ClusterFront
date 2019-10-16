@@ -1,27 +1,12 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Image,
-  TouchableOpacity,
-  Dimensions
-} from "react-native";
-import {
-  Container,
-  H2,
-  H3,
-  Header,
-  Left,
-  Text,
-  Body,
-  Right
-} from "native-base";
+import { StyleSheet, View, Image, TouchableOpacity, Dimensions } from "react-native";
+import { Container, H2, H3, Header, Left, Text, Body, Right } from "native-base";
 import T from "prop-types";
 import Barcode from "react-native-barcode-builder";
 
 import { colors } from "../../../constants/Colors";
 import { url } from "../../../actions/userActions";
-import { MyLinearGradient, Icon, IconButton } from "@components/AllComponents";
+import { MyLinearGradient, Icon, IconButton } from "../../../components";
 
 const styles = StyleSheet.create({
   container: {
@@ -52,12 +37,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function BardCodeForm({
-  goListingScreen,
-  handleFavoriteChange,
-  goCommentsScreen,
-  item
-}) {
+export default function BardCodeForm({ goListingScreen, handleFavoriteChange, goCommentsScreen, item }) {
   const height = Dimensions.get("window").height;
   return (
     <MyLinearGradient>
@@ -75,20 +55,13 @@ export default function BardCodeForm({
           </Left>
           <Right>
             <TouchableOpacity onPress={() => handleFavoriteChange(item)}>
-              <Icon
-                name={item.featured ? "star" : "star-empty"}
-                color={colors.orange}
-                size={30}
-              />
+              <Icon name={item.featured ? "star" : "star-empty"} color={colors.orange} size={30} />
             </TouchableOpacity>
           </Right>
         </Header>
         <Body style={{ justifyContent: "space-around" }}>
           <View style={styles.top}>
-            <Image
-              source={{ uri: `${url}${item.image.tiny.url}` }}
-              style={styles.image}
-            />
+            <Image source={{ uri: `${url}${item.image.tiny.url}` }} style={styles.image} />
             <H2 style={styles.h2}> {item.fields.name}</H2>
           </View>
 

@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Text } from "native-base";
 import T from "prop-types";
-import { colors } from "../../../constants/Colors";
+import { colors } from "../../constants/Colors";
 
 const BlueButton = ({
   text,

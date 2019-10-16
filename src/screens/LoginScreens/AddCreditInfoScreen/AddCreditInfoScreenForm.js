@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Form, CheckBox, ListItem, Body, Text } from "native-base";
 import T from "prop-types";
 
-import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components/AllComponents";
+import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components";
 import { colors } from "../../../constants";
 
 const s = StyleSheet.create({

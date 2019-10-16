@@ -3,7 +3,7 @@ import { StyleSheet, Animated } from "react-native";
 import { Form, View, H1, Text } from "native-base";
 import T from "prop-types";
 
-import { BlueButton, LogoImage, MainInput, MyLinearGradient } from "../../../components/AllComponents";
+import { BlueButton, LogoImage, MainInput, MyLinearGradient } from "../../../components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../../constants";
 import { keyboard } from "../../../hooks";

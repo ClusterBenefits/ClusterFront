@@ -3,8 +3,7 @@ import React, { useContext } from "react";
 import FavoritesScreenForm from "./FavoritesScreenForm";
 import { handleClickIcon, changeFavoriteCompanies } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
-import { LoadingHOC } from "@components/AllComponents";
-import { screens } from "../../../constants";
+import { LoadingHOC } from "../../../components";
 
 const FavoritesScreenWithLoading = LoadingHOC(FavoritesScreenForm);
 

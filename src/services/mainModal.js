@@ -3,7 +3,6 @@ import { Modal, View, StatusBar } from "react-native";
 
 import { BarcodeItem } from "./components";
 import ImageButtons from "./components/ImageButtons";
-// import {  } from "../components/AllComponents";
 
 let mainModal;
 

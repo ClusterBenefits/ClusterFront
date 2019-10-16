@@ -3,8 +3,8 @@ import { BackHandler } from "react-native";
 
 import FeedBackScreenForm from "./FeedBackScreenForm";
 import { sendMessageToAdmin, handleBackButton } from "../../../actions/userActions";
-import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "../../../reducers/context";
+import { LoadingHOC } from "../../../components";
 
 const FeedBackScreenWithLoading = LoadingHOC(FeedBackScreenForm);
 

@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Image, View } from "react-native";
 import { Text, ListItem } from "native-base";
-import { colors } from "../../../constants/Colors";
+import { colors } from "../../constants/Colors";
 import T from "prop-types";
-import { url } from "../../../constants";
-import { FavoritesIcon, FavoritesIconOutLine } from "../../../assets/svg";
+import { url } from "../../constants";
+import { FavoritesIcon, FavoritesIconOutLine } from "../../assets/svg";
 
 const styles = StyleSheet.create({
   container: {

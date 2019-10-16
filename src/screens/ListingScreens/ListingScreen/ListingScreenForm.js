@@ -3,9 +3,9 @@ import { StyleSheet, FlatList } from "react-native";
 import { H1 } from "native-base";
 import T from "prop-types";
 
-import { MainItem, MyLinearGradient } from "@components/AllComponents";
 import { colors } from "../../../constants";
 import { ButtonModal } from "../../../services/mainModal";
+import { MyLinearGradient, MainItem } from "../../../components";
 
 const s = StyleSheet.create({
   mainText: {

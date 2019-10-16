@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import NewPasswordScreenForm from "./NewPasswordScreenForm";
 import { setNewUserPassword } from "../../../actions/userActions";
-import { LoadingHOC } from "@components/AllComponents";
 import { screens } from "../../../constants";
+import { LoadingHOC } from "../../../components";
 
 const NewPasswordScreenWithLoading = LoadingHOC(NewPasswordScreenForm);
 

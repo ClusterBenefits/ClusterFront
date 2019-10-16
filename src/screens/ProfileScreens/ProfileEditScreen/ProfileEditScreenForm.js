@@ -3,9 +3,9 @@ import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Text } from "native-base";
 import T from "prop-types";
 
-import { MyLinearGradient, MainInput, BlueButton, Header } from "@components/AllComponents";
 import { ButtonModal } from "../../../services/mainModal";
 import { url, colors } from "../../../constants";
+import { MyLinearGradient, MainInput, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {

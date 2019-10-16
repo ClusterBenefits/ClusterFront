@@ -1,16 +1,6 @@
-import React, { useState, useContext } from "react";
-import {
-  Modal,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Alert,
-  TouchableHighlight,
-  Image,
-  Button
-} from "react-native";
+import React, { useState } from "react";
+import { Modal, StyleSheet } from "react-native";
 
-import { MyLinearGradient, Header } from "@components/AllComponents";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
@@ -42,8 +32,6 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 });
-
-let mainModal;
 
 export function ImagePickerFunction() {
   // const { state, dispatch } = useContext(UserContext);

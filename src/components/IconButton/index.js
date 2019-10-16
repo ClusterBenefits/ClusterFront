@@ -20,11 +20,7 @@ const IconButton = ({ text, onPress, ...props }) => {
 
   return (
     <Button onPress={onPress} bordered style={styles.button} upperCase>
-      <Icon
-        name={props.name || "left"}
-        color={props.color || "white"}
-        size={props.size || 18}
-      />
+      <Icon name={props.name || "left"} color={props.color || "white"} size={props.size || 18} />
       <Text uppercase={false} style={styles.button_text}>
         {text}
       </Text>

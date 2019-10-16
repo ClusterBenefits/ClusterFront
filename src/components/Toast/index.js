@@ -1,5 +1,5 @@
 import { Toast } from "native-base";
-import { colors } from "../../../constants";
+import { colors } from "../../constants";
 
 export default function ShowToast(text) {
   Toast.show({

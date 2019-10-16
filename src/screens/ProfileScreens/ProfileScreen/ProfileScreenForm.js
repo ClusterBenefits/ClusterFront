@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Text, ListItem } from "native-base";
 import T from "prop-types";
-import { MyLinearGradient } from "@components/AllComponents";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import {
@@ -15,6 +14,7 @@ import {
   EditPenIcon
 } from "../../../assets/svg";
 import { url, colors, screens } from "../../../constants";
+import { MyLinearGradient } from "../../../components";
 
 const styles = StyleSheet.create({
   container: {

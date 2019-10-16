@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Input, Item, Text, Label } from "native-base";
 import T from "prop-types";
-import { colors } from "../../../constants";
+import { colors } from "../../constants";
 
 const MainInput = ({
   onChangeText,

@@ -4,9 +4,9 @@ import { AsyncStorage, BackHandler } from "react-native";
 import ChangeEmailScreenForm from "./ChangeEmailScreenForm";
 import { handleBackButton, changeEmail } from "../../../actions/userActions";
 import { allFieldsValidation } from "./../../../utils/validation";
-import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "./../../../reducers/context";
 import { screens } from "../../../constants";
+import { LoadingHOC } from "../../../components";
 
 const ChangeEmailScreenWithLoading = LoadingHOC(ChangeEmailScreenForm);
 
@@ -19,8 +19,10 @@ export default function ChangeEmailScreen({ navigation }) {
   const [errorText, setErrorText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
+
   const { isValid } = allFieldsValidation({ email: formCredentials.email });
   const isValidButton = isValid && formCredentials.password_email.length > 3;
+
   useEffect(() => {
     BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
     getPasswordFromStorage();
@@ -28,6 +30,7 @@ export default function ChangeEmailScreen({ navigation }) {
       BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     };
   }, []);
+
   // get inital password for validation
   const getPasswordFromStorage = async () => {
     let response = (await AsyncStorage.getItem("password")) || "none";

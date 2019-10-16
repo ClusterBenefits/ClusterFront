@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Container, H3, Header, Left, Body, Title, Form } from "native-base";
 import T from "prop-types";
 
-import { MyLinearGradient, MainInput, SmallBlueButton, IconButton } from "@components/AllComponents";
+import { MyLinearGradient, MainInput, SmallBlueButton, IconButton } from "../../../components";
 
 export default function commentsForm({ goBack, onChangeValue, addComment, formCredentials, formErrors }) {
   return (

@@ -3,9 +3,9 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "./../../../reducers/context";
 import ProfileFillingScreenForm from "./ProfileFillingScreenForm";
 import { postUserInfo } from "../../../actions/userActions";
-import { LoadingHOC } from "@components/AllComponents";
 import { allFieldsValidation } from "../../../utils";
 import { screens } from "../../../constants";
+import { LoadingHOC } from "../../../components";
 
 const ProfileFillingScreenWithLoading = LoadingHOC(ProfileFillingScreenForm);
 

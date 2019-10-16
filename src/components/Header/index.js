@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text, View } from "native-base";
 import T from "prop-types";
-import { colors } from "../../../constants/Colors";
-import { BackArrowIcon } from "../../../assets/svg";
+import { colors } from "../../constants";
+import { BackArrowIcon } from "../../assets/svg";
 
 const Header = ({ titleText, navigation, onPress, titleRightText, onTitleRightPress }) => {
   const s = StyleSheet.create({

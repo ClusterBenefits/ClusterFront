@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { Button } from "native-base";
-import { colors } from "../../../constants/Colors";
+import { colors } from "../../constants";
 import T from "prop-types";
 
 const SmallBlueButton = ({ text, textColor = "white", buttonColor, onPress, ...props }) => {

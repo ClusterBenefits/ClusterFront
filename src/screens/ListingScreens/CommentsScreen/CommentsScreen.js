@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CommentsScreenForm from "./CommentsScreenForm";
 import { getComments } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
-import { LoadingHOC } from "@components/AllComponents";
+import { LoadingHOC } from "../../../components";
 
 const CommentsScreenWithLoading = LoadingHOC(CommentsScreenForm);
 
@@ -22,10 +22,7 @@ export default function CommentsScreen(props) {
 
   // adding on scrollview
   const handleLoadMore = async () => {
-    if (
-      state.comments.meta.pagination.current_page <
-      state.comments.meta.pagination.total_pages
-    ) {
+    if (state.comments.meta.pagination.current_page < state.comments.meta.pagination.total_pages) {
       setRefreshing(true);
       await getComments({
         id: item.id,

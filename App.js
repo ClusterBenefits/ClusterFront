@@ -6,7 +6,7 @@ import getTheme from "./src/native-base-theme/components";
 import platform from "./src/native-base-theme/variables/platform";
 import { MyProvider } from "./src/reducers/context";
 import { MainModalComponent } from "./src/services/mainModal";
-import { StatusBar } from "./src/components/AllComponents";
+import { StatusBar } from "./src/components";
 
 const StyleProviderTheme = ({ children }) => (
   <StyleProvider style={getTheme(platform)}>{children}</StyleProvider>

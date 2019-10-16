@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ShowToast } from "@components/AllComponents";
 import { url } from "../constants";
+import { ShowToast } from "../components";
 
 const errorHandler = ({ response }) => {
   // check if response error has nested lvls or no

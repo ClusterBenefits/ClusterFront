@@ -3,9 +3,9 @@ import { StyleSheet, View } from "react-native";
 import { H1, Text } from "native-base";
 import T from "prop-types";
 
-import { MyLinearGradient, BlueButton, Header } from "@components/AllComponents";
 import { CreditCardBigIcon } from "../../../assets/svg";
 import { screens } from "../../../constants";
+import { MyLinearGradient, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {

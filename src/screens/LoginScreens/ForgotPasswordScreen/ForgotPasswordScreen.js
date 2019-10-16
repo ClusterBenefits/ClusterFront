@@ -4,8 +4,8 @@ import { BackHandler } from "react-native";
 import { handleBackButton, resetUserPassword } from "../../../actions/userActions";
 import ForgotPasswordScreenForm from "./ForgotPasswordScreenForm";
 import { allFieldsValidation } from "./../../../utils/validation";
-import { LoadingHOC } from "@components/AllComponents";
 import { screens } from "../../../constants";
+import { LoadingHOC } from "../../../components";
 
 const ForgotPasswordScreenWithLoading = LoadingHOC(ForgotPasswordScreenForm);
 

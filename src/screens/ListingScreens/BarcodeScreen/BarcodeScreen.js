@@ -2,13 +2,10 @@ import React, { useEffect, useContext } from "react";
 import { BackHandler } from "react-native";
 
 import BarcodeScreenForm from "./BarcodeScreenForm";
-import {
-  handleClickIcon,
-  changeFavoriteCompanies,
-  handleBackButton
-} from "../../../actions/userActions";
-import { LoadingHOC } from "@components/AllComponents";
+import { handleClickIcon, changeFavoriteCompanies, handleBackButton } from "../../../actions/userActions";
+
 import { UserContext } from "./../../../reducers/context";
+import { LoadingHOC } from "../../../components";
 
 const BarcodeScreenWithLoading = LoadingHOC(BarcodeScreenForm);
 

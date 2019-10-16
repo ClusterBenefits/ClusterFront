@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, FlatList, ActivityIndicator } from 
 import { Container, H3, Header, Left, Body, Title } from "native-base";
 import T from "prop-types";
 
-import { MyLinearGradient, MainComment, IconButton } from "@components/AllComponents";
+import { MyLinearGradient, MainComment, IconButton } from "../../../components";
 
 export default function commentsForm({
   goBarcodeScreen,

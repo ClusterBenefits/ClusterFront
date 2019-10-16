@@ -3,8 +3,8 @@ import { BackHandler } from "react-native";
 
 import ChangePasswordScreenForm from "./ChangePasswordScreenForm";
 import { handleBackButton, changePassword } from "../../../actions/userActions";
-import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "./../../../reducers/context";
+import { LoadingHOC } from "../../../components";
 
 const ChangePasswordScreenWithLoading = LoadingHOC(ChangePasswordScreenForm);
 const initialState = {

@@ -3,9 +3,9 @@ import { BackHandler } from "react-native";
 
 import ProfileEditScreenForm from "./ProfileEditScreenForm";
 import { postUserInfo, handleBackButton } from "../../../actions/userActions";
-import { LoadingHOC, ShowToast } from "@components/AllComponents";
 import { allFieldsValidation } from "./../../../utils/validation";
 import { UserContext } from "./../../../reducers/context";
+import { LoadingHOC, ShowToast } from "../../../components";
 
 const ProfileEditScreenWithLoading = LoadingHOC(ProfileEditScreenForm);
 
@@ -37,8 +37,7 @@ export default function ProfileEditScreen({ navigation }) {
     navigation.navigate("ProfileScreen");
   };
 
-  // edit profiel user info
-
+  // edit profile user info
   const editUserProfile = async () => {
     setIsLoading(true);
 

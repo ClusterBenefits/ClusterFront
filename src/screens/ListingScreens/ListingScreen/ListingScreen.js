@@ -10,9 +10,9 @@ import {
   changeFavoriteCompanies
 } from "../../../actions/userActions";
 import ListingScreenForm from "./ListingScreenForm";
-import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "./../../../reducers/context";
 import { isSubscribed } from "../../../utils";
+import { LoadingHOC } from "../../../components";
 
 const ListingScreenWithLoading = LoadingHOC(ListingScreenForm);
 
@@ -27,7 +27,6 @@ export default function ListingScreen(props) {
   }, [state.subscription]);
 
   const subscribed = isSubscribed(state.subscription);
-  console.log(subscribed, state.subscription);
 
   async function asyncLoading() {
     if (!subscribed) {

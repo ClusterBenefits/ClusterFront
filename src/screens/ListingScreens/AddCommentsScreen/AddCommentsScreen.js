@@ -3,12 +3,10 @@ import debounce from "lodash/debounce";
 
 import AddCommentsScreenForm from "./AddCommentsScreenForm";
 import { sendComment, getComments } from "../../../actions/userActions";
-import { LoadingHOC } from "@components/AllComponents";
-import {
-  allFieldsValidation,
-  singleFieldValidation
-} from "./../../../utils/validation";
+
+import { allFieldsValidation, singleFieldValidation } from "./../../../utils/validation";
 import { UserContext } from "./../../../reducers/context";
+import { LoadingHOC } from "../../../components";
 
 const AddCommentsScreenWithLoading = LoadingHOC(AddCommentsScreenForm);
 

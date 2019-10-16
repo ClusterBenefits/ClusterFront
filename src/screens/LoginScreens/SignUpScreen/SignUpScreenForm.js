@@ -2,27 +2,12 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Form, View, H1 } from "native-base";
 import T from "prop-types";
-
-import {
-  BlueButton,
-  Header,
-  MainInput,
-  MyLinearGradient
-} from "@components/AllComponents";
+import { BlueButton, Header, MainInput, MyLinearGradient } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
     marginHorizontal: 20,
     marginBottom: 20
-  },
-  bottom_menu: {
-    flexDirection: "row",
-    justifyContent: "flex-end"
-  },
-  bottom_menu_text: {
-    color: "white",
-    textDecorationLine: "underline",
-    marginTop: 10
   },
   flexMax: {
     flex: 1

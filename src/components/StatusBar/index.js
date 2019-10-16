@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusBar, View, Platform, StyleSheet } from "react-native";
-import { isIphoneX } from "../../../utils";
-import { colors } from "../../../constants";
+import { isIphoneX } from "../../utils";
+import { colors } from "../../constants";
 
 const iosHeight = isIphoneX ? 44 : 20;
 

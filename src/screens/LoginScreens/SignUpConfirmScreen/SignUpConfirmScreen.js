@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 
 import SignUpConfirmScreenForm from "./SignUpConfirmScreenForm";
-import {
-  confirmUserCodeFromEmail,
-  resetUserPassword
-} from "../../../actions/userActions";
-import { LoadingHOC } from "@components/AllComponents";
+import { confirmUserCodeFromEmail, resetUserPassword } from "../../../actions/userActions";
 import { screens } from "../../../constants";
+import { LoadingHOC } from "../../../components";
 
-const SignUpConfrimScreenWithLoading = LoadingHOC(SignUpConfirmScreenForm);
+const SignUpConfirmScreenWithLoading = LoadingHOC(SignUpConfirmScreenForm);
 
 export default function SignUpConfirmScreen({ navigation }) {
   const [code, setVerificationCode] = useState("");
@@ -16,8 +13,7 @@ export default function SignUpConfirmScreen({ navigation }) {
   const email = navigation.getParam("email", "");
 
   // Resend varificationCode with resend && ShowToast('text')
-  const resendVarificationCode = () =>
-    resetUserPassword({ email, resend: true });
+  const resendVerificationCode = () => resetUserPassword({ email, resend: true });
 
   const goNewPassword = async () => {
     setIsLoading(true);
@@ -35,13 +31,13 @@ export default function SignUpConfirmScreen({ navigation }) {
   };
 
   return (
-    <SignUpConfrimScreenWithLoading
+    <SignUpConfirmScreenWithLoading
       isLoading={isLoading}
       goNewPassword={goNewPassword}
       code={code}
       setVerificationCode={setVerificationCode}
       navigation={navigation}
-      resendVarificationCode={resendVarificationCode}
+      resendVerificationCode={resendVerificationCode}
     />
   );
 }

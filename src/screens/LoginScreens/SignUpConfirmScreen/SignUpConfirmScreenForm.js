@@ -4,12 +4,8 @@ import { H1, Text } from "native-base";
 import T from "prop-types";
 import CodeInput from "react-native-confirmation-code-field";
 
-import {
-  BlueButton,
-  MyLinearGradient,
-  Header
-} from "@components/AllComponents";
 import { colors } from "../../../constants";
+import { BlueButton, MyLinearGradient, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -39,7 +35,7 @@ export default function SignUpForm({
   goNewPassword,
   code,
   setVerificationCode,
-  resendVarificationCode,
+  resendVerificationCode,
   navigation
 }) {
   const isValid = code.length === 4;
@@ -48,7 +44,7 @@ export default function SignUpForm({
     <MyLinearGradient style={s.container}>
       <Header
         navigation={navigation}
-        onTitleRightPress={resendVarificationCode}
+        onTitleRightPress={resendVerificationCode}
         titleRightText="Надіслати код знову"
       />
       <H1>Підтвердження</H1>
@@ -63,15 +59,9 @@ export default function SignUpForm({
         inputProps={{ onChangeText: setVerificationCode }}
       />
       <View style={s.maxFlex} />
-      <Text style={s.enterText}>
-        Введіть отриманий на емейл 4-ти значний код
-      </Text>
+      <Text style={s.enterText}>Введіть отриманий на емейл 4-ти значний код</Text>
 
-      <BlueButton
-        text="Підтвердити скидання паролю"
-        onPress={goNewPassword}
-        isValid={isValid}
-      />
+      <BlueButton text="Підтвердити скидання паролю" onPress={goNewPassword} isValid={isValid} />
     </MyLinearGradient>
   );
 }

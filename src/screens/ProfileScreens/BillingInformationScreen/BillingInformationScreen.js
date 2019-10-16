@@ -7,9 +7,9 @@ import {
   checkCreditCardSubscription,
   handleBackButton
 } from "../../../actions/userActions";
-import { LoadingHOC } from "@components/AllComponents";
 import { UserContext } from "../../../reducers/context";
 import { isSubscribed } from "../../../utils";
+import { LoadingHOC } from "../../../components";
 
 const BillingInformationScreenWithLoading = LoadingHOC(BillingInformationScreenForm);
 

@@ -10,9 +10,7 @@ export default function comment({ item }) {
         <Text style={styles.text}>Name : {item.user.first_name}</Text>
         <Text style={styles.text}>Email : {item.user.email}</Text>
         <Text style={styles.text}>Comment : {item.message}</Text>
-        {item.created_at ? (
-          <Text style={styles.end}>Date: {item.created_at.slice(0, 10)}</Text>
-        ) : null}
+        {item.created_at ? <Text style={styles.end}>Date: {item.created_at.slice(0, 10)}</Text> : null}
       </View>
     </ListItem>
   );

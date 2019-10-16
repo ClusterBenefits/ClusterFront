@@ -3,12 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { Form, H1, Text } from "native-base";
 import T from "prop-types";
 
-import {
-  BlueButton,
-  MainInput,
-  MyLinearGradient,
-  Header
-} from "@components/AllComponents";
+import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -24,13 +19,7 @@ const s = StyleSheet.create({
   }
 });
 
-export default function PasswordForm({
-  onChangeValue,
-  resetPassword,
-  formCredentials,
-  navigation,
-  isValid
-}) {
+export default function PasswordForm({ onChangeValue, resetPassword, formCredentials, navigation, isValid }) {
   return (
     <MyLinearGradient style={s.container}>
       <Header navigation={navigation} />
@@ -45,11 +34,7 @@ export default function PasswordForm({
       </Form>
       <Text style={s.enterEmailText}>Введіть емайл для відновлення паролю</Text>
       <View style={s.maxFlex} />
-      <BlueButton
-        text="Скинути пароль"
-        onPress={resetPassword}
-        disabled={!isValid}
-      />
+      <BlueButton text="Скинути пароль" onPress={resetPassword} disabled={!isValid} />
     </MyLinearGradient>
   );
 }

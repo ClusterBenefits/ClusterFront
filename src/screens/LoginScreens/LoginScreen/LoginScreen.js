@@ -3,10 +3,10 @@ import { BackHandler } from "react-native";
 
 import { UserContext } from "./../../../reducers/context";
 import LoginScreenForm from "./LoginScreenForm";
-import { LoadingHOC } from "@components/AllComponents";
 import { handleBackButton, loginUser } from "../../../actions/userActions";
 import { saveDataToLocalStorage, getDataFromLocalStorage, allFieldsValidation } from "../../../utils";
 import { screens } from "../../../constants";
+import { LoadingHOC } from "../../../components";
 
 const LoginScreenWithLoading = LoadingHOC(LoginScreenForm);
 

@@ -2,8 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Form, Text } from "native-base";
 import T from "prop-types";
-
-import { MyLinearGradient, MainInput, BlueButton, Header } from "@components/AllComponents";
+import { MyLinearGradient, MainInput, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {

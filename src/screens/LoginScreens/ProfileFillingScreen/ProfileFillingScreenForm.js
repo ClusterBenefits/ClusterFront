@@ -2,18 +2,15 @@ import React from "react";
 import { H1, View } from "native-base";
 import { StyleSheet } from "react-native";
 import T from "prop-types";
-
-import {
-  BlueButton,
-  MainInput,
-  MyLinearGradient,
-  Header
-} from "@components/AllComponents";
+import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
     marginBottom: 20,
     marginHorizontal: 20
+  },
+  flexMax: {
+    flex: 1
   }
 });
 
@@ -55,7 +52,7 @@ export default function ProfileFillingForm({
         value={formCredentials.position}
         onChangeText={onChangeValue}
       />
-      <View style={{ flex: 1 }} />
+      <View style={s.flexMax} />
       <BlueButton text="Next" onPress={onSubmit} disabled={!isValid} />
     </MyLinearGradient>
   );

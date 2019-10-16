@@ -22,8 +22,8 @@ const LogoImage = ({ withText = false, noBg = false }) => {
         style={s.image}
         source={
           withText
-            ? require("../../../assets/images/MainLogoWithText.png")
-            : require("../../../assets/images/MainLogo.png")
+            ? require("../../assets/images/MainLogoWithText.png")
+            : require("../../assets/images/MainLogo.png")
         }
       />
     </View>

@@ -3,7 +3,7 @@ import { StyleSheet, FlatList } from "react-native";
 import { H1, H3 } from "native-base";
 import T from "prop-types";
 
-import { MainItem, MyLinearGradient } from "../../../components/AllComponents";
+import { MainItem, MyLinearGradient } from "../../../components";
 import { colors } from "../../../constants";
 import { ButtonModal } from "../../../services/mainModal";
 

@@ -2,11 +2,11 @@ import React, { useState, useContext } from "react";
 import { Alert, Linking } from "react-native";
 
 import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
-import { LoadingHOC } from "@components/AllComponents";
 import { allFieldsValidation } from "../../../utils/validation";
 import { UserContext } from "../../../reducers/context";
 import { addCreditCardSubscription } from "../../../actions/userActions";
 import formatStringByConfig from "../../../utils/formatStringByConfig";
+import { LoadingHOC } from "../../../components";
 
 const AddCreditInfoScreenWithLoading = LoadingHOC(AddCreditInfoScreenForm);
 
