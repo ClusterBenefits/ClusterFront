@@ -289,9 +289,13 @@ export const ProfileIcon = ({ fill = "#afb4c4", ...props }) => (
 //BottomNavigation
 
 export const BackArrowIcon = ({ fill = "#4285f4", ...props }) => (
-  <Svg width="10" height="18" viewBox="0 0 10 18" {...props}>
-    <G transform="rotate(-315 5 9)">
-      <Path fill={fill} d="M2.49 3h2v10h10v2h-12z" />
+  <Svg width="24" height="24" viewBox="0 0 24 24" {...props}>
+    <G>
+      <G>
+        <G transform="rotate(-315 5 9)">
+          <Path fill={fill} d="M2.49 3h2v10h10v2h-12z" />
+        </G>
+      </G>
     </G>
   </Svg>
 );
@@ -310,21 +314,6 @@ export const CustomUserIcon = ({ fill = "#4285f4", ...props }) => (
           <Path
             fill="#e2e3e7"
             d="M38.008 20c0-6.627-4.479-12-10.003-12-5.525 0-10.003 5.373-10.003 12s4.478 12 10.003 12c5.524 0 10.003-5.373 10.003-12zM50.81 44.25C47.66 39.46 38.64 36 28.005 36 17.369 36 8.349 39.46 5.2 44.25 10.277 51.363 18.6 56 28.005 56s17.727-4.637 22.805-11.75z"
-          />
-        </G>
-      </G>
-    </G>
-  </Svg>
-);
-
-export const ClearInputIcon = ({ fill = "#e2e3e7", ...props }) => (
-  <Svg width="24" height="24" viewBox="0 0 24 24" {...props}>
-    <G>
-      <G>
-        <G>
-          <Path
-            fill={fill}
-            d="M10.828 3.757l1.415 1.415L9.414 8l2.829 2.828-1.415 1.415L8 9.414l-2.828 2.829-1.415-1.415L6.586 8 3.757 5.172l1.415-1.415L8 6.586zM8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
           />
         </G>
       </G>

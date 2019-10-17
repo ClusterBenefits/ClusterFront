@@ -1,5 +1,8 @@
 import { Toast } from "native-base";
 import { colors } from "../../constants";
+import { isIphoneX } from "../../utils";
+
+const marginBottom = isIphoneX ? 102 : 80;
 
 export default function ShowToast(text) {
   Toast.show({
@@ -8,6 +11,6 @@ export default function ShowToast(text) {
     duration: 2000,
     textStyle: { color: "white" },
     buttonTextStyle: { color: colors.mainBlue },
-    style: { margin: 10, marginBottom: 60, borderRadius: 8 }
+    style: { margin: 10, marginBottom: marginBottom, borderRadius: 8 }
   });
 }

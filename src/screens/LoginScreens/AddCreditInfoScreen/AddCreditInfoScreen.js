@@ -21,7 +21,6 @@ export default function AddCreditInfoScreen({ navigation }) {
     checkBox: false
   });
 
-  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
@@ -48,9 +47,8 @@ export default function AddCreditInfoScreen({ navigation }) {
       setFormCredentials({ ...formCredentials, [name]: value });
     }
   };
-  console.log(errors, isValid);
+
   const post = async () => {
-    console.log(formCredentials);
     setIsLoading(true);
     let response = await addCreditCardSubscription({
       token: state.token,
@@ -65,36 +63,25 @@ export default function AddCreditInfoScreen({ navigation }) {
       }
     });
     setIsLoading(false);
-    console.log(response);
-    //   if (!response) {
-    //     setIsLoading(false);
-    //     return;
-    //   }
-    //   if (response.code === "wait_3ds") {
-    //     let response1 = await AsyncAlert(response);
-    //     if (response1 === "No") {
-    //       console.log("nothing will happen");
-    //     } else {
-    //       console.log("doing");
-    //     }
-    //   }
-    //   if (response.code === "phone_verify") {
-    //     console.log("phone_verify");
-    //     return;
-    //   }
-    //   if (response && fromWho === "Registration") {
-    //     // after registration user has made a subscription
-    //     setFormCredentials({ creditCardNumber: "", expiration: "", cvv2: "" });
-    //     navigation.navigate("ProfileBottomTabNavigatior");
-    //   } else if (response && fromWho !== "Registration") {
-    //     // after billinginformation has user made a subscription
-    //     setFormCredentials({ bcreditCardNumber: "", expiration: "", cvv2: "" });
-    //     navigation.navigate("BillingInformationScreen");
-    //   } else {
-    //     // somthing was wrong with creditCard
-    //     setIsLoading(false);
-    //   }
-    // }
+    if (!response) {
+      setIsLoading(false);
+      return;
+    }
+    if (response.code === "wait_3ds") {
+      let response1 = await AsyncAlert(response);
+      response1 === "No" ? console.log("nothing will happen") : console.log("doing");
+    }
+    if (response.code === "phone_verify") {
+      console.log("phone_verify");
+      return;
+    }
+    if (response) {
+      // move back to billinginformation after subscription
+      navigation.pop();
+    } else {
+      // somthing was wrong with creditCard
+      setIsLoading(false);
+    }
   };
 
   const AsyncAlert = async response =>

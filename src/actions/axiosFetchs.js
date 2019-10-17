@@ -241,7 +241,7 @@ export const listOfCompanies = token => {
     .then(response => {
       return response.data;
     })
-    .catch(({ response }) => console.log("failed to load items", response));
+    .catch(({ response }) => console.log("failed to load items", response.data));
 
   return response;
 };

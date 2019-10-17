@@ -33,12 +33,13 @@ export default function ProfileEditScreen({ navigation }) {
 
   // remove payment subscription
   const cancelSubscription = async () => {
-    deleteCreditCardSubscription({
+    await deleteCreditCardSubscription({
       dispatch: dispatch,
       token: state.token,
       setIsLoading: setIsLoading
     });
   };
+
   return (
     <BillingInformationScreenWithLoading
       isLoading={isLoading}
