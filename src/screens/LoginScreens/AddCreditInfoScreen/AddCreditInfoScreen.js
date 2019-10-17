@@ -25,6 +25,7 @@ export default function AddCreditInfoScreen({ navigation }) {
   const { state, dispatch } = useContext(UserContext);
 
   const { isValid, errors } = allFieldsValidation({
+    // remove nonNumbers for validation
     credit_card_number: formCredentials.credit_card_number.replace(/[^0-9]/g, ""),
     expiration: formCredentials.expiration,
     cvv2: formCredentials.cvv2
@@ -38,9 +39,11 @@ export default function AddCreditInfoScreen({ navigation }) {
     if (name === "checkBox") {
       setFormCredentials({ ...formCredentials, [name]: !formCredentials.checkBox });
     } else if (name === "expiration") {
+      // add slash to month/year
       const formatedNumberCard = formatMonthAndYear(value);
       setFormCredentials({ ...formCredentials, [name]: formatedNumberCard });
     } else if (name === "credit_card_number") {
+      // add dash to creditCard number
       const formatedNumberCard = formatNumberCard(value);
       setFormCredentials({ ...formCredentials, [name]: formatedNumberCard });
     } else {
@@ -67,23 +70,22 @@ export default function AddCreditInfoScreen({ navigation }) {
       setIsLoading(false);
       return;
     }
+    // If liqpay wants other validation like web/phone
     if (response.code === "wait_3ds") {
       let response1 = await AsyncAlert(response);
-      response1 === "No" ? console.log("nothing will happen") : console.log("doing");
+      response1 === "No" ? console.log("no redirection") : console.log("doing redirection");
+      return;
     }
     if (response.code === "phone_verify") {
       console.log("phone_verify");
       return;
     }
     if (response) {
-      // move back to billinginformation after subscription
       navigation.pop();
-    } else {
-      // somthing was wrong with creditCard
-      setIsLoading(false);
     }
   };
 
+  // creditCard validation with web redirection
   const AsyncAlert = async response =>
     new Promise(resolve => {
       Alert.alert(

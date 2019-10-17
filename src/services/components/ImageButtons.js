@@ -53,7 +53,7 @@ const s = StyleSheet.create({
   }
 });
 
-export default function ImageButtons({ hideModal, navigation = {} }) {
+export default function ImageButtons({ hideModal, navigation }) {
   const { state, dispatch } = useContext(UserContext);
 
   const { token } = state;
@@ -108,9 +108,9 @@ export default function ImageButtons({ hideModal, navigation = {} }) {
 
     hideModal();
   };
-
+  console.log(navigation);
   const _showCamera = () => {
-    navigation.navigate(screens.CameraScreen);
+    navigation.navigate(screens.CameraScreen, { navigation });
     hideModal();
   };
 
@@ -122,7 +122,7 @@ export default function ImageButtons({ hideModal, navigation = {} }) {
         <Button full onPress={() => _pickImage()} style={[s.buttonStyle, s.imageButtonStyle]}>
           <Text style={s.buttonText}>Обрати фото</Text>
         </Button>
-        <Button full onPress={() => _showCamera()} style={[s.buttonStyle, s.cameraButtonStyle]}>
+        <Button full onPress={() => _pickImage()} style={[s.buttonStyle, s.cameraButtonStyle]}>
           <Text style={s.buttonText}>Відкрити камеру</Text>
         </Button>
 

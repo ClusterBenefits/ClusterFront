@@ -31,9 +31,10 @@ export default function ProfileFillingScreen({ navigation }) {
     let data = {
       first_name: formCredentials.firstName,
       last_name: formCredentials.lastName,
-      company: formCredentials.organization,
-      position: formCredentials.position
+      company: formCredentials.organization
     };
+    formCredentials.position.length > 0 && (data.position = formCredentials.position);
+
     let response = await postUserInfo({ token: state.token, data, dispatch });
     response ? navigation.navigate(screens.ListingScreen) : setIsLoading(false);
   };

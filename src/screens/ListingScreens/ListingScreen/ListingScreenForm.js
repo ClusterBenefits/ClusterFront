@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, FlatList } from "react-native";
-import { H1 } from "native-base";
+import { H1, H3 } from "native-base";
 import T from "prop-types";
 
 import { colors } from "../../../constants";
@@ -14,6 +14,9 @@ const s = StyleSheet.create({
     paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: colors.mainGrey
+  },
+  extraMarginLeft: {
+    marginLeft: 10
   }
 });
 
@@ -34,7 +37,7 @@ export default function ListScreenForm({ items, handleFavoriteChange, subscribed
           )}
         />
       ) : (
-        <H1>Subscribe to see items</H1>
+        <H3 style={s.extraMarginLeft}>Subscribe to see items</H3>
       )}
     </MyLinearGradient>
   );

@@ -54,7 +54,7 @@ export default function ProfileEditForm({
           }
           style={s.imageStyle}
         />
-        <TouchableOpacity onPress={() => ButtonModal.showModal(navigation, true)}>
+        <TouchableOpacity onPress={() => ButtonModal.showModal({ navigation })}>
           <Text style={s.uploadText}>Завантажити фото</Text>
         </TouchableOpacity>
       </View>

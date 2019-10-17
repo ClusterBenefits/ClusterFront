@@ -29,7 +29,7 @@ export default function ListingScreen(props) {
   const subscribed = isSubscribed(state.subscription);
 
   async function asyncLoading() {
-    if (subscribed) {
+    if (true) {
       // fetch all product items
       let response1 = await fetchItems({
         dispatch,
