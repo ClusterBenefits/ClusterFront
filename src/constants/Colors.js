@@ -10,5 +10,7 @@ export const colors = {
   mainWhite: "#ffffff",
   mainLogoBg: "#f6f7fb",
   bottomNavigationBg: "#ffffff",
-  modalBg: "rgba(0, 0, 0, 0.4)"
+  modalBg: "rgba(0, 0, 0, 0.4)",
+  linearGradientStart: "#fbfcfd",
+  linearGradientEnd: "#f6f7fb"
 };

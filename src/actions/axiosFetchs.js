@@ -205,7 +205,7 @@ export const attachToFavorites = ({ token, id }) => {
     })
     .then(response => {
       console.log("attachedfavorite response");
-      ShowToast("Item added to favorite list", 2000);
+      ShowToast("Item added to favorite list");
       return response;
     })
     .catch(e => console.log("failed to add", e));
@@ -220,7 +220,7 @@ export const removeFromFavorites = ({ token, id }) => {
       headers: { Accept: "application/json", Authorization: "Bearer " + token }
     })
     .then(response => {
-      ShowToast("Item removed from favorite list", 2000);
+      ShowToast("Item removed from favorite list");
       return response;
     })
     .catch(e => console.log("error removing ", e));
@@ -340,6 +340,7 @@ export const checkBillingSubscription = token => {
 };
 
 export const addBillingSubscription = ({ ...props }) => {
+  console.log(props.data);
   let response = axios
     .post(`${url}/api/user/payment/subscribe`, props.data, {
       headers: {
@@ -348,7 +349,7 @@ export const addBillingSubscription = ({ ...props }) => {
       }
     })
     .then(response => {
-      console.log("response addsubscription", response.data);
+      console.log("response add subscription", response.data);
       ShowToast(response.data.message);
       return response.data;
     })

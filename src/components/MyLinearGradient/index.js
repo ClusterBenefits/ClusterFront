@@ -1,6 +1,7 @@
 import React from "react";
-import { KeyboardAvoidingView, ScrollView, View, SafeAreaView, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, ScrollView, View, SafeAreaView, StyleSheet, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { colors } from "../../constants";
 
 const s = StyleSheet.create({
   flexMax: {
@@ -18,8 +19,8 @@ const MyLinearGradient = ({ children, withScroll = false, style }) => {
       }
     : {};
   return (
-    <LinearGradient style={s.flexMax} colors={["#fbfcfd", "#f6f7fb"]}>
-      <KeyboardAvoidingView style={s.flexMax} behavior="margin">
+    <LinearGradient style={s.flexMax} colors={[colors.linearGradientStart, colors.linearGradientEnd]}>
+      <KeyboardAvoidingView style={s.flexMax} behavior={Platform.OS === "ios" ? "padding" : null}>
         <SafeAreaView style={s.flexMax}>
           <ViewComponent {...scrollProps} style={[!withScroll && s.flexMax, style]}>
             {children}

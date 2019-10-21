@@ -30,6 +30,7 @@ export default function BillingInformationScreen({
   checkSubscription,
   subscription
 }) {
+  const { credit_card_number = "", expired_at = "" } = subscription || {};
   return (
     <MyLinearGradient style={s.container}>
       <>
@@ -38,8 +39,8 @@ export default function BillingInformationScreen({
         {(subscribed && (
           <>
             <H2 style={s.extraMarginBottom}>Платіжну карту додано</H2>
-            <Text>Expiration Date: 2019.09.10</Text>
-            <Text>Card Number: {subscription.credit_card_number}</Text>
+            <Text>Expiration Date: {expired_at}</Text>
+            <Text>Card Number: {credit_card_number}</Text>
             <View style={s.flexMax} />
             <BlueButton text="Відмінити підписку" withMarginBottom onPress={cancelSubscription} />
           </>
@@ -47,7 +48,7 @@ export default function BillingInformationScreen({
           (subscription && (
             <>
               <Text> Checking subscription , це може заняти декілька хвилин</Text>
-              <BlueButton text="Оновити дані" withMarginBottom onPress={checkSubscription} />
+              <BlueButton text="Оновити дані" withMarginBottom onPress={cancelSubscription} />
             </>
           )) || (
             <>

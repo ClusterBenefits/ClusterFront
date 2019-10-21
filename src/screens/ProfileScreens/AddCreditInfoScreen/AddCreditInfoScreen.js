@@ -16,7 +16,7 @@ export default function AddCreditInfoScreen({ navigation }) {
     expiration: "",
     cvv2: "",
     city: "dfsdf",
-    address: "dfg",
+    address: "dfgddd",
     postal_code: "123123",
     checkBox: false
   });
@@ -68,7 +68,6 @@ export default function AddCreditInfoScreen({ navigation }) {
     });
     setIsLoading(false);
     if (!response) {
-      setIsLoading(false);
       return;
     }
     // If liqpay wants other validation like web/phone
