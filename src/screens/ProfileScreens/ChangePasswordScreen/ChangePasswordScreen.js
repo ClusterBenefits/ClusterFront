@@ -1,41 +1,53 @@
 import React, { useState, useEffect, useContext } from "react";
-import { BackHandler } from "react-native";
+import { AsyncStorage } from "react-native";
 
 import ChangePasswordScreenForm from "./ChangePasswordScreenForm";
-import { handleBackButton, changePassword } from "../../../actions/userActions";
+import { changePassword } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
 import { LoadingHOC } from "../../../components";
+import { allFieldsValidation } from "../../../utils";
+import { useBackButton } from "../../../hooks";
 
 const ChangePasswordScreenWithLoading = LoadingHOC(ChangePasswordScreenForm);
-const initialState = {
-  oldPassword: "",
-  password: "",
-  password_confirmation: ""
-};
+
+const initialState = { oldPassword: "", password: "", password_confirmation: "", realPassword: "" };
+
 export default function ChangePasswordScreen({ navigation }) {
   const [formCredentials, setFormCredentials] = useState(initialState);
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { state, dispatch } = useContext(UserContext);
 
-  const isValid =
-    formCredentials.password.length > 6 &&
-    formCredentials.password_confirmation.length > 6 &&
-    formCredentials.oldPassword.length > 6;
+  const { state } = useContext(UserContext);
 
   useEffect(() => {
-    BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
-    return () => {
-      BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    };
+    getPasswordFromStorage();
   }, []);
+
+  useBackButton(false);
+
+  const getPasswordFromStorage = async () => {
+    let response = (await AsyncStorage.getItem("password")) || "";
+    setFormCredentials({
+      ...formCredentials,
+      realPassword: response
+    });
+  };
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
+    setFormErrors({ ...formErrors, [name]: "" });
   };
-
   // saving email / password for autologin next time
 
   const changeUserPassword = async () => {
+    const { errors } = allFieldsValidation(formCredentials, {
+      same: "Пароль не співпадає",
+      min: "Кількість символів в полі повинна бути не менше 8"
+    });
+    if (errors) {
+      setFormErrors(errors);
+      return;
+    }
     setIsLoading(true);
 
     // trying to change password
@@ -45,7 +57,7 @@ export default function ChangePasswordScreen({ navigation }) {
       new_password: formCredentials.password,
       new_password_confirmation: formCredentials.password_confirmation
     });
-    if (response) setFormCredentials(initialState);
+    if (response) setFormCredentials({ ...initialState, realPassword: formCredentials.password });
 
     setIsLoading(false);
   };
@@ -57,7 +69,7 @@ export default function ChangePasswordScreen({ navigation }) {
       changePassword={changeUserPassword}
       formCredentials={formCredentials}
       navigation={navigation}
-      isValid={isValid}
+      formErrors={formErrors}
     />
   );
 }

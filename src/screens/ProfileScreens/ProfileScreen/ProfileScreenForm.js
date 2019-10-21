@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Text, ListItem } from "native-base";
 import T from "prop-types";
 import {
@@ -11,19 +11,18 @@ import {
   InfoIcon,
   EditPenIcon
 } from "../../../assets/svg";
-import { url, colors, screens } from "../../../constants";
+import { screens } from "../../../constants";
 import { MyLinearGradient } from "../../../components";
+import UserAvatar from "react-native-user-avatar";
 import s from "./styles";
 
 export default function ProfileForm({ redirectToScreen, signOutUser, userInfo }) {
   const {
-    firstName = "Name",
-    lastName = "LastName",
+    first_name: firstName = "Name",
+    last_name: lastName = "LastName",
     position = "Position",
-    company = "Organization",
-    image
+    company = "Organization"
   } = userInfo;
-  const imageUrl = image && image.tiny;
 
   return (
     <MyLinearGradient withScroll style={s.container}>
@@ -39,15 +38,9 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
 
       <View style={s.bodyContainer}>
         <View style={s.userInfoContainer}>
-          <Image
-            source={
-              imageUrl
-                ? { uri: `${url}${imageUrl.url}` }
-                : require("../../../assets/images/DefaultAvatar.png")
-            }
-            style={s.image}
-          />
-          <Text style={s.nameText}>{`${firstName}${lastName}`}</Text>
+          <UserAvatar size="60" name={`${firstName} ${lastName}`} />
+
+          <Text style={s.nameText}>{`${firstName} ${lastName}`}</Text>
 
           <View style={s.companyContainer}>
             <Text style={s.companyText}>{company}</Text>

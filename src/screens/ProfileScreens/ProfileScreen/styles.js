@@ -21,6 +21,9 @@ export default StyleSheet.create({
     marginTop: 35
   },
   companyContainer: {
+    shadowColor: colors.mainBlack,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.04,
     width: 280,
     height: 80,
     marginTop: 15,
@@ -48,6 +51,7 @@ export default StyleSheet.create({
     marginTop: 20
   },
   nameText: {
+    marginTop: 15,
     fontSize: 16,
     fontWeight: "700"
   },

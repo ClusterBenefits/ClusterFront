@@ -1,23 +1,20 @@
 import React, { useEffect, useContext } from "react";
-import { BackHandler } from "react-native";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 
 import { UserContext } from "../../../reducers/context";
-import { handleBackButton, clearUserLocal } from "../../../actions/userActions";
+import { clearUserLocal } from "../../../actions/userActions";
 import ProfileScreenForm from "./ProfileScreenForm";
 import { screens } from "../../../constants";
+import { useBackButton } from "../../../hooks";
 
 export default function ProfileScreen({ navigation }) {
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
     getPermissionAsync();
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    return () => {
-      BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    };
   }, []);
+  useBackButton(true);
 
   const getPermissionAsync = async () => {
     if (Constants.platform.ios) {

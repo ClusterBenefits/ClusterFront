@@ -1,44 +1,37 @@
-import React, { useState, useEffect, useContext } from "react";
-import { BackHandler } from "react-native";
+import React, { useState, useContext } from "react";
 
 import ProfileEditScreenForm from "./ProfileEditScreenForm";
-import { postUserInfo, handleBackButton } from "../../../actions/userActions";
+import { postUserInfo } from "../../../actions/userActions";
 import { allFieldsValidation } from "./../../../utils/validation";
 import { UserContext } from "./../../../reducers/context";
 import { LoadingHOC, ShowToast } from "../../../components";
+import { useBackButton } from "../../../hooks";
 
 const ProfileEditScreenWithLoading = LoadingHOC(ProfileEditScreenForm);
 
+const initialState = { firstName: "", lastName: "", organization: "", position: "" };
+
 export default function ProfileEditScreen({ navigation }) {
-  const [formCredentials, setFormCredentials] = useState({
-    firstName: "",
-    lastName: "",
-    organization: "",
-    position: ""
-  });
+  const [formCredentials, setFormCredentials] = useState(initialState);
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    return () => {
-      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
-    };
-  }, []);
+  useBackButton(false);
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
+    setFormErrors({ ...formErrors, [name]: "" });
   };
 
-  // check if input field is correct after typing
-  const { isValid } = allFieldsValidation(formCredentials);
-
-  const goProfileScreen = () => {
-    navigation.navigate("ProfileScreen");
-  };
-
-  // edit profile user info
   const editUserProfile = async () => {
+    const { errors } = allFieldsValidation(formCredentials, {
+      min: "Кількість символів в полі повинна бути не менше 3"
+    });
+    if (errors) {
+      setFormErrors(errors);
+      return;
+    }
     setIsLoading(true);
 
     let data = {
@@ -60,12 +53,7 @@ export default function ProfileEditScreen({ navigation }) {
     if (response) {
       ShowToast("Ваш профайл оновлено успішно!");
 
-      setFormCredentials({
-        firstName: "",
-        lastName: "",
-        organization: "",
-        position: ""
-      });
+      setFormCredentials(initialState);
     }
     setIsLoading(false);
   };
@@ -73,13 +61,11 @@ export default function ProfileEditScreen({ navigation }) {
   return (
     <ProfileEditScreenWithLoading
       isLoading={isLoading}
-      goProfileScreen={goProfileScreen}
       editUserProfile={editUserProfile}
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
       navigation={navigation}
-      isValid={isValid}
-      userInfo={state.userInfo}
+      formErrors={formErrors}
     />
   );
 }

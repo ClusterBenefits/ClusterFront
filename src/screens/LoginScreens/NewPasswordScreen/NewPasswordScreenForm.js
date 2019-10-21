@@ -15,11 +15,7 @@ const s = StyleSheet.create({
   }
 });
 
-export default function NewPasswordForm({ goLogin, onChangeValue, formCredentials }) {
-  const isValid =
-    formCredentials.password.length >= 6 &&
-    formCredentials.password.length === formCredentials.password_confirmation.length;
-
+export default function NewPasswordForm({ goLogin, onChangeValue, formCredentials, formErrors }) {
   return (
     <MyLinearGradient style={s.container}>
       <Header />
@@ -31,6 +27,7 @@ export default function NewPasswordForm({ goLogin, onChangeValue, formCredential
           secureTextEntry={true}
           name={"password"}
           value={formCredentials.password}
+          error={formErrors["password"]}
         />
         <MainInput
           placeholder="Повторіть пароль"
@@ -38,10 +35,11 @@ export default function NewPasswordForm({ goLogin, onChangeValue, formCredential
           secureTextEntry={true}
           name={"password_confirmation"}
           value={formCredentials.password_confirmation}
+          error={formErrors["password_confirmation"]}
         />
       </Form>
       <View style={s.maxFlex} />
-      <BlueButton text="Зберегти" onPress={goLogin} disabled={!isValid} />
+      <BlueButton text="Зберегти" onPress={goLogin} />
     </MyLinearGradient>
   );
 }
@@ -49,5 +47,6 @@ export default function NewPasswordForm({ goLogin, onChangeValue, formCredential
 NewPasswordForm.propTypes = {
   goLogin: T.func.isRequired,
   onChangeValue: T.func.isRequired,
-  formCredentials: T.object.isRequired
+  formCredentials: T.object.isRequired,
+  formErrors: T.object.isRequired
 };

@@ -20,8 +20,7 @@ export default function ChangeEmailForm({
   onChangeValue,
   changeEmail,
   formCredentials,
-  isValid,
-  errorText,
+  formErrors,
   navigation
 }) {
   return (
@@ -30,32 +29,28 @@ export default function ChangeEmailForm({
       <H3>Change email</H3>
       <MainInput
         onChangeText={onChangeValue}
-        placeholder={"New email*"}
+        placeholder="Новий емейл"
         name={"email"}
         value={formCredentials.email}
+        error={formErrors["email"]}
       />
       <MainInput
         onChangeText={onChangeValue}
-        placeholder="Password*"
+        placeholder="Пароль"
         name={"password_email"}
         secureTextEntry={true}
         value={formCredentials.password_email}
-        error={errorText}
+        error={formErrors["password_email"]}
       />
       <View style={s.maxFlex} />
-      <BlueButton
-        onPress={changeEmail}
-        text="Зберегти зміни"
-        disabled={!isValid}
-        style={s.extraMarginBottom}
-      />
+      <BlueButton onPress={changeEmail} text="Зберегти зміни" style={s.extraMarginBottom} />
     </MyLinearGradient>
   );
 }
 ChangeEmailForm.propTypes = {
   onChangeValue: T.func.isRequired,
-  goProfileScreen: T.func.isRequired,
   changeEmail: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  errorText: T.string.isRequired
+  formErrors: T.object.isRequired,
+  navigation: T.object.isRequired
 };

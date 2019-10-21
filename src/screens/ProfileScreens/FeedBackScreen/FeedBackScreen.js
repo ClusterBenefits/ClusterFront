@@ -1,34 +1,39 @@
-import React, { useState, useContext, useEffect } from "react";
-import { BackHandler } from "react-native";
+import React, { useState, useContext } from "react";
 
 import FeedBackScreenForm from "./FeedBackScreenForm";
-import { sendMessageToAdmin, handleBackButton } from "../../../actions/userActions";
+import { sendMessageToAdmin } from "../../../actions/userActions";
 import { UserContext } from "../../../reducers/context";
 import { LoadingHOC } from "../../../components";
+import { allFieldsValidation } from "../../../utils";
+import { useBackButton } from "../../../hooks";
 
 const FeedBackScreenWithLoading = LoadingHOC(FeedBackScreenForm);
 
-const initialState = { comment: "", subject: "" };
+const initialState = { subject: "", comment: "" };
 
 export default function AddCommentsScreen({ navigation }) {
   const [formCredentials, setFormCredentials] = useState(initialState);
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useContext(UserContext);
-  const isValid = formCredentials.comment.length > 6 && formCredentials.subject.length > 3;
 
-  useEffect(() => {
-    BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
-    return () => {
-      BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    };
-  }, []);
+  useBackButton(false);
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
+    setFormErrors({ ...formErrors, [name]: "" });
   };
 
   // feedback to admin
   const sendMessage = async () => {
+    const { errors } = allFieldsValidation(formCredentials, {
+      same: "Пароль не співпадає",
+      min: "Кількість символів в полі повинна бути не менше 5"
+    });
+    if (errors) {
+      setFormErrors(errors);
+      return;
+    }
     setIsLoading(true);
 
     let response = await sendMessageToAdmin({
@@ -39,6 +44,7 @@ export default function AddCommentsScreen({ navigation }) {
       token: state.token
     });
     response && setFormCredentials(initialState);
+
     setIsLoading(false);
   };
 
@@ -48,7 +54,7 @@ export default function AddCommentsScreen({ navigation }) {
       onChangeValue={onChangeValue}
       sendMessage={sendMessage}
       formCredentials={formCredentials}
-      isValid={isValid}
+      formErrors={formErrors}
       navigation={navigation}
     />
   );

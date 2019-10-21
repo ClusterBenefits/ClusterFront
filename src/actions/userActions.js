@@ -351,26 +351,3 @@ export const clearUserLocal = async ({ dispatch }) =>
       }
     );
   });
-
-// handle back button
-export const handleBackButton = () => {
-  Alert.alert(
-    "Exit App",
-    "Exiting the application?",
-    [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      },
-      {
-        text: "OK",
-        onPress: () => BackHandler.exitApp()
-      }
-    ],
-    {
-      cancelable: false
-    }
-  );
-  return true;
-};

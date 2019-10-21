@@ -25,10 +25,21 @@ const s = StyleSheet.create({
   },
   checkBox: {
     backgroundColor: "transparent"
+  },
+  error: {
+    color: colors.mainRed,
+    fontSize: 12,
+    marginTop: -10
   }
 });
 
-export default function AddCreditInfoScreen({ post, onChangeValue, formCredentials, navigation, isValid }) {
+export default function AddCreditInfoScreen({
+  post,
+  onChangeValue,
+  formCredentials,
+  navigation,
+  formErrors
+}) {
   return (
     <MyLinearGradient withScroll style={s.container}>
       <Header titleText="Нова карта" navigation={navigation} />
@@ -38,6 +49,7 @@ export default function AddCreditInfoScreen({ post, onChangeValue, formCredentia
         maxLength={19}
         name="credit_card_number"
         value={formCredentials.credit_card_number}
+        error={formErrors["credit_card_number"]}
         containerStyle={s.extraMarginTop}
       />
 
@@ -47,6 +59,7 @@ export default function AddCreditInfoScreen({ post, onChangeValue, formCredentia
         maxLength={5}
         name="expiration"
         value={formCredentials.expiration}
+        error={formErrors["expiration"]}
       />
 
       <MainInput
@@ -55,6 +68,7 @@ export default function AddCreditInfoScreen({ post, onChangeValue, formCredentia
         maxLength={3}
         name="cvv2"
         value={formCredentials.cvv2}
+        error={formErrors["cvv2"]}
       />
 
       {/* <MainInput
@@ -94,9 +108,14 @@ export default function AddCreditInfoScreen({ post, onChangeValue, formCredentia
           <Text>Я погоджуюсь з умовами користування сервісом</Text>
         </Body>
       </ListItem>
+      {!!formErrors.checkBox && (
+        <Text style={s.error}>
+          Ознайомтеся з правилами та умовами користування сервісом і погодьтеся з ними
+        </Text>
+      )}
 
       <View style={s.flexMax} />
-      <BlueButton text="Зберегти" onPress={post} disabled={!isValid} withMarginBottom />
+      <BlueButton text="Зберегти" onPress={post} withMarginBottom />
     </MyLinearGradient>
   );
 }
@@ -105,5 +124,5 @@ AddCreditInfoScreen.propTypes = {
   onChangeValue: T.func.isRequired,
   post: T.func.isRequired,
   navigation: T.object.isRequired,
-  isValid: T.bool.isRequired
+  formErrors: T.object.isRequired
 };

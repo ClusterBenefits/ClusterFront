@@ -6,8 +6,7 @@ import {
   ChangeEmailScreen,
   BillingInformationScreen,
   FeedBackScreen,
-  AddCreditInfoScreen,
-  CameraScreen
+  AddCreditInfoScreen
 } from "../../screens";
 import { screens } from "../../constants";
 
@@ -19,8 +18,7 @@ const ProfileNavigator = createStackNavigator(
     [screens.ChangeEmailScreen]: ChangeEmailScreen,
     [screens.BillingInformationScreen]: BillingInformationScreen,
     [screens.FeedBackScreen]: FeedBackScreen,
-    [screens.AddCreditInfoScreen]: AddCreditInfoScreen,
-    [screens.CameraScreen]: CameraScreen
+    [screens.AddCreditInfoScreen]: AddCreditInfoScreen
   },
   {
     headerMode: "none"

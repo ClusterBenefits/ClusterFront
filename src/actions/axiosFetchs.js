@@ -3,12 +3,13 @@ import { url } from "../constants";
 import { ShowToast } from "../components";
 
 const errorHandler = ({ response }) => {
+  console.log(response);
   // check if response error has nested lvls or no
   const textError =
     typeof response.data.error === "string"
       ? response.data.error //error right here
       : response.data.error[Object.keys(response.data.error)[0]];
-  ShowToast(textError);
+  ShowToast(textError, true);
 };
 
 export const postTokenToServer = async ({ expoToken, token }) => {

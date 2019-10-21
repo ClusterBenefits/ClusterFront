@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { BackHandler } from "react-native";
+import React, { useState, useEffect, useContext, useCallback } from "react";
+import { StatusBar } from "react-native";
 
 import { UserContext } from "./../../../reducers/context";
 import LoginScreenForm from "./LoginScreenForm";
-import { handleBackButton, loginUser } from "../../../actions/userActions";
+import { loginUser } from "../../../actions/userActions";
 import { saveDataToLocalStorage, getDataFromLocalStorage, allFieldsValidation } from "../../../utils";
-import { screens } from "../../../constants";
+import { screens, colors } from "../../../constants";
 import { LoadingHOC } from "../../../components";
+import { useNavigationIsFocus, useBackButton } from "../../../hooks";
 
 const LoginScreenWithLoading = LoadingHOC(LoginScreenForm);
 
@@ -15,6 +16,7 @@ export default function LoginScreen({ navigation }) {
     email: "",
     password: ""
   });
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch } = useContext(UserContext);
 
@@ -42,18 +44,36 @@ export default function LoginScreen({ navigation }) {
     };
     autoAuth();
 
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     return () => {
-      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
+      StatusBar.setBackgroundColor(colors.mainWhite);
     };
   }, []);
+  useBackButton(true);
+
+  const onFocusChange = useCallback(isScreenInFocus => {
+    if (isScreenInFocus) {
+      StatusBar.setBackgroundColor(colors.mainLogoBg);
+    }
+    if (!isScreenInFocus) {
+      StatusBar.setBackgroundColor(colors.mainWhite);
+    }
+  }, []);
+  useNavigationIsFocus(navigation, onFocusChange);
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
+    setFormErrors({ ...formErrors, [name]: "" });
   };
-  const { isValid } = allFieldsValidation(formCredentials);
 
   const logInUser = async () => {
+    const { errors } = allFieldsValidation(formCredentials, {
+      email: "Неправильний емейл",
+      min: "Кількість символів в полі повинна бути не менше 8"
+    });
+    if (errors) {
+      setFormErrors(errors);
+      return;
+    }
     setIsLoading(true);
     // try to login with email/password
 
@@ -92,7 +112,7 @@ export default function LoginScreen({ navigation }) {
       goSignUp={goSignUp}
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
-      isValid={isValid}
+      formErrors={formErrors}
     />
   );
 }

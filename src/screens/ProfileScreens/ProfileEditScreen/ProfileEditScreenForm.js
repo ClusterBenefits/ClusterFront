@@ -1,35 +1,19 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
-import { Text } from "native-base";
+import { StyleSheet, View } from "react-native";
 import T from "prop-types";
 
-import { ButtonModal } from "../../../services/mainModal";
-import { url, colors } from "../../../constants";
 import { MyLinearGradient, MainInput, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
     paddingHorizontal: 20
   },
-  imageStyle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginBottom: 15,
-    marginTop: 30
-  },
+
   maxFlex: {
     flex: 1
   },
   extraMarginBottom: {
     marginBottom: 30
-  },
-  uploadText: {
-    color: colors.mainBlue
-  },
-  imageContainer: {
-    alignItems: "center",
-    justifyContent: "center"
   }
 });
 
@@ -38,43 +22,31 @@ export default function ProfileEditForm({
   onChangeValue,
   formCredentials,
   navigation,
-  isValid,
-  userInfo
+  formErrors
 }) {
-  const { image } = userInfo;
-  const imageUrl = image && image.tiny;
-
   return (
     <MyLinearGradient withScroll style={s.container}>
       <Header navigation={navigation} titleText="Редагування" />
-      <View style={s.imageContainer}>
-        <Image
-          source={
-            imageUrl ? { uri: `${url}${imageUrl.url}` } : require("../../../assets/images/DefaultAvatar.png")
-          }
-          style={s.imageStyle}
-        />
-        <TouchableOpacity onPress={() => ButtonModal.showModal({ navigation })}>
-          <Text style={s.uploadText}>Завантажити фото</Text>
-        </TouchableOpacity>
-      </View>
       <MainInput
         onChangeText={onChangeValue}
         placeholder="Ім'я"
         name="firstName"
         value={formCredentials.firstName}
+        error={formErrors["firstName"]}
       />
       <MainInput
         onChangeText={onChangeValue}
         placeholder="Прізвище"
         name="lastName"
         value={formCredentials.lastName}
+        error={formErrors["lastName"]}
       />
       <MainInput
         onChangeText={onChangeValue}
         placeholder="Компанія"
         name="organization"
         value={formCredentials.organization}
+        error={formErrors["organization"]}
       />
       <MainInput
         name="position"
@@ -85,12 +57,7 @@ export default function ProfileEditForm({
 
       <View style={s.maxFlex} />
 
-      <BlueButton
-        onPress={editUserProfile}
-        text="Зберегти зміни"
-        disabled={!isValid}
-        style={s.extraMarginBottom}
-      />
+      <BlueButton onPress={editUserProfile} text="Зберегти зміни" style={s.extraMarginBottom} />
     </MyLinearGradient>
   );
 }
@@ -98,8 +65,7 @@ export default function ProfileEditForm({
 ProfileEditForm.propTypes = {
   onChangeValue: T.func.isRequired,
   editUserProfile: T.func.isRequired,
-  goProfileScreen: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  navigation: T.object,
-  isValid: T.bool.isRequired
+  navigation: T.object.isRequired,
+  formErrors: T.object.isRequired
 };

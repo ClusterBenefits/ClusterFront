@@ -43,7 +43,7 @@ const MainInput = ({
 
   return (
     <>
-      <Item style={[s.container, focused && s.borderBlue, containerStyle]} floatingLabel>
+      <Item style={[s.container, focused && s.borderBlue, containerStyle]} floatingLabel error={!!error}>
         <Label style={[s.placeholder, focused && s.colorBlue]}>{placeholder}</Label>
         <Input
           value={value}
@@ -52,10 +52,11 @@ const MainInput = ({
           onFocus={() => setState(!focused)}
           onBlur={() => setState(!focused)}
           clearButtonMode={"while-editing"}
+          maxLength={35}
           {...props}
         />
       </Item>
-      {!!error && <Text style={s.error}>{error}</Text>}
+      {!!error && <Text style={s.error}>{error[0]}</Text>}
     </>
   );
 };

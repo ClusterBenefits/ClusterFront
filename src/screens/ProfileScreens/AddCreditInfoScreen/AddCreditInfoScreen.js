@@ -20,17 +20,9 @@ export default function AddCreditInfoScreen({ navigation }) {
     postal_code: "123123",
     checkBox: false
   });
-
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
-
-  const { isValid, errors } = allFieldsValidation({
-    // remove nonNumbers for validation
-    credit_card_number: formCredentials.credit_card_number.replace(/[^0-9]/g, ""),
-    expiration: formCredentials.expiration,
-    cvv2: formCredentials.cvv2
-  });
-  const validForm = isValid && formCredentials.checkBox;
 
   const formatNumberCard = formatStringByConfig({ 4: "-", 8: "-", 12: "-" });
   const formatMonthAndYear = formatStringByConfig({ 2: "/" });
@@ -49,9 +41,18 @@ export default function AddCreditInfoScreen({ navigation }) {
     } else {
       setFormCredentials({ ...formCredentials, [name]: value });
     }
+    setFormErrors({ ...formErrors, [name]: "" });
   };
 
   const post = async () => {
+    const { errors } = allFieldsValidation(
+      { ...formCredentials, credit_card_number: formCredentials.credit_card_number.replace(/\D/g, "") },
+      { min: "Кількість символів в полі повинна бути не менше 3" }
+    );
+    if (errors) {
+      setFormErrors(errors);
+      return;
+    }
     setIsLoading(true);
     let response = await addCreditCardSubscription({
       token: state.token,
@@ -125,7 +126,7 @@ export default function AddCreditInfoScreen({ navigation }) {
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
       navigation={navigation}
-      isValid={validForm}
+      formErrors={formErrors}
     />
   );
 }

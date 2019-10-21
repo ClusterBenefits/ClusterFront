@@ -20,11 +20,11 @@ export default function ChangePasswordForm({
   onChangeValue,
   changePassword,
   formCredentials,
-  isValid,
+  formErrors,
   navigation
 }) {
   return (
-    <MyLinearGradient style={s.container}>
+    <MyLinearGradient style={s.container} withScroll>
       <Header titleText="Змінити пароль" navigation={navigation} />
       <H3>Change password</H3>
       <MainInput
@@ -33,6 +33,7 @@ export default function ChangePasswordForm({
         name={"oldPassword"}
         secureTextEntry={true}
         value={formCredentials.oldPassword}
+        error={formErrors["oldPassword"]}
       />
       <MainInput
         onChangeText={onChangeValue}
@@ -40,6 +41,7 @@ export default function ChangePasswordForm({
         name={"password"}
         secureTextEntry={true}
         value={formCredentials.password}
+        error={formErrors["password"]}
       />
       <MainInput
         onChangeText={onChangeValue}
@@ -47,14 +49,10 @@ export default function ChangePasswordForm({
         name={"password_confirmation"}
         secureTextEntry={true}
         value={formCredentials.password_confirmation}
+        error={formErrors["password_confirmation"]}
       />
       <View style={s.flexMax} />
-      <BlueButton
-        text="Зберегти зміни"
-        disabled={!isValid}
-        onPress={changePassword}
-        style={s.extraMarginBottom}
-      />
+      <BlueButton text="Зберегти зміни" onPress={changePassword} style={s.extraMarginBottom} />
     </MyLinearGradient>
   );
 }
@@ -62,6 +60,6 @@ ChangePasswordForm.propTypes = {
   onChangeValue: T.func.isRequired,
   changePassword: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  isValid: T.bool.isRequired,
+  formErrors: T.object.isRequired,
   navigation: T.object.isRequired
 };

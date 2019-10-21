@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { BackHandler } from "react-native";
+import React, { useState, useContext } from "react";
 
 import SignUpScreenForm from "./SignUpScreenForm";
-import { handleBackButton, registerUser } from "../../../actions/userActions";
+import { registerUser } from "../../../actions/userActions";
 import { allFieldsValidation } from "./../../../utils/validation";
 import { saveDataToLocalStorage } from "../../../utils";
 import { screens } from "../../../constants";
 import { UserContext } from "./../../../reducers/context";
 import { LoadingHOC } from "../../../components";
+import { useBackButton } from "../../../hooks";
 
 const SignUpScreenWithLoading = LoadingHOC(SignUpScreenForm);
 
@@ -17,22 +17,26 @@ export default function SignUpScreen({ navigation }) {
     password: "",
     password_confirmation: ""
   });
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { state, dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    return () => {
-      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
-    };
-  });
+  useBackButton(false);
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
+    setFormErrors({ ...formErrors, [name]: "" });
   };
 
-  const { isValid } = allFieldsValidation(formCredentials);
-
   const signUpUser = async () => {
+    const { errors } = allFieldsValidation(formCredentials, {
+      email: "Неправильний емейл",
+      same: "Пароль не співпадає",
+      min: "Кількість символів в полі повинна бути не менше 8"
+    });
+    if (errors) {
+      setFormErrors(errors);
+      return;
+    }
     setIsLoading(true);
     //try to signup user with email/password
 
@@ -45,14 +49,12 @@ export default function SignUpScreen({ navigation }) {
     if (response) {
       // if signup is successful , save password & email
 
-      console.log("login time");
       saveDataToLocalStorage({
         email: formCredentials.email,
         password: formCredentials.password
       });
       navigation.navigate(screens.WelcomeScreen);
     } else {
-      console.log("wrong token");
       setIsLoading(false);
     }
   };
@@ -63,7 +65,7 @@ export default function SignUpScreen({ navigation }) {
       onChangeValue={onChangeValue}
       formCredentials={formCredentials}
       signUpUser={signUpUser}
-      isValid={isValid}
+      formErrors={formErrors}
       navigation={navigation}
     />
   );

@@ -108,11 +108,6 @@ export default function ImageButtons({ hideModal, navigation }) {
 
     hideModal();
   };
-  console.log(navigation);
-  const _showCamera = () => {
-    navigation.navigate(screens.CameraScreen, { navigation });
-    hideModal();
-  };
 
   return (
     <View style={s.modalContainer}>

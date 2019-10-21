@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Animated } from "react-native";
+import { StyleSheet, Animated, StatusBar } from "react-native";
 import { Form, View, H1, Text } from "native-base";
 import T from "prop-types";
 
@@ -48,7 +48,7 @@ export default function LoginForm({
   goForgotPassword,
   onChangeValue,
   formCredentials,
-  isValid
+  formErrors
 }) {
   // const [visible] = keyboard();
   // console.log(visible);
@@ -73,17 +73,17 @@ export default function LoginForm({
 
         <MainInput
           placeholder="Емейл"
-          focusedText="Введіть ваш емейл"
           name="email"
           onChangeText={onChangeValue}
           value={formCredentials.email}
+          error={formErrors["email"]}
         />
         <MainInput
           placeholder="Пароль"
-          focusedText="Введіть ваш пароль"
           name="password"
           onChangeText={onChangeValue}
           value={formCredentials.password}
+          error={formErrors["password"]}
           secureTextEntry={true}
         />
         <View style={s.forgotPasswordContainer}>
@@ -93,7 +93,7 @@ export default function LoginForm({
           <View />
         </View>
 
-        <BlueButton text="Log In" onPress={logInUser} disabled={!isValid} />
+        <BlueButton text="Log In" onPress={logInUser} />
 
         <View style={s.bottom_menu}>
           <Text style={s.bottom_menu_text}>Ще не зареєстровані?</Text>
@@ -113,5 +113,5 @@ LoginForm.propTypes = {
   goForgotPassword: T.func.isRequired,
   onChangeValue: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  isValid: T.bool.isRequired
+  formErrors: T.object.isRequired
 };

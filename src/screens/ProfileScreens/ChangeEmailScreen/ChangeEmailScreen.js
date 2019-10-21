@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AsyncStorage, BackHandler } from "react-native";
+import { AsyncStorage } from "react-native";
 
 import ChangeEmailScreenForm from "./ChangeEmailScreenForm";
-import { handleBackButton, changeEmail } from "../../../actions/userActions";
+import { changeEmail } from "../../../actions/userActions";
 import { allFieldsValidation } from "./../../../utils/validation";
 import { UserContext } from "./../../../reducers/context";
-import { screens } from "../../../constants";
 import { LoadingHOC } from "../../../components";
+import { useBackButton } from "../../../hooks";
 
 const ChangeEmailScreenWithLoading = LoadingHOC(ChangeEmailScreenForm);
 
@@ -16,20 +16,14 @@ export default function ChangeEmailScreen({ navigation }) {
     password_email: "",
     password_confirmation_email: ""
   });
-  const [errorText, setErrorText] = useState("");
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useContext(UserContext);
 
-  const { isValid } = allFieldsValidation({ email: formCredentials.email });
-  const isValidButton = isValid && formCredentials.password_email.length > 3;
-
   useEffect(() => {
-    BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
     getPasswordFromStorage();
-    return () => {
-      BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    };
   }, []);
+  useBackButton(false);
 
   // get inital password for validation
   const getPasswordFromStorage = async () => {
@@ -42,20 +36,19 @@ export default function ChangeEmailScreen({ navigation }) {
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
-    setErrorText("");
+    setFormErrors({ ...formErrors, [name]: "" });
   };
 
   // check if input fields are correct after typing
 
-  const goProfileScreen = () => {
-    navigation.navigate(screens.ProfileScreen);
-  };
-
   const changeUserEmail = async () => {
     //settings custom error for password
-    const { errors } = allFieldsValidation(formCredentials);
+    const { errors } = allFieldsValidation(formCredentials, {
+      same: "Неправильний пароль",
+      email: "Неправильний емейл"
+    });
     if (errors) {
-      setErrorText("Неправильний пароль");
+      setFormErrors(errors);
       return;
     }
     setIsLoading(true);
@@ -80,12 +73,10 @@ export default function ChangeEmailScreen({ navigation }) {
     <ChangeEmailScreenWithLoading
       isLoading={isLoading}
       onChangeValue={onChangeValue}
-      goProfileScreen={goProfileScreen}
       changeEmail={changeUserEmail}
       formCredentials={formCredentials}
-      isValid={isValidButton}
       navigation={navigation}
-      errorText={errorText}
+      formErrors={formErrors}
     />
   );
 }

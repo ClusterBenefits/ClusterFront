@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import { BackHandler } from "react-native";
 
 import { UserContext } from "./../../../reducers/context";
 import WelcomeScreenForm from "./WelcomeScreenForm";
 import {
   fetchUserInfo,
-  handleBackButton,
   registerForPushNotificationsAsync,
   checkCreditCardSubscription
 } from "../../../actions/userActions";
 import { screens } from "../../../constants";
 import { LoadingHOC } from "../../../components";
+import { useBackButton } from "../../../hooks";
 
 const WelcomeScreenWithLoading = LoadingHOC(WelcomeScreenForm);
 
@@ -39,12 +38,9 @@ export default function WelcomeScreen({ navigation }) {
 
     // update expoPushNotificationKey
     registerForPushNotificationsAsync(state.token);
-
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
-    return () => {
-      BackHandler.removeEventListener("hardwareBackPress", handleBackButton);
-    };
   }, []);
+
+  useBackButton(true);
 
   const goProfileFillingScreen = () => {
     navigation.push(screens.ProfileFillingScreen);

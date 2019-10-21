@@ -19,7 +19,13 @@ const s = StyleSheet.create({
   }
 });
 
-export default function PasswordForm({ onChangeValue, resetPassword, formCredentials, navigation, isValid }) {
+export default function PasswordForm({
+  onChangeValue,
+  resetPassword,
+  formCredentials,
+  navigation,
+  formErrors
+}) {
   return (
     <MyLinearGradient style={s.container}>
       <Header navigation={navigation} />
@@ -30,11 +36,12 @@ export default function PasswordForm({ onChangeValue, resetPassword, formCredent
           onChangeText={onChangeValue}
           name={"email"}
           value={formCredentials.email}
+          error={formErrors["email"]}
         />
       </Form>
       <Text style={s.enterEmailText}>Введіть емайл для відновлення паролю</Text>
       <View style={s.maxFlex} />
-      <BlueButton text="Скинути пароль" onPress={resetPassword} disabled={!isValid} />
+      <BlueButton text="Скинути пароль" onPress={resetPassword} />
     </MyLinearGradient>
   );
 }
@@ -44,5 +51,5 @@ PasswordForm.propTypes = {
   resetPassword: T.func.isRequired,
   formCredentials: T.object.isRequired,
   navigation: T.object.isRequired,
-  isValid: T.bool.isRequired
+  formErrors: T.object.isRequired
 };

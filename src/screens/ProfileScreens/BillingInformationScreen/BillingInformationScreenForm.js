@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { H1, Text, Item, H3, H2 } from "native-base";
+import { H1, Text, H2 } from "native-base";
 import T from "prop-types";
 
 import { CreditCardBigIcon } from "../../../assets/svg";
@@ -27,6 +27,7 @@ export default function BillingInformationScreen({
   navigation,
   subscribed,
   cancelSubscription,
+  checkSubscription,
   subscription
 }) {
   return (
@@ -34,7 +35,7 @@ export default function BillingInformationScreen({
       <>
         <Header navigation={navigation} titleText="інформація про оплату" />
         <CreditCardBigIcon style={s.imageStyle} />
-        {subscribed ? (
+        {(subscribed && (
           <>
             <H2 style={s.extraMarginBottom}>Платіжну карту додано</H2>
             <Text>Expiration Date: 2019.09.10</Text>
@@ -42,21 +43,27 @@ export default function BillingInformationScreen({
             <View style={s.flexMax} />
             <BlueButton text="Відмінити підписку" withMarginBottom onPress={cancelSubscription} />
           </>
-        ) : (
-          <>
-            <H1>Платіжну карту не додано</H1>
-            <Text>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-              pariatur.
-            </Text>
-            <View style={s.flexMax} />
-            <BlueButton
-              text="Додати карту"
-              withMarginBottom
-              onPress={() => navigation.navigate(screens.AddCreditInfoScreen)}
-            />
-          </>
-        )}
+        )) ||
+          (subscription && (
+            <>
+              <Text> Checking subscription , це може заняти декілька хвилин</Text>
+              <BlueButton text="Оновити дані" withMarginBottom onPress={checkSubscription} />
+            </>
+          )) || (
+            <>
+              <H1>Платіжну карту не додано</H1>
+              <Text>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur.
+              </Text>
+              <View style={s.flexMax} />
+              <BlueButton
+                text="Додати карту"
+                withMarginBottom
+                onPress={() => navigation.navigate(screens.AddCreditInfoScreen)}
+              />
+            </>
+          )}
       </>
     </MyLinearGradient>
   );
@@ -65,10 +72,6 @@ BillingInformationScreen.propTypes = {
   navigation: T.object.isRequired
 };
 
-// const isSubscriptionActive =
-// subscription &&
-// subscription.expired_at &&
-// new Date(subscription.expired_at).getTime() > new Date().getTime();
 // <H3 style={{ marginLeft: 0, marginBottom: 20 }}>Billing information</H3>
 // {(isSubscriptionActive && (
 //   <>

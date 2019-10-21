@@ -19,7 +19,13 @@ const s = StyleSheet.create({
   }
 });
 
-export default function commentsForm({ onChangeValue, formCredentials, sendMessage, isValid, navigation }) {
+export default function commentsForm({
+  onChangeValue,
+  formCredentials,
+  sendMessage,
+  formErrors,
+  navigation
+}) {
   return (
     <MyLinearGradient style={s.container}>
       <Header titleText="Новий запит" navigation={navigation} />
@@ -32,24 +38,21 @@ export default function commentsForm({ onChangeValue, formCredentials, sendMessa
           onChangeText={onChangeValue}
           name="subject"
           value={formCredentials.subject}
+          error={formErrors["subject"]}
         />
         <MainInput
           placeholder={"Довільний опис"}
           onChangeText={onChangeValue}
           name="comment"
-          value={formCredentials.myComment}
+          value={formCredentials.comment}
           style={s.inputMaxHeight}
+          error={formErrors["comment"]}
+          maxLength={300}
           multiline
         />
       </Form>
       <View style={s.flexMax} />
-      <BlueButton
-        text="Подати зміни"
-        disabled={!isValid}
-        onPress={sendMessage}
-        style={s.extraMarginBottom}
-        withMarginBottom
-      />
+      <BlueButton text="Подати зміни" onPress={sendMessage} style={s.extraMarginBottom} withMarginBottom />
     </MyLinearGradient>
   );
 }
@@ -59,5 +62,5 @@ commentsForm.propTypes = {
   sendMessage: T.func.isRequired,
   formCredentials: T.object.isRequired,
   navigation: T.object.isRequired,
-  isValid: T.bool.isRequired
+  formErrors: T.object.isRequired
 };

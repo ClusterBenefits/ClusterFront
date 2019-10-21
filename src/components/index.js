@@ -8,7 +8,6 @@ import MyLinearGradient from "./MyLinearGradient";
 import Icon from "./Icon";
 import ShowToast from "./Toast";
 import LoadingHOC from "./LoadingHOC";
-import IconButton from "./IconButton";
 import Header from "./Header";
 import StatusBar from "./StatusBar";
 
@@ -23,7 +22,6 @@ export {
   Icon,
   ShowToast,
   LoadingHOC,
-  IconButton,
   Header,
   StatusBar
 };

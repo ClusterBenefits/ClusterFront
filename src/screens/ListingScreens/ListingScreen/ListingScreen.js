@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { BackHandler } from "react-native";
 
 import {
   fetchItems,
-  handleBackButton,
   fetchFavoriteItems,
   changeInitialFeatured,
   handleClickIcon,
@@ -13,6 +11,7 @@ import ListingScreenForm from "./ListingScreenForm";
 import { UserContext } from "./../../../reducers/context";
 import { isSubscribed } from "../../../utils";
 import { LoadingHOC } from "../../../components";
+import { useBackButton } from "../../../hooks";
 
 const ListingScreenWithLoading = LoadingHOC(ListingScreenForm);
 
@@ -22,9 +21,9 @@ export default function ListingScreen(props) {
 
   useEffect(() => {
     asyncLoading();
-
-    BackHandler.addEventListener("hardwareBackPress", handleBackButton);
   }, [state.subscription]);
+
+  useBackButton(true);
 
   const subscribed = isSubscribed(state.subscription);
 

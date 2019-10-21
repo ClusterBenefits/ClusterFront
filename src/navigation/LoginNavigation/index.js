@@ -3,7 +3,6 @@ import {
   SignUpScreen,
   WelcomeScreen,
   ProfileFillingScreen,
-  AddCreditInfoScreen,
   LoginScreen,
   ForgotPasswordScreen,
   NewPasswordScreen,
@@ -43,6 +42,5 @@ const FirstLogin = createStackNavigator(
 
 export default createSwitchNavigator({
   ResetPasswordNavigation,
-  [screens.AddCreditInfoScreen]: AddCreditInfoScreen,
   FirstLogin
 });

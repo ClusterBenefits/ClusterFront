@@ -19,7 +19,7 @@ export default function SignUpScreenForm({
   onChangeValue,
   formCredentials,
   navigation,
-  isValid
+  formErrors
 }) {
   return (
     <MyLinearGradient withScroll style={s.container}>
@@ -28,30 +28,30 @@ export default function SignUpScreenForm({
       <Form>
         <MainInput
           placeholder="Емейл"
-          focusedText="Введіть ваш емейл"
           onChangeText={onChangeValue}
           name="email"
           value={formCredentials.email}
+          error={formErrors["email"]}
         />
         <MainInput
           placeholder="Пароль"
-          focusedText="Введіть ваш пароль"
           secureTextEntry={true}
           onChangeText={onChangeValue}
           name="password"
           value={formCredentials.password}
+          error={formErrors["password"]}
         />
         <MainInput
           placeholder="Повторіть пароль"
-          focusedText="Повторіть ваш пароль"
           secureTextEntry={true}
           onChangeText={onChangeValue}
           name="password_confirmation"
           value={formCredentials.password_confirmation}
+          error={formErrors["password_confirmation"]}
         />
       </Form>
       <View style={s.flexMax} />
-      <BlueButton text=" Продовжити" onPress={signUpUser} disabled={!isValid} />
+      <BlueButton text=" Продовжити" onPress={signUpUser} />
     </MyLinearGradient>
   );
 }
@@ -60,6 +60,6 @@ SignUpScreenForm.propTypes = {
   signUpUser: T.func.isRequired,
   onChangeValue: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  isValid: T.bool.isRequired,
+  formErrors: T.object.isRequired,
   navigation: T.object.isRequired
 };

@@ -13,6 +13,7 @@ const MyLinearGradient = ({ children, withScroll = false, style }) => {
   const scrollProps = withScroll
     ? {
         showsVerticalScrollIndicator: false,
+        keyboardShouldPersistTaps: "always",
         contentContainerStyle: { flexGrow: 1 }
       }
     : {};

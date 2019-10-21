@@ -61,7 +61,7 @@ export default function SignUpForm({
       <View style={s.maxFlex} />
       <Text style={s.enterText}>Введіть отриманий на емейл 4-ти значний код</Text>
 
-      <BlueButton text="Підтвердити скидання паролю" onPress={goNewPassword} isValid={isValid} />
+      <BlueButton text="Підтвердити скидання паролю" onPress={goNewPassword} disabled={!isValid} />
     </MyLinearGradient>
   );
 }
@@ -70,6 +70,6 @@ SignUpForm.propTypes = {
   goNewPassword: T.func.isRequired,
   code: T.string.isRequired,
   setVerificationCode: T.func.isRequired,
-  resendVarificationCode: T.func.isRequired,
+  resendVerificationCode: T.func.isRequired,
   navigation: T.object.isRequired
 };
