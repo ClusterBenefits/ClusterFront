@@ -72,5 +72,15 @@ export default StyleSheet.create({
   },
   extraMarginRight: {
     marginRight: 5
+  },
+  hitSlop: {
+    top: 5,
+    bottom: 5,
+    left: 5,
+    right: 5
+  },
+  emptySpace: {
+    width: 16,
+    height: 1
   }
 });

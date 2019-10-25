@@ -27,9 +27,9 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
   return (
     <MyLinearGradient withScroll style={s.container}>
       <View style={s.header}>
-        <View style={{ width: 16, height: 1 }} />
+        <View style={s.emptySpace} />
         <Text style={s.extraMarginRight}>Профіль</Text>
-        <TouchableOpacity onPress={() => redirectToScreen(screens.ProfileEditScreen)}>
+        <TouchableOpacity hitSlop={s.hitSlop} onPress={() => redirectToScreen(screens.ProfileEditScreen)}>
           <EditPenIcon />
         </TouchableOpacity>
       </View>
