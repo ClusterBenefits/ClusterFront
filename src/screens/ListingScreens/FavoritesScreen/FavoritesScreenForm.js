@@ -24,7 +24,7 @@ export default function FavoriteForm({ favoriteItems, handleFavoriteChange }) {
   return (
     <MyLinearGradient>
       <H1 style={s.mainText}>Улюблені</H1>
-      {favoriteItems.length > 0 ? (
+      {favoriteItems && favoriteItems.length > 0 ? (
         <FlatList
           data={favoriteItems}
           keyExtractor={item => item.id.toString()}
@@ -44,6 +44,6 @@ export default function FavoriteForm({ favoriteItems, handleFavoriteChange }) {
 }
 
 FavoriteForm.propTypes = {
-  favoriteItems: T.array.isRequired,
+  favoriteItems: T.array,
   handleFavoriteChange: T.func.isRequired
 };

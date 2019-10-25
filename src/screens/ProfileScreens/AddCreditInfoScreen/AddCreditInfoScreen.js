@@ -15,9 +15,9 @@ export default function AddCreditInfoScreen({ navigation }) {
     credit_card_number: "",
     expiration: "",
     cvv2: "",
-    city: "dfsdf",
-    address: "dfgddd",
-    postal_code: "123123",
+    city: "",
+    address: "",
+    postal_code: "",
     checkBox: false
   });
   const [formErrors, setFormErrors] = useState({});
@@ -73,12 +73,15 @@ export default function AddCreditInfoScreen({ navigation }) {
     // If liqpay wants other validation like web/phone
     if (response.code === "wait_3ds") {
       let response1 = await AsyncAlert(response);
-      response1 === "No"
-        ? dispatch({
-            type: dispatchTypes.SUBSCRIPTION,
-            payload: null
-          })
-        : navigation.pop();
+      if (response1 === "No") {
+        dispatch({
+          type: dispatchTypes.SUBSCRIPTION,
+          payload: response
+        });
+        navigation.pop();
+      } else {
+        navigation.pop();
+      }
       return;
     }
     if (response.code === "phone_verify") {

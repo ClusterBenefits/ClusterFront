@@ -169,12 +169,12 @@ export const postUserAvatar = async ({ dispatch, token, data }) => {
 
 export const fetchItems = async ({ dispatch, token }) => {
   let response = await listOfCompanies(token);
-  if (response) {
-    await dispatch({
-      type: dispatchTypes.ADD_ITEMS,
-      payload: response
-    });
-  }
+
+  await dispatch({
+    type: dispatchTypes.ADD_ITEMS,
+    payload: response ? response : null
+  });
+
   return response;
 };
 
@@ -183,13 +183,12 @@ export const fetchItems = async ({ dispatch, token }) => {
 export const fetchFavoriteItems = async ({ token, dispatch }) => {
   let response = await listFavoritesCompanies(token);
 
-  if (response) {
-    response.forEach(item => (item.featured = true));
-    await dispatch({
-      type: dispatchTypes.ADD_FAVORITE_ITEMS,
-      payload: response
-    });
-  }
+  response && response.forEach(item => (item.featured = true));
+  await dispatch({
+    type: dispatchTypes.ADD_FAVORITE_ITEMS,
+    payload: response ? response : null
+  });
+
   return response;
 };
 

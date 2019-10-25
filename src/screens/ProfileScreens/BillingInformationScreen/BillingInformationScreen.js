@@ -15,15 +15,10 @@ export default function ProfileEditScreen({ navigation }) {
   const subscribed = isSubscribed(state.subscription);
 
   useEffect(() => {
-    checkCreditInfo();
+    checkSubscription();
   }, []);
 
   useBackButton(false);
-  const checkCreditInfo = async () => {
-    setIsLoading(true);
-    await checkCreditCardSubscription({ token: state.token, dispatch });
-    setIsLoading(false);
-  };
 
   const checkSubscription = async () => {
     setIsLoading(true);
@@ -43,7 +38,6 @@ export default function ProfileEditScreen({ navigation }) {
   return (
     <BillingInformationScreenWithLoading
       isLoading={isLoading}
-      checkCreditInfo={checkCreditInfo}
       cancelSubscription={cancelSubscription}
       checkSubscription={checkSubscription}
       subscription={state.subscription}

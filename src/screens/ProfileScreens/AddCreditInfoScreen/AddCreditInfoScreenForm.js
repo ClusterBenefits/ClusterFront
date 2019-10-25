@@ -71,7 +71,7 @@ export default function AddCreditInfoScreen({
         error={formErrors["cvv2"]}
       />
 
-      {/* <MainInput
+      <MainInput
         placeholder={"City"}
         onChangeText={onChangeValue}
         maxLength={20}
@@ -96,7 +96,7 @@ export default function AddCreditInfoScreen({
         name="postal_code"
         value={formCredentials.postal_code}
         error={formErrors["postal_code"]}
-      /> */}
+      />
 
       <ListItem style={s.checkBoxContainer}>
         <CheckBox

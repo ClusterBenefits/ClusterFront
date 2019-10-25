@@ -28,26 +28,24 @@ export default function ListingScreen(props) {
   const subscribed = isSubscribed(state.subscription);
 
   async function asyncLoading() {
-    if (true) {
-      // fetch all product items
-      let response1 = await fetchItems({
-        dispatch,
-        token: state.token
-      });
+    // fetch all product items
+    let response1 = await fetchItems({
+      dispatch,
+      token: state.token
+    });
 
-      //fetch all favorites items
-      let response2 = await fetchFavoriteItems({
-        token: state.token,
+    //fetch all favorites items
+    let response2 = await fetchFavoriteItems({
+      token: state.token,
+      dispatch
+    });
+    // change star color if item is in favorite list
+    response1 &&
+      changeInitialFeatured({
+        items: response1,
+        favoriteItems: response2,
         dispatch
       });
-      // change star color if item is in favorite list
-      response1 &&
-        changeInitialFeatured({
-          items: response1,
-          favoriteItems: response2,
-          dispatch
-        });
-    }
 
     setIsLoading(false);
   }
