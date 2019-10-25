@@ -5,14 +5,11 @@ const LogoImage = ({ withText = false, noBg = false }) => {
   const s = StyleSheet.create({
     container: {
       flex: 1,
+      minHeight: 100,
+      maxHeight: 225,
       width: "100%",
       justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: noBg ? "#fff" : "#f6f7fb"
-    },
-    image: {
-      // justifyContent: "center",
-      // alignItems: "center"
+      alignItems: "center"
     }
   });
 

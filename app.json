@@ -24,6 +24,6 @@
       "package": "com.mycompany.meelor"
     },
     "description": "testing",
-    "androidStatusBar": { "backgroundColor": "#fff" , "barStyle": "dark-content"},
+    "androidStatusBar": { "backgroundColor": "#ffffff" , "barStyle": "dark-content"}
   }
 }

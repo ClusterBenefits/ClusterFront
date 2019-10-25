@@ -21,6 +21,7 @@ export default StyleSheet.create({
     marginTop: 35
   },
   companyContainer: {
+    elevation: 2,
     shadowColor: colors.mainBlack,
     shadowOffset: { width: 0, height: 12 },
     shadowOpacity: 0.04,

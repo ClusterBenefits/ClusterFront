@@ -43,22 +43,8 @@ export default function LoginScreen({ navigation }) {
       }
     };
     autoAuth();
-
-    return () => {
-      StatusBar.setBackgroundColor(colors.mainWhite);
-    };
   }, []);
   useBackButton(true);
-
-  const onFocusChange = useCallback(isScreenInFocus => {
-    if (isScreenInFocus) {
-      StatusBar.setBackgroundColor(colors.mainLogoBg);
-    }
-    if (!isScreenInFocus) {
-      StatusBar.setBackgroundColor(colors.mainWhite);
-    }
-  }, []);
-  useNavigationIsFocus(navigation, onFocusChange);
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });

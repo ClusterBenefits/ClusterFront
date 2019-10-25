@@ -24,7 +24,7 @@ export default function ListScreenForm({ items, handleFavoriteChange, subscribed
   return (
     <MyLinearGradient>
       <H1 style={s.mainText}>Мої картки</H1>
-      {true ? (
+      {subscribed ? (
         <FlatList
           data={items}
           keyExtractor={item => item.id.toString()}

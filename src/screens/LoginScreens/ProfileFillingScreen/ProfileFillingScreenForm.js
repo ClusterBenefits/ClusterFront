@@ -18,42 +18,43 @@ export default function ProfileFillingForm({
   onChangeValue,
   onSubmit,
   formCredentials,
-  goWelcomeScreen,
-  isValid
+  navigation,
+  formErrors
 }) {
   return (
     <MyLinearGradient withScroll style={s.container}>
-      <Header titleText="Додаткова Інформація" onPress={goWelcomeScreen} />
+      <Header titleText="Додаткова Інформація" navigation={navigation} />
       <H1>Реєстрація</H1>
       <MainInput
         placeholder="Ім'я"
         name="firstName"
-        focusedText="Введіть ваш пароль"
         value={formCredentials.firstName}
         onChangeText={onChangeValue}
+        error={formErrors["firstName"]}
       />
       <MainInput
         placeholder="Прізвище"
         name="lastName"
-        focusedText="Введіть ваш пароль"
         value={formCredentials.lastName}
         onChangeText={onChangeValue}
+        error={formErrors["lastName"]}
       />
       <MainInput
         placeholder="Компанія"
         name="organization"
-        focusedText="Введіть ваш пароль"
         value={formCredentials.organization}
         onChangeText={onChangeValue}
+        error={formErrors["organization"]}
       />
       <MainInput
         placeholder="Позиція (не обов'язково)"
         name="position"
         value={formCredentials.position}
         onChangeText={onChangeValue}
+        error={formErrors["position"]}
       />
       <View style={s.flexMax} />
-      <BlueButton text="Next" onPress={onSubmit} disabled={!isValid} />
+      <BlueButton text="Next" onPress={onSubmit} />
     </MyLinearGradient>
   );
 }
@@ -62,5 +63,5 @@ ProfileFillingForm.propTypes = {
   onChangeValue: T.func.isRequired,
   onSubmit: T.func.isRequired,
   formCredentials: T.object.isRequired,
-  isValid: T.bool.isRequired
+  navigation: T.object.isRequired
 };

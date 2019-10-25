@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Animated, StatusBar } from "react-native";
-import { Form, View, H1, Text } from "native-base";
+import { View, H1, Text } from "native-base";
 import T from "prop-types";
 
 import { BlueButton, LogoImage, MainInput, MyLinearGradient } from "../../../components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../../constants";
-import { keyboard } from "../../../hooks";
 
 const s = StyleSheet.create({
   container: {
     marginHorizontal: 20,
-    marginTop: 65
+    marginTop: 40
   },
   bottom_menu: {
     flexDirection: "row",

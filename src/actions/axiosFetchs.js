@@ -5,10 +5,16 @@ import { ShowToast } from "../components";
 const errorHandler = ({ response }) => {
   console.log(response);
   // check if response error has nested lvls or no
-  const textError =
-    typeof response.data.error === "string"
-      ? response.data.error //error right here
-      : response.data.error[Object.keys(response.data.error)[0]];
+  let textError;
+  if (response) {
+    textError =
+      typeof response.data.error === "string"
+        ? response.data.error //error right here
+        : response.data.error[Object.keys(response.data.error)[0]];
+  } else {
+    textError = "Виникла непередбачувана помилка";
+  }
+
   ShowToast(textError, true);
 };
 
@@ -40,6 +46,7 @@ export const login = ({ email, password }) => {
   let response = axios
     .post(`${url}/api/login`, { email, password }, { headers: { "Content-Type": "application/json" } })
     .then(response => {
+      console.log(response);
       return response.data.token;
     })
     .catch(errorHandler);

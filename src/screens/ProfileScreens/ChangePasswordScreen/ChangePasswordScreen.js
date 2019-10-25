@@ -35,7 +35,7 @@ export default function ChangePasswordScreen({ navigation }) {
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
-    setFormErrors({ ...formErrors, [name]: "" });
+    formErrors[name] && setFormErrors({ ...formErrors, [name]: "" });
   };
   // saving email / password for autologin next time
 

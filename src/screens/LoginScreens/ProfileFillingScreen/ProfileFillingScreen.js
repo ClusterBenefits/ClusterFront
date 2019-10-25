@@ -16,17 +16,25 @@ export default function ProfileFillingScreen({ navigation }) {
     organization: "",
     position: ""
   });
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { isValid } = allFieldsValidation(formCredentials);
   const { state, dispatch } = useContext(UserContext);
 
   const onChangeValue = (name, value) => {
     setFormCredentials({ ...formCredentials, [name]: value });
+    setFormErrors({ ...formErrors, [name]: "" });
   };
 
   // filling profile information ( name last_name etc )
 
   const onSubmit = async () => {
+    const { errors } = allFieldsValidation(formCredentials, {
+      min: "Кількість символів в полі повинна бути не менше 3"
+    });
+    if (errors) {
+      setFormErrors(errors);
+      return;
+    }
     setIsLoading(true);
     let data = {
       first_name: formCredentials.firstName,
@@ -38,7 +46,6 @@ export default function ProfileFillingScreen({ navigation }) {
     let response = await postUserInfo({ token: state.token, data, dispatch });
     response ? navigation.navigate(screens.ListingScreen) : setIsLoading(false);
   };
-  const goWelcomeScreen = () => navigation.navigate(screens.WelcomeScreen);
 
   return (
     <ProfileFillingScreenWithLoading
@@ -46,8 +53,8 @@ export default function ProfileFillingScreen({ navigation }) {
       onChangeValue={onChangeValue}
       onSubmit={onSubmit}
       formCredentials={formCredentials}
-      isValid={isValid}
-      goWelcomeScreen={goWelcomeScreen}
+      formErrors={formErrors}
+      navigation={navigation}
     />
   );
 }
