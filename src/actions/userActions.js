@@ -245,6 +245,9 @@ export const checkCreditCardSubscription = async ({ token, dispatch }) => {
 
 export const addCreditCardSubscription = async ({ ...props }) => {
   let response = await addBillingSubscription(props);
+  if (response) {
+    checkCreditCardSubscription({ token: props.token, dispatch: props.dispatch });
+  }
   props.dispatch({
     type: dispatchTypes.SUBSCRIPTION,
     payload: response ? response : false

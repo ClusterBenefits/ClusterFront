@@ -47,8 +47,9 @@ export default function BillingInformationScreen({
         )) ||
           (subscription && (
             <>
-              <Text> Checking subscription , це може заняти декілька хвилин</Text>
-              <BlueButton text="Оновити дані" withMarginBottom onPress={cancelSubscription} />
+              <Text> Проводиться оплата , це може заняти декілька хвилин</Text>
+              <View style={s.flexMax} />
+              <BlueButton text="Оновити дані" withMarginBottom onPress={checkSubscription} />
             </>
           )) || (
             <>

@@ -26,7 +26,9 @@ export default function ProfileEditScreen({ navigation }) {
   };
 
   const checkSubscription = async () => {
+    setIsLoading(true);
     await checkCreditCardSubscription({ token: state.token, dispatch });
+    setIsLoading(false);
   };
 
   // remove payment subscription

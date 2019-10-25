@@ -4,7 +4,7 @@ import { Alert, Linking } from "react-native";
 import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
 import { allFieldsValidation } from "../../../utils/validation";
 import { UserContext } from "../../../reducers/context";
-import { addCreditCardSubscription } from "../../../actions/userActions";
+import { addCreditCardSubscription, dispatchTypes } from "../../../actions/userActions";
 import formatStringByConfig from "../../../utils/formatStringByConfig";
 import { LoadingHOC } from "../../../components";
 
@@ -73,7 +73,12 @@ export default function AddCreditInfoScreen({ navigation }) {
     // If liqpay wants other validation like web/phone
     if (response.code === "wait_3ds") {
       let response1 = await AsyncAlert(response);
-      response1 === "No" ? console.log("no redirection") : console.log("doing redirection");
+      response1 === "No"
+        ? dispatch({
+            type: dispatchTypes.SUBSCRIPTION,
+            payload: null
+          })
+        : navigation.pop();
       return;
     }
     if (response.code === "phone_verify") {
