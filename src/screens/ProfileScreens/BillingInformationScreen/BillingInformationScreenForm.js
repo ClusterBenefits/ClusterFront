@@ -34,7 +34,7 @@ export default function BillingInformationScreen({
   return (
     <MyLinearGradient style={s.container}>
       <>
-        <Header navigation={navigation} titleText="інформація про оплату" />
+        <Header navigation={navigation} titleText="Інформація про оплату" />
         <CreditCardBigIcon style={s.imageStyle} />
         {(subscribed && (
           <>
