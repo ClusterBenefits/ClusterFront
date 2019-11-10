@@ -22,7 +22,7 @@ export default function WelcomeScreen({ navigation }) {
     async function fetchUserData() {
       let response = await fetchUserInfo({ token: state.token, dispatch });
 
-      // trying to auto login if userInfo is there , otherwise stay here and fill info
+      // trying to auto login if userInfo is there , otherwise stay and fill info
 
       if (response.first_name && response.last_name) {
         await checkCreditCardSubscription({

@@ -8,7 +8,6 @@ import {
   BillingInformationIcon,
   SupportIcon,
   LogOutIcon,
-  InfoIcon,
   EditPenIcon
 } from "../../../assets/svg";
 import { screens } from "../../../constants";

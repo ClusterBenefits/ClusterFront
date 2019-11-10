@@ -1,10 +1,13 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Container, Text, H1 } from "native-base";
+import { Text, H1 } from "native-base";
 import T from "prop-types";
 import { BlueButton, LogoImage, MyLinearGradient } from "../../../components";
 
 const s = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20
+  },
   H1: {
     marginBottom: 20
   },
@@ -16,16 +19,16 @@ const s = StyleSheet.create({
 
 export default function WelcomeForm({ goProfileFillingScreen }) {
   return (
-    <MyLinearGradient>
-      <Container>
-        <LogoImage noBg />
-        <H1 style={s.H1}>Welcome!</H1>
-        <Text style={s.text3}>
-          Eu velit occaecat eu minim minim nostrud et sunt nostrud adipisicing ut aliqua sint. Exercitation
-          qui Lorem ea qui fugiat eiusmod id velit. Nisi
-        </Text>
-        <BlueButton text="Гаразд" onPress={goProfileFillingScreen} />
-      </Container>
+    <MyLinearGradient withScroll style={s.container}>
+      <LogoImage />
+      <H1 style={s.H1}>Welcome!</H1>
+      <Text style={s.text3}>
+        Даний додаток дає можливість користуватися знижками на товари та послуги в рамках програми ІТ Benefits
+        від Івано-Франківського ІТ кластеру. Детальнішу інформацію про програму та наших партнерів можна
+        знайти на FB сторінці. Весь прибуток від користування додатком буде спрямовано на покращення умов
+        життя в нашому місті та благодійні цілі. Приємного користування!
+      </Text>
+      <BlueButton withMarginBottom text="Гаразд" onPress={goProfileFillingScreen} />
     </MyLinearGradient>
   );
 }

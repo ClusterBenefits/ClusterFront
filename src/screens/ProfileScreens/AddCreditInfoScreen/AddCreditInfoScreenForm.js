@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Form, CheckBox, ListItem, Body, Text } from "native-base";
+import { CheckBox, ListItem, Body, Text } from "native-base";
 import T from "prop-types";
 
 import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components";

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Image, View } from "react-native";
 
-const LogoImage = ({ withText = false, noBg = false }) => {
+const LogoImage = ({ withText = false }) => {
   const s = StyleSheet.create({
     container: {
       flex: 1,

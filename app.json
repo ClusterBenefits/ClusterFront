@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "It Cluster",
-    "slug": "test",
+    "slug": "Cluster",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/image-2019-06-12.png",
+    "icon": "./src/assets/images/App-Icon-83.5@2x@3x.png",
     "splash": {
       "image": "./src/assets/images/SplashScreen.png",
       "resizeMode": "contain",

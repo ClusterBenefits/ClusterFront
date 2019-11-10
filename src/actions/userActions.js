@@ -1,4 +1,4 @@
-import { BackHandler, Alert, AsyncStorage } from "react-native";
+import { Alert, AsyncStorage } from "react-native";
 import {
   postTokenToServer,
   login,
@@ -88,7 +88,6 @@ export const registerUser = async ({ ...props }) => {
 
 export const resetUserPassword = async ({ email, resend }) => {
   const response = await forgotPassword({ email, resend });
-  console.log(response);
   return response;
 };
 
@@ -303,12 +302,7 @@ export const changeInitialFeatured = ({ items, favoriteItems, dispatch }) => {
 };
 
 export const changeFavoriteCompanies = ({ token, item }) => {
-  console.log(item.featured);
-  if (item.featured) {
-    removeFromFavorites({ token, id: item.id });
-  } else {
-    attachToFavorites({ token, id: item.id });
-  }
+  item.featured ? removeFromFavorites({ token, id: item.id }) : attachToFavorites({ token, id: item.id });
 };
 
 // change item.featured , favoriteItems , favoriteItemsKeys(All logic in reducer)
