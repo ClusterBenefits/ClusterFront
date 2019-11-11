@@ -49,24 +49,10 @@ export default function LoginForm({
   formCredentials,
   formErrors
 }) {
-  // const [visible] = keyboard();
-  // console.log(visible);
-  // const bounceValue = new Animated.Value(visible ? 0 : -225);
-  // function animation() {
-  //   let toValue = visible ? -225 : 0;
-
-  //   Animated.timing(bounceValue, {
-  //     toValue: toValue,
-  //     duration: 500
-  //   }).start();
-  // }
-  // animation();
-
   return (
     <MyLinearGradient withScroll>
-      {/* <Animated.View style={[s.subView, { transform: [{ translateY: bounceValue }] }]}> */}
       <LogoImage withText />
-      {/* </Animated.View> */}
+
       <View style={s.container}>
         <H1>Вітаємо!</H1>
 

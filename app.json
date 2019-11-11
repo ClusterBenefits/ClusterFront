@@ -7,9 +7,9 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/App-Icon-83.5@2x@3x.png",
+    "icon": "./src/assets/images/App-Icon-832x3x.png",
     "splash": {
-      "image": "./src/assets/images/SplashScreen.png",
+      "image": "./src/assets/images/ITBenefitsLogo3x-1.png",
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },

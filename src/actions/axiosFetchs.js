@@ -46,7 +46,6 @@ export const login = ({ email, password }) => {
   let response = axios
     .post(`${url}/api/login`, { email, password }, { headers: { "Content-Type": "application/json" } })
     .then(response => {
-      console.log(response);
       return response.data.token;
     })
     .catch(errorHandler);

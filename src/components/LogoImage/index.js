@@ -10,18 +10,24 @@ const LogoImage = ({ withText = false }) => {
       width: "100%",
       justifyContent: "center",
       alignItems: "center"
+    },
+    imageWithText: {
+      flex: 1,
+      width: "100%"
     }
   });
 
   return (
     <View style={s.container}>
       <Image
-        style={s.image}
+        style={s.imageWithText}
         source={
           withText
-            ? require("../../assets/images/MainLogoWithText.png")
-            : require("../../assets/images/MainLogo.png")
+            ? require("../../assets/images/ITBenefitsLogo3x-1.png")
+            : require("../../assets/images/ITBenefitsLogo3x-1.png")
+          // : require("../../assets/images/App-Icon-832x3x.png")
         }
+        resizeMode="contain"
       />
     </View>
   );

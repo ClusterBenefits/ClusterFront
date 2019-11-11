@@ -15,7 +15,6 @@ const s = StyleSheet.create({
     alignItems: "center"
   },
   container: {
-    height: 250,
     width: 340,
     backgroundColor: colors.mainWhite,
     borderRadius: 16,
@@ -33,25 +32,26 @@ const s = StyleSheet.create({
   discountStyle: {
     color: colors.mainGrey,
     lineHeight: 20,
-    marginTop: 15,
+    marginTop: 13,
     marginBottom: 8
   },
   imageContainer: {
+    marginTop: 20,
     marginLeft: 22,
-    maxHeight: 64,
+    maxHeight: 62,
     maxWidth: 132,
     justifyContent: "center"
   },
   image: {
-    height: 64,
-    width: 64
+    height: 62,
+    width: 62
   },
   flexMax: {
     flex: 1
   }
 });
 
-export default function BarcodeItem({ item: { fields = {}, image = {} }, hideModal }) {
+export default function BarcodeItem({ item: { fields = {}, image = {}, featured }, hideModal }) {
   return (
     <BlurView style={s.flexMax} tint="dark" intensity={100}>
       <TouchableOpacity style={s.modalContainer} onPress={hideModal} activeOpacity={1}>
@@ -62,7 +62,7 @@ export default function BarcodeItem({ item: { fields = {}, image = {} }, hideMod
               <View style={s.imageContainer}>
                 <Image source={{ uri: `${url}${image.tiny.url}` }} style={s.image} />
               </View>
-              {true ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
+              {featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
             </View>
             <Barcode value={`${fields.discount}`} format="CODE128" width={2} height={80} />
             <Text>{fields.discount} %</Text>
