@@ -21,7 +21,6 @@ const s = StyleSheet.create({
 });
 
 export default function ListScreenForm({ items, handleFavoriteChange, subscribed }) {
-  console.log(items);
   return (
     <MyLinearGradient>
       <H1 style={s.mainText}>Мої картки</H1>

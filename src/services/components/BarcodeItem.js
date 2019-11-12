@@ -36,7 +36,7 @@ const s = StyleSheet.create({
     marginBottom: 8
   },
   imageContainer: {
-    marginTop: 20,
+    marginTop: 15,
     marginLeft: 22,
     maxHeight: 62,
     maxWidth: 132,
@@ -65,7 +65,7 @@ export default function BarcodeItem({ item: { fields = {}, image = {}, featured 
               {featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
             </View>
             <Barcode value={`${fields.discount}`} format="CODE128" width={2} height={80} />
-            <Text>{fields.discount} %</Text>
+            <Text>{fields.card_number}</Text>
             <Text style={s.discountStyle}>{`Знижка ${fields.discount} %`}</Text>
           </View>
         </TouchableWithoutFeedback>
