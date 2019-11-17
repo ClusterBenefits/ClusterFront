@@ -37,7 +37,7 @@ export default function ListScreenForm({ items, handleFavoriteChange, subscribed
           )}
         />
       ) : (
-        <H3 style={s.extraMarginLeft}>Subscribe to see items</H3>
+        <H3 style={s.extraMarginLeft}>Підпишіться щоб получити доступ до знижок</H3>
       )}
     </MyLinearGradient>
   );

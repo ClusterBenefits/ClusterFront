@@ -37,7 +37,7 @@ export default function FavoriteForm({ favoriteItems, handleFavoriteChange }) {
           )}
         />
       ) : (
-        <H3 style={s.extraMarginLeft}>No items in favorite list</H3>
+        <H3 style={s.extraMarginLeft}>Немає улюблених знижок</H3>
       )}
     </MyLinearGradient>
   );

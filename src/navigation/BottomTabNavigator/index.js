@@ -45,8 +45,9 @@ export default createBottomTabNavigator(
     }),
     tabBarOptions: {
       style: {
-        height: 50,
-        backgroundColor: "#fff"
+        height: 53,
+        backgroundColor: "#fff",
+        paddingTop: 6
       },
       labelStyle: {
         fontSize: 9,
