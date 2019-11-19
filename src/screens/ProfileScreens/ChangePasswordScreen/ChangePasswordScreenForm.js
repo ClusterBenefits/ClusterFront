@@ -26,7 +26,6 @@ export default function ChangePasswordForm({
   return (
     <MyLinearGradient style={s.container} withScroll>
       <Header titleText="Змінити пароль" navigation={navigation} />
-      <H3>Change password</H3>
       <MainInput
         onChangeText={onChangeValue}
         placeholder={"Пароль"}

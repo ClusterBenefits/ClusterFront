@@ -26,7 +26,6 @@ export default function ChangeEmailForm({
   return (
     <MyLinearGradient style={s.container}>
       <Header titleText="Змінити емейл" navigation={navigation} />
-      <H3>Change email</H3>
       <MainInput
         onChangeText={onChangeValue}
         placeholder="Новий емейл"

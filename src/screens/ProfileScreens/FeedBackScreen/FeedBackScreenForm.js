@@ -52,7 +52,7 @@ export default function commentsForm({
         />
       </Form>
       <View style={s.flexMax} />
-      <BlueButton text="Подати зміни" onPress={sendMessage} style={s.extraMarginBottom} withMarginBottom />
+      <BlueButton text="Подати запит" onPress={sendMessage} style={s.extraMarginBottom} withMarginBottom />
     </MyLinearGradient>
   );
 }

@@ -78,7 +78,7 @@ export default function LoginForm({
           <View />
         </View>
 
-        <BlueButton text="Log In" onPress={logInUser} />
+        <BlueButton text="Увійти" onPress={logInUser} />
 
         <View style={s.bottom_menu}>
           <Text style={s.bottom_menu_text}>Ще не зареєстровані?</Text>
