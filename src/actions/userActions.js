@@ -255,16 +255,16 @@ export const addCreditCardSubscription = async ({ ...props }) => {
 
 export const deleteCreditCardSubscription = async ({ ...props }) => {
   Alert.alert(
-    "Cancel Subscription?",
-    "Are you sure that you want to cancel subscription?",
+    "Скасувати підписку",
+    "Ви впевнені, що хочете скасувати підписку?",
     [
       {
-        text: "Cancel",
+        text: "Ні",
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel"
       },
       {
-        text: "OK",
+        text: "Так",
         onPress: async () => {
           props.setIsLoading(true);
           let response = await deleteBillingSubscription(props);
@@ -319,11 +319,11 @@ export const handleClickIcon = ({ item, dispatch }) => {
 export const clearUserLocal = async ({ dispatch }) =>
   new Promise(resolve => {
     Alert.alert(
-      "Logout user",
-      "Are you sure that you want to logout?",
+      "Вийти",
+      "Ви впевнені, що хочете вийти?",
       [
         {
-          text: "Cancel",
+          text: "Ні",
           onPress: () => {
             console.log("Cancel Pressed");
             resolve("No");
@@ -331,7 +331,7 @@ export const clearUserLocal = async ({ dispatch }) =>
           style: "cancel"
         },
         {
-          text: "OK",
+          text: "Так",
           onPress: () => {
             console.log("loging out )");
             AsyncStorage.clear().catch(e => console.log(e));

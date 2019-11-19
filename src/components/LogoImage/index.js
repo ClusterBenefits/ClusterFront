@@ -25,7 +25,6 @@ const LogoImage = ({ withText = false }) => {
           withText
             ? require("../../assets/images/ITBenefitsLogo3x-1.png")
             : require("../../assets/images/ITBenefitsLogo3x-1.png")
-          // : require("../../assets/images/App-Icon-832x3x.png")
         }
         resizeMode="contain"
       />

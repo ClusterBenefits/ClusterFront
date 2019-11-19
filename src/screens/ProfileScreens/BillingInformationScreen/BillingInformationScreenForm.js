@@ -38,29 +38,26 @@ export default function BillingInformationScreen({
         <CreditCardBigIcon style={s.imageStyle} />
         {(subscribed && (
           <>
-            <H2 style={s.extraMarginBottom}>Платіжну карту додано</H2>
-            <Text>Expiration Date: {expired_at}</Text>
-            <Text>Card Number: {credit_card_number}</Text>
+            <H2 style={s.extraMarginBottom}>Платіжну каркту додано</H2>
+            <Text>Строк дії : {expired_at}</Text>
+            <Text>Номер каркти : {credit_card_number}</Text>
             <View style={s.flexMax} />
             <BlueButton text="Відмінити підписку" withMarginBottom onPress={cancelSubscription} />
           </>
         )) ||
           (subscription && (
             <>
-              <Text> Проводиться оплата , це може заняти декілька хвилин</Text>
+              <Text> Проводиться оплата, це може заняти декілька хвилин</Text>
               <View style={s.flexMax} />
               <BlueButton text="Оновити дані" withMarginBottom onPress={checkSubscription} />
             </>
           )) || (
             <>
-              <H1>Платіжну карту не додано</H1>
-              <Text>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur.
-              </Text>
+              <H1>Платіжну каркту не додано</H1>
+              <Text>Додайте платіжну картку щоб отримати доступ до знижок</Text>
               <View style={s.flexMax} />
               <BlueButton
-                text="Додати карту"
+                text="Додати картку"
                 withMarginBottom
                 onPress={() => navigation.navigate(screens.AddCreditInfoScreen)}
               />

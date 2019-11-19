@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Animated, StatusBar } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import { View, H1, Text } from "native-base";
 import T from "prop-types";
 
@@ -31,13 +31,6 @@ const s = StyleSheet.create({
   },
   forgotPasswordText: {
     fontWeight: "500"
-  },
-  subView: {
-    position: "relative",
-    top: 0,
-    left: 0,
-    right: 0,
-    flex: 1
   }
 });
 

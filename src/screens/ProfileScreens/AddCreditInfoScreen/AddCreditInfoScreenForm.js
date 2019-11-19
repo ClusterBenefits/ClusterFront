@@ -42,9 +42,9 @@ export default function AddCreditInfoScreen({
 }) {
   return (
     <MyLinearGradient withScroll style={s.container}>
-      <Header titleText="Нова карта" navigation={navigation} />
+      <Header titleText="Нова картка" navigation={navigation} />
       <MainInput
-        placeholder="Номер карти"
+        placeholder="Номер каркти"
         onChangeText={onChangeValue}
         maxLength={19}
         name="credit_card_number"
@@ -72,7 +72,7 @@ export default function AddCreditInfoScreen({
       />
 
       <MainInput
-        placeholder={"City"}
+        placeholder={"Місто"}
         onChangeText={onChangeValue}
         maxLength={20}
         name="city"
@@ -81,7 +81,7 @@ export default function AddCreditInfoScreen({
       />
 
       <MainInput
-        placeholder={"Address"}
+        placeholder={"Адреса"}
         onChangeText={onChangeValue}
         maxLength={25}
         name="address"
@@ -90,7 +90,7 @@ export default function AddCreditInfoScreen({
       />
 
       <MainInput
-        placeholder={"Postal Code"}
+        placeholder={"Поштовий індекс"}
         onChangeText={onChangeValue}
         maxLength={10}
         name="postal_code"

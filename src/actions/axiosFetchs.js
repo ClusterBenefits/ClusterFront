@@ -179,7 +179,7 @@ export const changeUserPassword = async ({
       headers: { Authorization: "Bearer " + token, Accept: "application/json" }
     })
     .then(response => {
-      ShowToast("Your password has been changed successfully!");
+      ShowToast("Ваш пароль успішно оновлено!");
       return response.data;
     })
     .catch(errorHandler);
@@ -211,7 +211,7 @@ export const attachToFavorites = ({ token, id }) => {
     })
     .then(response => {
       console.log("attachedfavorite response");
-      ShowToast("Item added to favorite list");
+      ShowToast("Додано до улюбленого списку");
       return response;
     })
     .catch(e => console.log("failed to add", e));
@@ -226,7 +226,7 @@ export const removeFromFavorites = ({ token, id }) => {
       headers: { Accept: "application/json", Authorization: "Bearer " + token }
     })
     .then(response => {
-      ShowToast("Item removed from favorite list");
+      ShowToast("Видалено з улюбленого списку");
       return response;
     })
     .catch(e => console.log("error removing ", e));
@@ -257,29 +257,6 @@ export const listOfCompanies = token => {
 
 // Send Messages
 
-export const getItemComments = ({ id, token, page }) => {
-  let fetch;
-  if (page) {
-    fetch = `${url}/api/companies/${id}/comments?page=${page}`;
-  } else {
-    fetch = `${url}/api/companies/${id}/comments`;
-  }
-  let response = axios
-    .get(fetch, {
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token
-      }
-    })
-    .then(response => {
-      return response.data;
-    })
-    .catch(({ response }) => {
-      ShowToast(`error: ${response.data.error}`);
-    });
-  return response;
-};
-
 export const sendMessageToAdmins = ({ name, email, subject, comment, token }) => {
   let response = axios
     .post(
@@ -293,33 +270,11 @@ export const sendMessageToAdmins = ({ name, email, subject, comment, token }) =>
       }
     )
     .then(response => {
-      ShowToast("Message has been sent successfully");
+      ShowToast("Запит надіслано успішно!");
       return response.data;
     })
     .catch(errorHandler);
 
-  return response;
-};
-export const sendComments = ({ message, token, id }) => {
-  let response = axios
-    .post(
-      `${url}/api/companies/comment`,
-      { company_id: id, message },
-      {
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + token
-        }
-      }
-    )
-    .then(response => {
-      ShowToast("Message has been sent successfully");
-      return response;
-    })
-    .catch(({ response }) => {
-      console.log("error", response);
-      ShowToast(`error: ${response.data.error}`);
-    });
   return response;
 };
 
@@ -381,7 +336,7 @@ export const deleteBillingSubscription = ({ token }) => {
     })
     .catch(({ response }) => {
       console.log(response);
-      ShowToast(`error: ${response.data.error}`);
+      ShowToast(`${response.data.error}`);
     });
   return response;
 };

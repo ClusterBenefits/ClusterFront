@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
-import { StatusBar } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
 
 import { UserContext } from "./../../../reducers/context";
 import LoginScreenForm from "./LoginScreenForm";
 import { loginUser } from "../../../actions/userActions";
 import { saveDataToLocalStorage, getDataFromLocalStorage, allFieldsValidation } from "../../../utils";
-import { screens, colors } from "../../../constants";
+import { screens } from "../../../constants";
 import { LoadingHOC } from "../../../components";
-import { useNavigationIsFocus, useBackButton } from "../../../hooks";
+import { useBackButton } from "../../../hooks";
 
 const LoginScreenWithLoading = LoadingHOC(LoginScreenForm);
 
