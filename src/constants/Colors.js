@@ -8,7 +8,6 @@ export const colors = {
   mainBlack: "#141820",
   mainRed: "#ea4335",
   mainWhite: "#ffffff",
-  mainLogoBg: "#f6f7fb",
   bottomNavigationBg: "#ffffff",
   modalBg: "rgba(0, 0, 0, 0.4)",
   linearGradientStart: "#fbfcfd",

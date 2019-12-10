@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import { Modal, View, StatusBar } from "react-native";
 
 import { BarcodeItem } from "./components";
-import ImageButtons from "./components/ImageButtons";
 
 let mainModal;
 
 export function MainModalComponent() {
-  const [{ isVisible, navigation, item }, setState] = useState({
+  const [{ isVisible, item }, setState] = useState({
     isVisible: false,
     item: null
   });
 
-  const showModal = ({ navigation, item }) => setState({ isVisible: true, navigation, item });
+  const showModal = ({ item }) => setState({ isVisible: true, item });
   const hideModal = () => setState({ isVisible: false, item: null });
 
   mainModal = {
@@ -28,17 +27,13 @@ export function MainModalComponent() {
         <View>
           <StatusBar translucent barStyle="dark-content" backgroundColor={"rgba(0,0,0,0.6)"} />
         </View>
-        {item ? (
-          <BarcodeItem item={item} hideModal={hideModal} />
-        ) : (
-          <ImageButtons hideModal={hideModal} navigation={navigation} />
-        )}
+        {item && <BarcodeItem item={item} hideModal={hideModal} />}
       </>
     </Modal>
   );
 }
 
 export const ButtonModal = {
-  showModal: ({ navigation, item }) => mainModal.showModal({ navigation, item }),
+  showModal: ({ item }) => mainModal.showModal({ item }),
   hideModal: () => mainModal.hideModal()
 };

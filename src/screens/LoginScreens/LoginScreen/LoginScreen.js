@@ -17,7 +17,7 @@ export default function LoginScreen({ navigation }) {
   });
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const { state, dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
 
   useEffect(() => {
     const autoAuth = async () => {
