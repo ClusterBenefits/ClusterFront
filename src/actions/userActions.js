@@ -14,9 +14,7 @@ import {
   attachToFavorites,
   removeFromFavorites,
   listOfCompanies,
-  getItemComments,
   sendMessageToAdmins,
-  sendComments,
   checkBillingSubscription,
   addBillingSubscription,
   deleteBillingSubscription,
@@ -191,45 +189,6 @@ export const fetchFavoriteItems = async ({ token, dispatch }) => {
   return response;
 };
 
-//  Message and Comments
-
-export const getComments = async ({ id, token, dispatch, page, comments }) => {
-  let response = await getItemComments({ id, token, page });
-  if (response) {
-    if (!page) {
-      dispatch({
-        type: dispatchTypes.ADD_COMMENTS,
-        payload: response
-      });
-    } // adding new comments from page 2/3/4/5......
-    else {
-      let newPayload = { ...comments };
-      newPayload.data = [...newPayload.data, ...response.data];
-      newPayload.meta = response.meta;
-      dispatch({
-        type: dispatchTypes.ADD_COMMENTS,
-        payload: newPayload
-      });
-    }
-  }
-
-  return response;
-};
-
-export const sendComment = async ({ ...props }) => {
-  let response = await sendComments(props);
-
-  return response;
-};
-
-export const sendMessageToAdmin = async ({ ...props }) => {
-  let response = await sendMessageToAdmins(props);
-
-  return response;
-};
-
-//  Message and Comments
-
 // CreditCardApi
 
 export const checkCreditCardSubscription = async ({ token, dispatch }) => {
@@ -315,6 +274,12 @@ export const handleClickIcon = ({ item, dispatch }) => {
 };
 
 // other
+
+export const sendMessageToAdmin = async ({ ...props }) => {
+  let response = await sendMessageToAdmins(props);
+
+  return response;
+};
 
 export const clearUserLocal = async ({ dispatch }) =>
   new Promise(resolve => {

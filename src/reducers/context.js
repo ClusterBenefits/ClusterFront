@@ -45,11 +45,6 @@ let reducer = (state, action) => {
         ...state,
         favoriteItems: action.payload
       };
-    case dispatchTypes.ADD_COMMENTS:
-      return {
-        ...state,
-        comments: action.payload
-      };
     case dispatchTypes.SUBSCRIPTION:
       return {
         ...state,
@@ -65,7 +60,6 @@ const initialState = {
   userInfo: null,
   items: [],
   favoriteItems: [],
-  comments: {},
   subscription: false
 };
 
@@ -73,10 +67,6 @@ const UserContext = React.createContext(initialState);
 
 function MyProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  return (
-    <UserContext.Provider value={{ state, dispatch }}>
-      {props.children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ state, dispatch }}>{props.children}</UserContext.Provider>;
 }
 export { UserContext, MyProvider };
