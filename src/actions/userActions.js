@@ -151,17 +151,6 @@ export const postUserInfo = async ({ token, data, dispatch }) => {
   return response;
 };
 
-export const postUserAvatar = async ({ dispatch, token, data }) => {
-  const response = await updateUserAvatar({ token, data });
-  if (response) {
-    dispatch({
-      type: dispatchTypes.ADD_USERINFO,
-      payload: response
-    });
-  }
-  return response;
-};
-
 /////// User
 
 export const fetchItems = async ({ dispatch, token }) => {

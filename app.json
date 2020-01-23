@@ -18,6 +18,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.mycompany.meelor",
       "supportsTablet": true
     },
     "android": {

@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Image, View, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, TouchableOpacity, View, TouchableWithoutFeedback } from "react-native";
 import { Text } from "native-base";
 import T from "prop-types";
 import Barcode from "react-native-barcode-builder";
 
-import { colors, url } from "../../constants";
+import { colors } from "../../constants";
 import { FavoritesIcon, FavoritesIconOutLine } from "../../assets/svg";
 import { BlurView } from "expo-blur";
 
@@ -42,16 +42,12 @@ const s = StyleSheet.create({
     maxWidth: 132,
     justifyContent: "center"
   },
-  image: {
-    height: 62,
-    width: 62
-  },
   flexMax: {
     flex: 1
   }
 });
 
-export default function BarcodeItem({ item: { fields = {}, image = {}, featured }, hideModal }) {
+export default function BarcodeItem({ item: { fields = {}, image = {}, featured = false }, hideModal }) {
   return (
     <BlurView style={s.flexMax} tint="dark" intensity={100}>
       <TouchableOpacity style={s.modalContainer} onPress={hideModal} activeOpacity={1}>
@@ -60,7 +56,7 @@ export default function BarcodeItem({ item: { fields = {}, image = {}, featured 
             <View style={s.topPartContainer}>
               <View />
               <View style={s.imageContainer}>
-                <Image source={{ uri: `${url}${image.tiny.url}` }} style={s.image} />
+                <Text>{fields.name}</Text>
               </View>
               {featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
             </View>

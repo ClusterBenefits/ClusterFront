@@ -6,4 +6,5 @@ function dateCompare(date) {
 export default subscription =>
   !!subscription &&
   subscription.expired_at &&
+  subscription.status === "subscribed" &&
   dateCompare(subscription.expired_at).getTime() > new Date().getTime();

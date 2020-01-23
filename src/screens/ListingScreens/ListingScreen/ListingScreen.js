@@ -15,7 +15,7 @@ import { useBackButton } from "../../../hooks";
 
 const ListingScreenWithLoading = LoadingHOC(ListingScreenForm);
 
-export default function ListingScreen(props) {
+export default function ListingScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch } = useContext(UserContext);
 

@@ -31,6 +31,8 @@ export default function BillingInformationScreen({
   subscription
 }) {
   const { credit_card_number = "", expired_at = "" } = subscription || {};
+  const activatedFromAdmin = credit_card_number === "";
+
   return (
     <MyLinearGradient style={s.container}>
       <>
@@ -38,9 +40,11 @@ export default function BillingInformationScreen({
         <CreditCardBigIcon style={s.imageStyle} />
         {(subscribed && (
           <>
-            <H2 style={s.extraMarginBottom}>Платіжну каркту додано</H2>
+            <H2 style={s.extraMarginBottom}>
+              {activatedFromAdmin ? "Підписку активовано" : "Платіжну каркту додано"}
+            </H2>
             <Text>Строк дії : {expired_at}</Text>
-            <Text>Номер каркти : {credit_card_number}</Text>
+            {!activatedFromAdmin && <Text>Номер каркти : {credit_card_number}</Text>}
             <View style={s.flexMax} />
             <BlueButton text="Відмінити підписку" withMarginBottom onPress={cancelSubscription} />
           </>
@@ -70,26 +74,3 @@ export default function BillingInformationScreen({
 BillingInformationScreen.propTypes = {
   navigation: T.object.isRequired
 };
-
-// <H3 style={{ marginLeft: 0, marginBottom: 20 }}>Billing information</H3>
-// {(isSubscriptionActive && (
-//   <>
-//     <Text style={styles.text}>Expiration Date: 2019.09.10</Text>
-//     <Text style={styles.text}>Card Number</Text>
-//     <Item style={styles.container}>
-//       <H3>4444**44</H3>
-//     </Item>
-//   </>
-// )) ||
-//   (subscription && <Text> Checking subscription , it may take few minutes</Text>) || (
-//     <Text> You have no subscription</Text>
-//   )}
-// <View style={styles.bottom}>
-//   <IconButton onPress={goProfileScreen} text={"Profile"} />
-//   {(isSubscriptionActive && (
-//     <SmallBlueButton onPress={cancelSubscription} text={"Cancel Subscription"} />
-//   )) ||
-//     (subscription && subscription.expired_at && (
-//       <SmallBlueButton onPress={checkCreditInfo} text={"Update"} />
-//     )) || <SmallBlueButton onPress={goEditBillingInfoScreen} text={"Subscribe"} />}
-// </View>
