@@ -17,26 +17,29 @@ const ListingScreenWithLoading = LoadingHOC(ListingScreenForm);
 
 export default function ListingScreen() {
   const [isLoading, setIsLoading] = useState(true);
-  const { state, dispatch } = useContext(UserContext);
+  const {
+    state: { subscription, userInfo, token, items },
+    dispatch
+  } = useContext(UserContext);
 
   useEffect(() => {
     asyncLoading();
-  }, [state.subscription]);
+  }, [subscription]);
 
   useBackButton(true);
 
-  const subscribed = isSubscribed(state.subscription);
+  const subscribed = isSubscribed(userInfo, subscription);
 
   async function asyncLoading() {
     // fetch all product items
     let response1 = await fetchItems({
       dispatch,
-      token: state.token
+      token
     });
 
     //fetch all favorites items
     let response2 = await fetchFavoriteItems({
-      token: state.token,
+      token,
       dispatch
     });
     // change star color if item is in favorite list
@@ -52,14 +55,14 @@ export default function ListingScreen() {
 
   // change item.featured and favoritelist
   const handleFavoriteChange = async item => {
-    changeFavoriteCompanies({ token: state.token, item });
+    changeFavoriteCompanies({ token, item });
     handleClickIcon({ item, dispatch });
   };
 
   return (
     <ListingScreenWithLoading
       isLoading={isLoading}
-      items={state.items}
+      items={items}
       handleFavoriteChange={handleFavoriteChange}
       subscribed={subscribed}
     />

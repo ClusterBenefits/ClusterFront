@@ -7,7 +7,8 @@ import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../compon
 const s = StyleSheet.create({
   container: {
     marginBottom: 20,
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    flex: 1
   },
   flexMax: {
     flex: 1
@@ -22,39 +23,41 @@ export default function ProfileFillingForm({
   formErrors
 }) {
   return (
-    <MyLinearGradient withScroll style={s.container}>
+    <MyLinearGradient withScroll>
       <Header titleText="Додаткова Інформація" navigation={navigation} />
-      <H1>Реєстрація</H1>
-      <MainInput
-        placeholder="Ім'я"
-        name="firstName"
-        value={formCredentials.firstName}
-        onChangeText={onChangeValue}
-        error={formErrors["firstName"]}
-      />
-      <MainInput
-        placeholder="Прізвище"
-        name="lastName"
-        value={formCredentials.lastName}
-        onChangeText={onChangeValue}
-        error={formErrors["lastName"]}
-      />
-      <MainInput
-        placeholder="Компанія"
-        name="organization"
-        value={formCredentials.organization}
-        onChangeText={onChangeValue}
-        error={formErrors["organization"]}
-      />
-      <MainInput
-        placeholder="Позиція (не обов'язково)"
-        name="position"
-        value={formCredentials.position}
-        onChangeText={onChangeValue}
-        error={formErrors["position"]}
-      />
-      <View style={s.flexMax} />
-      <BlueButton text="Next" onPress={onSubmit} />
+      <View style={s.container}>
+        <H1>Реєстрація</H1>
+        <MainInput
+          placeholder="Ім'я"
+          name="firstName"
+          value={formCredentials.firstName}
+          onChangeText={onChangeValue}
+          error={formErrors["firstName"]}
+        />
+        <MainInput
+          placeholder="Прізвище"
+          name="lastName"
+          value={formCredentials.lastName}
+          onChangeText={onChangeValue}
+          error={formErrors["lastName"]}
+        />
+        <MainInput
+          placeholder="Компанія"
+          name="organization"
+          value={formCredentials.organization}
+          onChangeText={onChangeValue}
+          error={formErrors["organization"]}
+        />
+        <MainInput
+          placeholder="Позиція (не обов'язково)"
+          name="position"
+          value={formCredentials.position}
+          onChangeText={onChangeValue}
+          error={formErrors["position"]}
+        />
+        <View style={s.flexMax} />
+        <BlueButton text="Next" onPress={onSubmit} />
+      </View>
     </MyLinearGradient>
   );
 }

@@ -17,8 +17,7 @@ import {
   sendMessageToAdmins,
   checkBillingSubscription,
   addBillingSubscription,
-  deleteBillingSubscription,
-  updateUserAvatar
+  deleteBillingSubscription
 } from "./axiosFetchs";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";

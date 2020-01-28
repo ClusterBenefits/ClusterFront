@@ -9,7 +9,8 @@ import { MyLinearGradient, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
-    paddingHorizontal: 16
+    paddingHorizontal: 20,
+    flex: 1
   },
   flexMax: {
     flex: 1
@@ -28,25 +29,31 @@ export default function BillingInformationScreen({
   subscribed,
   cancelSubscription,
   checkSubscription,
-  subscription
+  subscription,
+  userInfo
 }) {
   const { credit_card_number = "", expired_at = "" } = subscription || {};
-  const activatedFromAdmin = credit_card_number === "";
+  const isActivatedFromAdmin = subscribed && credit_card_number === "";
 
   return (
-    <MyLinearGradient style={s.container}>
-      <>
-        <Header navigation={navigation} titleText="Інформація про оплату" />
+    <MyLinearGradient>
+      <Header navigation={navigation} titleText="Інформація про оплату" />
+      <View style={s.container}>
         <CreditCardBigIcon style={s.imageStyle} />
         {(subscribed && (
           <>
             <H2 style={s.extraMarginBottom}>
-              {activatedFromAdmin ? "Підписку активовано" : "Платіжну каркту додано"}
+              {isActivatedFromAdmin ? "Підписку активовано" : "Платіжну каркту додано"}
             </H2>
-            <Text>Строк дії : {expired_at}</Text>
-            {!activatedFromAdmin && <Text>Номер каркти : {credit_card_number}</Text>}
+            <Text>Строк дії : {isActivatedFromAdmin ? userInfo.expired_at : expired_at}</Text>
+            {!isActivatedFromAdmin && <Text>Номер каркти : {credit_card_number}</Text>}
             <View style={s.flexMax} />
-            <BlueButton text="Відмінити підписку" withMarginBottom onPress={cancelSubscription} />
+            <BlueButton
+              text="Відмінити підписку"
+              withMarginBottom
+              onPress={cancelSubscription}
+              disabled={subscribed && isActivatedFromAdmin}
+            />
           </>
         )) ||
           (subscription && (
@@ -67,10 +74,14 @@ export default function BillingInformationScreen({
               />
             </>
           )}
-      </>
+      </View>
     </MyLinearGradient>
   );
 }
 BillingInformationScreen.propTypes = {
-  navigation: T.object.isRequired
+  navigation: T.object.isRequired,
+  subscribed: T.bool,
+  cancelSubscription: T.func,
+  checkSubscription: T.func,
+  userInfo: T.object
 };

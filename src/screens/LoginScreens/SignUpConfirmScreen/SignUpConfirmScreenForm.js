@@ -9,8 +9,9 @@ import { BlueButton, MyLinearGradient, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
-    marginHorizontal: 16,
-    marginBottom: 20
+    marginHorizontal: 20,
+    marginBottom: 20,
+    flex: 1
   },
   inputContainer: {
     justifyContent: "space-between",
@@ -41,27 +42,29 @@ export default function SignUpForm({
   const isValid = code.length === 4;
 
   return (
-    <MyLinearGradient style={s.container}>
+    <MyLinearGradient>
       <Header
         navigation={navigation}
         onTitleRightPress={resendVerificationCode}
         titleRightText="Надіслати код знову"
       />
-      <H1>Підтвердження</H1>
+      <View style={s.container}>
+        <H1>Підтвердження</H1>
 
-      <CodeInput
-        onFulfill={setVerificationCode}
-        codeLength={4}
-        cellProps={{ style: s.inputCell }}
-        activeColor={colors.mainBlack}
-        cellBorderWidth={1}
-        containerProps={{ style: s.inputContainer }}
-        inputProps={{ onChangeText: setVerificationCode }}
-      />
-      <View style={s.maxFlex} />
-      <Text style={s.enterText}>Введіть отриманий на емейл 4-ти значний код</Text>
+        <CodeInput
+          onFulfill={setVerificationCode}
+          codeLength={4}
+          cellProps={{ style: s.inputCell }}
+          activeColor={colors.mainBlack}
+          cellBorderWidth={1}
+          containerProps={{ style: s.inputContainer }}
+          inputProps={{ onChangeText: setVerificationCode }}
+        />
+        <View style={s.maxFlex} />
+        <Text style={s.enterText}>Введіть отриманий на емейл 4-ти значний код</Text>
 
-      <BlueButton text="Підтвердити скидання паролю" onPress={goNewPassword} disabled={!isValid} />
+        <BlueButton text="Підтвердити скидання паролю" onPress={goNewPassword} disabled={!isValid} />
+      </View>
     </MyLinearGradient>
   );
 }

@@ -6,7 +6,8 @@ import { MyLinearGradient, MainInput, BlueButton, Header } from "../../../compon
 
 const s = StyleSheet.create({
   container: {
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    flex: 1
   },
 
   maxFlex: {
@@ -25,39 +26,41 @@ export default function ProfileEditForm({
   formErrors
 }) {
   return (
-    <MyLinearGradient withScroll style={s.container}>
+    <MyLinearGradient withScroll>
       <Header navigation={navigation} titleText="Редагування" />
-      <MainInput
-        onChangeText={onChangeValue}
-        placeholder="Ім'я"
-        name="firstName"
-        value={formCredentials.firstName}
-        error={formErrors["firstName"]}
-      />
-      <MainInput
-        onChangeText={onChangeValue}
-        placeholder="Прізвище"
-        name="lastName"
-        value={formCredentials.lastName}
-        error={formErrors["lastName"]}
-      />
-      <MainInput
-        onChangeText={onChangeValue}
-        placeholder="Компанія"
-        name="organization"
-        value={formCredentials.organization}
-        error={formErrors["organization"]}
-      />
-      <MainInput
-        name="position"
-        onChangeText={onChangeValue}
-        placeholder="Позиція(не обов'язково)"
-        value={formCredentials.position}
-      />
+      <View style={s.container}>
+        <MainInput
+          onChangeText={onChangeValue}
+          placeholder="Ім'я"
+          name="firstName"
+          value={formCredentials.firstName}
+          error={formErrors["firstName"]}
+        />
+        <MainInput
+          onChangeText={onChangeValue}
+          placeholder="Прізвище"
+          name="lastName"
+          value={formCredentials.lastName}
+          error={formErrors["lastName"]}
+        />
+        <MainInput
+          onChangeText={onChangeValue}
+          placeholder="Компанія"
+          name="organization"
+          value={formCredentials.organization}
+          error={formErrors["organization"]}
+        />
+        <MainInput
+          name="position"
+          onChangeText={onChangeValue}
+          placeholder="Позиція(не обов'язково)"
+          value={formCredentials.position}
+        />
 
-      <View style={s.maxFlex} />
+        <View style={s.maxFlex} />
 
-      <BlueButton onPress={editUserProfile} text="Зберегти зміни" style={s.extraMarginBottom} />
+        <BlueButton onPress={editUserProfile} text="Зберегти зміни" style={s.extraMarginBottom} />
+      </View>
     </MyLinearGradient>
   );
 }

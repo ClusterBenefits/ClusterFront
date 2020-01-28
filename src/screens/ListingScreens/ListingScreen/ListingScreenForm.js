@@ -45,5 +45,6 @@ export default function ListScreenForm({ items, handleFavoriteChange, subscribed
 
 ListScreenForm.propTypes = {
   items: T.array,
-  handleFavoriteChange: T.func.isRequired
+  handleFavoriteChange: T.func.isRequired,
+  subscribed: T.bool
 };

@@ -11,8 +11,11 @@ const BillingInformationScreenWithLoading = LoadingHOC(BillingInformationScreenF
 
 export default function ProfileEditScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
-  const { state, dispatch } = useContext(UserContext);
-  const subscribed = isSubscribed(state.subscription);
+  const {
+    state: { userInfo, token, subscription },
+    dispatch
+  } = useContext(UserContext);
+  const subscribed = isSubscribed(userInfo, subscription);
 
   useEffect(() => {
     checkSubscription();
@@ -22,7 +25,7 @@ export default function ProfileEditScreen({ navigation }) {
 
   const checkSubscription = async () => {
     setIsLoading(true);
-    await checkCreditCardSubscription({ token: state.token, dispatch });
+    await checkCreditCardSubscription({ token, dispatch });
     setIsLoading(false);
   };
 
@@ -30,7 +33,7 @@ export default function ProfileEditScreen({ navigation }) {
   const cancelSubscription = async () => {
     await deleteCreditCardSubscription({
       dispatch: dispatch,
-      token: state.token,
+      token,
       setIsLoading: setIsLoading
     });
   };
@@ -40,9 +43,10 @@ export default function ProfileEditScreen({ navigation }) {
       isLoading={isLoading}
       cancelSubscription={cancelSubscription}
       checkSubscription={checkSubscription}
-      subscription={state.subscription}
+      subscription={subscription}
       navigation={navigation}
       subscribed={subscribed}
+      userInfo={userInfo}
     />
   );
 }

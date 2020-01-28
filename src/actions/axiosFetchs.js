@@ -133,23 +133,6 @@ export const updateUserInformation = ({ token, data }) => {
   return response;
 };
 
-export const updateUserAvatar = ({ token, data }) => {
-  let response = axios
-    .post(`${url}/api/common/files?type=user`, data, {
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token,
-        "Content-Type": "multipart/form-data"
-      }
-    })
-    .then(response => {
-      // return response.data
-      console.log(response);
-    })
-    .catch(errorHandler);
-  return response;
-};
-
 export const changeUserEmail = ({ token, email }) => {
   let response = axios
     .post(

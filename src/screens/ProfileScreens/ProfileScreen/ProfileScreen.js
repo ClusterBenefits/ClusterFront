@@ -7,7 +7,10 @@ import { screens } from "../../../constants";
 import { useBackButton } from "../../../hooks";
 
 export default function ProfileScreen({ navigation }) {
-  const { state, dispatch } = useContext(UserContext);
+  const {
+    state: { userInfo },
+    dispatch
+  } = useContext(UserContext);
 
   useBackButton(true);
 
@@ -21,10 +24,6 @@ export default function ProfileScreen({ navigation }) {
   };
 
   return (
-    <ProfileScreenForm
-      redirectToScreen={redirectToScreen}
-      signOutUser={signOutUser}
-      userInfo={state.userInfo}
-    />
+    <ProfileScreenForm redirectToScreen={redirectToScreen} signOutUser={signOutUser} userInfo={userInfo} />
   );
 }

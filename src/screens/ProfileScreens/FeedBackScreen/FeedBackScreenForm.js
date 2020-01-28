@@ -6,7 +6,8 @@ import { MyLinearGradient, MainInput, BlueButton, Header } from "../../../compon
 
 const s = StyleSheet.create({
   container: {
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    flex: 1
   },
   extraMarginTop: {
     marginTop: 25
@@ -27,32 +28,34 @@ export default function commentsForm({
   navigation
 }) {
   return (
-    <MyLinearGradient style={s.container}>
+    <MyLinearGradient>
       <Header titleText="Новий запит" navigation={navigation} />
-      <Text style={s.extraMarginTop}>
-        Щоб подати новий запит в службу підтримки, вкажіть тему запиту та опишіть проблему
-      </Text>
-      <Form>
-        <MainInput
-          placeholder="Тема"
-          onChangeText={onChangeValue}
-          name="subject"
-          value={formCredentials.subject}
-          error={formErrors["subject"]}
-        />
-        <MainInput
-          placeholder={"Довільний опис"}
-          onChangeText={onChangeValue}
-          name="comment"
-          value={formCredentials.comment}
-          style={s.inputMaxHeight}
-          error={formErrors["comment"]}
-          maxLength={300}
-          multiline
-        />
-      </Form>
-      <View style={s.flexMax} />
-      <BlueButton text="Подати запит" onPress={sendMessage} style={s.extraMarginBottom} withMarginBottom />
+      <View style={s.container}>
+        <Text style={s.extraMarginTop}>
+          Щоб подати новий запит в службу підтримки, вкажіть тему запиту та опишіть проблему
+        </Text>
+        <Form>
+          <MainInput
+            placeholder="Тема"
+            onChangeText={onChangeValue}
+            name="subject"
+            value={formCredentials.subject}
+            error={formErrors["subject"]}
+          />
+          <MainInput
+            placeholder={"Довільний опис"}
+            onChangeText={onChangeValue}
+            name="comment"
+            value={formCredentials.comment}
+            style={s.inputMaxHeight}
+            error={formErrors["comment"]}
+            maxLength={300}
+            multiline
+          />
+        </Form>
+        <View style={s.flexMax} />
+        <BlueButton text="Подати запит" onPress={sendMessage} style={s.extraMarginBottom} withMarginBottom />
+      </View>
     </MyLinearGradient>
   );
 }

@@ -14,8 +14,7 @@ const Header = ({ titleText, navigation, onPress, titleRightText, onTitleRightPr
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      marginLeft: -10,
-      marginRight: 10
+      paddingHorizontal: 20
     },
     titleText: {
       fontSize: 15,
@@ -35,11 +34,8 @@ const Header = ({ titleText, navigation, onPress, titleRightText, onTitleRightPr
     hitSlop: {
       top: 10,
       bottom: 10,
-      left: 20,
+      left: 15,
       right: 10
-    },
-    extraMarginLeft: {
-      marginLeft: 12
     }
   });
   const popUp = () => navigation.pop();
@@ -48,7 +44,7 @@ const Header = ({ titleText, navigation, onPress, titleRightText, onTitleRightPr
     <View style={s.containerHeader}>
       <View>
         <TouchableOpacity hitSlop={s.hitSlop} onPress={onPress || popUp}>
-          <BackArrowIcon style={s.extraMarginLeft} />
+          <BackArrowIcon />
         </TouchableOpacity>
       </View>
       {titleText && (
