@@ -24,7 +24,7 @@ export default function ListingScreen() {
 
   useEffect(() => {
     asyncLoading();
-  }, [subscription]);
+  }, [subscription, userInfo]);
 
   useBackButton(true);
 

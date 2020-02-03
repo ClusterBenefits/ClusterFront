@@ -30,13 +30,44 @@ export default function BillingInformationScreen({
   cancelSubscription,
   checkSubscription,
   subscription,
-  userInfo
+  userInfo,
+  checkUserInfo
 }) {
   const { credit_card_number = "", expired_at = "" } = subscription || {};
   const isActivatedFromAdmin = subscribed && credit_card_number === "";
 
   return (
     <MyLinearGradient>
+      <Header navigation={navigation} titleText="Інформація про підписку" />
+      <View style={s.container}>
+        <CreditCardBigIcon style={s.imageStyle} />
+        {subscribed ? (
+          <>
+            <H2 style={s.extraMarginBottom}>Підписку активовано</H2>
+            <Text>Строк дії : {userInfo.expired_at}</Text>
+            <View style={s.flexMax} />
+            <BlueButton text="Оновити дані" withMarginBottom onPress={checkUserInfo} />
+          </>
+        ) : (
+          <>
+            <H2 style={s.extraMarginBottom}>Підписку не активовано</H2>
+            <View style={s.flexMax} />
+            <BlueButton text="Оновити дані" withMarginBottom onPress={checkUserInfo} />
+          </>
+        )}
+      </View>
+    </MyLinearGradient>
+  );
+}
+BillingInformationScreen.propTypes = {
+  navigation: T.object.isRequired,
+  subscribed: T.bool,
+  cancelSubscription: T.func,
+  checkSubscription: T.func,
+  userInfo: T.object
+};
+
+/* <MyLinearGradient>
       <Header navigation={navigation} titleText="Інформація про оплату" />
       <View style={s.container}>
         <CreditCardBigIcon style={s.imageStyle} />
@@ -75,13 +106,4 @@ export default function BillingInformationScreen({
             </>
           )}
       </View>
-    </MyLinearGradient>
-  );
-}
-BillingInformationScreen.propTypes = {
-  navigation: T.object.isRequired,
-  subscribed: T.bool,
-  cancelSubscription: T.func,
-  checkSubscription: T.func,
-  userInfo: T.object
-};
+    </MyLinearGradient> */

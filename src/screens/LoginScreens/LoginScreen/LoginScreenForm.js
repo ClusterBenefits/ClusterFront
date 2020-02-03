@@ -10,7 +10,8 @@ import { colors } from "../../../constants";
 const s = StyleSheet.create({
   container: {
     marginHorizontal: 20,
-    marginTop: 40
+    marginTop: 40,
+    flex: 1
   },
   bottom_menu: {
     flexDirection: "row",
@@ -31,6 +32,9 @@ const s = StyleSheet.create({
   },
   forgotPasswordText: {
     fontWeight: "500"
+  },
+  maxFlex: {
+    flex: 1
   }
 });
 
@@ -70,16 +74,17 @@ export default function LoginForm({
           </TouchableOpacity>
           <View />
         </View>
+        <View style={s.maxFlex} />
 
-        <BlueButton text="Увійти" onPress={logInUser} />
+        <BlueButton text="Увійти" onPress={logInUser} withMarginBottom />
 
-        <View style={s.bottom_menu}>
+        {/* <View style={s.bottom_menu}>
           <Text style={s.bottom_menu_text}>Ще не зареєстровані?</Text>
 
           <TouchableOpacity onPress={goSignUp}>
             <Text style={s.signUpText}>Зареєструйтесь</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </MyLinearGradient>
   );

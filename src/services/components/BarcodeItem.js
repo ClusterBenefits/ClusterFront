@@ -15,7 +15,7 @@ const s = StyleSheet.create({
     alignItems: "center"
   },
   container: {
-    width: 340,
+    width: "90%",
     backgroundColor: colors.mainWhite,
     borderRadius: 16,
     alignItems: "center",
@@ -27,7 +27,7 @@ const s = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 15
+    marginVertical: 15
   },
   discountStyle: {
     color: colors.mainGrey,
@@ -36,27 +36,33 @@ const s = StyleSheet.create({
     marginBottom: 8
   },
   imageContainer: {
-    marginTop: 15,
-    marginLeft: 22,
+    marginHorizontal: 10,
     maxHeight: 62,
-    maxWidth: 132,
+    maxWidth: "90%",
     justifyContent: "center"
+  },
+  companyName: {
+    fontSize: 20,
+    fontWeight: "500"
+  },
+  leftItem: {
+    width: 20
   },
   flexMax: {
     flex: 1
   }
 });
 
-export default function BarcodeItem({ item: { fields = {}, image = {}, featured = false }, hideModal }) {
+export default function BarcodeItem({ item: { fields = {}, featured = false }, hideModal }) {
   return (
     <BlurView style={s.flexMax} tint="dark" intensity={100}>
       <TouchableOpacity style={s.modalContainer} onPress={hideModal} activeOpacity={1}>
         <TouchableWithoutFeedback>
           <View style={s.container}>
             <View style={s.topPartContainer}>
-              <View />
+              <View style={s.leftItem} />
               <View style={s.imageContainer}>
-                <Text>{fields.name}</Text>
+                <Text style={s.companyName}>{fields.name}</Text>
               </View>
               {featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
             </View>

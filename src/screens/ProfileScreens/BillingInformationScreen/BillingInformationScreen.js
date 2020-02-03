@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import BillingInformationScreenForm from "./BillingInformationScreenForm";
-import { deleteCreditCardSubscription, checkCreditCardSubscription } from "../../../actions/userActions";
+import {
+  deleteCreditCardSubscription,
+  checkCreditCardSubscription,
+  fetchUserInfo
+} from "../../../actions/userActions";
 import { UserContext } from "../../../reducers/context";
 import { isSubscribed } from "../../../utils";
 import { LoadingHOC } from "../../../components";
@@ -38,6 +42,12 @@ export default function ProfileEditScreen({ navigation }) {
     });
   };
 
+  const checkUserInfo = async () => {
+    setIsLoading(true);
+    await fetchUserInfo({ dispatch: dispatch, token });
+    setIsLoading(false);
+  };
+
   return (
     <BillingInformationScreenWithLoading
       isLoading={isLoading}
@@ -47,6 +57,7 @@ export default function ProfileEditScreen({ navigation }) {
       navigation={navigation}
       subscribed={subscribed}
       userInfo={userInfo}
+      checkUserInfo={checkUserInfo}
     />
   );
 }

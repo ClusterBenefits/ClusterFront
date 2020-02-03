@@ -78,7 +78,7 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
               <View style={s.icon}>
                 <BillingInformationIcon />
               </View>
-              <Text>Інформація про оплату</Text>
+              <Text>Інформація про підписку</Text>
             </TouchableOpacity>
           </ListItem>
 
