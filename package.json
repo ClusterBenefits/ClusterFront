@@ -53,10 +53,5 @@
     "jest-expo": "^36.0.0",
     "prettier": "^1.16.4"
   },
-  "rnpm": {
-    "assets": [
-      "./assets/fonts"
-    ]
-  },
   "private": true
 }
