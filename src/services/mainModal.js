@@ -6,13 +6,15 @@ import { BarcodeItem } from "./components";
 let mainModal;
 
 export function MainModalComponent() {
-  const [{ isVisible, item }, setState] = useState({
+  const [{ isVisible, item, handleFavoriteChange }, setState] = useState({
     isVisible: false,
-    item: null
+    item: {},
+    handleFavoriteChange: () => {}
   });
 
-  const showModal = ({ item }) => setState({ isVisible: true, item });
-  const hideModal = () => setState({ isVisible: false, item: null });
+  const showModal = ({ item, handleFavoriteChange }) =>
+    setState({ isVisible: true, item, handleFavoriteChange });
+  const hideModal = () => setState({ isVisible: false, item: {} });
 
   mainModal = {
     showModal,
@@ -27,13 +29,19 @@ export function MainModalComponent() {
         <View>
           <StatusBar translucent barStyle="dark-content" backgroundColor={"rgba(0,0,0,0.6)"} />
         </View>
-        {item && <BarcodeItem item={item} hideModal={hideModal} />}
+        {item && (
+          <BarcodeItem
+            id={item.id}
+            hideModal={hideModal}
+            handleFavoriteChange={() => handleFavoriteChange(item)}
+          />
+        )}
       </>
     </Modal>
   );
 }
 
 export const ButtonModal = {
-  showModal: ({ item }) => mainModal.showModal({ item }),
+  showModal: ({ item, handleFavoriteChange }) => mainModal.showModal({ item, handleFavoriteChange }),
   hideModal: () => mainModal.hideModal()
 };

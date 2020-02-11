@@ -11,7 +11,7 @@ import {
   EditPenIcon
 } from "../../../assets/svg";
 import { screens } from "../../../constants";
-import { MyLinearGradient } from "../../../components";
+import { Container } from "../../../components";
 import UserAvatar from "react-native-user-avatar";
 import s from "./styles";
 
@@ -24,7 +24,7 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
   } = userInfo;
 
   return (
-    <MyLinearGradient withScroll style={s.container}>
+    <Container withScroll style={s.container}>
       <View style={s.header}>
         <View style={s.emptySpace} />
         <Text style={s.extraMarginRight}>Профіль</Text>
@@ -104,7 +104,7 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
           </ListItem>
         </View>
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

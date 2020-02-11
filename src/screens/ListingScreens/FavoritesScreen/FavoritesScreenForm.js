@@ -3,7 +3,7 @@ import { StyleSheet, FlatList } from "react-native";
 import { H1, H3 } from "native-base";
 import T from "prop-types";
 
-import { MainItem, MyLinearGradient } from "../../../components";
+import { MainItem, Container } from "../../../components";
 import { colors } from "../../../constants";
 import { ButtonModal } from "../../../services/mainModal";
 
@@ -22,7 +22,7 @@ const s = StyleSheet.create({
 
 export default function FavoriteForm({ favoriteItems, handleFavoriteChange }) {
   return (
-    <MyLinearGradient>
+    <Container>
       <H1 style={s.mainText}>Улюблені</H1>
       {favoriteItems && favoriteItems.length > 0 ? (
         <FlatList
@@ -39,7 +39,7 @@ export default function FavoriteForm({ favoriteItems, handleFavoriteChange }) {
       ) : (
         <H3 style={s.extraMarginLeft}>Немає улюблених знижок</H3>
       )}
-    </MyLinearGradient>
+    </Container>
   );
 }
 

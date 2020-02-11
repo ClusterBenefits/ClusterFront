@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Form, Text } from "native-base";
 import T from "prop-types";
-import { MyLinearGradient, MainInput, BlueButton, Header } from "../../../components";
+import { Container, MainInput, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -28,7 +28,7 @@ export default function commentsForm({
   navigation
 }) {
   return (
-    <MyLinearGradient>
+    <Container>
       <Header titleText="Новий запит" navigation={navigation} />
       <View style={s.container}>
         <Text style={s.extraMarginTop}>
@@ -56,7 +56,7 @@ export default function commentsForm({
         <View style={s.flexMax} />
         <BlueButton text="Подати запит" onPress={sendMessage} style={s.extraMarginBottom} withMarginBottom />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

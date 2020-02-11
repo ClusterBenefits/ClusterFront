@@ -5,7 +5,7 @@ import T from "prop-types";
 import CodeInput from "react-native-confirmation-code-field";
 
 import { colors } from "../../../constants";
-import { BlueButton, MyLinearGradient, Header } from "../../../components";
+import { BlueButton, Container, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -42,7 +42,7 @@ export default function SignUpForm({
   const isValid = code.length === 4;
 
   return (
-    <MyLinearGradient>
+    <Container>
       <Header
         navigation={navigation}
         onTitleRightPress={resendVerificationCode}
@@ -65,7 +65,7 @@ export default function SignUpForm({
 
         <BlueButton text="Підтвердити скидання паролю" onPress={goNewPassword} disabled={!isValid} />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

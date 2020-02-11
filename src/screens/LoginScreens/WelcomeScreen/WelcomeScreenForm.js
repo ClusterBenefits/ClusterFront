@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, H1 } from "native-base";
 import T from "prop-types";
-import { BlueButton, LogoImage, MyLinearGradient } from "../../../components";
+import { BlueButton, LogoImage, Container } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -20,7 +20,7 @@ const s = StyleSheet.create({
 
 export default function WelcomeForm({ goProfileFillingScreen }) {
   return (
-    <MyLinearGradient withScroll>
+    <Container withScroll>
       <LogoImage />
       <View style={s.container}>
         <H1 style={s.H1}>Welcome!</H1>
@@ -32,7 +32,7 @@ export default function WelcomeForm({ goProfileFillingScreen }) {
         </Text>
         <BlueButton withMarginBottom text="Гаразд" onPress={goProfileFillingScreen} />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

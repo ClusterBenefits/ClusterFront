@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, TouchableOpacity, View, TouchableWithoutFeedback } from "react-native";
 import { Text } from "native-base";
 import T from "prop-types";
@@ -7,6 +7,7 @@ import Barcode from "react-native-barcode-builder";
 import { colors } from "../../constants";
 import { FavoritesIcon, FavoritesIconOutLine } from "../../assets/svg";
 import { BlurView } from "expo-blur";
+import { UserContext } from "../../reducers/context";
 
 const s = StyleSheet.create({
   modalContainer: {
@@ -53,7 +54,12 @@ const s = StyleSheet.create({
   }
 });
 
-export default function BarcodeItem({ item: { fields = {}, featured = false }, hideModal }) {
+export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
+  const {
+    state: { items }
+  } = useContext(UserContext);
+
+  const { fields = {}, featured = false } = items.find(item => item.id === id) || {};
   return (
     <BlurView style={s.flexMax} tint="dark" intensity={100}>
       <TouchableOpacity style={s.modalContainer} onPress={hideModal} activeOpacity={1}>
@@ -64,7 +70,9 @@ export default function BarcodeItem({ item: { fields = {}, featured = false }, h
               <View style={s.imageContainer}>
                 <Text style={s.companyName}>{fields.name}</Text>
               </View>
-              {featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
+              <TouchableOpacity onPress={handleFavoriteChange}>
+                {featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
+              </TouchableOpacity>
             </View>
             <Barcode value={`${fields.discount}`} format="CODE128" width={2} height={80} />
             <Text>{fields.card_number}</Text>
@@ -77,6 +85,7 @@ export default function BarcodeItem({ item: { fields = {}, featured = false }, h
 }
 
 BarcodeItem.propTypes = {
-  item: T.object.isRequired,
-  hideModal: T.func.isRequired
+  id: T.number,
+  handleFavoriteChange: T.func,
+  hideModal: T.func
 };

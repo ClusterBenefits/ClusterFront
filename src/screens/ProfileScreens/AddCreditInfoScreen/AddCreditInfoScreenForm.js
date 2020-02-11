@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { CheckBox, ListItem, Body, Text } from "native-base";
 import T from "prop-types";
 
-import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components";
+import { Container, BlueButton, MainInput, Header } from "../../../components";
 import { colors } from "../../../constants";
 
 const s = StyleSheet.create({
@@ -42,7 +42,7 @@ export default function AddCreditInfoScreen({
   formErrors
 }) {
   return (
-    <MyLinearGradient withScroll>
+    <Container withScroll>
       <Header titleText="Нова картка" navigation={navigation} />
       <View style={s.container}>
         <MainInput
@@ -119,7 +119,7 @@ export default function AddCreditInfoScreen({
         <View style={s.flexMax} />
         <BlueButton text="Зберегти" onPress={post} withMarginBottom />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

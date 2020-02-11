@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Form, View, H1 } from "native-base";
 import T from "prop-types";
-import { BlueButton, Header, MainInput, MyLinearGradient } from "../../../components";
+import { BlueButton, Header, MainInput, Container } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -23,7 +23,7 @@ export default function SignUpScreenForm({
   formErrors
 }) {
   return (
-    <MyLinearGradient withScroll>
+    <Container withScroll>
       <Header navigation={navigation} />
       <View style={s.container}>
         <H1>Реєстрація</H1>
@@ -55,7 +55,7 @@ export default function SignUpScreenForm({
         <View style={s.flexMax} />
         <BlueButton text=" Продовжити" onPress={signUpUser} />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

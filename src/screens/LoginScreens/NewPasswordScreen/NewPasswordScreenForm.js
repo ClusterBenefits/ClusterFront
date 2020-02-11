@@ -3,7 +3,7 @@ import { Form, H1 } from "native-base";
 import { StyleSheet, View } from "react-native";
 import T from "prop-types";
 
-import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components";
+import { Container, BlueButton, MainInput, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -18,7 +18,7 @@ const s = StyleSheet.create({
 
 export default function NewPasswordForm({ goLogin, onChangeValue, formCredentials, formErrors }) {
   return (
-    <MyLinearGradient>
+    <Container>
       <Header />
       <View style={s.container}>
         <H1>Новий пароль</H1>
@@ -43,7 +43,7 @@ export default function NewPasswordForm({ goLogin, onChangeValue, formCredential
         <View style={s.maxFlex} />
         <BlueButton text="Зберегти" onPress={goLogin} />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

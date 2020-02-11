@@ -2,7 +2,7 @@ import React from "react";
 import { H1, View } from "native-base";
 import { StyleSheet } from "react-native";
 import T from "prop-types";
-import { MyLinearGradient, BlueButton, MainInput, Header } from "../../../components";
+import { Container, BlueButton, MainInput, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -23,7 +23,7 @@ export default function ProfileFillingForm({
   formErrors
 }) {
   return (
-    <MyLinearGradient withScroll>
+    <Container withScroll>
       <Header titleText="Додаткова Інформація" navigation={navigation} />
       <View style={s.container}>
         <H1>Реєстрація</H1>
@@ -58,7 +58,7 @@ export default function ProfileFillingForm({
         <View style={s.flexMax} />
         <BlueButton text="Next" onPress={onSubmit} />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

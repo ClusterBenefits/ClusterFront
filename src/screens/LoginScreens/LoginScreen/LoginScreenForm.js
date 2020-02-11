@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { View, H1, Text } from "native-base";
 import T from "prop-types";
 
-import { BlueButton, LogoImage, MainInput, MyLinearGradient } from "../../../components";
+import { BlueButton, LogoImage, MainInput, Container } from "../../../components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../../constants";
 
@@ -47,11 +47,11 @@ export default function LoginForm({
   formErrors
 }) {
   return (
-    <MyLinearGradient withScroll>
+    <Container withScroll>
       <LogoImage withText />
 
       <View style={s.container}>
-        <H1>Вітаємо!</H1>
+        <H1>Вітаємо6!</H1>
 
         <MainInput
           placeholder="Емейл"
@@ -76,17 +76,17 @@ export default function LoginForm({
         </View>
         <View style={s.maxFlex} />
 
-        <BlueButton text="Увійти" onPress={logInUser} withMarginBottom />
+        <BlueButton text="Увійти" onPress={logInUser} />
 
-        {/* <View style={s.bottom_menu}>
+        <View style={s.bottom_menu}>
           <Text style={s.bottom_menu_text}>Ще не зареєстровані?</Text>
 
           <TouchableOpacity onPress={goSignUp}>
             <Text style={s.signUpText}>Зареєструйтесь</Text>
           </TouchableOpacity>
-        </View> */}
+        </View>
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 

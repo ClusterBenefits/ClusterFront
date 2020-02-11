@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import T from "prop-types";
-import { MyLinearGradient, MainInput, BlueButton, Header } from "../../../components";
+import { Container, MainInput, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -24,7 +24,7 @@ export default function ChangeEmailForm({
   navigation
 }) {
   return (
-    <MyLinearGradient>
+    <Container>
       <Header titleText="Змінити емейл" navigation={navigation} />
       <View style={s.container}>
         <MainInput
@@ -45,7 +45,7 @@ export default function ChangeEmailForm({
         <View style={s.maxFlex} />
         <BlueButton onPress={changeEmail} text="Зберегти зміни" style={s.extraMarginBottom} />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 ChangeEmailForm.propTypes = {

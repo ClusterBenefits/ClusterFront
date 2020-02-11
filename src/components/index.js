@@ -4,7 +4,7 @@ import LogoImage from "./LogoImage";
 import MainInput from "./MainInput";
 import MainItem from "./MainItem";
 import MainComment from "./MainComment";
-import MyLinearGradient from "./MyLinearGradient";
+import Container from "./Container";
 import ShowToast from "./Toast";
 import LoadingHOC from "./LoadingHOC";
 import Header from "./Header";
@@ -17,7 +17,7 @@ export {
   MainInput,
   MainItem,
   MainComment,
-  MyLinearGradient,
+  Container,
   ShowToast,
   LoadingHOC,
   Header,

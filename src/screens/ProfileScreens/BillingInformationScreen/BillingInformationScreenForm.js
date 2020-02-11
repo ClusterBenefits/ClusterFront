@@ -5,7 +5,7 @@ import T from "prop-types";
 
 import { CreditCardBigIcon } from "../../../assets/svg";
 import { screens } from "../../../constants";
-import { MyLinearGradient, BlueButton, Header } from "../../../components";
+import { Container, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -37,7 +37,7 @@ export default function BillingInformationScreen({
   const isActivatedFromAdmin = subscribed && credit_card_number === "";
 
   return (
-    <MyLinearGradient>
+    <Container>
       <Header navigation={navigation} titleText="Інформація про підписку" />
       <View style={s.container}>
         <CreditCardBigIcon style={s.imageStyle} />
@@ -56,7 +56,7 @@ export default function BillingInformationScreen({
           </>
         )}
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 BillingInformationScreen.propTypes = {
@@ -67,7 +67,7 @@ BillingInformationScreen.propTypes = {
   userInfo: T.object
 };
 
-/* <MyLinearGradient>
+/* <Container>
       <Header navigation={navigation} titleText="Інформація про оплату" />
       <View style={s.container}>
         <CreditCardBigIcon style={s.imageStyle} />
@@ -106,4 +106,4 @@ BillingInformationScreen.propTypes = {
             </>
           )}
       </View>
-    </MyLinearGradient> */
+    </Container> */

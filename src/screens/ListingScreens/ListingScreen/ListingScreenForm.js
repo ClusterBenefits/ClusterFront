@@ -5,7 +5,7 @@ import T from "prop-types";
 
 import { colors } from "../../../constants";
 import { ButtonModal } from "../../../services/mainModal";
-import { MyLinearGradient, MainItem } from "../../../components";
+import { Container, MainItem } from "../../../components";
 
 const s = StyleSheet.create({
   mainText: {
@@ -22,7 +22,7 @@ const s = StyleSheet.create({
 
 export default function ListScreenForm({ items, handleFavoriteChange, subscribed }) {
   return (
-    <MyLinearGradient>
+    <Container>
       <H1 style={s.mainText}>Мої картки</H1>
       {subscribed ? (
         <FlatList
@@ -31,7 +31,7 @@ export default function ListScreenForm({ items, handleFavoriteChange, subscribed
           renderItem={({ item }) => (
             <MainItem
               item={item}
-              onPress={ButtonModal.showModal}
+              onPress={() => ButtonModal.showModal({ item, handleFavoriteChange })}
               handleFavoriteChange={handleFavoriteChange}
             />
           )}
@@ -39,7 +39,7 @@ export default function ListScreenForm({ items, handleFavoriteChange, subscribed
       ) : (
         <H3 style={s.extraMarginLeft}>Підпишіться щоб получити доступ до знижок</H3>
       )}
-    </MyLinearGradient>
+    </Container>
   );
 }
 

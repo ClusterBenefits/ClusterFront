@@ -9,7 +9,7 @@ const s = StyleSheet.create({
   }
 });
 
-const MyLinearGradient = ({ children, withScroll = false, style }) => {
+const Container = ({ children, withScroll = false, style }) => {
   const ViewComponent = withScroll ? ScrollView : View;
   const scrollProps = withScroll
     ? {
@@ -31,4 +31,4 @@ const MyLinearGradient = ({ children, withScroll = false, style }) => {
   );
 };
 
-export default MyLinearGradient;
+export default Container;

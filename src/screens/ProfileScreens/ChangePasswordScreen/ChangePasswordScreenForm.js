@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import T from "prop-types";
-import { MyLinearGradient, MainInput, BlueButton, Header } from "../../../components";
+import { Container, MainInput, BlueButton, Header } from "../../../components";
 
 const s = StyleSheet.create({
   container: {
@@ -24,7 +24,7 @@ export default function ChangePasswordForm({
   navigation
 }) {
   return (
-    <MyLinearGradient withScroll>
+    <Container withScroll>
       <Header titleText="Змінити пароль" navigation={navigation} />
       <View style={s.container}>
         <MainInput
@@ -54,7 +54,7 @@ export default function ChangePasswordForm({
         <View style={s.flexMax} />
         <BlueButton text="Зберегти зміни" onPress={changePassword} style={s.extraMarginBottom} />
       </View>
-    </MyLinearGradient>
+    </Container>
   );
 }
 ChangePasswordForm.propTypes = {

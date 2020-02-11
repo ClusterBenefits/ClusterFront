@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 export default function list({ item, onPress, handleFavoriteChange }) {
   return (
     <ListItem style={styles.container}>
-      <TouchableOpacity style={styles.container_item} onPress={() => onPress({ item })}>
+      <TouchableOpacity style={styles.container_item} onPress={onPress}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: `${url}${item.image.tiny.url}` }} style={styles.image} />
         </View>
