@@ -31,7 +31,7 @@ export default function FavoriteForm({ favoriteItems, handleFavoriteChange }) {
           renderItem={({ item }) => (
             <MainItem
               item={item}
-              onPress={ButtonModal.showModal}
+              onPress={() => ButtonModal.showModal({ item, handleFavoriteChange })}
               handleFavoriteChange={handleFavoriteChange}
             />
           )}

@@ -16,7 +16,7 @@ const s = StyleSheet.create({
   bottom_menu: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 20
   },
   bottom_menu_text: {
