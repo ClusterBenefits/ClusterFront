@@ -51,7 +51,7 @@ export default function LoginForm({
       <LogoImage withText />
 
       <View style={s.container}>
-        <H1>Вітаємо6!</H1>
+        <H1>Вітаємо!</H1>
 
         <MainInput
           placeholder="Емейл"

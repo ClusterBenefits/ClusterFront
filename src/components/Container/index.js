@@ -21,7 +21,11 @@ const Container = ({ children, withScroll = false, style }) => {
   return (
     <LinearGradient style={s.flexMax} colors={[colors.linearGradientStart, colors.linearGradientEnd]}>
       <SafeAreaView style={s.flexMax}>
-        <KeyboardAvoidingView style={s.flexMax} behavior={Platform.OS === "ios" ? "padding" : null}>
+        <KeyboardAvoidingView
+          style={s.flexMax}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          enabled
+        >
           <ViewComponent {...scrollProps} style={[!withScroll && s.flexMax, style]}>
             {children}
           </ViewComponent>

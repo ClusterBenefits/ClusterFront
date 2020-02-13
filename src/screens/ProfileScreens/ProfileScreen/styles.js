@@ -25,31 +25,12 @@ export default StyleSheet.create({
     shadowColor: colors.mainBlack,
     shadowOffset: { width: 0, height: 12 },
     shadowOpacity: 0.04,
-    width: 280,
+    width: "70%",
     height: 80,
     marginTop: 15,
     backgroundColor: colors.mainWhite,
     alignItems: "center",
     justifyContent: "center"
-  },
-  categoryContainer: {
-    height: 56,
-    marginLeft: 0
-  },
-  touchableContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-  icon: {
-    alignItems: "center",
-    width: 50,
-    marginRight: 20
-  },
-  lastItemMargin: {
-    marginTop: 20
   },
   nameText: {
     marginTop: 15,

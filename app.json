@@ -16,6 +16,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },
+    "androidStatusBarColor": "#ffffff", 
+    "androidStatusBar": {
+      "backgroundColor": "#ffffff",
+      "barStyle": "dark-content"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -29,10 +34,6 @@
     "android": {
       "package": "com.mycompany.meelor"
     },
-    "description": "testing",
-    "androidStatusBar": {
-      "backgroundColor": "#ffffff",
-      "barStyle": "dark-content"
-    }
+    "description": "testing"
   }
 }

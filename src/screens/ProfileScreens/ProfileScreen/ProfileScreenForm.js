@@ -1,18 +1,13 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
-import { Text, ListItem } from "native-base";
+import { Text } from "native-base";
 import T from "prop-types";
-import {
-  EmailIcon,
-  PasswordIcon,
-  BillingInformationIcon,
-  SupportIcon,
-  LogOutIcon,
-  EditPenIcon
-} from "../../../assets/svg";
+import UserAvatar from "react-native-user-avatar";
+import { EditPenIcon } from "../../../assets/svg";
 import { screens } from "../../../constants";
 import { Container } from "../../../components";
-import UserAvatar from "react-native-user-avatar";
+import { CategoryItem } from "./components";
+import { url } from "../../../constants";
 import s from "./styles";
 
 export default function ProfileForm({ redirectToScreen, signOutUser, userInfo }) {
@@ -20,8 +15,11 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
     first_name: firstName = "Name",
     last_name: lastName = "LastName",
     position = "Position",
-    company = "Organization"
+    company = "Organization",
+    image = {}
   } = userInfo;
+
+  const showImage = image.preview && !image.preview.stub;
 
   return (
     <Container withScroll style={s.container}>
@@ -35,7 +33,11 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
 
       <View style={s.bodyContainer}>
         <View style={s.userInfoContainer}>
-          <UserAvatar size="60" name={`${firstName} ${lastName}`} />
+          <UserAvatar
+            size="80"
+            name={`${firstName} ${lastName}`}
+            {...(showImage && { src: `${url}${image.preview.url}` })}
+          />
 
           <Text style={s.nameText}>{`${firstName} ${lastName}`}</Text>
 
@@ -46,62 +48,23 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
         </View>
 
         <View>
-          <ListItem style={s.categoryContainer}>
-            <TouchableOpacity
-              style={s.touchableContainer}
-              onPress={() => redirectToScreen(screens.ChangeEmailScreen)}
-            >
-              <View style={s.icon}>
-                <EmailIcon />
-              </View>
-              <Text>Змінити емайл</Text>
-            </TouchableOpacity>
-          </ListItem>
-
-          <ListItem style={s.categoryContainer}>
-            <TouchableOpacity
-              style={s.touchableContainer}
-              onPress={() => redirectToScreen(screens.ChangePasswordScreen)}
-            >
-              <View style={s.icon}>
-                <PasswordIcon />
-              </View>
-              <Text>Змінити пароль</Text>
-            </TouchableOpacity>
-          </ListItem>
-
-          <ListItem style={s.categoryContainer}>
-            <TouchableOpacity
-              style={s.touchableContainer}
-              onPress={() => redirectToScreen(screens.BillingInformationScreen)}
-            >
-              <View style={s.icon}>
-                <BillingInformationIcon />
-              </View>
-              <Text>Інформація про підписку</Text>
-            </TouchableOpacity>
-          </ListItem>
-
-          <ListItem style={s.categoryContainer}>
-            <TouchableOpacity
-              style={s.touchableContainer}
-              onPress={() => redirectToScreen(screens.FeedBackScreen)}
-            >
-              <View style={s.icon}>
-                <SupportIcon />
-              </View>
-              <Text>Підтримка</Text>
-            </TouchableOpacity>
-          </ListItem>
-
-          <ListItem style={[s.categoryContainer, s.lastItemMargin]}>
-            <TouchableOpacity style={s.touchableContainer} onPress={signOutUser}>
-              <View style={s.icon}>
-                <LogOutIcon />
-              </View>
-              <Text>Вийти</Text>
-            </TouchableOpacity>
-          </ListItem>
+          <CategoryItem
+            onPress={redirectToScreen}
+            text="Змінити емайл"
+            screenName={screens.ChangeEmailScreen}
+          />
+          <CategoryItem
+            onPress={redirectToScreen}
+            text="Змінити пароль"
+            screenName={screens.ChangePasswordScreen}
+          />
+          <CategoryItem
+            onPress={redirectToScreen}
+            text="Інформація про підписку"
+            screenName={screens.BillingInformationScreen}
+          />
+          <CategoryItem onPress={redirectToScreen} text="Підтримка" screenName={screens.FeedBackScreen} />
+          <CategoryItem onPress={signOutUser} text="Вийти" screenName={screens.ChangeEmailScreen} lastItem />
         </View>
       </View>
     </Container>
