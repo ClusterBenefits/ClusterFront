@@ -18,39 +18,71 @@ let reducer = (state, action) => {
         ...state,
         userInfo: { ...state.userInfo, ...action.payload }
       };
-    case dispatchTypes.ADD_ITEMS:
-      return {
-        ...state,
-        items: action.payload
-      };
     case dispatchTypes.FEATURED:
-      const Item = state.items.find(item => item.id === action.payload.id);
-      if (Item.featured) {
-        Item.featured = false;
+      const Item = state.items.data.find(item => item.id === action.payload.id);
+      if (!Item) {
+        const itemToRemove = state.favoriteItems.data.find(item => item.id === action.payload.id);
         return {
           ...state,
-          items: [...state.items],
-          favoriteItems: state.favoriteItems.filter(item => item.id !== Item.id)
-        };
-      } else {
-        Item.featured = true;
-        return {
-          ...state,
-          items: [...state.items],
-          favoriteItems: [Item, ...state.favoriteItems]
+          items: { ...state.items },
+          favoriteItems: {
+            ...state.favoriteItems,
+            data: state.favoriteItems.data.filter(item => item.id !== itemToRemove.id)
+          }
         };
       }
-    case dispatchTypes.ADD_FAVORITE_ITEMS:
-      return {
-        ...state,
-        favoriteItems: action.payload
-      };
+      if (Item.is_favorite) {
+        Item.is_favorite = false;
+        return {
+          ...state,
+          items: { ...state.items },
+          favoriteItems: {
+            ...state.favoriteItems,
+            data: state.favoriteItems.data.filter(item => item.id !== Item.id)
+          }
+        };
+      } else {
+        Item.is_favorite = true;
+        return {
+          ...state,
+          items: { ...state.items },
+          favoriteItems: {
+            ...state.favoriteItems,
+            data: [...state.favoriteItems.data, Item]
+          }
+        };
+      }
     case dispatchTypes.SUBSCRIPTION:
       return {
         ...state,
         subscription: action.payload
       };
-
+    case dispatchTypes.ADD_FAVORITE_ITEMS:
+      return {
+        ...state,
+        favoriteItems: { ...action.payload }
+      };
+    case dispatchTypes.ADD_ITEMS:
+      return {
+        ...state,
+        items: { ...action.payload }
+      };
+    case dispatchTypes.ADD_MORE_ITEMS:
+      return {
+        ...state,
+        items: {
+          ...action.payload,
+          data: [...state.items.data, ...action.payload.data]
+        }
+      };
+    case dispatchTypes.ADD_MORE_FAVORITE_ITEMS:
+      return {
+        ...state,
+        favoriteItems: {
+          ...action.payload,
+          data: [...state.favoriteItems.data, ...action.payload.data]
+        }
+      };
     default:
       return state;
   }
@@ -58,8 +90,8 @@ let reducer = (state, action) => {
 const initialState = {
   token: null,
   userInfo: null,
-  items: [],
-  favoriteItems: [],
+  items: { data: [] },
+  favoriteItems: { data: [] },
   subscription: false
 };
 

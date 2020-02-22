@@ -5,7 +5,8 @@ import T from "prop-types";
 
 import { colors } from "../../../constants";
 import { ButtonModal } from "../../../services/mainModal";
-import { Container, MainItem } from "../../../components";
+import { Container, MainItem, ActivityIndicator } from "../../../components";
+import { enhancedOnEndReached } from "../../../helpers";
 
 const s = StyleSheet.create({
   mainText: {
@@ -20,12 +21,22 @@ const s = StyleSheet.create({
   }
 });
 
-export default function ListScreenForm({ items, handleFavoriteChange, subscribed }) {
+export default function ListScreenForm({
+  items,
+  handleFavoriteChange,
+  subscribed,
+  fetchMore,
+  refetchItems,
+  isRefetching,
+  isFetchingMore
+}) {
   return (
     <Container>
       <H1 style={s.mainText}>Мої картки</H1>
       {subscribed ? (
         <FlatList
+          refreshing={isRefetching}
+          onRefresh={refetchItems}
           data={items}
           keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
@@ -35,6 +46,9 @@ export default function ListScreenForm({ items, handleFavoriteChange, subscribed
               handleFavoriteChange={handleFavoriteChange}
             />
           )}
+          onEndReached={enhancedOnEndReached(fetchMore)}
+          onEndReachedThreshold={0.1}
+          ListFooterComponent={isFetchingMore && <ActivityIndicator size="small" />}
         />
       ) : (
         <H3 style={s.extraMarginLeft}>Підпишіться щоб получити доступ до знижок</H3>
@@ -46,5 +60,8 @@ export default function ListScreenForm({ items, handleFavoriteChange, subscribed
 ListScreenForm.propTypes = {
   items: T.array,
   handleFavoriteChange: T.func.isRequired,
-  subscribed: T.bool
+  subscribed: T.bool,
+  fetchMore: T.func,
+  refetchItems: T.func,
+  isRefetching: T.bool
 };

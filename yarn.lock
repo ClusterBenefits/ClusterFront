@@ -5026,7 +5026,7 @@ js-yaml@^3.13.0, js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-jsbarcode@^3.8.0:
+jsbarcode@^3.11.0:
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/jsbarcode/-/jsbarcode-3.11.0.tgz#20623e008b101ef45d0cce9c8022cdf49be28547"
   integrity sha512-/ozCd7wsa+VIHo9sUc03HneVEQrH7cVWfJolUT/WOW1m8mJ2e3iYZje6C9X3LFHdczlesqFHRpxLtbVsNtjyow==
@@ -6666,12 +6666,13 @@ react-is@^16.9.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
-react-native-barcode-builder@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-barcode-builder/-/react-native-barcode-builder-1.0.5.tgz#dcc93b6afeec56148b8b3c4e5fb9136a532f7883"
-  integrity sha1-3Mk7av7sVhSLizxOX7kTalMveIM=
+react-native-barcode-expo@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-barcode-expo/-/react-native-barcode-expo-1.0.1.tgz#03a33fce2b6341357285f3f23ab70e9c51c12e14"
+  integrity sha512-9z2Q6nlHDpgaS7K4bJheLzr//6pU1ktYsomcAHWHiU5RI1LF58CLoicoY5SzZGgOOKRDRBCMGHhQZIKt15dWPg==
   dependencies:
-    jsbarcode "^3.8.0"
+    jsbarcode "^3.11.0"
+    react-native-svg "9.13.3"
 
 "react-native-confirmation-code-field@file:./packages/react-native-confirmation-code-field":
   version "3.9.0"

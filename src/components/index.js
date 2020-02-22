@@ -9,6 +9,7 @@ import ShowToast from "./Toast";
 import LoadingHOC from "./LoadingHOC";
 import Header from "./Header";
 import StatusBar from "./StatusBar";
+import ActivityIndicator from "./ActivityIndicator";
 
 export {
   BlueButton,
@@ -21,5 +22,6 @@ export {
   ShowToast,
   LoadingHOC,
   Header,
-  StatusBar
+  StatusBar,
+  ActivityIndicator
 };

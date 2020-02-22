@@ -27,9 +27,10 @@ export const dispatchTypes = {
   CLEAR_USER: "CLEAR_USER",
   ADD_USERINFO: "ADD_USERINFO",
   ADD_ITEMS: "ADD_ITEMS",
+  ADD_MORE_ITEMS: "ADD_MORE_ITEMS",
   FEATURED: "FEATURED",
-  FAVORITE_ITEMS_KEYS: "FAVORITE_ITEMS_KEYS",
   ADD_FAVORITE_ITEMS: "ADD_FAVORITE_ITEMS",
+  ADD_MORE_FAVORITE_ITEMS: "ADD_MORE_FAVORITE_ITEMS",
   ADD_COMMENTS: "ADD_COMMENTS",
   SUBSCRIPTION: "SUBSCRIPTION"
 };
@@ -152,11 +153,10 @@ export const postUserInfo = async ({ token, data, dispatch }) => {
 
 /////// User
 
-export const fetchItems = async ({ dispatch, token }) => {
-  let response = await listOfCompanies(token);
-
+export const fetchItems = async ({ dispatch, token, page = 1 }) => {
+  let response = await listOfCompanies({ token, page });
   await dispatch({
-    type: dispatchTypes.ADD_ITEMS,
+    type: page > 1 ? dispatchTypes.ADD_MORE_ITEMS : dispatchTypes.ADD_ITEMS,
     payload: response ? response : null
   });
 
@@ -165,13 +165,12 @@ export const fetchItems = async ({ dispatch, token }) => {
 
 // fetch favoriteItemsKeys for user from server (doing it only once at start)
 
-export const fetchFavoriteItems = async ({ token, dispatch }) => {
-  let response = await listFavoritesCompanies(token);
-
-  response && response.forEach(item => (item.featured = true));
+export const fetchFavoriteItems = async ({ token, dispatch, page = 1 }) => {
+  let response = await listFavoritesCompanies({ token, page });
+  response?.data?.forEach(item => (item.is_favorite = true));
   await dispatch({
-    type: dispatchTypes.ADD_FAVORITE_ITEMS,
-    payload: response ? response : null
+    type: page > 1 ? dispatchTypes.ADD_MORE_FAVORITE_ITEMS : dispatchTypes.ADD_FAVORITE_ITEMS,
+    payload: response
   });
 
   return response;
@@ -233,23 +232,9 @@ export const deleteCreditCardSubscription = async ({ ...props }) => {
 
 // CreditCardApi
 
-// change star color if item is in favorite list (doing it only once at start)
-export const changeInitialFeatured = ({ items, favoriteItems, dispatch }) => {
-  favoriteItems.forEach(key => {
-    items.forEach(item => {
-      if (item.id === key.id) {
-        item.featured = true;
-      }
-    });
-  });
-  dispatch({
-    type: dispatchTypes.ADD_ITEMS,
-    payload: items
-  });
-};
-
 export const changeFavoriteCompanies = ({ token, item }) => {
-  item.featured ? removeFromFavorites({ token, id: item.id }) : attachToFavorites({ token, id: item.id });
+  // console.log("alert somtbing triggered it ");
+  item?.is_favorite ? removeFromFavorites({ token, id: item.id }) : attachToFavorites({ token, id: item.id });
 };
 
 // change item.featured , favoriteItems , favoriteItemsKeys(All logic in reducer)

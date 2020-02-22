@@ -3,7 +3,6 @@ import { url } from "../constants";
 import { ShowToast } from "../components";
 
 const errorHandler = ({ response }) => {
-  console.log(response);
   // check if response error has nested lvls or no
   let textError;
   if (response) {
@@ -31,12 +30,9 @@ export const postTokenToServer = async ({ expoToken, token }) => {
       }
     )
     .then(response => {
-      console.log("response", response.data);
       return response.data;
     })
-    .catch(({ response }) => {
-      console.log("err", response);
-    });
+    .catch(({ response }) => {});
 
   return response;
 };
@@ -173,9 +169,9 @@ export const changeUserPassword = async ({
 
 /////// Favoriter
 
-export const listFavoritesCompanies = token => {
+export const listFavoritesCompanies = ({ token, page }) => {
   let results = axios
-    .get(`${url}/api/companies/favorites`, {
+    .get(`${url}/api/companies/favorites?page=${page}`, {
       headers: { Authorization: "Bearer " + token }
     })
     .then(response => {
@@ -220,9 +216,9 @@ export const removeFromFavorites = ({ token, id }) => {
 
 ////////////Companies
 
-export const listOfCompanies = token => {
+export const listOfCompanies = ({ token, page }) => {
   let response = axios
-    .get(`${url}/api/companies`, {
+    .get(`${url}/api/companies?page=${page}`, {
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + token

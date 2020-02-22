@@ -62,7 +62,7 @@ export default function list({ item, onPress, handleFavoriteChange }) {
           </Text>
         </View>
         <TouchableOpacity onPress={() => handleFavoriteChange(item)}>
-          {item.featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
+          {item.is_favorite ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
         </TouchableOpacity>
       </TouchableOpacity>
     </ListItem>

@@ -1,25 +1,90 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { StyleSheet, FlatList } from "react-native";
+import { H1, H3 } from "native-base";
 
-import FavoritesScreenForm from "./FavoritesScreenForm";
-import { handleClickIcon, changeFavoriteCompanies } from "../../../actions/userActions";
+import { MainItem, Container, ActivityIndicator } from "../../../components";
+import { colors } from "../../../constants";
+import { ButtonModal } from "../../../services/mainModal";
+
+import { handleClickIcon, changeFavoriteCompanies, fetchFavoriteItems } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
 import { LoadingHOC } from "../../../components";
+import { enhancedOnEndReached } from "../../../helpers";
 
-const FavoritesScreenWithLoading = LoadingHOC(FavoritesScreenForm);
+const s = StyleSheet.create({
+  mainText: {
+    marginTop: 50,
+    paddingLeft: 15,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.mainGrey
+  },
+  extraMarginLeft: {
+    marginLeft: 10
+  }
+});
 
 export default function FavoritesScreen(props) {
-  const { state, dispatch } = useContext(UserContext);
+  const [isRefetching, setIsRefetching] = useState(true);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+
+  const {
+    state: { favoriteItems, token },
+    dispatch
+  } = useContext(UserContext);
+
+  useEffect(() => {
+    asyncLoading();
+  }, []);
+
+  async function asyncLoading() {
+    await fetchFavoriteItems({ dispatch, token });
+    setIsRefetching(false);
+  }
 
   // remove item from favorite list
   const handleFavoriteChange = item => {
-    changeFavoriteCompanies({ token: state.token, item });
+    changeFavoriteCompanies({ token, item });
     handleClickIcon({ item, dispatch });
   };
 
+  const fetchMore = async () => {
+    if (favoriteItems.current_page < favoriteItems.last_page) {
+      setIsFetchingMore(true);
+      await fetchFavoriteItems({ dispatch, token, page: favoriteItems.current_page + 1 });
+      setIsFetchingMore(false);
+    }
+  };
+
+  const refetchItems = async () => {
+    setIsRefetching(true);
+    await fetchFavoriteItems({ dispatch, token });
+    setIsRefetching(false);
+  };
+
   return (
-    <FavoritesScreenWithLoading
-      favoriteItems={state.favoriteItems}
-      handleFavoriteChange={handleFavoriteChange}
-    />
+    <Container>
+      <H1 style={s.mainText}>Улюблені</H1>
+      {favoriteItems.data?.length > 0 ? (
+        <FlatList
+          data={favoriteItems.data}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <MainItem
+              item={item}
+              onPress={() => ButtonModal.showModal({ item, handleFavoriteChange })}
+              handleFavoriteChange={handleFavoriteChange}
+            />
+          )}
+          refreshing={isRefetching}
+          onRefresh={refetchItems}
+          onEndReached={enhancedOnEndReached(fetchMore)}
+          onEndReachedThreshold={0.1}
+          ListFooterComponent={isFetchingMore && <ActivityIndicator size="small" />}
+        />
+      ) : (
+        <H3 style={s.extraMarginLeft}>Немає улюблених знижок</H3>
+      )}
+    </Container>
   );
 }

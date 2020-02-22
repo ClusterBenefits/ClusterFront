@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { StyleSheet, TouchableOpacity, View, TouchableWithoutFeedback } from "react-native";
 import { Text } from "native-base";
 import T from "prop-types";
-import Barcode from "react-native-barcode-builder";
+import Barcode from "react-native-barcode-expo";
 
 import { colors } from "../../constants";
 import { FavoritesIcon, FavoritesIconOutLine } from "../../assets/svg";
@@ -59,7 +59,7 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
     state: { items }
   } = useContext(UserContext);
 
-  const { fields = {}, featured = false } = items.find(item => item.id === id) || {};
+  const { fields = {}, is_favorite = false } = items.data.find(item => item.id === id) || {};
   return (
     <BlurView style={s.flexMax} tint="dark" intensity={100}>
       <TouchableOpacity style={s.modalContainer} onPress={hideModal} activeOpacity={1}>
@@ -71,10 +71,10 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
                 <Text style={s.companyName}>{fields.name}</Text>
               </View>
               <TouchableOpacity onPress={handleFavoriteChange}>
-                {featured ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
+                {is_favorite ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
               </TouchableOpacity>
             </View>
-            <Barcode value={`${fields.discount}`} format="CODE128" width={2} height={80} />
+            <Barcode value={`${fields.discount}`} format="CODE128" />
             <Text>{fields.card_number}</Text>
             <Text style={s.discountStyle}>{`Знижка ${fields.discount} %`}</Text>
           </View>
