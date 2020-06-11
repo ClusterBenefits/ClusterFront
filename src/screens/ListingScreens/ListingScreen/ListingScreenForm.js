@@ -51,7 +51,7 @@ export default function ListScreenForm({
           ListFooterComponent={isFetchingMore && <ActivityIndicator size="small" />}
         />
       ) : (
-        <H3 style={s.extraMarginLeft}>Підпишіться щоб получити доступ до знижок</H3>
+        <H3 style={s.extraMarginLeft}>Підпишіться, щоб отримати доступ до знижок</H3>
       )}
     </Container>
   );

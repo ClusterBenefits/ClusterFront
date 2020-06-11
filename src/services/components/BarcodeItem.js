@@ -37,17 +37,17 @@ const s = StyleSheet.create({
     marginBottom: 8
   },
   imageContainer: {
-    marginHorizontal: 10,
-    maxHeight: 62,
-    maxWidth: "90%",
-    justifyContent: "center"
+    marginHorizontal: 15,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   companyName: {
     fontSize: 20,
     fontWeight: "500"
   },
   leftItem: {
-    width: 20
+    width: 10
   },
   flexMax: {
     flex: 1
@@ -68,7 +68,9 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
             <View style={s.topPartContainer}>
               <View style={s.leftItem} />
               <View style={s.imageContainer}>
-                <Text style={s.companyName}>{fields.name}</Text>
+                <Text numberOfLines={2} style={s.companyName}>
+                  {fields.name}
+                </Text>
               </View>
               <TouchableOpacity onPress={handleFavoriteChange}>
                 {is_favorite ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}

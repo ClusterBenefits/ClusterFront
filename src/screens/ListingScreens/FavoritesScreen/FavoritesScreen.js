@@ -25,7 +25,8 @@ const s = StyleSheet.create({
 });
 
 export default function FavoritesScreen(props) {
-  const [isRefetching, setIsRefetching] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isRefetching, setIsRefetching] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const {
@@ -39,7 +40,7 @@ export default function FavoritesScreen(props) {
 
   async function asyncLoading() {
     await fetchFavoriteItems({ dispatch, token });
-    setIsRefetching(false);
+    setIsLoading(false);
   }
 
   // remove item from favorite list
@@ -65,7 +66,9 @@ export default function FavoritesScreen(props) {
   return (
     <Container>
       <H1 style={s.mainText}>Улюблені</H1>
-      {favoriteItems.data?.length > 0 ? (
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : favoriteItems.data?.length > 0 ? (
         <FlatList
           data={favoriteItems.data}
           keyExtractor={item => item.id.toString()}
@@ -80,7 +83,7 @@ export default function FavoritesScreen(props) {
           onRefresh={refetchItems}
           onEndReached={enhancedOnEndReached(fetchMore)}
           onEndReachedThreshold={0.1}
-          ListFooterComponent={isFetchingMore && <ActivityIndicator size="small" />}
+          ListFooterComponent={isFetchingMore && <ActivityIndicator />}
         />
       ) : (
         <H3 style={s.extraMarginLeft}>Немає улюблених знижок</H3>

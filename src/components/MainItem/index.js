@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   image: {
-    height: 40,
-    width: 40,
+    height: 50,
+    resizeMode: "contain",
+    width: 50,
     marginRight: 15
   },
   flex: {
@@ -47,11 +48,12 @@ const styles = StyleSheet.create({
 });
 
 export default function list({ item, onPress, handleFavoriteChange }) {
+  console.log(item.image, "here image");
   return (
     <ListItem style={styles.container}>
       <TouchableOpacity style={styles.container_item} onPress={onPress}>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: `${url}${item.image.tiny.url}` }} style={styles.image} />
+          <Image source={{ uri: `${url}${item.image.preview.url}` }} style={styles.image} />
         </View>
         <View style={styles.flex}>
           <Text numberOfLines={1} style={styles.mainText}>
