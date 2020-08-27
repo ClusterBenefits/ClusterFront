@@ -76,7 +76,7 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
                 {is_favorite ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
               </TouchableOpacity>
             </View>
-            <Barcode value={`${fields.discount}`} format="CODE128" />
+            <Barcode value={`${fields.card_number}`} format="CODE128" />
             <Text>{fields.card_number}</Text>
             <Text style={s.discountStyle}>{`Знижка ${fields.discount} %`}</Text>
           </View>
