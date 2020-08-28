@@ -46,7 +46,7 @@ export default function AddCreditInfoScreen({
       <Header titleText="Нова картка" navigation={navigation} />
       <View style={s.container}>
         <MainInput
-          placeholder="Номер каркти"
+          placeholder="Номер картки"
           onChangeText={onChangeValue}
           maxLength={19}
           name="credit_card_number"

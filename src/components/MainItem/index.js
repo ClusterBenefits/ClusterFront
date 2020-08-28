@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 });
 
 export default function list({ item, onPress, handleFavoriteChange }) {
-  console.log(item.image, "here image");
+  // console.log(item.image, "here image");
   return (
     <ListItem style={styles.container}>
       <TouchableOpacity style={styles.container_item} onPress={onPress}>
