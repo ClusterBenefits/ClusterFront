@@ -110,9 +110,11 @@ export default function AddCreditInfoScreen({
             onPress={value => onChangeValue("checkBox", value)}
           />
           <Body style={s.extraMarginLeft}>
-            <Text>Я погоджуюсь з</Text>
-            <Text style={s.link} onPress={() => navigation.navigate(screens.AgreementScreen)}>
-              умовами користування сервісом
+            <Text>
+              Я погоджуюсь з{" "}
+              <Text style={s.link} onPress={() => navigation.navigate(screens.AgreementScreen)}>
+                умовами користування сервісом
+              </Text>
             </Text>
           </Body>
         </ListItem>

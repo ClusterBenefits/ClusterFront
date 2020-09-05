@@ -53,7 +53,11 @@ export default function list({ item, onPress, handleFavoriteChange }) {
     <ListItem style={styles.container}>
       <TouchableOpacity style={styles.container_item} onPress={onPress}>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: `${url}${item.image.preview.url}` }} style={styles.image} />
+          <Image
+            source={{ uri: `${url}${item.image.preview.url}` }}
+            resizeMode={"contain"}
+            style={styles.image}
+          />
         </View>
         <View style={styles.flex}>
           <Text numberOfLines={1} style={styles.mainText}>
