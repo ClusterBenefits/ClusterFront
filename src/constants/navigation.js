@@ -14,7 +14,8 @@ export const screens = {
   ChangePasswordScreen: "ChangePasswordScreen",
   ChangeEmailScreen: "ChangeEmailScreen",
   BillingInformationScreen: "BillingInformationScreen",
-  FeedBackScreen: "FeedBackScreen"
+  FeedBackScreen: "FeedBackScreen",
+  AgreementScreen: "AgreementScreen"
 };
 
 export const navigation = {

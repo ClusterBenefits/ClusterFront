@@ -17,3 +17,4 @@ export { default as ChangeEmailScreen } from "./ProfileScreens/ChangeEmailScreen
 export { default as BillingInformationScreen } from "./ProfileScreens/BillingInformationScreen";
 export { default as AddCreditInfoScreen } from "./ProfileScreens/AddCreditInfoScreen";
 export { default as FeedBackScreen } from "./ProfileScreens/FeedBackScreen";
+export { default as AgreementScreen } from "./ProfileScreens/AgreementScreen";

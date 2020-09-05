@@ -4,7 +4,7 @@ import { CheckBox, ListItem, Body, Text } from "native-base";
 import T from "prop-types";
 
 import { Container, BlueButton, MainInput, Header } from "../../../components";
-import { colors } from "../../../constants";
+import { colors, screens } from "../../../constants";
 
 const s = StyleSheet.create({
   container: {
@@ -31,6 +31,9 @@ const s = StyleSheet.create({
     color: colors.mainRed,
     fontSize: 12,
     marginTop: -10
+  },
+  link: {
+    color: colors.mainBlue
   }
 });
 
@@ -107,7 +110,10 @@ export default function AddCreditInfoScreen({
             onPress={value => onChangeValue("checkBox", value)}
           />
           <Body style={s.extraMarginLeft}>
-            <Text>Я погоджуюсь з умовами користування сервісом</Text>
+            <Text>Я погоджуюсь з</Text>
+            <Text style={s.link} onPress={() => navigation.navigate(screens.AgreementScreen)}>
+              умовами користування сервісом
+            </Text>
           </Body>
         </ListItem>
         {!!formErrors.checkBox && (
