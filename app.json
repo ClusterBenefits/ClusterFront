@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.2",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./src/assets/images/App-Icon-832x3x.png",
     "splash": {
@@ -16,7 +16,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },
-    "androidStatusBarColor": "#ffffff", 
+    "androidStatusBarColor": "#ffffff",
     "androidStatusBar": {
       "backgroundColor": "#ffffff",
       "barStyle": "dark-content"
@@ -36,6 +36,7 @@
       "permissions": [],
       "package": "com.mycompany.meelor"
     },
-    "description": "first release"
+    "description": "Release version 1.0.4",
+    "githubUrl": "https://github.com/ClusterBenefits/ClusterFront"
   }
 }
