@@ -19,10 +19,6 @@ export default function ListingScreen() {
     dispatch
   } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   asyncLoading();
-  // }, []);
-
   useEffect(() => {
     asyncLoading();
   }, [subscription, userInfo]);
@@ -38,7 +34,7 @@ export default function ListingScreen() {
 
   const fetchMore = async () => {
     if (items.current_page < items.last_page) {
-      console.log("fetching items baby ");
+      // console.log("fetching items baby ");
       setIsFetchingMore(true);
       await fetchItems({ dispatch, token, page: items.current_page + 1 });
       setIsFetchingMore(false);

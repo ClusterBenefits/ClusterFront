@@ -261,6 +261,19 @@ export const sendMessageToAdmins = ({ name, email, subject, comment, token }) =>
 
 // CreditCard Api
 
+//get data and signature info from api
+export const getInfoForBillingSubscription = token => {
+  let response = axios
+    .get(`http://997f4b5ec40a.ngrok.io/api/v1/liqpay/subscribe/5`)
+    .then(response => {
+      return response.data;
+    })
+    .catch(err => {
+      console.log("error axiosFetch", err);
+    });
+  return response;
+};
+
 export const checkBillingSubscription = token => {
   let response = axios
     .get(`${url}/api/user/payment/subscribe`, {

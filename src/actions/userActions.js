@@ -17,7 +17,8 @@ import {
   sendMessageToAdmins,
   checkBillingSubscription,
   addBillingSubscription,
-  deleteBillingSubscription
+  deleteBillingSubscription,
+  getInfoForBillingSubscription
 } from "./axiosFetchs";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
@@ -32,7 +33,8 @@ export const dispatchTypes = {
   ADD_FAVORITE_ITEMS: "ADD_FAVORITE_ITEMS",
   ADD_MORE_FAVORITE_ITEMS: "ADD_MORE_FAVORITE_ITEMS",
   ADD_COMMENTS: "ADD_COMMENTS",
-  SUBSCRIPTION: "SUBSCRIPTION"
+  SUBSCRIPTION: "SUBSCRIPTION",
+  INFO_SUBSCRIPTION: "INFO_SUBSCRIPTION"
 };
 
 ///////// AUTH
@@ -177,6 +179,15 @@ export const fetchFavoriteItems = async ({ token, dispatch, page = 1 }) => {
 };
 
 // CreditCardApi
+
+export const getInfoForSubscription = async ({ token, dispatch }) => {
+  let response = await getInfoForBillingSubscription(token);
+  dispatch({
+    type: dispatchTypes.INFO_SUBSCRIPTION,
+    payload: response
+  });
+  return response;
+};
 
 export const checkCreditCardSubscription = async ({ token, dispatch }) => {
   let response = await checkBillingSubscription(token);
