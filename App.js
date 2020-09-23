@@ -17,7 +17,7 @@ const StyleProviderTheme = ({ children }) => (
 
 export default function App({ navigation }) {
   useEffect(() => {
-    console.log(`${Constants.linkingUri}`);
+    // console.log(`${Constants.linkingUri}`);
     // const prefix = LinkingExpo.makeUrl("/");
     // console.log({ prefix });
     Linking.addEventListener("url", ({ url }) => {

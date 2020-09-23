@@ -108,7 +108,7 @@ export const setNewUserPassword = async ({ ...props }) => {
 export const changeEmail = async ({ token, email, dispatch }) => {
   let response = await changeUserEmail({ token, email });
   if (response) {
-    console.log("email changed to", email);
+    // console.log("email changed to", email);
     AsyncStorage.setItem("email", email);
     dispatch({
       type: dispatchTypes.ADD_USERINFO,
@@ -121,7 +121,7 @@ export const changeEmail = async ({ token, email, dispatch }) => {
 export const changePassword = async ({ ...props }) => {
   let response = await changeUserPassword(props);
   if (response) {
-    console.log("password changed to", props.new_password);
+    // console.log("password changed to", props.new_password);
     AsyncStorage.setItem("password", props.new_password);
   }
   return response;

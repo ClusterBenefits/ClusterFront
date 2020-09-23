@@ -1,139 +1,70 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { CheckBox, ListItem, Body, Text } from "native-base";
 import T from "prop-types";
-
-import { Container, BlueButton, MainInput, Header } from "../../../components";
-import { colors, screens } from "../../../constants";
+import WebView from "react-native-webview";
 
 const s = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    flex: 1
-  },
-  flexMax: {
-    flex: 1
-  },
-  extraMarginTop: {
-    marginTop: 20
-  },
-  extraMarginLeft: {
-    marginLeft: 20
-  },
-  checkBoxContainer: {
-    marginLeft: 10,
-    borderBottomWidth: 0
-  },
-  checkBox: {
-    backgroundColor: "transparent"
-  },
-  error: {
-    color: colors.mainRed,
-    fontSize: 12,
-    marginTop: -10
-  },
-  link: {
-    color: colors.mainBlue
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center"
   }
 });
 
-export default function AddCreditInfoScreen({
-  post,
-  onChangeValue,
-  formCredentials,
+export default function AddCreditInfoScreenForm({
+  handleMessage,
+  handleNavigation,
   navigation,
-  formErrors
+  subscription
 }) {
   return (
-    <Container withScroll>
-      <Header titleText="Нова картка" navigation={navigation} />
-      <View style={s.container}>
-        <MainInput
-          placeholder="Номер картки"
-          onChangeText={onChangeValue}
-          maxLength={19}
-          name="credit_card_number"
-          value={formCredentials.credit_card_number}
-          error={formErrors["credit_card_number"]}
-          containerStyle={s.extraMarginTop}
-        />
-
-        <MainInput
-          placeholder="Термін дії"
-          onChangeText={onChangeValue}
-          maxLength={5}
-          name="expiration"
-          value={formCredentials.expiration}
-          error={formErrors["expiration"]}
-        />
-
-        <MainInput
-          placeholder={"CVV"}
-          onChangeText={onChangeValue}
-          maxLength={3}
-          name="cvv2"
-          value={formCredentials.cvv2}
-          error={formErrors["cvv2"]}
-        />
-
-        <MainInput
-          placeholder={"Місто"}
-          onChangeText={onChangeValue}
-          maxLength={20}
-          name="city"
-          value={formCredentials.city}
-          error={formErrors["city"]}
-        />
-
-        <MainInput
-          placeholder={"Адреса"}
-          onChangeText={onChangeValue}
-          maxLength={25}
-          name="address"
-          value={formCredentials.address}
-          error={formErrors["address"]}
-        />
-
-        <MainInput
-          placeholder={"Поштовий індекс"}
-          onChangeText={onChangeValue}
-          maxLength={10}
-          name="postal_code"
-          value={formCredentials.postal_code}
-          error={formErrors["postal_code"]}
-        />
-
-        <ListItem style={s.checkBoxContainer}>
-          <CheckBox
-            style={s.checkBox}
-            checked={!formCredentials.checkBox}
-            onPress={value => onChangeValue("checkBox", value)}
-          />
-          <Body style={s.extraMarginLeft}>
-            <Text>
-              Я погоджуюсь з{" "}
-              <Text style={s.link} onPress={() => navigation.navigate(screens.AgreementScreen)}>
-                умовами користування сервісом
-              </Text>
-            </Text>
-          </Body>
-        </ListItem>
-        {!!formErrors.checkBox && (
-          <Text style={s.error}>
-            Ознайомтеся з правилами та умовами користування сервісом і погодьтеся з ними
-          </Text>
-        )}
-
-        <View style={s.flexMax} />
-        <BlueButton text="Зберегти" onPress={post} withMarginBottom />
-      </View>
-    </Container>
+    <View style={s.container}>
+      <WebView
+        originWhitelist={["*"]}
+        mixedContentMode={"always"}
+        source={{
+          html: `
+        <html lang="">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Liqpay</title>
+        </head>
+        <body style="display: flex; justify-content: center; align-items: center">
+          <form method="POST" accept-charset="utf-8" action="https://www.liqpay.ua/api/3/checkout">
+          <input type="hidden" name="data" value="${subscription.data}" />
+          <input type="hidden" name="signature" value="${subscription.signature}" />
+          <button style="border: none !important; display:inline-block !important;text-align: center !important;padding: 15px 35px !important;
+            color: #fff !important; font-size:20px !important; font-weight: 600 !important; font-family:OpenSans, sans-serif; cursor: pointer !important; border-radius: 2px !important;
+            background: rgba(122,183,43,1) !important;"onmouseover="this.style.opacity='0.5';" onmouseout="this.style.opacity='1';">
+            <img src="https://static.liqpay.ua/buttons/logo-small.png" name="btn_text"
+              style="margin-right: 7px !important; vertical-align: middle !important;"/>
+            <span style="vertical-align:middle; !important">Сплатити 200 UAH</span>
+          </button>
+          </form>
+        </body>
+        </html>
+      `
+        }}
+        onError={e => {
+          console.log("Error Occured", e);
+          navigation.pop();
+        }}
+        onMessage={event => handleMessage(event)}
+        onNavigationStateChange={event => handleNavigation(event)}
+        javaScriptEnabled={true}
+        allowUniversalAccessFromFileURLs={true}
+        domStorageEnabled={true}
+        startInLoadingState={true}
+      />
+    </View>
   );
 }
 
-AddCreditInfoScreen.propTypes = {
-  onChangeValue: T.func.isRequired,
-  post: T.func.isRequired,
+AddCreditInfoScreenForm.propTypes = {
+  handleMessage: T.func.isRequired,
+  handleNavigation: T.func.isRequired,
+  subscription: T.object.isRequired,
   navigation: T.object.isRequired,
-  formErrors: T.object.isRequired
+  subscription: T.object.isRequired
 };

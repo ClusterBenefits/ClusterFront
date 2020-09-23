@@ -71,7 +71,7 @@ export default function BillingInformationScreen({
               <BlueButton
                 text="Додати картку"
                 withMarginBottom
-                onPress={() => navigation.navigate(screens.AddCreditInfoScreen)}
+                onPress={() => navigation.navigate(screens.AgreementScreen)}
               />
             </>
           )}

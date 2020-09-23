@@ -107,7 +107,7 @@ export const resetPassword = ({ email, token, password, password_confirmation })
 //////// User
 
 export const showUserInformation = token => {
-  console.log("fetching userInfo data");
+  // console.log("fetching userInfo data");
   let response = axios
     .get(`${url}/api/user`, { headers: { Authorization: "Bearer " + token } })
     .then(response => {
@@ -182,7 +182,7 @@ export const listFavoritesCompanies = ({ token, page }) => {
 };
 
 export const attachToFavorites = ({ token, id }) => {
-  console.log("adding item", id);
+  // console.log("adding item", id);
   let data = { company_id: id };
   let response = axios
     .post(`${url}/api/companies/favorites`, data, {
@@ -264,7 +264,7 @@ export const sendMessageToAdmins = ({ name, email, subject, comment, token }) =>
 //get data and signature info from api
 export const getInfoForBillingSubscription = token => {
   let response = axios
-    .get(`http://997f4b5ec40a.ngrok.io/api/v1/liqpay/subscribe/5`)
+    .get(`http://c0bf32d1ba9f.ngrok.io/api/v1/liqpay/subscribe/5`)
     .then(response => {
       return response.data;
     })
