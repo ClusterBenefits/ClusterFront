@@ -1,4 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
+<<<<<<< HEAD
+=======
+import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
+>>>>>>> 36eff7779082ecfe562dce3574a8485da7a83102
 import { UserContext } from "../../../reducers/context";
 import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
 import { getInfoForSubscription } from "../../../actions/userActions";

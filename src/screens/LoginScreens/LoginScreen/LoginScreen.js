@@ -73,7 +73,7 @@ export default function LoginScreen({ navigation }) {
       });
       navigation.navigate(screens.WelcomeScreen);
     } else {
-      console.log("wrong token");
+      // console.log("wrong token");
       setIsLoading(false);
     }
   };

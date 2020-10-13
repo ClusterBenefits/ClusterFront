@@ -7,7 +7,6 @@ export default function AddCreditInfoScreen({ subscription }) {
   function handleNavigation(event) {
     console.log("event", event);
   }
-
   function handleMessage(event) {
     let data = event.nativeEvent.data;
     data = JSON.parse(data);
@@ -58,6 +57,10 @@ export default function AddCreditInfoScreen({ subscription }) {
   );
 }
 
-AddCreditInfoScreen.propTypes = {
+AddCreditInfoScreenForm.propTypes = {
+  handleMessage: T.func.isRequired,
+  handleNavigation: T.func.isRequired,
+  subscription: T.object.isRequired,
+  navigation: T.object.isRequired,
   subscription: T.object.isRequired
 };
