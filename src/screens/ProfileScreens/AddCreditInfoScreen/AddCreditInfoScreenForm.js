@@ -57,10 +57,9 @@ export default function AddCreditInfoScreen({ subscription }) {
   );
 }
 
-AddCreditInfoScreenForm.propTypes = {
+AddCreditInfoScreen.propTypes = {
   handleMessage: T.func.isRequired,
   handleNavigation: T.func.isRequired,
   subscription: T.object.isRequired,
-  navigation: T.object.isRequired,
-  subscription: T.object.isRequired
+  navigation: T.object.isRequired
 };
