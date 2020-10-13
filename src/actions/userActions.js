@@ -51,7 +51,6 @@ export const registerForPushNotificationsAsync = async userToken => {
   }
   try {
     let token = await Notifications.getExpoPushTokenAsync();
-    console.log(token);
     if (token) {
       postTokenToServer({ expoToken: token, token: userToken });
     }
@@ -274,7 +273,7 @@ export const clearUserLocal = async ({ dispatch }) =>
         {
           text: "Ні",
           onPress: () => {
-            console.log("Cancel Pressed");
+            // console.log("Cancel Pressed");
             resolve("No");
           },
           style: "cancel"
@@ -282,7 +281,7 @@ export const clearUserLocal = async ({ dispatch }) =>
         {
           text: "Так",
           onPress: () => {
-            console.log("loging out )");
+            // console.log("loging out )");
             AsyncStorage.clear().catch(e => console.log(e));
             dispatch({
               type: dispatchTypes.CLEAR_USER

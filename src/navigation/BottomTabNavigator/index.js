@@ -16,6 +16,7 @@ export default createBottomTabNavigator(
     },
     FavoritesScreen: {
       screen: FavoritesScreen,
+      // path: "favorites",
       navigationOptions: {
         tabBarLabel: "Улюблені"
       }
@@ -24,7 +25,8 @@ export default createBottomTabNavigator(
       screen: ProfileNavigation,
       navigationOptions: {
         tabBarLabel: "Профіль"
-      }
+      },
+      path: "tab"
     }
   },
   {

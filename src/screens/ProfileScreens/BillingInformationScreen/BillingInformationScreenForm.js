@@ -36,6 +36,8 @@ export default function BillingInformationScreen({
   const { credit_card_number = "", expired_at = "" } = subscription || {};
   const isActivatedFromAdmin = subscribed && credit_card_number === "";
 
+  console.log("SUBSCRIPTION", subscription);
+
   return (
     <Container>
       <Header navigation={navigation} titleText="Інформація про оплату" />
@@ -56,25 +58,18 @@ export default function BillingInformationScreen({
               disabled={subscribed && isActivatedFromAdmin}
             />
           </>
-        )) ||
-          (subscription && (
-            <>
-              <Text> Проводиться оплата, це може зайняти декілька хвилин</Text>
-              <View style={s.flexMax} />
-              <BlueButton text="Оновити дані" withMarginBottom onPress={checkSubscription} />
-            </>
-          )) || (
-            <>
-              <H1>Платіжну картку не додано</H1>
-              <Text>Додайте платіжну картку щоб отримати доступ до знижок</Text>
-              <View style={s.flexMax} />
-              <BlueButton
-                text="Додати картку"
-                withMarginBottom
-                onPress={() => navigation.navigate(screens.AddCreditInfoScreen)}
-              />
-            </>
-          )}
+        )) || (
+          <>
+            <H1>Платіжну картку не додано</H1>
+            <Text>Додайте платіжну картку щоб отримати доступ до знижок</Text>
+            <View style={s.flexMax} />
+            <BlueButton
+              text="Додати картку"
+              withMarginBottom
+              onPress={() => navigation.navigate(screens.AddCreditInfoScreen)}
+            />
+          </>
+        )}
       </View>
     </Container>
   );
@@ -107,3 +102,11 @@ BillingInformationScreen.propTypes = {
         )}
       </View>
     </Container> */
+
+/* (subscription && (
+            <>
+              <Text> Проводиться оплата, це може зайняти декілька хвилин</Text>
+              <View style={s.flexMax} />
+              <BlueButton text="Оновити дані" withMarginBottom onPress={checkSubscription} />
+            </>
+          )) || */

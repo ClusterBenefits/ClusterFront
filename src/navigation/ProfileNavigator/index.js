@@ -13,7 +13,7 @@ import { screens } from "../../constants";
 
 const ProfileNavigator = createStackNavigator(
   {
-    [screens.ProfileScreen]: ProfileScreen,
+    [screens.ProfileScreen]: { screen: ProfileScreen, path: "profile" },
     [screens.ProfileEditScreen]: ProfileEditScreen,
     [screens.ChangePasswordScreen]: ChangePasswordScreen,
     [screens.ChangeEmailScreen]: ChangeEmailScreen,
@@ -33,6 +33,7 @@ ProfileNavigator.navigationOptions = ({ navigation }) => {
     tabBarVisible = false;
   }
 
+  // console.log(ProfileNavigator.router);
   return {
     tabBarVisible
   };

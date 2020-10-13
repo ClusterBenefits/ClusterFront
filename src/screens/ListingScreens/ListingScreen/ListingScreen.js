@@ -6,10 +6,11 @@ import { UserContext } from "./../../../reducers/context";
 import { isSubscribed } from "../../../utils";
 import { LoadingHOC } from "../../../components";
 import { useBackButton } from "../../../hooks";
+import { screens } from "../../../constants";
 
 const ListingScreenWithLoading = LoadingHOC(ListingScreenForm);
 
-export default function ListingScreen() {
+export default function ListingScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefetching, setIsRefetching] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
@@ -34,7 +35,6 @@ export default function ListingScreen() {
 
   const fetchMore = async () => {
     if (items.current_page < items.last_page) {
-      // console.log("fetching items baby ");
       setIsFetchingMore(true);
       await fetchItems({ dispatch, token, page: items.current_page + 1 });
       setIsFetchingMore(false);
@@ -53,6 +53,8 @@ export default function ListingScreen() {
     setIsRefetching(false);
   };
 
+  const goBillingInformationScreen = () => navigation.navigate(screens.BillingInformationScreen);
+
   return (
     <ListingScreenWithLoading
       isLoading={isLoading}
@@ -63,6 +65,7 @@ export default function ListingScreen() {
       refetchItems={refetchItems}
       isRefetching={isRefetching}
       isFetchingMore={isFetchingMore}
+      goBillingInformationScreen={goBillingInformationScreen}
     />
   );
 }

@@ -32,6 +32,7 @@
       "package": "com.mycompany.meelor"
     },
     "description": "Release version 1.0.4",
-    "githubUrl": "https://github.com/ClusterBenefits/ClusterFront"
+    "githubUrl": "https://github.com/ClusterBenefits/ClusterFront",
+    "scheme": "exp"
   }
 }
