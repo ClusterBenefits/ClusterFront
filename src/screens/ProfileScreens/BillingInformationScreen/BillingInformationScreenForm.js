@@ -24,7 +24,7 @@ const s = StyleSheet.create({
   }
 });
 
-export default function BillingInformationScreen({
+export default function BillingInformationScreenForm({
   navigation,
   subscribed,
   cancelSubscription,
@@ -35,8 +35,6 @@ export default function BillingInformationScreen({
 }) {
   const { credit_card_number = "", expired_at = "" } = subscription || {};
   const isActivatedFromAdmin = subscribed && credit_card_number === "";
-
-  console.log("SUBSCRIPTION", subscription);
 
   return (
     <Container>
@@ -58,30 +56,23 @@ export default function BillingInformationScreen({
               disabled={subscribed && isActivatedFromAdmin}
             />
           </>
-        )) ||
-          (subscription && (
-            <>
-              <Text> Проводиться оплата, це може зайняти декілька хвилин</Text>
-              <View style={s.flexMax} />
-              <BlueButton text="Оновити дані" withMarginBottom onPress={checkSubscription} />
-            </>
-          )) || (
-            <>
-              <H1>Платіжну картку не додано</H1>
-              <Text>Додайте платіжну картку щоб отримати доступ до знижок</Text>
-              <View style={s.flexMax} />
-              <BlueButton
-                text="Додати картку"
-                withMarginBottom
-                onPress={() => navigation.navigate(screens.AgreementScreen)}
-              />
-            </>
-          )}
+        )) || (
+          <>
+            <H1>Платіжну картку не додано</H1>
+            <Text>Додайте платіжну картку щоб отримати доступ до знижок</Text>
+            <View style={s.flexMax} />
+            <BlueButton
+              text="Додати картку"
+              withMarginBottom
+              onPress={() => navigation.navigate(screens.AgreementScreen)}
+            />
+          </>
+        )}
       </View>
     </Container>
   );
 }
-BillingInformationScreen.propTypes = {
+BillingInformationScreenForm.propTypes = {
   navigation: T.object.isRequired,
   subscribed: T.bool,
   cancelSubscription: T.func,

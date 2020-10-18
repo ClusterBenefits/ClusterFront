@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import BillingInformationScreenForm from "./BillingInformationScreenForm";
+import BillingInformationForm from "./BillingInformationScreenForm";
 import {
   deleteCreditCardSubscription,
   checkCreditCardSubscription,
@@ -11,9 +11,9 @@ import { isSubscribed } from "../../../utils";
 import { LoadingHOC } from "../../../components";
 import { useBackButton } from "../../../hooks";
 
-const BillingInformationScreenWithLoading = LoadingHOC(BillingInformationScreenForm);
+const BillingInformationScreenWithLoading = LoadingHOC(BillingInformationForm);
 
-export default function ProfileEditScreen({ navigation }) {
+export default function BillingInformationScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const {
     state: { userInfo, token, subscription },

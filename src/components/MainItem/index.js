@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
 });
 
 export default function list({ item, onPress, handleFavoriteChange, subscribed }) {
-  console.log(item.image, "here image");
   return (
     <ListItem style={styles.container}>
       <TouchableOpacity style={styles.container_item} onPress={onPress}>
@@ -64,7 +63,7 @@ export default function list({ item, onPress, handleFavoriteChange, subscribed }
             {item.fields.name}
           </Text>
           <Text numberOfLines={1} style={styles.secondaryText}>
-            Знижка {item.fields.discount}%
+            Знижка {item.fields.discount}
           </Text>
         </View>
         {subscribed && (

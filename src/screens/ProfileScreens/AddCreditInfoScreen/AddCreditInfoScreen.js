@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import AddCreditInfoScreenForm from "./AddCreditInfoScreenForm";
+import AddCreditInfoForm from "./AddCreditInfoScreenForm";
 import { UserContext } from "../../../reducers/context";
 import { getInfoForSubscription } from "../../../actions/userActions";
 import { LoadingHOC } from "../../../components";
 
-const AddCreditInfoScreenWithLoading = LoadingHOC(AddCreditInfoScreenForm);
+const AddCreditInfoScreenWithLoading = LoadingHOC(AddCreditInfoForm);
 
 export default function AddCreditInfoScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,6 @@ export default function AddCreditInfoScreen({ navigation }) {
         dispatch,
         token: state.token
       });
-      console.log("subscribe", response);
       setInfoSubscription({
         data: response.data,
         signature: response.signature
@@ -34,5 +33,11 @@ export default function AddCreditInfoScreen({ navigation }) {
     }
   };
 
-  return <AddCreditInfoScreenWithLoading isLoading={isLoading} subscription={subscription} />;
+  return (
+    <AddCreditInfoScreenWithLoading
+      isLoading={isLoading}
+      subscription={subscription}
+      navigation={navigation}
+    />
+  );
 }

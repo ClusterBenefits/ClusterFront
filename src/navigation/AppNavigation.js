@@ -8,6 +8,5 @@ const AppSwitchNavigator = createSwitchNavigator({
 });
 
 const AppNavigation = createAppContainer(AppSwitchNavigator);
-// console.log(AppNavigation.router);
 
 export default AppNavigation;

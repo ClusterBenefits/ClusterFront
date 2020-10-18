@@ -2,10 +2,14 @@ import React from "react";
 import { View } from "react-native";
 import T from "prop-types";
 import { WebView } from "react-native-webview";
+import { screens, liqpayUrl } from "../../../constants";
 
-export default function AddCreditInfoScreen({ subscription }) {
+export default function AddCreditInfoScreen({ navigation, subscription }) {
   function handleNavigation(event) {
     console.log("event", event);
+    if (event.url === liqpayUrl) {
+      navigation.navigate(screens.ListingScreen);
+    }
   }
   function handleMessage(event) {
     let data = event.nativeEvent.data;
@@ -58,8 +62,6 @@ export default function AddCreditInfoScreen({ subscription }) {
 }
 
 AddCreditInfoScreen.propTypes = {
-  handleMessage: T.func.isRequired,
-  handleNavigation: T.func.isRequired,
   subscription: T.object.isRequired,
   navigation: T.object.isRequired
 };

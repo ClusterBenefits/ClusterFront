@@ -13,38 +13,16 @@ import { StatusBar } from "./src/components";
 const StyleProviderTheme = ({ children }) => (
   <StyleProvider style={getTheme(platform)}>{children}</StyleProvider>
 );
-const prefix1 = Linking.makeUrl("https://46-hh8.expotest32.cluster.exp.direct:80/");
-const prefix2 = Linking.makeUrl("/");
+
+const prefix = Linking.makeUrl("127.0.0.1:19000/");
 
 export default function App({ navigation }) {
-  // const linking = {
-  //   prefixes: [prefix1, prefix2],
-  //   config: {
-  //     screens: {
-  //       ProfileBottomTabNavigatior: {
-  //         path: "bottom_tabs",
-  //         screens: {
-  //           ListingScreen: {
-  //             path: "listing",
-  //             exact: true
-  //           },
-  //           FavoritesScreen: {
-  //             path: "favorites",
-  //             exact: true
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // };
-
   useEffect(() => {
     function urlRedirect(url) {
       if (!url) return;
-      // parse and redirect to new url
       let { path, queryParams } = Linking.parse(url);
       console.log(`Linked to app with path: ${path} and data: ${JSON.stringify(queryParams)}`);
-      navigation.replace(path, queryParams);
+      // navigation.replace(path, queryParams);
     }
 
     console.log(`${Constants.linkingUri}`);
@@ -62,7 +40,7 @@ export default function App({ navigation }) {
       <MyProvider>
         <Root>
           <StatusBar />
-          <AppNavigation uriPrefix={prefix2} />
+          <AppNavigation uriPrefix={prefix} />
           <MainModalComponent navigation={navigation} />
         </Root>
       </MyProvider>

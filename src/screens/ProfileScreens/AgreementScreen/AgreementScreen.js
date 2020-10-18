@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { CheckBox, Body, Text, H1 } from "native-base";
+import { Body, Text, H1, CheckBox } from "native-base";
 import T from "prop-types";
 import { BlueButton, Container, Header } from "../../../components";
 import { screens } from "../../../constants";
@@ -48,8 +48,7 @@ const s = StyleSheet.create({
   }
 });
 export default function AgreementScreen({ navigation }) {
-  const [isChecked, setChecked] = useState(false);
-  console.log(isChecked);
+  const [isChecked, setIsChecked] = useState(true);
   return (
     <Container>
       <Container withScroll>
@@ -219,7 +218,11 @@ export default function AgreementScreen({ navigation }) {
       </Container>
       <View style={s.bottomContainer}>
         <View style={s.checkboxContainer}>
-          <CheckBox style={s.checkBox} checked={isChecked} onPress={() => setChecked(!isChecked)} />
+          <CheckBox
+            style={s.checkBox}
+            checked={isChecked}
+            onPress={() => setIsChecked(prevState => !prevState)}
+          />
           <Body style={s.extraMarginLeft}>
             <Text>Я погоджуюсь з умовами користування сервісом</Text>
           </Body>

@@ -221,7 +221,7 @@ export const listOfCompanies = ({ token, page }) => {
       }
     })
     .then(response => {
-      console.log("companies", response);
+      // console.log("companies", response);
       return response.data;
     })
     .catch(({ response }) => console.log("failed to load items", response.data));
@@ -277,7 +277,6 @@ export const getInfoForBillingSubscription = token => {
 };
 
 export const checkBillingSubscription = token => {
-  //CHANGE TO /payment/subscribe/info!!!!!!!!!!!!!!!!!!
   let response = axios
     .get(`${url}/payment/subscribe/info`, {
       headers: {
@@ -286,7 +285,7 @@ export const checkBillingSubscription = token => {
       }
     })
     .then(response => {
-      console.log("res", response);
+      console.log("res", response.data.status);
       return response.data;
     })
     .catch(({ response }) => {

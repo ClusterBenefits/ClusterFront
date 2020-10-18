@@ -8,7 +8,6 @@ import { ButtonModal } from "../../../services/mainModal";
 
 import { handleClickIcon, changeFavoriteCompanies, fetchFavoriteItems } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
-import { LoadingHOC } from "../../../components";
 import { enhancedOnEndReached } from "../../../helpers";
 import { isSubscribed } from "../../../utils";
 
