@@ -1,5 +1,12 @@
 import React, { useContext } from "react";
-import { StyleSheet, TouchableOpacity, View, TouchableWithoutFeedback, Image } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  TouchableWithoutFeedback,
+  Image,
+  ScrollView
+} from "react-native";
 import { Text } from "native-base";
 import T from "prop-types";
 import Barcode from "react-native-barcode-expo";
@@ -48,7 +55,8 @@ const s = StyleSheet.create({
     fontWeight: "500"
   },
   descriptionContainer: {
-    paddingHorizontal: 25,
+    height: "35%",
+    paddingHorizontal: 35,
     paddingBottom: 10
   },
   descriptionText: {
@@ -103,12 +111,12 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
                 style={s.image}
               />
             </View>
-            <View style={s.descriptionContainer}>
+            <ScrollView style={s.descriptionContainer}>
               <Text style={s.descriptionText}>{fields.description}</Text>
-            </View>
+            </ScrollView>
             <Barcode value={`${fields.card_number}`} format="CODE128" />
             <Text>{fields.card_number}</Text>
-            <Text style={s.discountStyle}>{`Знижка ${fields.discount} %`}</Text>
+            <Text style={s.discountStyle}>{`Знижка ${fields.discount}`}</Text>
           </View>
         </TouchableWithoutFeedback>
       </TouchableOpacity>

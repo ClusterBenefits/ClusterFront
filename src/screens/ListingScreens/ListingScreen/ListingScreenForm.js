@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, View } from "react-native";
 import { H1, H3 } from "native-base";
 import T from "prop-types";
 
 import { colors } from "../../../constants";
 import { ButtonModal } from "../../../services/mainModal";
-import { Container, MainItem, ActivityIndicator } from "../../../components";
+import { Container, MainItem, ActivityIndicator, BlueButton } from "../../../components";
 import { enhancedOnEndReached } from "../../../helpers";
 
 const s = StyleSheet.create({
@@ -17,7 +17,11 @@ const s = StyleSheet.create({
     borderBottomColor: colors.mainGrey
   },
   extraMarginLeft: {
-    marginLeft: 10
+    marginLeft: 10,
+    textAlign: "center"
+  },
+  buttonContainer: {
+    paddingHorizontal: 30
   }
 });
 
@@ -28,7 +32,8 @@ export default function ListScreenForm({
   fetchMore,
   refetchItems,
   isRefetching,
-  isFetchingMore
+  isFetchingMore,
+  goBillingInformationScreen
 }) {
   return (
     <Container>
@@ -51,7 +56,22 @@ export default function ListScreenForm({
           ListFooterComponent={isFetchingMore && <ActivityIndicator size="small" />}
         />
       ) : (
-        <H3 style={s.extraMarginLeft}>Підпишіться, щоб отримати доступ до знижок</H3>
+        <>
+          <H3 style={s.extraMarginLeft}>Підпишіться, щоб отримати доступ до знижок</H3>
+          <View style={s.buttonContainer}>
+            <BlueButton text="Перейти до оплати" onPress={goBillingInformationScreen} />
+          </View>
+          <FlatList
+            refreshing={isRefetching}
+            onRefresh={refetchItems}
+            data={items}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({ item }) => <MainItem item={item} onPress={() => {}} subscribed={subscribed} />}
+            onEndReached={enhancedOnEndReached(fetchMore)}
+            onEndReachedThreshold={0.1}
+            ListFooterComponent={isFetchingMore && <ActivityIndicator size="small" />}
+          />
+        </>
       )}
     </Container>
   );

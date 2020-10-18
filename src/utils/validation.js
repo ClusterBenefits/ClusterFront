@@ -3,15 +3,15 @@ import ua from "validatorjs/src/lang/ua";
 
 const rules = {
   email: "required|email",
-  password: "required|min:8",
-  password_confirmation: "required|same:password|min:8",
+  password: "required|min:6",
+  password_confirmation: "required|same:password|min:6",
   password_confirmation_email: "same:password_email",
   password_email: "required|same:password_confirmation_email",
   firstName: "required|min:3 ",
   lastName: "required|min:3",
   organization: "required|min:3",
   position: "min:3",
-  realPassword: "required|min:8",
+  realPassword: "required|min:6",
   oldPassword: "required|same:realPassword",
   comment: "required|min:5",
   subject: "required",

@@ -20,7 +20,7 @@ const errorHandler = ({ response }) => {
 export const postTokenToServer = async ({ expoToken, token }) => {
   let response = axios
     .post(
-      `${url}/api/user/attach-token`,
+      `${url}/user/attach-token`,
       { token: expoToken },
       {
         headers: {
@@ -40,7 +40,7 @@ export const postTokenToServer = async ({ expoToken, token }) => {
 ///////// AUTH
 export const login = ({ email, password }) => {
   let response = axios
-    .post(`${url}/api/login`, { email, password }, { headers: { "Content-Type": "application/json" } })
+    .post(`${url}/login`, { email, password }, { headers: { "Content-Type": "application/json" } })
     .then(response => {
       return response.data.token;
     })
@@ -56,7 +56,7 @@ export const register = ({ email, password, password_confirmation }) => {
     password_confirmation
   };
   let response = axios
-    .post(`${url}/api/register`, data, {
+    .post(`${url}/register`, data, {
       headers: { Accept: "application/json" }
     })
     .then(response => {
@@ -72,7 +72,7 @@ export const register = ({ email, password, password_confirmation }) => {
 
 export const forgotPassword = ({ email, resend }) => {
   let response = axios
-    .post(`${url}/api/password/forgot`, { email }, { headers: { Accept: "application/json" } })
+    .post(`${url}/password/forgot`, { email }, { headers: { Accept: "application/json" } })
     .then(response => {
       resend && ShowToast("Код успішно відправлений");
       return response.data;
@@ -83,7 +83,7 @@ export const forgotPassword = ({ email, resend }) => {
 
 export const confirmCodeFromEmail = ({ email, code }) => {
   let response = axios
-    .post(`${url}/api/password/confirm`, { email, code })
+    .post(`${url}/password/confirm`, { email, code })
     .then(response => {
       return response.data.token;
     })
@@ -107,9 +107,8 @@ export const resetPassword = ({ email, token, password, password_confirmation })
 //////// User
 
 export const showUserInformation = token => {
-  console.log("fetching userInfo data");
   let response = axios
-    .get(`${url}/api/user`, { headers: { Authorization: "Bearer " + token } })
+    .get(`${url}/user`, { headers: { Authorization: "Bearer " + token } })
     .then(response => {
       return response.data;
     })
@@ -119,7 +118,7 @@ export const showUserInformation = token => {
 
 export const updateUserInformation = ({ token, data }) => {
   let response = axios
-    .post(`${url}/api/user`, data, {
+    .post(`${url}/user`, data, {
       headers: { Accept: "application/json", Authorization: "Bearer " + token }
     })
     .then(response => {
@@ -132,7 +131,7 @@ export const updateUserInformation = ({ token, data }) => {
 export const changeUserEmail = ({ token, email }) => {
   let response = axios
     .post(
-      `${url}/api/user/change-email`,
+      `${url}/user/change-email`,
       { email },
       {
         headers: { Authorization: "Bearer " + token }
@@ -154,7 +153,7 @@ export const changeUserPassword = async ({
 }) => {
   let data = { old_password, new_password, new_password_confirmation };
   let response = await axios
-    .post(`${url}/api/user/change-password`, data, {
+    .post(`${url}/user/change-password`, data, {
       headers: { Authorization: "Bearer " + token, Accept: "application/json" }
     })
     .then(response => {
@@ -171,7 +170,7 @@ export const changeUserPassword = async ({
 
 export const listFavoritesCompanies = ({ token, page }) => {
   let results = axios
-    .get(`${url}/api/companies/favorites?page=${page}`, {
+    .get(`${url}/companies/favorites?page=${page}`, {
       headers: { Authorization: "Bearer " + token }
     })
     .then(response => {
@@ -182,14 +181,12 @@ export const listFavoritesCompanies = ({ token, page }) => {
 };
 
 export const attachToFavorites = ({ token, id }) => {
-  console.log("adding item", id);
   let data = { company_id: id };
   let response = axios
-    .post(`${url}/api/companies/favorites`, data, {
+    .post(`${url}/companies/favorites`, data, {
       headers: { Accept: "application/json", Authorization: "Bearer " + token }
     })
     .then(response => {
-      console.log("attachedfavorite response");
       ShowToast("Додано до улюбленого списку");
       return response;
     })
@@ -199,9 +196,8 @@ export const attachToFavorites = ({ token, id }) => {
 };
 
 export const removeFromFavorites = ({ token, id }) => {
-  console.log("removing item id = ", id);
   let response = axios
-    .delete(`${url}/api/companies/favorites/${id}`, {
+    .delete(`${url}/companies/favorites/${id}`, {
       headers: { Accept: "application/json", Authorization: "Bearer " + token }
     })
     .then(response => {
@@ -218,13 +214,14 @@ export const removeFromFavorites = ({ token, id }) => {
 
 export const listOfCompanies = ({ token, page }) => {
   let response = axios
-    .get(`${url}/api/companies?page=${page}`, {
+    .get(`${url}/companies?page=${page}`, {
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + token
       }
     })
     .then(response => {
+      // console.log("companies", response);
       return response.data;
     })
     .catch(({ response }) => console.log("failed to load items", response.data));
@@ -239,7 +236,7 @@ export const listOfCompanies = ({ token, page }) => {
 export const sendMessageToAdmins = ({ name, email, subject, comment, token }) => {
   let response = axios
     .post(
-      `${url}/api/feedback`,
+      `${url}/feedback`,
       { name, email, subject, comment },
       {
         headers: {
@@ -261,48 +258,65 @@ export const sendMessageToAdmins = ({ name, email, subject, comment, token }) =>
 
 // CreditCard Api
 
-export const checkBillingSubscription = token => {
+//get data and signature info from api
+export const getInfoForBillingSubscription = token => {
   let response = axios
-    .get(`${url}/api/user/payment/subscribe`, {
+    .get(`${url}/payment/subscribe/59`, {
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + token
       }
     })
     .then(response => {
-      console.log(response.data);
       return response.data;
     })
-    .catch(({ response }) => {
-      console.log("check bill err ");
+    .catch(err => {
+      console.log("error axiosFetch", err);
     });
   return response;
 };
 
-export const addBillingSubscription = ({ ...props }) => {
-  console.log(props.data);
+export const checkBillingSubscription = token => {
   let response = axios
-    .post(`${url}/api/user/payment/subscribe`, props.data, {
+    .get(`${url}/payment/subscribe/info`, {
       headers: {
         Accept: "application/json",
-        Authorization: "Bearer " + props.token
+        Authorization: "Bearer " + token
       }
     })
     .then(response => {
-      console.log("response add subscription", response.data);
-      ShowToast(response.data.message);
+      console.log("res", response.data.status);
       return response.data;
     })
     .catch(({ response }) => {
-      ShowToast(response.data.message);
-      console.log("addbillingsub error");
+      console.log("check bill err", response);
     });
   return response;
 };
 
+// export const addBillingSubscription = ({ ...props }) => {
+//   let response = axios
+//     .post(`${url}/payment/subscribe`, props.data, {
+//       headers: {
+//         Accept: "application/json",
+//         Authorization: "Bearer " + props.token
+//       }
+//     })
+//     .then(response => {
+//       console.log("response add subscription", response.data);
+//       ShowToast(response.data.message);
+//       return response.data;
+//     })
+//     .catch(({ response }) => {
+//       ShowToast(response.data.message);
+//       console.log("addbillingsub error");
+//     });
+//   return response;
+// };
+
 export const deleteBillingSubscription = ({ token }) => {
   let response = axios
-    .delete(`${url}/api/user/payment/subscribe`, {
+    .delete(`${url}/payment/subscribe`, {
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + token

@@ -47,8 +47,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function list({ item, onPress, handleFavoriteChange }) {
-  // console.log(item.image, "here image");
+export default function list({ item, onPress, handleFavoriteChange, subscribed }) {
   return (
     <ListItem style={styles.container}>
       <TouchableOpacity style={styles.container_item} onPress={onPress}>
@@ -64,12 +63,14 @@ export default function list({ item, onPress, handleFavoriteChange }) {
             {item.fields.name}
           </Text>
           <Text numberOfLines={1} style={styles.secondaryText}>
-            Знижка {item.fields.discount}%
+            Знижка {item.fields.discount}
           </Text>
         </View>
-        <TouchableOpacity onPress={() => handleFavoriteChange(item)}>
-          {item.is_favorite ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
-        </TouchableOpacity>
+        {subscribed && (
+          <TouchableOpacity onPress={() => handleFavoriteChange(item)}>
+            {item.is_favorite ? <FavoritesIcon fill={colors.mainRed} /> : <FavoritesIconOutLine />}
+          </TouchableOpacity>
+        )}
       </TouchableOpacity>
     </ListItem>
   );
@@ -78,5 +79,6 @@ export default function list({ item, onPress, handleFavoriteChange }) {
 list.propTypes = {
   item: T.object.isRequired,
   onPress: T.func.isRequired,
-  handleFavoriteChange: T.func.isRequired
+  handleFavoriteChange: T.func,
+  subscribed: T.bool
 };

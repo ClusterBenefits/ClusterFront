@@ -8,8 +8,8 @@ import { ButtonModal } from "../../../services/mainModal";
 
 import { handleClickIcon, changeFavoriteCompanies, fetchFavoriteItems } from "../../../actions/userActions";
 import { UserContext } from "./../../../reducers/context";
-import { LoadingHOC } from "../../../components";
 import { enhancedOnEndReached } from "../../../helpers";
+import { isSubscribed } from "../../../utils";
 
 const s = StyleSheet.create({
   mainText: {
@@ -30,9 +30,11 @@ export default function FavoritesScreen(props) {
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const {
-    state: { favoriteItems, token },
+    state: { favoriteItems, subscription, userInfo, token },
     dispatch
   } = useContext(UserContext);
+
+  const subscribed = isSubscribed(userInfo, subscription);
 
   useEffect(() => {
     asyncLoading();
@@ -68,7 +70,7 @@ export default function FavoritesScreen(props) {
       <H1 style={s.mainText}>Улюблені</H1>
       {isLoading ? (
         <ActivityIndicator />
-      ) : favoriteItems.data?.length > 0 ? (
+      ) : subscribed && favoriteItems.data?.length > 0 ? (
         <FlatList
           data={favoriteItems.data}
           keyExtractor={item => item.id.toString()}

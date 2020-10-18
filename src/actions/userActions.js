@@ -17,7 +17,8 @@ import {
   sendMessageToAdmins,
   checkBillingSubscription,
   addBillingSubscription,
-  deleteBillingSubscription
+  deleteBillingSubscription,
+  getInfoForBillingSubscription
 } from "./axiosFetchs";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
@@ -32,7 +33,8 @@ export const dispatchTypes = {
   ADD_FAVORITE_ITEMS: "ADD_FAVORITE_ITEMS",
   ADD_MORE_FAVORITE_ITEMS: "ADD_MORE_FAVORITE_ITEMS",
   ADD_COMMENTS: "ADD_COMMENTS",
-  SUBSCRIPTION: "SUBSCRIPTION"
+  SUBSCRIPTION: "SUBSCRIPTION",
+  INFO_SUBSCRIPTION: "INFO_SUBSCRIPTION"
 };
 
 ///////// AUTH
@@ -49,7 +51,6 @@ export const registerForPushNotificationsAsync = async userToken => {
   }
   try {
     let token = await Notifications.getExpoPushTokenAsync();
-    console.log(token);
     if (token) {
       postTokenToServer({ expoToken: token, token: userToken });
     }
@@ -106,7 +107,7 @@ export const setNewUserPassword = async ({ ...props }) => {
 export const changeEmail = async ({ token, email, dispatch }) => {
   let response = await changeUserEmail({ token, email });
   if (response) {
-    console.log("email changed to", email);
+    // console.log("email changed to", email);
     AsyncStorage.setItem("email", email);
     dispatch({
       type: dispatchTypes.ADD_USERINFO,
@@ -119,7 +120,7 @@ export const changeEmail = async ({ token, email, dispatch }) => {
 export const changePassword = async ({ ...props }) => {
   let response = await changeUserPassword(props);
   if (response) {
-    console.log("password changed to", props.new_password);
+    // console.log("password changed to", props.new_password);
     AsyncStorage.setItem("password", props.new_password);
   }
   return response;
@@ -177,6 +178,15 @@ export const fetchFavoriteItems = async ({ token, dispatch, page = 1 }) => {
 };
 
 // CreditCardApi
+
+export const getInfoForSubscription = async ({ token, dispatch }) => {
+  let response = await getInfoForBillingSubscription(token);
+  dispatch({
+    type: dispatchTypes.INFO_SUBSCRIPTION,
+    payload: response
+  });
+  return response;
+};
 
 export const checkCreditCardSubscription = async ({ token, dispatch }) => {
   let response = await checkBillingSubscription(token);
@@ -263,7 +273,7 @@ export const clearUserLocal = async ({ dispatch }) =>
         {
           text: "Ні",
           onPress: () => {
-            console.log("Cancel Pressed");
+            // console.log("Cancel Pressed");
             resolve("No");
           },
           style: "cancel"
@@ -271,7 +281,7 @@ export const clearUserLocal = async ({ dispatch }) =>
         {
           text: "Так",
           onPress: () => {
-            console.log("loging out )");
+            // console.log("loging out )");
             AsyncStorage.clear().catch(e => console.log(e));
             dispatch({
               type: dispatchTypes.CLEAR_USER

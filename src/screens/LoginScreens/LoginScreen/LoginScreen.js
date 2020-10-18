@@ -22,7 +22,6 @@ export default function LoginScreen({ navigation }) {
   useEffect(() => {
     const autoAuth = async () => {
       let { email, password } = await getDataFromLocalStorage();
-      console.log(email, password);
       if (!(email === "none") && !(password === "none")) {
         let response = await loginUser({
           email,
@@ -33,11 +32,9 @@ export default function LoginScreen({ navigation }) {
         if (response) {
           navigation.navigate(screens.WelcomeScreen);
         } else {
-          console.log("wrong token");
           setIsLoading(false);
         }
       } else {
-        console.log("no data at async storage");
         setIsLoading(false);
       }
     };
@@ -76,7 +73,7 @@ export default function LoginScreen({ navigation }) {
       });
       navigation.navigate(screens.WelcomeScreen);
     } else {
-      console.log("wrong token");
+      // console.log("wrong token");
       setIsLoading(false);
     }
   };
