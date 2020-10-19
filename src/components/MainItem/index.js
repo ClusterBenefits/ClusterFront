@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, Image, View } from "react-native";
 import { Text, ListItem } from "native-base";
 import { colors } from "../../constants/Colors";
 import T from "prop-types";
-import { url } from "../../constants";
+import { baseUrl } from "../../constants";
 import { FavoritesIcon, FavoritesIconOutLine } from "../../assets/svg";
 
 const styles = StyleSheet.create({
@@ -48,12 +48,13 @@ const styles = StyleSheet.create({
 });
 
 export default function list({ item, onPress, handleFavoriteChange, subscribed }) {
+  console.log(`${baseUrl}${item.image.preview.url}`);
   return (
     <ListItem style={styles.container}>
       <TouchableOpacity style={styles.container_item} onPress={onPress}>
         <View style={styles.imageContainer}>
           <Image
-            source={{ uri: `${url}${item.image.preview.url}` }}
+            source={{ uri: `${baseUrl}${item.image.preview.url}` }}
             resizeMode={"contain"}
             style={styles.image}
           />

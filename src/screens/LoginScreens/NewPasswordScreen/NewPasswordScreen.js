@@ -26,7 +26,7 @@ export default function ForgotPasswordScreen(props) {
   const goLogin = async () => {
     const { errors } = allFieldsValidation(formCredentials, {
       same: "Пароль не співпадає",
-      min: "Кількість символів в полі повинна бути не менше 8"
+      min: "Кількість символів в полі повинна бути не менше 6"
     });
     if (errors) {
       setFormErrors(errors);
@@ -46,6 +46,7 @@ export default function ForgotPasswordScreen(props) {
     });
     if (response) {
       // new password ready to go
+      console.log("password response", response);
       props.navigation.navigate(screens.LoginScreen);
     }
     setIsLoading(false);

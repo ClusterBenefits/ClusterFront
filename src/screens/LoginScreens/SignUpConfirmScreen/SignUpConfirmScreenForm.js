@@ -39,7 +39,7 @@ export default function SignUpForm({
   resendVerificationCode,
   navigation
 }) {
-  const isValid = code.length === 4;
+  const isValid = code.length === 5;
 
   return (
     <Container>
@@ -53,7 +53,7 @@ export default function SignUpForm({
 
         <CodeInput
           onFulfill={setVerificationCode}
-          codeLength={4}
+          codeLength={5}
           cellProps={{ style: s.inputCell }}
           activeColor={colors.mainBlack}
           cellBorderWidth={1}
@@ -61,7 +61,7 @@ export default function SignUpForm({
           inputProps={{ onChangeText: setVerificationCode }}
         />
         <View style={s.maxFlex} />
-        <Text style={s.enterText}>Введіть отриманий на емейл 4-ти значний код</Text>
+        <Text style={s.enterText}>Введіть отриманий на емейл 5-ти значний код</Text>
 
         <BlueButton text="Підтвердити скидання паролю" onPress={goNewPassword} disabled={!isValid} />
       </View>
