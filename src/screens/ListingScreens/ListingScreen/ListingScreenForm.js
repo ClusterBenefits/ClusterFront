@@ -49,6 +49,7 @@ export default function ListScreenForm({
               item={item}
               onPress={() => ButtonModal.showModal({ item, handleFavoriteChange })}
               handleFavoriteChange={handleFavoriteChange}
+              subscribed={subscribed}
             />
           )}
           onEndReached={enhancedOnEndReached(fetchMore)}

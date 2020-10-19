@@ -15,7 +15,7 @@ import { colors } from "../../constants";
 import { FavoritesIcon, FavoritesIconOutLine } from "../../assets/svg";
 import { BlurView } from "expo-blur";
 import { UserContext } from "../../reducers/context";
-import { url } from "../../constants";
+import { baseUrl } from "../../constants";
 
 const s = StyleSheet.create({
   modalContainer: {
@@ -106,7 +106,7 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
             </View>
             <View style={s.imageCompanyContainer}>
               <Image
-                source={{ uri: `${url}${image.preview_list.url}` }}
+                source={{ uri: `${baseUrl}${image.preview_list.url}` }}
                 resizeMode={"contain"}
                 style={s.image}
               />
