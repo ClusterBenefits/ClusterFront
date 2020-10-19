@@ -94,7 +94,7 @@ export const confirmCodeFromEmail = ({ email, code }) => {
 export const resetPassword = ({ email, token, password, password_confirmation }) => {
   let data = { email, token, password, password_confirmation };
   let response = axios
-    .post(`${url}/api/password/reset`, data)
+    .post(`${url}/password/reset`, data)
     .then(response => {
       return response.data;
     })
