@@ -22,7 +22,14 @@ export function MainModalComponent() {
   };
 
   return (
-    <Modal animationType="slide" useNativeDriver transparent={true} position={"bottom"} visible={isVisible}>
+    <Modal
+      propagateSwipe={true}
+      animationType="slide"
+      useNativeDriver
+      transparent={true}
+      position={"bottom"}
+      visible={isVisible}
+    >
       <>
         {/* with expo , while you have modal opened , status bar disappears and turns into a whiteBar same height ,
        thats why we have this view with statusBar style here  */}

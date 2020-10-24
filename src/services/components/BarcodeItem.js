@@ -112,7 +112,9 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
               />
             </View>
             <ScrollView style={s.descriptionContainer}>
-              <Text style={s.descriptionText}>{fields.description}</Text>
+              <View onStartShouldSetResponder={() => true}>
+                <Text style={s.descriptionText}>{fields.description}</Text>
+              </View>
             </ScrollView>
             <Barcode value={`${fields.card_number}`} format="CODE128" />
             <Text>{fields.card_number}</Text>
