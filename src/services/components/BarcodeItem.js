@@ -5,7 +5,9 @@ import {
   View,
   TouchableWithoutFeedback,
   Image,
-  ScrollView
+  ScrollView,
+  Linking,
+  Alert
 } from "react-native";
 import { Text } from "native-base";
 import T from "prop-types";
@@ -79,6 +81,17 @@ const s = StyleSheet.create({
     height: 94,
     resizeMode: "contain",
     width: 94
+  },
+  site: {
+    textAlign: "left"
+  },
+  hyperlink: {
+    color: colors.mainBlue
+  },
+  siteContainer: {
+    marginTop: 10,
+    paddingHorizontal: 35,
+    width: "100%"
   }
 });
 
@@ -88,6 +101,15 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
   } = useContext(UserContext);
 
   const { fields = {}, is_favorite = false, image = {} } = items.data.find(item => item.id === id) || {};
+
+  const _goToURL = () =>
+    Linking.canOpenURL(fields.site).then(supported => {
+      if (supported) {
+        Linking.openURL(fields.site);
+      } else {
+        Alert.alert("Don't know how to open URI: " + fields.site);
+      }
+    });
   return (
     <BlurView style={s.flexMax} tint="dark" intensity={100}>
       <TouchableOpacity style={s.modalContainer} onPress={hideModal} activeOpacity={1}>
@@ -116,6 +138,18 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
                 <Text style={s.descriptionText}>{fields.description}</Text>
               </View>
             </ScrollView>
+            <View style={s.siteContainer}>
+              <Text>
+                {fields.site && (
+                  <Text style={s.site}>
+                    <Text>Веб-сайт: </Text>
+                    <Text style={s.hyperlink} onPress={_goToURL}>
+                      {fields.site}
+                    </Text>
+                  </Text>
+                )}
+              </Text>
+            </View>
             <Barcode value={`${fields.card_number}`} format="CODE128" />
             <Text>{fields.card_number}</Text>
             <Text style={s.discountStyle}>{`Знижка ${fields.discount}`}</Text>
