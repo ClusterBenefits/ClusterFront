@@ -3,8 +3,10 @@
     "name": "IT Benefits",
     "slug": "Benefits",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/App-Icon-832x3x.png",
@@ -21,7 +23,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "com.itBenefits",
       "supportsTablet": true
