@@ -229,6 +229,15 @@ export const listOfCompanies = ({ token, page }) => {
   return response;
 };
 
+// Added just for tracking event purposes and data from this response does not saved anywhere
+export const getCompanyById = ({ token, id }) =>
+  axios
+    .get(`${url}/companies/${id}`, {
+      headers: { Authorization: "Bearer " + token }
+    })
+    .then(res => res.data)
+    .catch(e => console.log("failed to load favorite items", e));
+
 ////////////Companies
 
 // Send Messages

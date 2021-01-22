@@ -31,10 +31,16 @@ export default function ListScreenForm({
   subscribed,
   fetchMore,
   refetchItems,
+  fetchItem,
   isRefetching,
   isFetchingMore,
   goBillingInformationScreen
 }) {
+  const handlePressItem = item => {
+    // we don't need to wait for this async func to complete
+    fetchItem(item.id); // hack for tracking event on server
+    ButtonModal.showModal({ item, handleFavoriteChange });
+  };
   return (
     <Container>
       <H1 style={s.mainText}>Мої картки</H1>
@@ -47,7 +53,7 @@ export default function ListScreenForm({
           renderItem={({ item }) => (
             <MainItem
               item={item}
-              onPress={() => ButtonModal.showModal({ item, handleFavoriteChange })}
+              onPress={() => handlePressItem(item)}
               handleFavoriteChange={handleFavoriteChange}
               subscribed={subscribed}
             />
@@ -84,5 +90,6 @@ ListScreenForm.propTypes = {
   subscribed: T.bool,
   fetchMore: T.func,
   refetchItems: T.func,
+  fetchItem: T.func,
   isRefetching: T.bool
 };

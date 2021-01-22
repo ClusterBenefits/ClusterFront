@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 
 import { fetchItems, handleClickIcon, changeFavoriteCompanies } from "../../../actions/userActions";
 import ListingScreenForm from "./ListingScreenForm";
@@ -7,6 +7,7 @@ import { isSubscribed } from "../../../utils";
 import { LoadingHOC } from "../../../components";
 import { useBackButton } from "../../../hooks";
 import { screens } from "../../../constants";
+import { getCompanyById } from "../../../actions/axiosFetchs";
 
 const ListingScreenWithLoading = LoadingHOC(ListingScreenForm);
 
@@ -53,6 +54,10 @@ export default function ListingScreen({ navigation }) {
     setIsRefetching(false);
   };
 
+  const fetchItem = useCallback(async id => {
+    await getCompanyById({ token, id });
+  }, []);
+
   const goBillingInformationScreen = () => navigation.navigate(screens.BillingInformationScreen);
 
   return (
@@ -63,6 +68,7 @@ export default function ListingScreen({ navigation }) {
       subscribed={subscribed}
       fetchMore={fetchMore}
       refetchItems={refetchItems}
+      fetchItem={fetchItem}
       isRefetching={isRefetching}
       isFetchingMore={isFetchingMore}
       goBillingInformationScreen={goBillingInformationScreen}
