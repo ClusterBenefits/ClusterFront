@@ -18,3 +18,6 @@ export { default as BillingInformationScreen } from "./ProfileScreens/BillingInf
 export { default as AddCreditInfoScreen } from "./ProfileScreens/AddCreditInfoScreen";
 export { default as FeedBackScreen } from "./ProfileScreens/FeedBackScreen";
 export { default as AgreementScreen } from "./ProfileScreens/AgreementScreen";
+// legacy information screen
+export { default as PrivacyPolicyScreen } from "./LegalInformation/PrivacyPolicyScreen";
+export { default as ContractInformationScreen } from "./LegalInformation/ContractInformationScreen";

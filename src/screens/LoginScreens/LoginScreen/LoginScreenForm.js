@@ -23,7 +23,7 @@ const s = StyleSheet.create({
     marginRight: 10
   },
   signUpText: {
-    color: colors.mainBlue
+    color: '#009fe3'
   },
   forgotPasswordContainer: {
     flexDirection: "row",
@@ -31,7 +31,8 @@ const s = StyleSheet.create({
     marginBottom: 20
   },
   forgotPasswordText: {
-    fontWeight: "500"
+    fontWeight: "500",
+    color: '#009fe3'
   },
   maxFlex: {
     flex: 1

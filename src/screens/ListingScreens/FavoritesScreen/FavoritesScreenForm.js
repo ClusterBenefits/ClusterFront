@@ -20,7 +20,10 @@ const s = StyleSheet.create({
   }
 });
 
-export default function FavoriteForm({ favoriteItems, handleFavoriteChange }) {
+
+
+export default function FavoriteForm({ favoriteItems, handleFavoriteChange,  fetchItem, }) {
+
   return (
     <Container>
       <H1 style={s.mainText}>Улюблені</H1>

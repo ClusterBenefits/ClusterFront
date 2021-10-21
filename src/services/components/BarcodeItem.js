@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -13,11 +13,10 @@ import { Text } from "native-base";
 import T from "prop-types";
 import Barcode from "react-native-barcode-expo";
 
-import { colors } from "../../constants";
+import { colors, imgUrl } from "../../constants";
 import { FavoritesIcon, FavoritesIconOutLine } from "../../assets/svg";
 import { BlurView } from "expo-blur";
 import { UserContext } from "../../reducers/context";
-import { baseUrl } from "../../constants";
 
 const s = StyleSheet.create({
   modalContainer: {
@@ -100,7 +99,7 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
     state: { items }
   } = useContext(UserContext);
 
-  const { fields = {}, is_favorite = false, image = {} } = items.data.find(item => item.id === id) || {};
+  const { fields = {}, is_favorite = false, image = {} } = items?.data?.find(item => item?.id === id) || {};
 
   const _goToURL = () =>
     Linking.canOpenURL(fields.site).then(supported => {
@@ -110,6 +109,9 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
         Alert.alert("Don't know how to open URI: " + fields.site);
       }
     });
+
+    console.log(image.preview_list.url);
+
   return (
     <BlurView style={s.flexMax} tint="dark" intensity={100}>
       <TouchableOpacity style={s.modalContainer} onPress={hideModal} activeOpacity={1}>
@@ -128,7 +130,7 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
             </View>
             <View style={s.imageCompanyContainer}>
               <Image
-                source={{ uri: `${baseUrl}${image.preview_list.url}` }}
+                source={{ uri: `${imgUrl}${image.preview_list.url}` }}
                 resizeMode={"contain"}
                 style={s.image}
               />
@@ -150,7 +152,7 @@ export default function BarcodeItem({ id, hideModal, handleFavoriteChange }) {
                 )}
               </Text>
             </View>
-            <Barcode value={`${fields.card_number}`} format="CODE128" />
+            <Barcode value={fields.card_number} format="CODE128" />
             <Text>{fields.card_number}</Text>
             <Text style={s.discountStyle}>{`Знижка ${fields.discount}`}</Text>
           </View>

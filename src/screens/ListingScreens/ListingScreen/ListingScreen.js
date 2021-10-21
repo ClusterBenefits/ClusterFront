@@ -8,6 +8,7 @@ import { LoadingHOC } from "../../../components";
 import { useBackButton } from "../../../hooks";
 import { screens } from "../../../constants";
 import { getCompanyById } from "../../../actions/axiosFetchs";
+import { BackHandler } from "react-native";
 
 const ListingScreenWithLoading = LoadingHOC(ListingScreenForm);
 
@@ -65,7 +66,7 @@ export default function ListingScreen({ navigation }) {
       isLoading={isLoading}
       items={items.data}
       handleFavoriteChange={handleFavoriteChange}
-      subscribed={subscribed}
+      subscribed={ subscribed}
       fetchMore={fetchMore}
       refetchItems={refetchItems}
       fetchItem={fetchItem}

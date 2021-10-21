@@ -16,10 +16,10 @@ const s = StyleSheet.create({
   }
 });
 
-export default function NewPasswordForm({ goLogin, onChangeValue, formCredentials, formErrors }) {
+export default function NewPasswordForm({ goLogin, onChangeValue, formCredentials, formErrors, navigation }) {
   return (
     <Container>
-      <Header />
+      <Header onPress={() => navigation.goBack()} navigation={navigation}/>
       <View style={s.container}>
         <H1>Новий пароль</H1>
         <Form>

@@ -16,7 +16,7 @@ let reducer = (state, action) => {
     case dispatchTypes.ADD_USERINFO:
       return {
         ...state,
-        userInfo: { ...state.userInfo, ...action.payload }
+        userInfo: { ...state?.userInfo || [], ...action?.payload || [] }
       };
     case dispatchTypes.FEATURED:
       const Item = state.items.data.find(item => item.id === action.payload.id);
@@ -27,7 +27,7 @@ let reducer = (state, action) => {
           items: { ...state.items },
           favoriteItems: {
             ...state.favoriteItems,
-            data: state.favoriteItems.data.filter(item => item.id !== itemToRemove.id)
+            data: state?.favoriteItems?.data?.filter(item => item.id !== itemToRemove.id) || []
           }
         };
       }
@@ -38,17 +38,18 @@ let reducer = (state, action) => {
           items: { ...state.items },
           favoriteItems: {
             ...state.favoriteItems,
-            data: state.favoriteItems.data.filter(item => item.id !== Item.id)
+            data: state?.favoriteItems?.data?.filter(item => item.id !== Item.id) || []
           }
         };
       } else {
         Item.is_favorite = true;
+        //console.log(state.favoriteItems.data);
         return {
           ...state,
           items: { ...state.items },
           favoriteItems: {
             ...state.favoriteItems,
-            data: [...state.favoriteItems.data, Item]
+            data: [...state.favoriteItems?.data || {}, Item] 
           }
         };
       }
@@ -60,7 +61,7 @@ let reducer = (state, action) => {
     case dispatchTypes.ADD_FAVORITE_ITEMS:
       return {
         ...state,
-        favoriteItems: { ...action.payload }
+        favoriteItems: { ...action?.payload || {} }
       };
     case dispatchTypes.ADD_ITEMS:
       return {
@@ -72,7 +73,7 @@ let reducer = (state, action) => {
         ...state,
         items: {
           ...action.payload,
-          data: [...state.items.data, ...action.payload.data]
+          data: [...state?.items?.data || {}, ...action?.payload?.data || []]
         }
       };
     case dispatchTypes.ADD_MORE_FAVORITE_ITEMS:
@@ -80,7 +81,7 @@ let reducer = (state, action) => {
         ...state,
         favoriteItems: {
           ...action.payload,
-          data: [...state.favoriteItems.data, ...action.payload.data]
+          data: [...state?.favoriteItems?.data || [], ...action?.payload?.data || []]
         }
       };
     default:

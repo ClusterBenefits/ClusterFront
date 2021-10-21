@@ -27,7 +27,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.04,
     width: "70%",
     height: 80,
-    marginVertical: 15,
+    marginVertical: 10,
     backgroundColor: colors.mainWhite,
     alignItems: "center",
     justifyContent: "center"

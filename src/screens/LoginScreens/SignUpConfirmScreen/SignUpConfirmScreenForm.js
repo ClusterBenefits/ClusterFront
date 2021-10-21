@@ -2,8 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { H1, Text } from "native-base";
 import T from "prop-types";
-import CodeInput from "react-native-confirmation-code-field";
-
+import CodeInput from 'react-native-confirmation-code-input';
 import { colors } from "../../../constants";
 import { BlueButton, Container, Header } from "../../../components";
 
@@ -19,6 +18,7 @@ const s = StyleSheet.create({
     marginHorizontal: 25
   },
   inputCell: {
+    borderWidth: 1,
     borderColor: colors.mainBlack,
     height: 50,
     width: 45
@@ -50,13 +50,13 @@ export default function SignUpForm({
       />
       <View style={s.container}>
         <H1>Підтвердження</H1>
-
         <CodeInput
           onFulfill={setVerificationCode}
           codeLength={5}
-          cellProps={{ style: s.inputCell }}
+          codeInputStyle={s.inputCell}
           activeColor={colors.mainBlack}
           cellBorderWidth={1}
+          keyboardType="numeric"
           containerProps={{ style: s.inputContainer }}
           inputProps={{ onChangeText: setVerificationCode }}
         />

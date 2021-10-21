@@ -14,14 +14,18 @@ export const screens = {
   ChangePasswordScreen: "ChangePasswordScreen",
   ChangeEmailScreen: "ChangeEmailScreen",
   BillingInformationScreen: "BillingInformationScreen",
+  PrivacyPolicyScreen: "PrivacyPolicyScreen",
+  PrivacyPolicyInProfileScreen: "PrivacyPolicyInProfileScreen",
+  ContractInformationScreen: "ContractInformationScreen",
   FeedBackScreen: "FeedBackScreen",
-  AgreementScreen: "AgreementScreen"
+  AgreementScreen: "AgreementScreen",
 };
 
 export const navigation = {
-  BottomTabNavigator: "BottomTabNavigator",
+  WelcomeNavigator: "WelcomeNavigator",
   ListingNavigator: "ListingNavigator",
-  LoginNavigator: "LoginNavigator",
   ProfileNavigator: "ProfileNavigator",
-  WelcomeNavigator: "WelcomeNavigator"
+  ResetPasswordNavigation: "ResetPasswordNavigation",
+  FirstLoginNavigator: "FirstLoginNavigator",
+  ProfileBottomTabNavigator: "ProfileBottomTabNavigator"
 };

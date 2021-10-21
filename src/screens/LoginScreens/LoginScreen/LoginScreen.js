@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 
 import { UserContext } from "./../../../reducers/context";
 import LoginScreenForm from "./LoginScreenForm";
-import { loginUser } from "../../../actions/userActions";
+import { loginUser, fetchUserInfo, checkCreditCardSubscription } from "../../../actions/userActions";
 import { saveDataToLocalStorage, getDataFromLocalStorage, allFieldsValidation } from "../../../utils";
-import { screens } from "../../../constants";
+import { screens, navigation as navName } from "../../../constants";
 import { LoadingHOC } from "../../../components";
 import { useBackButton } from "../../../hooks";
 
@@ -15,6 +15,7 @@ export default function LoginScreen({ navigation }) {
     email: "",
     password: ""
   });
+
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { dispatch } = useContext(UserContext);
@@ -23,6 +24,7 @@ export default function LoginScreen({ navigation }) {
     const autoAuth = async () => {
       let { email, password } = await getDataFromLocalStorage();
       if (!(email === "none") && !(password === "none")) {
+
         let response = await loginUser({
           email,
           password,
@@ -30,7 +32,10 @@ export default function LoginScreen({ navigation }) {
         });
 
         if (response) {
-          navigation.navigate(screens.WelcomeScreen);
+          navigation.reset({
+            index: 0,
+            routes: [{name: navName.FirstLoginNavigator}]
+          });
         } else {
           setIsLoading(false);
         }
@@ -53,27 +58,47 @@ export default function LoginScreen({ navigation }) {
       min: "Кількість символів в полі повинна бути не менше 8"
     });
     if (errors) {
+
       setFormErrors(errors);
       return;
     }
     setIsLoading(true);
     // try to login with email/password
+    
 
     let response = await loginUser({
       dispatch,
       email: formCredentials.email,
       password: formCredentials.password
     });
+
+    console.log(response);
+
     if (response) {
       // if login is successful save password/login
-
       saveDataToLocalStorage({
         email: formCredentials.email,
         password: formCredentials.password
       });
-      navigation.navigate(screens.WelcomeScreen);
+
+      const userInfo = await fetchUserInfo({ token: response, dispatch });
+
+      if (userInfo.first_name && userInfo.last_name) {
+        await checkCreditCardSubscription({
+          token: response,
+          dispatch
+        });
+      }
+      
+      navigation.reset({
+        index: 0,
+        routes: [{name: navName.ProfileBottomTabNavigator}]
+      });
+
+      //navigation.navigate(screens.WelcomeScreen);
     } else {
       // console.log("wrong token");
+      
       setIsLoading(false);
     }
   };

@@ -20,8 +20,8 @@ import {
   deleteBillingSubscription,
   getInfoForBillingSubscription
 } from "./axiosFetchs";
-import { Notifications } from "expo";
-import * as Permissions from "expo-permissions";
+import * as Notifications  from "expo-notifications";
+//import * as Permissions from "expo-permissions";
 
 export const dispatchTypes = {
   ADD_TOKEN: "ADD_TOKEN",
@@ -39,11 +39,11 @@ export const dispatchTypes = {
 
 ///////// AUTH
 export const registerForPushNotificationsAsync = async userToken => {
-  const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  const { status: existingStatus } = await Notifications.getPermissionsAsync();
 
   let finalStatus = existingStatus;
   if (existingStatus !== "granted") {
-    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    const { status } = await Notifications.getPermissionsAsync();
     finalStatus = status;
   }
   if (finalStatus !== "granted") {
@@ -260,7 +260,7 @@ export const handleClickIcon = ({ item, dispatch }) => {
 
 export const sendMessageToAdmin = async ({ ...props }) => {
   let response = await sendMessageToAdmins(props);
-
+  console.log(response);
   return response;
 };
 

@@ -10,6 +10,7 @@ import { CategoryItem } from "./components";
 import { url } from "../../../constants";
 import s from "./styles";
 
+
 export default function ProfileForm({ redirectToScreen, signOutUser, userInfo }) {
   const {
     first_name: firstName = "Name",
@@ -34,7 +35,7 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
       <View style={s.bodyContainer}>
         <View style={s.userInfoContainer}>
           <UserAvatar
-            size="80"
+            size={80}
             name={`${firstName} ${lastName}`}
             {...(showImage && { src: `${url}${image.preview.url}` })}
           />
@@ -59,12 +60,18 @@ export default function ProfileForm({ redirectToScreen, signOutUser, userInfo })
             screenName={screens.ChangePasswordScreen}
           />
           <CategoryItem
+            disable
             onPress={redirectToScreen}
             text="Інформація про підписку"
             screenName={screens.BillingInformationScreen}
           />
+          <CategoryItem
+            onPress={redirectToScreen}
+            text="Політика конфіденційності"
+            screenName={screens.PrivacyPolicyInProfileScreen}
+          />
           <CategoryItem onPress={redirectToScreen} text="Підтримка" screenName={screens.FeedBackScreen} />
-          <CategoryItem onPress={signOutUser} text="Вийти" screenName={screens.ChangeEmailScreen} lastItem />
+          <CategoryItem onPress={signOutUser} text="Вийти" screenName={screens.ChangeEmailScreen} />
         </View>
       </View>
     </Container>

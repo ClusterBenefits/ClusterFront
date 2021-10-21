@@ -5,6 +5,7 @@ import { setNewUserPassword } from "../../../actions/userActions";
 import { screens } from "../../../constants";
 import { LoadingHOC } from "../../../components";
 import { allFieldsValidation } from "../../../utils";
+import { useBackButton } from "../../../hooks";
 
 const NewPasswordScreenWithLoading = LoadingHOC(NewPasswordScreenForm);
 
@@ -20,7 +21,7 @@ export default function ForgotPasswordScreen(props) {
     setFormCredentials({ ...formCredentials, [name]: value });
     setFormErrors({ ...formErrors, [name]: "" });
   };
-
+  useBackButton(false);
   // check if input field is correct after typing
 
   const goLogin = async () => {
@@ -33,9 +34,7 @@ export default function ForgotPasswordScreen(props) {
       return;
     }
     setIsLoading(true);
-    const email = props.navigation.getParam("email", "");
-    const token = props.navigation.getParam("token", "");
-
+    const {email, token} = props.route.params;
     // setting new passowrd
 
     let response = await setNewUserPassword({
@@ -59,6 +58,7 @@ export default function ForgotPasswordScreen(props) {
       goLogin={goLogin}
       formCredentials={formCredentials}
       formErrors={formErrors}
+      navigation={props.navigation}
     />
   );
 }

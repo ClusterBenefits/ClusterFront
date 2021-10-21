@@ -7,7 +7,7 @@ import {
   registerForPushNotificationsAsync,
   checkCreditCardSubscription
 } from "../../../actions/userActions";
-import { screens } from "../../../constants";
+import { screens, navigation as navName } from "../../../constants";
 import { LoadingHOC } from "../../../components";
 import { useBackButton } from "../../../hooks";
 
@@ -29,7 +29,13 @@ export default function WelcomeScreen({ navigation }) {
           token: state.token,
           dispatch
         });
-        navigation.navigate(screens.ListingScreen);
+
+        navigation.reset({
+          index: 0,
+          routes: [{name: navName.ProfileBottomTabNavigator}]
+        });
+        
+        //navigation.navigate(screens.ListingScreen);
       } else {
         setIsLoading(false);
       }
@@ -43,7 +49,7 @@ export default function WelcomeScreen({ navigation }) {
   useBackButton(true);
 
   const goProfileFillingScreen = () => {
-    navigation.push(screens.ProfileFillingScreen);
+    navigation.navigate(screens.ProfileFillingScreen);
   };
 
   return <WelcomeScreenWithLoading isLoading={isLoading} goProfileFillingScreen={goProfileFillingScreen} />;

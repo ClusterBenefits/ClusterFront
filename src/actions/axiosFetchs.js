@@ -6,6 +6,7 @@ const errorHandler = ({ response }) => {
   // check if response error has nested lvls or no
   let textError;
   if (response) {
+    //console.log(response);
     textError =
       typeof response.data.error === "string"
         ? response.data.error //error right here
@@ -30,6 +31,7 @@ export const postTokenToServer = async ({ expoToken, token }) => {
       }
     )
     .then(response => {
+      console.log(response.data);
       return response.data;
     })
     .catch(({ response }) => {});
@@ -39,9 +41,12 @@ export const postTokenToServer = async ({ expoToken, token }) => {
 
 ///////// AUTH
 export const login = ({ email, password }) => {
+  
   let response = axios
     .post(`${url}/login`, { email, password }, { headers: { "Content-Type": "application/json" } })
     .then(response => {
+      console.log(response.data);
+
       return response.data.token;
     })
     .catch(errorHandler);

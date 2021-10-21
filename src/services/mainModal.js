@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Modal, View, StatusBar } from "react-native";
+import { Modal, View, StatusBar, BackHandler } from "react-native";
+import { useEffect } from "react/cjs/react.development";
+import { useBackButton } from "../hooks";
 
 import { BarcodeItem } from "./components";
 
 let mainModal;
 
-export function MainModalComponent() {
+export function MainModalComponent({}) {
   const [{ isVisible, item, handleFavoriteChange }, setState] = useState({
     isVisible: false,
     item: {},
@@ -23,6 +25,7 @@ export function MainModalComponent() {
 
   return (
     <Modal
+      onRequestClose={() => hideModal()}
       propagateSwipe={true}
       animationType="slide"
       useNativeDriver

@@ -16,9 +16,9 @@ const App = ({ navigation }) => (
   <StyleProviderTheme>
     <MyProvider>
       <Root>
-        <StatusBar />
+        <StatusBar/>
         <AppNavigation />
-        <MainModalComponent navigation={navigation} />
+        <MainModalComponent />
       </Root>
     </MyProvider>
   </StyleProviderTheme>

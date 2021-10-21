@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { H1, H3 } from "native-base";
 
@@ -10,6 +10,7 @@ import { handleClickIcon, changeFavoriteCompanies, fetchFavoriteItems } from "..
 import { UserContext } from "./../../../reducers/context";
 import { enhancedOnEndReached } from "../../../helpers";
 import { isSubscribed } from "../../../utils";
+import { getCompanyById } from "../../../actions/axiosFetchs";
 
 const s = StyleSheet.create({
   mainText: {
@@ -65,6 +66,16 @@ export default function FavoritesScreen(props) {
     setIsRefetching(false);
   };
 
+  const fetchItem = useCallback(async id => {
+    await getCompanyById({ token, id });
+  }, []);
+
+  const handlePressItem = (item) => {
+    // we don't need to wait for this async func to complete
+    fetchItem(item.id); // hack for tracking event on server
+    ButtonModal.showModal({ item, handleFavoriteChange });
+  }
+
   return (
     <Container>
       <H1 style={s.mainText}>Улюблені</H1>
@@ -77,7 +88,7 @@ export default function FavoritesScreen(props) {
           renderItem={({ item }) => (
             <MainItem
               item={item}
-              onPress={() => ButtonModal.showModal({ item, handleFavoriteChange })}
+              onPress={() => handlePressItem(item)}
               handleFavoriteChange={handleFavoriteChange}
             />
           )}

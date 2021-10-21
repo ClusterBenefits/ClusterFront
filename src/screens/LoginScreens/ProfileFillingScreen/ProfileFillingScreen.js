@@ -4,7 +4,7 @@ import { UserContext } from "./../../../reducers/context";
 import ProfileFillingScreenForm from "./ProfileFillingScreenForm";
 import { postUserInfo } from "../../../actions/userActions";
 import { allFieldsValidation } from "../../../utils";
-import { screens } from "../../../constants";
+import { navigation as navName } from "../../../constants";
 import { LoadingHOC } from "../../../components";
 
 const ProfileFillingScreenWithLoading = LoadingHOC(ProfileFillingScreenForm);
@@ -44,7 +44,11 @@ export default function ProfileFillingScreen({ navigation }) {
     formCredentials.position.length > 0 && (data.position = formCredentials.position);
 
     let response = await postUserInfo({ token: state.token, data, dispatch });
-    response ? navigation.navigate(screens.ListingScreen) : setIsLoading(false);
+
+    response ? navigation.reset({
+      index: 0,
+      routes: [{name: navName.ProfileBottomTabNavigator}]
+    }) : setIsLoading(false);
   };
 
   return (

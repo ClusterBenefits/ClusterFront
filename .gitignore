@@ -1,4 +1,1 @@
-# ignore folder named 'node_modules'
-node_modules/
-__tests__/
-.expo/
+node_modules
