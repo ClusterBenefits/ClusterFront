@@ -65,7 +65,8 @@ export default function SignUpScreenForm({
   toggleHandlePersonalData,
   isHandlePersonalData,
   togglePrivacy,
-  isPolicy
+  isPolicy,
+  openContractInfo
 }) {
   return (
     <Container withScroll>
@@ -130,7 +131,7 @@ export default function SignUpScreenForm({
               checkBoxColor='#45a0f3'/>
 
               <View rightTextStyle={s.textWrapper}>
-                <Text onPress={openPrivacyPolicy} style={s.text}>Ознайомлений(а) з      
+                <Text onPress={openContractInfo} style={s.text}>Ознайомлений(а) з      
                   <Text 
                   style={[s.text, s.link]}> угодою користування</Text>
                 </Text>

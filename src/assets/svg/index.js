@@ -1,5 +1,5 @@
-import React from "react";
-import Svg, { Path, G } from "react-native-svg";
+import React from 'react';
+import Svg, {Path, G} from 'react-native-svg';
 
 export const CreditCardBigIcon = props => (
   <Svg width="212" height="157" viewBox="0 0 212 157" {...props}>
@@ -28,7 +28,7 @@ export const CreditCardBigIcon = props => (
   </Svg>
 );
 
-export const EmailIcon = ({ fill = "#afb4c4", ...props }) => (
+export const EmailIcon = ({fill = '#afb4c4', ...props}) => (
   <Svg width="20" height="16" viewBox="0 0 20 16" {...props}>
     <Path
       fill={fill}
@@ -37,7 +37,7 @@ export const EmailIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const PasswordIcon = ({ fill = "#afb4c4", ...props }) => (
+export const PasswordIcon = ({fill = '#afb4c4', ...props}) => (
   <Svg width="16" height="21" viewBox="0 0 16 21" {...props}>
     <Path
       fill={fill}
@@ -46,7 +46,7 @@ export const PasswordIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const BillingInformationIcon = ({ fill = "#afb4c4", ...props }) => (
+export const BillingInformationIcon = ({fill = '#afb4c4', ...props}) => (
   <Svg width="20" height="20" viewBox="0 0 20 20" {...props}>
     <Path
       fill={fill}
@@ -55,7 +55,7 @@ export const BillingInformationIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const SupportIcon = ({ fill = "#afb4c4", ...props }) => (
+export const SupportIcon = ({fill = '#afb4c4', ...props}) => (
   <Svg width="20" height="20" viewBox="0 0 20 20" {...props}>
     <Path
       fill={fill}
@@ -64,7 +64,7 @@ export const SupportIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const LogOutIcon = ({ fill = "#afb4c4", ...props }) => (
+export const LogOutIcon = ({fill = '#afb4c4', ...props}) => (
   <Svg width="24" height="24" viewBox="0 0 24 24" {...props}>
     <Path
       fill="#afb4c4"
@@ -73,7 +73,7 @@ export const LogOutIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const EditPenIcon = ({ fill = "#4285f4", ...props }) => (
+export const EditPenIcon = ({fill = '#4285f4', ...props}) => (
   <Svg width="17" height="17" viewBox="0 0 17 17" {...props}>
     <Path
       fill={fill}
@@ -83,7 +83,7 @@ export const EditPenIcon = ({ fill = "#4285f4", ...props }) => (
 );
 
 //BottomNavigation
-export const MyCardsIcon = ({ fill = "#afb4c4", ...props }) => (
+export const MyCardsIcon = ({fill = '#afb4c4', ...props}) => (
   <Svg width="21" height="17" viewBox="0 0 20 16" {...props}>
     <Path
       fill={fill}
@@ -92,7 +92,7 @@ export const MyCardsIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const FavoritesIcon = ({ fill = "#afb4c4", ...props }) => (
+export const FavoritesIcon = ({fill = '#afb4c4', ...props}) => (
   <Svg width="22" height="21" viewBox="0 0 20 19" {...props}>
     <Path
       fill={fill}
@@ -101,7 +101,7 @@ export const FavoritesIcon = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const FavoritesIconOutLine = ({ fill = "#afb4c4", ...props }) => (
+export const FavoritesIconOutLine = ({fill = '#afb4c4', ...props}) => (
   <Svg width="22" height="21" viewBox="0 0 20 19">
     <Path
       fill="none"
@@ -111,7 +111,7 @@ export const FavoritesIconOutLine = ({ fill = "#afb4c4", ...props }) => (
   </Svg>
 );
 
-export const ProfileIcon = ({ fill = "#afb4c4", ...props }) => (
+export const ProfileIcon = ({fill = '#afb4c4', ...props}) => (
   <Svg width="21" height="21" viewBox="0 0 20 20" {...props}>
     <Path
       fill={fill}
@@ -122,7 +122,7 @@ export const ProfileIcon = ({ fill = "#afb4c4", ...props }) => (
 
 //BottomNavigation
 
-export const BackArrowIcon = ({ fill = "#4285f4", ...props }) => (
+export const BackArrowIcon = ({fill = '#4285f4', ...props}) => (
   <Svg width="24" height="24" viewBox="0 0 24 24" {...props}>
     <G>
       <G>
@@ -133,3 +133,36 @@ export const BackArrowIcon = ({ fill = "#4285f4", ...props }) => (
     </G>
   </Svg>
 );
+
+export const SearchSwitcherIcon = ({size, fill = '#B8B0B0', ...props}) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 37 37" fill="none">
+      <Path
+        d="M3.0835 26.2083C3.0835 27.0562 3.77725 27.75 4.62516 27.75H32.3752C33.2231 27.75 33.9168 27.0562 33.9168 26.2083C33.9168 25.3604 33.2231 24.6667 32.3752 24.6667H4.62516C3.77725 24.6667 3.0835 25.3604 3.0835 26.2083ZM3.0835 18.5C3.0835 19.3479 3.77725 20.0417 4.62516 20.0417H32.3752C33.2231 20.0417 33.9168 19.3479 33.9168 18.5C33.9168 17.6521 33.2231 16.9583 32.3752 16.9583H4.62516C3.77725 16.9583 3.0835 17.6521 3.0835 18.5ZM3.0835 10.7917C3.0835 11.6396 3.77725 12.3333 4.62516 12.3333H32.3752C33.2231 12.3333 33.9168 11.6396 33.9168 10.7917C33.9168 9.94375 33.2231 9.25 32.3752 9.25H4.62516C3.77725 9.25 3.0835 9.94375 3.0835 10.7917Z"
+        fill={fill}
+      />
+    </Svg>
+  );
+};
+
+export const CloseIcon = ({fill = '', size, ...props}) => {
+  return (
+    <Svg
+      height={size}
+      version="1.1"
+      viewBox="0 0 512 512"
+      fill={fill}
+      width={size}
+      {...props}>
+      <Path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z" />
+    </Svg>
+  );
+};
+
+export const SearchIcon = ({fill, size, ...props}) => {
+  return (
+    <Svg {...props} fill={fill} viewBox="0 0 50 50" width={size} height={size}>
+      <Path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z" />
+    </Svg>
+  );
+};

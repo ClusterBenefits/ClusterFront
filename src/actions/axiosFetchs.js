@@ -1,49 +1,53 @@
-import axios from "axios";
-import { url } from "../constants";
-import { ShowToast } from "../components";
+import axios from 'axios';
+import {url} from '../constants';
+import {ShowToast} from '../components';
 
-const errorHandler = ({ response }) => {
+const errorHandler = ({response}) => {
   // check if response error has nested lvls or no
+
   let textError;
   if (response) {
-    //console.log(response);
+    console.log(response);
     textError =
-      typeof response.data.error === "string"
+      typeof response.data.error === 'string'
         ? response.data.error //error right here
         : response.data.error[Object.keys(response.data.error)[0]];
   } else {
-    textError = "Виникла непередбачувана помилка";
+    textError = 'Виникла непередбачувана помилка';
   }
 
   ShowToast(textError, true);
 };
 
-export const postTokenToServer = async ({ expoToken, token }) => {
+export const postTokenToServer = async ({expoToken, token}) => {
   let response = axios
     .post(
       `${url}/user/attach-token`,
-      { token: expoToken },
+      {token: expoToken},
       {
         headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + token
-        }
-      }
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      },
     )
     .then(response => {
       console.log(response.data);
       return response.data;
     })
-    .catch(({ response }) => {});
+    .catch(({response}) => {});
 
   return response;
 };
 
 ///////// AUTH
-export const login = ({ email, password }) => {
-  
+export const login = ({email, password}) => {
   let response = axios
-    .post(`${url}/login`, { email, password }, { headers: { "Content-Type": "application/json" } })
+    .post(
+      `${url}/login`,
+      {email, password},
+      {headers: {'Content-Type': 'application/json'}},
+    )
     .then(response => {
       console.log(response.data);
 
@@ -54,15 +58,15 @@ export const login = ({ email, password }) => {
   return response;
 };
 
-export const register = ({ email, password, password_confirmation }) => {
+export const register = ({email, password, password_confirmation}) => {
   let data = {
     email,
     password,
-    password_confirmation
+    password_confirmation,
   };
   let response = axios
     .post(`${url}/register`, data, {
-      headers: { Accept: "application/json" }
+      headers: {Accept: 'application/json'},
     })
     .then(response => {
       return response.data.token;
@@ -75,20 +79,24 @@ export const register = ({ email, password, password_confirmation }) => {
 
 ///////// Password/Email Reset
 
-export const forgotPassword = ({ email, resend }) => {
+export const forgotPassword = ({email, resend}) => {
   let response = axios
-    .post(`${url}/password/forgot`, { email }, { headers: { Accept: "application/json" } })
+    .post(
+      `${url}/password/forgot`,
+      {email},
+      {headers: {Accept: 'application/json'}},
+    )
     .then(response => {
-      resend && ShowToast("Код успішно відправлений");
+      resend && ShowToast('Код успішно відправлений');
       return response.data;
     })
     .catch(errorHandler);
   return response;
 };
 
-export const confirmCodeFromEmail = ({ email, code }) => {
+export const confirmCodeFromEmail = ({email, code}) => {
   let response = axios
-    .post(`${url}/password/confirm`, { email, code })
+    .post(`${url}/password/confirm`, {email, code})
     .then(response => {
       return response.data.token;
     })
@@ -96,8 +104,13 @@ export const confirmCodeFromEmail = ({ email, code }) => {
   return response;
 };
 
-export const resetPassword = ({ email, token, password, password_confirmation }) => {
-  let data = { email, token, password, password_confirmation };
+export const resetPassword = ({
+  email,
+  token,
+  password,
+  password_confirmation,
+}) => {
+  let data = {email, token, password, password_confirmation};
   let response = axios
     .post(`${url}/password/reset`, data)
     .then(response => {
@@ -113,7 +126,7 @@ export const resetPassword = ({ email, token, password, password_confirmation })
 
 export const showUserInformation = token => {
   let response = axios
-    .get(`${url}/user`, { headers: { Authorization: "Bearer " + token } })
+    .get(`${url}/user`, {headers: {Authorization: 'Bearer ' + token}})
     .then(response => {
       return response.data;
     })
@@ -121,10 +134,10 @@ export const showUserInformation = token => {
   return response;
 };
 
-export const updateUserInformation = ({ token, data }) => {
+export const updateUserInformation = ({token, data}) => {
   let response = axios
     .post(`${url}/user`, data, {
-      headers: { Accept: "application/json", Authorization: "Bearer " + token }
+      headers: {Accept: 'application/json', Authorization: 'Bearer ' + token},
     })
     .then(response => {
       return response.data;
@@ -133,17 +146,17 @@ export const updateUserInformation = ({ token, data }) => {
   return response;
 };
 
-export const changeUserEmail = ({ token, email }) => {
+export const changeUserEmail = ({token, email}) => {
   let response = axios
     .post(
       `${url}/user/change-email`,
-      { email },
+      {email},
       {
-        headers: { Authorization: "Bearer " + token }
-      }
+        headers: {Authorization: 'Bearer ' + token},
+      },
     )
     .then(response => {
-      ShowToast("Ваш емейл успішно оновлено!");
+      ShowToast('Ваш емейл успішно оновлено!');
       return response.data;
     })
     .catch(errorHandler);
@@ -154,15 +167,15 @@ export const changeUserPassword = async ({
   token,
   old_password,
   new_password,
-  new_password_confirmation
+  new_password_confirmation,
 }) => {
-  let data = { old_password, new_password, new_password_confirmation };
+  let data = {old_password, new_password, new_password_confirmation};
   let response = await axios
     .post(`${url}/user/change-password`, data, {
-      headers: { Authorization: "Bearer " + token, Accept: "application/json" }
+      headers: {Authorization: 'Bearer ' + token, Accept: 'application/json'},
     })
     .then(response => {
-      ShowToast("Ваш пароль успішно оновлено!");
+      ShowToast('Ваш пароль успішно оновлено!');
       return response.data;
     })
     .catch(errorHandler);
@@ -173,43 +186,47 @@ export const changeUserPassword = async ({
 
 /////// Favoriter
 
-export const listFavoritesCompanies = ({ token, page }) => {
+export const listFavoritesCompanies = ({token, page, name = ''}) => {
   let results = axios
-    .get(`${url}/companies/favorites?page=${page}`, {
-      headers: { Authorization: "Bearer " + token }
+    .get(`${url}/companies/favorites`, {
+      headers: {Authorization: 'Bearer ' + token},
+      params: {
+        page,
+        name,
+      },
     })
     .then(response => {
       return response.data;
     })
-    .catch(e => console.log("failed to load favorite items", e));
+    .catch(e => console.log('failed to load favorite items', e));
   return results;
 };
 
-export const attachToFavorites = ({ token, id }) => {
-  let data = { company_id: id };
+export const attachToFavorites = ({token, id}) => {
+  let data = {company_id: id};
   let response = axios
     .post(`${url}/companies/favorites`, data, {
-      headers: { Accept: "application/json", Authorization: "Bearer " + token }
+      headers: {Accept: 'application/json', Authorization: 'Bearer ' + token},
     })
     .then(response => {
-      ShowToast("Додано до улюбленого списку");
+      ShowToast('Додано до улюбленого списку');
       return response;
     })
-    .catch(e => console.log("failed to add", e));
+    .catch(e => console.log('failed to add', e));
 
   return response;
 };
 
-export const removeFromFavorites = ({ token, id }) => {
+export const removeFromFavorites = ({token, id}) => {
   let response = axios
     .delete(`${url}/companies/favorites/${id}`, {
-      headers: { Accept: "application/json", Authorization: "Bearer " + token }
+      headers: {Accept: 'application/json', Authorization: 'Bearer ' + token},
     })
     .then(response => {
-      ShowToast("Видалено з улюбленого списку");
+      ShowToast('Видалено з улюбленого списку');
       return response;
     })
-    .catch(e => console.log("error removing ", e));
+    .catch(e => console.log('error removing ', e));
   return response;
 };
 
@@ -217,50 +234,54 @@ export const removeFromFavorites = ({ token, id }) => {
 
 ////////////Companies
 
-export const listOfCompanies = ({ token, page }) => {
+export const listOfCompanies = ({token, page, name = ''}) => {
   let response = axios
-    .get(`${url}/companies?page=${page}`, {
+    .get(`${url}/companies`, {
       headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token
-      }
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      params: {
+        page,
+        name,
+      },
     })
     .then(response => {
       // console.log("companies", response);
       return response.data;
     })
-    .catch(({ response }) => console.log("failed to load items", response.data));
+    .catch(({response}) => console.log('failed to load items', response.data));
 
   return response;
 };
 
 // Added just for tracking event purposes and data from this response does not saved anywhere
-export const getCompanyById = ({ token, id }) =>
+export const getCompanyById = ({token, id}) =>
   axios
     .get(`${url}/companies/${id}`, {
-      headers: { Authorization: "Bearer " + token }
+      headers: {Authorization: 'Bearer ' + token},
     })
     .then(res => res.data)
-    .catch(e => console.log("failed to load favorite items", e));
+    .catch(e => console.log('failed to load favorite items', e));
 
 ////////////Companies
 
 // Send Messages
 
-export const sendMessageToAdmins = ({ name, email, subject, comment, token }) => {
+export const sendMessageToAdmins = ({name, email, subject, comment, token}) => {
   let response = axios
     .post(
       `${url}/feedback`,
-      { name, email, subject, comment },
+      {name, email, subject, comment},
       {
         headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + token
-        }
-      }
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      },
     )
     .then(response => {
-      ShowToast("Запит надіслано успішно!");
+      ShowToast('Запит надіслано успішно!');
       return response.data;
     })
     .catch(errorHandler);
@@ -277,15 +298,15 @@ export const getInfoForBillingSubscription = token => {
   let response = axios
     .get(`${url}/payment/subscribe/59`, {
       headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token
-      }
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
     })
     .then(response => {
       return response.data;
     })
     .catch(err => {
-      console.log("error axiosFetch", err);
+      console.log('error axiosFetch', err);
     });
   return response;
 };
@@ -294,16 +315,16 @@ export const checkBillingSubscription = token => {
   let response = axios
     .get(`${url}/payment/subscribe/info`, {
       headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token
-      }
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
     })
     .then(response => {
-      console.log("res", response.data.status);
+      console.log('res', response.data.status);
       return response.data;
     })
-    .catch(({ response }) => {
-      console.log("check bill err");
+    .catch(({response}) => {
+      console.log('check bill err');
     });
   return response;
 };
@@ -328,23 +349,99 @@ export const checkBillingSubscription = token => {
 //   return response;
 // };
 
-export const deleteBillingSubscription = ({ token }) => {
+export const deleteBillingSubscription = ({token}) => {
   let response = axios
     .delete(`${url}/payment/subscribe`, {
       headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token
-      }
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
     })
     .then(response => {
       console.log(response.data);
       ShowToast(`${response.data.message}`);
       return response.data;
     })
-    .catch(({ response }) => {
+    .catch(({response}) => {
       console.log(response);
       ShowToast(`${response.data.error}`);
     });
+  return response;
+};
+
+export const changeImage = ({token, coverToken}) => {
+  const response = axios
+    .put(
+      `${url}/user/photo`,
+      {coverToken},
+      {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    )
+    .then(response => {
+      return response.data;
+    })
+    .catch(errorHandler);
+
+  return response;
+};
+
+export const uploadImage = ({token, data}) => {
+  // console.log(data);
+
+  const response = axios
+    .post(`${url}/files`, data, {
+      headers: {
+        Accept: 'multipart/form-data',
+
+        'Content-Type': 'multipart/form-data',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(response => {
+      // console.log(response.data, 'responseresponse');
+      if (response?.data?.token) {
+        return changeImage({token, coverToken: response.data.token});
+      }
+    })
+    .catch(errorHandler);
+
+  return response;
+};
+
+export const removeImage = ({token}) => {
+  const response = axios
+    .delete(`${url}/user/photo`, {
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(response => {
+      return response.data;
+    })
+    .catch(errorHandler);
+
+  return response;
+};
+
+export const searchByName = ({token, name}) => {
+  const response = axios
+    .get(`${url}/companies`, {
+      params: {name},
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(errorHandler);
+
   return response;
 };
 

@@ -65,7 +65,7 @@ export default function LoginScreen({ navigation }) {
     setIsLoading(true);
     // try to login with email/password
     
-
+    console.log(formCredentials);
     let response = await loginUser({
       dispatch,
       email: formCredentials.email,

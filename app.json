@@ -3,11 +3,16 @@
     "name": "IT Benefits",
     "slug": "Benefits",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "android"
+    "platforms": ["ios", "android"],
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
     ],
-    "version": "1.2.0",
+    "version": "1.3.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/App-Icon-832x3x.png",
     "splash": {
@@ -15,7 +20,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },
-    "androidNavigationBar" : {
+    "androidNavigationBar": {
       "barStyle": "dark-content",
       "backgroundColor": "#F1F1F1"
     },
@@ -27,15 +32,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.itBenefits",
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 6,
+      "versionCode": 8,
       "permissions": [],
       "package": "com.mycompany.meelor"
     },
