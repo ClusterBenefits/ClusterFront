@@ -1,23 +1,28 @@
-import React, { useState, useEffect, useContext } from "react";
-import { AsyncStorage } from "react-native";
+import React, {useState, useEffect, useContext} from 'react';
 
-import ChangePasswordScreenForm from "./ChangePasswordScreenForm";
-import { changePassword } from "../../../actions/userActions";
-import { UserContext } from "./../../../reducers/context";
-import { LoadingHOC } from "../../../components";
-import { allFieldsValidation } from "../../../utils";
-import { useBackButton } from "../../../hooks";
+import ChangePasswordScreenForm from './ChangePasswordScreenForm';
+import {changePassword} from '../../../actions/userActions';
+import {UserContext} from './../../../reducers/context';
+import {LoadingHOC} from '../../../components';
+import {allFieldsValidation} from '../../../utils';
+import {useBackButton} from '../../../hooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ChangePasswordScreenWithLoading = LoadingHOC(ChangePasswordScreenForm);
 
-const initialState = { oldPassword: "", password: "", password_confirmation: "", realPassword: "" };
+const initialState = {
+  oldPassword: '',
+  password: '',
+  password_confirmation: '',
+  realPassword: '',
+};
 
-export default function ChangePasswordScreen({ navigation }) {
+export default function ChangePasswordScreen({navigation}) {
   const [formCredentials, setFormCredentials] = useState(initialState);
   const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const { state } = useContext(UserContext);
+  const {state} = useContext(UserContext);
 
   useEffect(() => {
     getPasswordFromStorage();
@@ -26,23 +31,23 @@ export default function ChangePasswordScreen({ navigation }) {
   useBackButton(false);
 
   const getPasswordFromStorage = async () => {
-    let response = (await AsyncStorage.getItem("password")) || "";
+    let response = (await AsyncStorage.getItem('password')) || '';
     setFormCredentials({
       ...formCredentials,
-      realPassword: response
+      realPassword: response,
     });
   };
 
   const onChangeValue = (name, value) => {
-    setFormCredentials({ ...formCredentials, [name]: value });
-    formErrors[name] && setFormErrors({ ...formErrors, [name]: "" });
+    setFormCredentials({...formCredentials, [name]: value});
+    formErrors[name] && setFormErrors({...formErrors, [name]: ''});
   };
   // saving email / password for autologin next time
 
   const changeUserPassword = async () => {
-    const { errors } = allFieldsValidation(formCredentials, {
-      same: "Пароль не співпадає",
-      min: "Кількість символів в полі повинна бути не менше 8"
+    const {errors} = allFieldsValidation(formCredentials, {
+      same: 'Пароль не співпадає',
+      min: 'Кількість символів в полі повинна бути не менше 8',
     });
     if (errors) {
       setFormErrors(errors);
@@ -55,9 +60,13 @@ export default function ChangePasswordScreen({ navigation }) {
       token: state.token,
       old_password: formCredentials.oldPassword,
       new_password: formCredentials.password,
-      new_password_confirmation: formCredentials.password_confirmation
+      new_password_confirmation: formCredentials.password_confirmation,
     });
-    if (response) setFormCredentials({ ...initialState, realPassword: formCredentials.password });
+    if (response)
+      setFormCredentials({
+        ...initialState,
+        realPassword: formCredentials.password,
+      });
 
     setIsLoading(false);
   };

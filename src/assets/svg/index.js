@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {Path, G} from 'react-native-svg';
 
-export const CreditCardBigIcon = props => (
+export const CreditCardBigIcon = (props) => (
   <Svg width="212" height="157" viewBox="0 0 212 157" {...props}>
     <G>
       <G>

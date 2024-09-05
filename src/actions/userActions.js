@@ -1,4 +1,4 @@
-import {Alert, AsyncStorage} from 'react-native';
+import {Alert} from 'react-native';
 import {
   postTokenToServer,
   login,
@@ -21,6 +21,7 @@ import {
   getInfoForBillingSubscription,
 } from './axiosFetchs';
 import * as Notifications from 'expo-notifications';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //import * as Permissions from "expo-permissions";
 
 export const dispatchTypes = {
@@ -38,7 +39,7 @@ export const dispatchTypes = {
 };
 
 ///////// AUTH
-export const registerForPushNotificationsAsync = async userToken => {
+export const registerForPushNotificationsAsync = async (userToken) => {
   const {status: existingStatus} = await Notifications.getPermissionsAsync();
 
   let finalStatus = existingStatus;
@@ -173,7 +174,7 @@ export const fetchFavoriteItems = async ({
   name = '',
 }) => {
   let response = await listFavoritesCompanies({token, page, name});
-  response?.data?.forEach(item => (item.is_favorite = true));
+  response?.data?.forEach((item) => (item.is_favorite = true));
   await dispatch({
     type:
       page > 1
@@ -275,7 +276,7 @@ export const sendMessageToAdmin = async ({...props}) => {
 };
 
 export const clearUserLocal = async ({dispatch}) =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     Alert.alert(
       'Вийти',
       'Ви впевнені, що хочете вийти?',
@@ -292,7 +293,7 @@ export const clearUserLocal = async ({dispatch}) =>
           text: 'Так',
           onPress: () => {
             // console.log("loging out )");
-            AsyncStorage.clear().catch(e => console.log(e));
+            AsyncStorage.clear().catch((e) => console.log(e));
             dispatch({
               type: dispatchTypes.CLEAR_USER,
             });

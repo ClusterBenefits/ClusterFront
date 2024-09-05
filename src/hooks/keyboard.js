@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { Keyboard } from "react-native";
+import {constructFrom} from 'date-fns';
+import {useEffect, useState} from 'react';
+import {Keyboard} from 'react-native';
 
 export default () => {
   const [visible, setVisible] = useState(false);
@@ -17,13 +18,12 @@ export default () => {
     function onKeyboardDidHide() {
       setVisible(false);
     }
-
-    Keyboard.addListener("keyboardDidShow", onKeyboardDidShow);
-    Keyboard.addListener("keyboardDidHide", onKeyboardDidHide);
+    const show = Keyboard.addListener('keyboardDidShow', onKeyboardDidShow);
+    const hide = Keyboard.addListener('keyboardDidHide', onKeyboardDidHide);
 
     return () => {
-      Keyboard.removeListener("keyboardDidShow", onKeyboardDidShow);
-      Keyboard.removeListener("keyboardDidHide", onKeyboardDidHide);
+      show.remove();
+      hide.remove();
     };
   }, []);
 
