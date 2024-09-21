@@ -27,7 +27,7 @@ export default function FavoriteForm({ favoriteItems, handleFavoriteChange,  fet
   return (
     <Container>
       <H1 style={s.mainText}>Улюблені</H1>
-      {favoriteItems && favoriteItems.length > 0 ? (
+      {favoriteItems && favoriteItems?.length > 0 ? (
         <FlatList
           data={favoriteItems}
           keyExtractor={item => item.id.toString()}

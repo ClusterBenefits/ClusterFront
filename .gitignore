@@ -1,1 +1,7 @@
 node_modules
+android/app/release/
+android/app/app-release.properties
+.idea
+*.keystore
+!debug.keystore
+.DS_Store

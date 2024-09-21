@@ -1,4 +1,4 @@
-package com.mycompany.meelor;
+package com.itbenefits;
 
 import android.os.Build;
 import android.os.Bundle;

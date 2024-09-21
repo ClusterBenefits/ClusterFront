@@ -219,8 +219,6 @@ export default function FavoritesScreen(props) {
     );
   }, [isShowSearch, value, userInfo]);
 
-  console.log(favoriteItems.data.length);
-
   return (
     <Container>
       {renderHeader}
